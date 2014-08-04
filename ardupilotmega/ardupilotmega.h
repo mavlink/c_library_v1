@@ -165,7 +165,7 @@ typedef enum CAMERA_STATUS_TYPES
 	HEARTBEAT=0, /* Camera heartbeat, announce camera component ID at 1hz | */
 	TRIGGER=1, /* Camera image triggered | */
 	DISCONNECT=2, /* Camera connection lost | */
-	ERROR=3, /* Camera unknown error | */
+    ERRORCAMERA=3, /* Camera unknown error | */
 	LOWBATT=4, /* Camera battery low. Parameter p1 shows reported voltage | */
 	LOWSTORE=5, /* Camera storage low. Parameter p1 shows reported shots remaining | */
 	LOWSTOREV=6, /* Camera storage low. Parameter p1 shows reported video minutes remaining | */
