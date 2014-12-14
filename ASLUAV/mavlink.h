@@ -1,5 +1,5 @@
 /** @file
- *	@brief MAVLink comm protocol built from sensesoar.xml
+ *	@brief MAVLink comm protocol built from ASLUAV.xml
  *	@see http://mavlink.org
  */
 #ifndef MAVLINK_H
@@ -22,6 +22,6 @@
 #endif
 
 #include "version.h"
-#include "sensesoar.h"
+#include "ASLUAV.h"
 
 #endif // MAVLINK_H
