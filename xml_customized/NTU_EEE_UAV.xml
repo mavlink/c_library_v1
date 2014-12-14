@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<mavlink>
+     <include>common.xml</include>
+     <enums>
+          <enum name="MAV_CMD">
+               <!-- 1-10000 reserved for common commands -->
+		<!-- 10001-10003 seems reserved for pixhawk commands -->
+		<!-- 60001 afterwards is NTU EEE UAV command -->
+               <entry value="25001" name="MAV_CMD_NAV_WAYPOINT_WAIT_RC">
+                    <description>Navigate to MISSION and wait for RC command for next mission.--weidong</description>
+                    <param index="1">Hold time in decimal seconds. (ignored by fixed wing, time to stay at MISSION for rotary wing)</param>
+                    <param index="2">Acceptance radius in meters (if the sphere with this radius is hit, the MISSION counts as reached)</param>
+                    <param index="3">0 to pass through the WP, if > 0 radius in meters to pass by WP. Positive value for clockwise orbit, negative value for counter-clockwise orbit. Allows trajectory control.</param>
+                    <param index="4">Desired yaw angle at MISSION (rotary wing)</param>
+                    <param index="5">Latitude</param>
+                    <param index="6">Longitude</param>
+                    <param index="7">Altitude</param>
+               </entry>
+          </enum>
+     </enums>
+     <messages>
+     </messages>
+</mavlink>
