@@ -16,8 +16,47 @@
                     <param index="6">Longitude</param>
                     <param index="7">Altitude</param>
                </entry>
+			   <entry value="25002" name="MAV_CMD_NAV_SWEEP_INDOOR">
+                    <description>Starts a search with sweep type route--weidong</description>
+                    <param index="1">initial x position, where sweep start</param>
+                    <param index="2">initial y position, where sweep start</param>
+                    <param index="3">z coordinate, sweep process will follow this altitude</param>
+                    <param index="4">Desired yaw angle at sweep (rotary wing)</param>
+                    <param index="5">side a of sweep</param>
+                    <param index="6">side b of sweep</param>
+					<param index="7">width d of adjacent line</param>
+               </entry>
+			   <entry value="25003" name="MAV_CMD_NAV_SLAM_PATHPLAN">
+                    <description>Starts a search with sweep type route--weidong</description>
+                    <param index="1">initial x position, where sweep start</param>
+                    <param index="2">initial y position, where sweep start</param>
+                    <param index="3">z coordinate, sweep process will follow this altitude</param>
+                    <param index="4">Desired yaw angle at sweep (rotary wing)</param>
+                    <param index="5">destination x position</param>
+                    <param index="6">destination y position</param>
+					<param index="7">IDLE temp</param>
+               </entry>
           </enum>
      </enums>
      <messages>
+		<message id="230" name="UWB_POSITION_ESTIMATE">
+               <field type="uint64_t" name="usec">Timestamp (microseconds, synced to UNIX time or since system boot)</field>
+               <field type="float" name="x">UWB X position</field>
+               <field type="float" name="y">UWB Y position</field>
+               <field type="float" name="z">UWB Z position</field>
+               <field type="float" name="roll">Roll angle in rad</field>
+               <field type="float" name="pitch">Pitch angle in rad</field>
+               <field type="float" name="yaw">Yaw angle in rad</field>
+		</message>
+		
+		<message id="231" name="General Purpose for SAFMC">
+               <field type="uint64_t" name="usec">Timer usage</field>
+               <field type="float" name="find_drop">payload dropping target find flag</field>
+               <field type="float" name="find_land">landing area find flag</field>
+               <field type="float" name="cam_shutter">camera shutter flag</field>
+               <field type="float" name="roll">Roll angle in rad</field>
+               <field type="float" name="pitch">Pitch angle in rad</field>
+               <field type="float" name="yaw">Yaw angle in rad</field>
+		</message>
      </messages>
 </mavlink>
