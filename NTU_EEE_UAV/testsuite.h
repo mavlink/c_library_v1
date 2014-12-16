@@ -73,15 +73,15 @@ static void mavlink_test_uwb_position_estimate(uint8_t system_id, uint8_t compon
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
-static void mavlink_test_general purpose for safmc(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+static void mavlink_test_general_purpose_safmc(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
 	mavlink_message_t msg;
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
-	mavlink_general purpose for safmc_t packet_in = {
+	mavlink_general_purpose_safmc_t packet_in = {
 		93372036854775807ULL,73.0,101.0,129.0,157.0,185.0,213.0
     };
-	mavlink_general purpose for safmc_t packet1, packet2;
+	mavlink_general_purpose_safmc_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
         	packet1.usec = packet_in.usec;
         	packet1.find_drop = packet_in.find_drop;
@@ -94,18 +94,18 @@ static void mavlink_test_general purpose for safmc(uint8_t system_id, uint8_t co
         
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_general purpose for safmc_encode(system_id, component_id, &msg, &packet1);
-	mavlink_msg_general purpose for safmc_decode(&msg, &packet2);
+	mavlink_msg_general_purpose_safmc_encode(system_id, component_id, &msg, &packet1);
+	mavlink_msg_general_purpose_safmc_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_general purpose for safmc_pack(system_id, component_id, &msg , packet1.usec , packet1.find_drop , packet1.find_land , packet1.cam_shutter , packet1.roll , packet1.pitch , packet1.yaw );
-	mavlink_msg_general purpose for safmc_decode(&msg, &packet2);
+	mavlink_msg_general_purpose_safmc_pack(system_id, component_id, &msg , packet1.usec , packet1.find_drop , packet1.find_land , packet1.cam_shutter , packet1.roll , packet1.pitch , packet1.yaw );
+	mavlink_msg_general_purpose_safmc_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_general purpose for safmc_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.usec , packet1.find_drop , packet1.find_land , packet1.cam_shutter , packet1.roll , packet1.pitch , packet1.yaw );
-	mavlink_msg_general purpose for safmc_decode(&msg, &packet2);
+	mavlink_msg_general_purpose_safmc_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.usec , packet1.find_drop , packet1.find_land , packet1.cam_shutter , packet1.roll , packet1.pitch , packet1.yaw );
+	mavlink_msg_general_purpose_safmc_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
@@ -113,19 +113,19 @@ static void mavlink_test_general purpose for safmc(uint8_t system_id, uint8_t co
         for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
         	comm_send_ch(MAVLINK_COMM_0, buffer[i]);
         }
-	mavlink_msg_general purpose for safmc_decode(last_msg, &packet2);
+	mavlink_msg_general_purpose_safmc_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_general purpose for safmc_send(MAVLINK_COMM_1 , packet1.usec , packet1.find_drop , packet1.find_land , packet1.cam_shutter , packet1.roll , packet1.pitch , packet1.yaw );
-	mavlink_msg_general purpose for safmc_decode(last_msg, &packet2);
+	mavlink_msg_general_purpose_safmc_send(MAVLINK_COMM_1 , packet1.usec , packet1.find_drop , packet1.find_land , packet1.cam_shutter , packet1.roll , packet1.pitch , packet1.yaw );
+	mavlink_msg_general_purpose_safmc_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
 static void mavlink_test_NTU_EEE_UAV(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
 	mavlink_test_uwb_position_estimate(system_id, component_id, last_msg);
-	mavlink_test_general purpose for safmc(system_id, component_id, last_msg);
+	mavlink_test_general_purpose_safmc(system_id, component_id, last_msg);
 }
 
 #ifdef __cplusplus

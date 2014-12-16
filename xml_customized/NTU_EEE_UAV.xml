@@ -49,7 +49,7 @@
                <field type="float" name="yaw">Yaw angle in rad</field>
 		</message>
 		
-		<message id="231" name="General Purpose for SAFMC">
+		<message id="231" name="GENERAL_PURPOSE_SAFMC">
                <field type="uint64_t" name="usec">Timer usage</field>
                <field type="float" name="find_drop">payload dropping target find flag</field>
                <field type="float" name="find_land">landing area find flag</field>
