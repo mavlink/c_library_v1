@@ -106,7 +106,8 @@ typedef enum MAV_CMD
 } MAV_CMD;
 #endif
 
-#include "../common/common.h"
+//#include "../common/common.h"
+#include "../pixhawk/pixhawk.h" //added by weidong for mavconn errors eliminate
 
 // MAVLINK VERSION
 
