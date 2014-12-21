@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <mavlink>
-     <include>common.xml</include>
+     <include>pixhawk.xml</include>
      <enums>
           <enum name="MAV_CMD">
                <!-- 1-10000 reserved for common commands -->
