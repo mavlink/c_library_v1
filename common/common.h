@@ -85,9 +85,10 @@ typedef enum MAV_TYPE
 	MAV_TYPE_FLAPPING_WING=16, /* Flapping wing | */
 	MAV_TYPE_KITE=17, /* Flapping wing | */
 	MAV_TYPE_ONBOARD_CONTROLLER=18, /* Onboard companion controller | */
-	MAV_TYPE_VTOL_DUOROTOR=19, /* Two-rotor VTOL using control surfaces in vertical operation in addition. Tailsitter. | */
-	MAV_TYPE_VTOL_QUADROTOR=20, /* Quad-rotor VTOL using a V-shaped quad config in vertical operation. Tailsitter. | */
-	MAV_TYPE_ENUM_END=21, /*  | */
+	MAV_TYPE_VTOL_DUOROTOR=19, /* Duorotor VTOL | */
+	MAV_TYPE_VTOL_QUADROTOR=20, /* Quadrotor VTOL | */
+	MAV_TYPE_VTOL_HEXAROTOR=21, /* Hexarotor VTOL | */
+	MAV_TYPE_ENUM_END=22, /*  | */
 } MAV_TYPE;
 #endif
 
