@@ -2,8 +2,8 @@
 
 #define MAVLINK_MSG_ID_FW_SOARING_DATA 210
 
-typedef struct MAVLINK_PACKED __mavlink_fw_soaring_data_t
-{
+MAVPACKED(
+typedef struct __mavlink_fw_soaring_data_t {
  uint64_t timestamp; /*< Timestamp [ms]*/
  uint64_t timestampModeChanged; /*< Timestamp since last mode change[ms]*/
  float CurrentUpdraftSpeed; /*< Updraft speed at current/local airplane position [m/s]*/
@@ -18,7 +18,7 @@ typedef struct MAVLINK_PACKED __mavlink_fw_soaring_data_t
  float LoiterRadius; /*< Suggested loiter radius [m]*/
  uint8_t ControlMode; /*< Control Mode [-]*/
  uint8_t valid; /*< Data valid [-]*/
-} mavlink_fw_soaring_data_t;
+}) mavlink_fw_soaring_data_t;
 
 #define MAVLINK_MSG_ID_FW_SOARING_DATA_LEN 58
 #define MAVLINK_MSG_ID_FW_SOARING_DATA_MIN_LEN 58

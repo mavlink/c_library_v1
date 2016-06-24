@@ -2,8 +2,8 @@
 
 #define MAVLINK_MSG_ID_ASLCTRL_DATA 203
 
-typedef struct MAVLINK_PACKED __mavlink_aslctrl_data_t
-{
+MAVPACKED(
+typedef struct __mavlink_aslctrl_data_t {
  uint64_t timestamp; /*<  Timestamp*/
  float h; /*<  See sourcecode for a description of these values... */
  float hRef; /*<  */
@@ -29,7 +29,7 @@ typedef struct MAVLINK_PACKED __mavlink_aslctrl_data_t
  float uRud; /*<  */
  uint8_t aslctrl_mode; /*<  ASLCTRL control-mode (manual, stabilized, auto, etc...)*/
  uint8_t SpoilersEngaged; /*<  */
-} mavlink_aslctrl_data_t;
+}) mavlink_aslctrl_data_t;
 
 #define MAVLINK_MSG_ID_ASLCTRL_DATA_LEN 98
 #define MAVLINK_MSG_ID_ASLCTRL_DATA_MIN_LEN 98
