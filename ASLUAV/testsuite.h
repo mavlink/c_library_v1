@@ -600,7 +600,7 @@ static void mavlink_test_fw_soaring_data(uint8_t system_id, uint8_t component_id
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
 	mavlink_fw_soaring_data_t packet_in = {
-		93372036854775807ULL,93372036854776311ULL,129.0,157.0,185.0,213.0,241.0,269.0,297.0,325.0,353.0,381.0,409.0,437.0,465.0,493.0,521.0,549.0,577.0,605.0,633.0,661.0,37,104
+		93372036854775807ULL,93372036854776311ULL,129.0,157.0,185.0,213.0,241.0,269.0,297.0,325.0,353.0,381.0,409.0,437.0,465.0,493.0,521.0,549.0,577.0,605.0,633.0,661.0,689.0,49,116
     };
 	mavlink_fw_soaring_data_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -625,7 +625,8 @@ static void mavlink_test_fw_soaring_data(uint8_t system_id, uint8_t component_id
         packet1.ThermalGSNorth = packet_in.ThermalGSNorth;
         packet1.ThermalGSEast = packet_in.ThermalGSEast;
         packet1.TSE_dot = packet_in.TSE_dot;
-        packet1.TSE_dot_uf = packet_in.TSE_dot_uf;
+        packet1.DebugVar1 = packet_in.DebugVar1;
+        packet1.DebugVar2 = packet_in.DebugVar2;
         packet1.ControlMode = packet_in.ControlMode;
         packet1.valid = packet_in.valid;
         
@@ -642,12 +643,12 @@ static void mavlink_test_fw_soaring_data(uint8_t system_id, uint8_t component_id
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_fw_soaring_data_pack(system_id, component_id, &msg , packet1.timestamp , packet1.timestampModeChanged , packet1.xW , packet1.xR , packet1.xLat , packet1.xLon , packet1.VarW , packet1.VarR , packet1.VarLat , packet1.VarLon , packet1.LoiterRadius , packet1.LoiterDirection , packet1.DistToSoarPoint , packet1.vSinkExp , packet1.z1_LocalUpdraftSpeed , packet1.z2_DeltaRoll , packet1.z1_exp , packet1.z2_exp , packet1.ThermalGSNorth , packet1.ThermalGSEast , packet1.TSE_dot , packet1.TSE_dot_uf , packet1.ControlMode , packet1.valid );
+	mavlink_msg_fw_soaring_data_pack(system_id, component_id, &msg , packet1.timestamp , packet1.timestampModeChanged , packet1.xW , packet1.xR , packet1.xLat , packet1.xLon , packet1.VarW , packet1.VarR , packet1.VarLat , packet1.VarLon , packet1.LoiterRadius , packet1.LoiterDirection , packet1.DistToSoarPoint , packet1.vSinkExp , packet1.z1_LocalUpdraftSpeed , packet1.z2_DeltaRoll , packet1.z1_exp , packet1.z2_exp , packet1.ThermalGSNorth , packet1.ThermalGSEast , packet1.TSE_dot , packet1.DebugVar1 , packet1.DebugVar2 , packet1.ControlMode , packet1.valid );
 	mavlink_msg_fw_soaring_data_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_fw_soaring_data_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.timestamp , packet1.timestampModeChanged , packet1.xW , packet1.xR , packet1.xLat , packet1.xLon , packet1.VarW , packet1.VarR , packet1.VarLat , packet1.VarLon , packet1.LoiterRadius , packet1.LoiterDirection , packet1.DistToSoarPoint , packet1.vSinkExp , packet1.z1_LocalUpdraftSpeed , packet1.z2_DeltaRoll , packet1.z1_exp , packet1.z2_exp , packet1.ThermalGSNorth , packet1.ThermalGSEast , packet1.TSE_dot , packet1.TSE_dot_uf , packet1.ControlMode , packet1.valid );
+	mavlink_msg_fw_soaring_data_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.timestamp , packet1.timestampModeChanged , packet1.xW , packet1.xR , packet1.xLat , packet1.xLon , packet1.VarW , packet1.VarR , packet1.VarLat , packet1.VarLon , packet1.LoiterRadius , packet1.LoiterDirection , packet1.DistToSoarPoint , packet1.vSinkExp , packet1.z1_LocalUpdraftSpeed , packet1.z2_DeltaRoll , packet1.z1_exp , packet1.z2_exp , packet1.ThermalGSNorth , packet1.ThermalGSEast , packet1.TSE_dot , packet1.DebugVar1 , packet1.DebugVar2 , packet1.ControlMode , packet1.valid );
 	mavlink_msg_fw_soaring_data_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -660,7 +661,7 @@ static void mavlink_test_fw_soaring_data(uint8_t system_id, uint8_t component_id
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_fw_soaring_data_send(MAVLINK_COMM_1 , packet1.timestamp , packet1.timestampModeChanged , packet1.xW , packet1.xR , packet1.xLat , packet1.xLon , packet1.VarW , packet1.VarR , packet1.VarLat , packet1.VarLon , packet1.LoiterRadius , packet1.LoiterDirection , packet1.DistToSoarPoint , packet1.vSinkExp , packet1.z1_LocalUpdraftSpeed , packet1.z2_DeltaRoll , packet1.z1_exp , packet1.z2_exp , packet1.ThermalGSNorth , packet1.ThermalGSEast , packet1.TSE_dot , packet1.TSE_dot_uf , packet1.ControlMode , packet1.valid );
+	mavlink_msg_fw_soaring_data_send(MAVLINK_COMM_1 , packet1.timestamp , packet1.timestampModeChanged , packet1.xW , packet1.xR , packet1.xLat , packet1.xLon , packet1.VarW , packet1.VarR , packet1.VarLat , packet1.VarLon , packet1.LoiterRadius , packet1.LoiterDirection , packet1.DistToSoarPoint , packet1.vSinkExp , packet1.z1_LocalUpdraftSpeed , packet1.z2_DeltaRoll , packet1.z1_exp , packet1.z2_exp , packet1.ThermalGSNorth , packet1.ThermalGSEast , packet1.TSE_dot , packet1.DebugVar1 , packet1.DebugVar2 , packet1.ControlMode , packet1.valid );
 	mavlink_msg_fw_soaring_data_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
@@ -738,7 +739,7 @@ static void mavlink_test_sens_power_board(uint8_t system_id, uint8_t component_i
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
 	mavlink_sens_power_board_t packet_in = {
-		93372036854775807ULL,73.0,101.0,129.0,157.0,185.0,213.0,241.0,269.0,297.0,137,204,15,82,149,216,27
+		93372036854775807ULL,73.0,101.0,129.0,157.0,185.0,213.0,241.0,269.0,297.0,137,204
     };
 	mavlink_sens_power_board_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -754,11 +755,6 @@ static void mavlink_test_sens_power_board(uint8_t system_id, uint8_t component_i
         packet1.pwr_brd_aux_amp = packet_in.pwr_brd_aux_amp;
         packet1.pwr_brd_status = packet_in.pwr_brd_status;
         packet1.pwr_brd_led_status = packet_in.pwr_brd_led_status;
-        packet1.pwr_brd_blink_reg = packet_in.pwr_brd_blink_reg;
-        packet1.pwr_brd_led_1_pwr = packet_in.pwr_brd_led_1_pwr;
-        packet1.pwr_brd_led_2_pwr = packet_in.pwr_brd_led_2_pwr;
-        packet1.pwr_brd_led_3_pwr = packet_in.pwr_brd_led_3_pwr;
-        packet1.pwr_brd_led_4_pwr = packet_in.pwr_brd_led_4_pwr;
         
         
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
@@ -773,12 +769,12 @@ static void mavlink_test_sens_power_board(uint8_t system_id, uint8_t component_i
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_sens_power_board_pack(system_id, component_id, &msg , packet1.timestamp , packet1.pwr_brd_status , packet1.pwr_brd_led_status , packet1.pwr_brd_blink_reg , packet1.pwr_brd_led_1_pwr , packet1.pwr_brd_led_2_pwr , packet1.pwr_brd_led_3_pwr , packet1.pwr_brd_led_4_pwr , packet1.pwr_brd_system_volt , packet1.pwr_brd_servo_volt , packet1.pwr_brd_mot_l_amp , packet1.pwr_brd_mot_r_amp , packet1.pwr_brd_servo_1_amp , packet1.pwr_brd_servo_2_amp , packet1.pwr_brd_servo_3_amp , packet1.pwr_brd_servo_4_amp , packet1.pwr_brd_aux_amp );
+	mavlink_msg_sens_power_board_pack(system_id, component_id, &msg , packet1.timestamp , packet1.pwr_brd_status , packet1.pwr_brd_led_status , packet1.pwr_brd_system_volt , packet1.pwr_brd_servo_volt , packet1.pwr_brd_mot_l_amp , packet1.pwr_brd_mot_r_amp , packet1.pwr_brd_servo_1_amp , packet1.pwr_brd_servo_2_amp , packet1.pwr_brd_servo_3_amp , packet1.pwr_brd_servo_4_amp , packet1.pwr_brd_aux_amp );
 	mavlink_msg_sens_power_board_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_sens_power_board_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.timestamp , packet1.pwr_brd_status , packet1.pwr_brd_led_status , packet1.pwr_brd_blink_reg , packet1.pwr_brd_led_1_pwr , packet1.pwr_brd_led_2_pwr , packet1.pwr_brd_led_3_pwr , packet1.pwr_brd_led_4_pwr , packet1.pwr_brd_system_volt , packet1.pwr_brd_servo_volt , packet1.pwr_brd_mot_l_amp , packet1.pwr_brd_mot_r_amp , packet1.pwr_brd_servo_1_amp , packet1.pwr_brd_servo_2_amp , packet1.pwr_brd_servo_3_amp , packet1.pwr_brd_servo_4_amp , packet1.pwr_brd_aux_amp );
+	mavlink_msg_sens_power_board_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.timestamp , packet1.pwr_brd_status , packet1.pwr_brd_led_status , packet1.pwr_brd_system_volt , packet1.pwr_brd_servo_volt , packet1.pwr_brd_mot_l_amp , packet1.pwr_brd_mot_r_amp , packet1.pwr_brd_servo_1_amp , packet1.pwr_brd_servo_2_amp , packet1.pwr_brd_servo_3_amp , packet1.pwr_brd_servo_4_amp , packet1.pwr_brd_aux_amp );
 	mavlink_msg_sens_power_board_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -791,7 +787,7 @@ static void mavlink_test_sens_power_board(uint8_t system_id, uint8_t component_i
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_sens_power_board_send(MAVLINK_COMM_1 , packet1.timestamp , packet1.pwr_brd_status , packet1.pwr_brd_led_status , packet1.pwr_brd_blink_reg , packet1.pwr_brd_led_1_pwr , packet1.pwr_brd_led_2_pwr , packet1.pwr_brd_led_3_pwr , packet1.pwr_brd_led_4_pwr , packet1.pwr_brd_system_volt , packet1.pwr_brd_servo_volt , packet1.pwr_brd_mot_l_amp , packet1.pwr_brd_mot_r_amp , packet1.pwr_brd_servo_1_amp , packet1.pwr_brd_servo_2_amp , packet1.pwr_brd_servo_3_amp , packet1.pwr_brd_servo_4_amp , packet1.pwr_brd_aux_amp );
+	mavlink_msg_sens_power_board_send(MAVLINK_COMM_1 , packet1.timestamp , packet1.pwr_brd_status , packet1.pwr_brd_led_status , packet1.pwr_brd_system_volt , packet1.pwr_brd_servo_volt , packet1.pwr_brd_mot_l_amp , packet1.pwr_brd_mot_r_amp , packet1.pwr_brd_servo_1_amp , packet1.pwr_brd_servo_2_amp , packet1.pwr_brd_servo_3_amp , packet1.pwr_brd_servo_4_amp , packet1.pwr_brd_aux_amp );
 	mavlink_msg_sens_power_board_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
