@@ -731,6 +731,7 @@ typedef enum MAV_REMOTE_LOG_DATA_BLOCK_STATUSES
 
 // base include
 #include "../common/common.h"
+#include "../uAvionix/uAvionix.h"
 
 #if MAVLINK_COMMAND_24BIT
 #include "../mavlink_get_info.h"
