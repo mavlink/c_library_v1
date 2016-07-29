@@ -1175,6 +1175,18 @@
                  <param index="7">Empty</param>
                </entry>
 
+               <entry value="223" name="MAV_CMD_DO_ENGINE_CONTROL">
+                 <description>Control vehicle engine. This is interpreted by the vehicles engine controller to change the target engine state. It is intended for vehicles with internal combustion engines</description>
+                 <param index="1">0: Stop engine, 1:Start Engine</param>
+                 <param index="2">0: Warm start, 1:Cold start. Controls use of choke where applicable</param>
+                 <param index="3">Height delay (meters). This is for commanding engine start only after the vehicle has gained the specified height. Used in VTOL vehicles during takeoff to start engine after the aircraft is off the ground. Zero for no delay.</param>
+                 <param index="4">Empty</param>
+                 <param index="5">Empty</param>
+                 <param index="5">Empty</param>
+                 <param index="6">Empty</param>
+                 <param index="7">Empty</param>
+               </entry>
+               
                <entry value="240" name="MAV_CMD_DO_LAST">
                     <description>NOP - This command is only used to mark the upper limit of the DO commands in the enumeration</description>
                     <param index="1">Empty</param>
@@ -2469,6 +2481,15 @@
                <field type="uint16_t" name="servo6_raw">Servo output 6 value, in microseconds</field>
                <field type="uint16_t" name="servo7_raw">Servo output 7 value, in microseconds</field>
                <field type="uint16_t" name="servo8_raw">Servo output 8 value, in microseconds</field>
+               <extensions/>
+               <field type="uint16_t" name="servo9_raw">Servo output 9 value, in microseconds</field>
+               <field type="uint16_t" name="servo10_raw">Servo output 10 value, in microseconds</field>
+               <field type="uint16_t" name="servo11_raw">Servo output 11 value, in microseconds</field>
+               <field type="uint16_t" name="servo12_raw">Servo output 12 value, in microseconds</field>
+               <field type="uint16_t" name="servo13_raw">Servo output 13 value, in microseconds</field>
+               <field type="uint16_t" name="servo14_raw">Servo output 14 value, in microseconds</field>
+               <field type="uint16_t" name="servo15_raw">Servo output 15 value, in microseconds</field>
+               <field type="uint16_t" name="servo16_raw">Servo output 16 value, in microseconds</field>
           </message>
           <message id="37" name="MISSION_REQUEST_PARTIAL_LIST">
                <description>Request a partial list of mission items from the system/component. http://qgroundcontrol.org/mavlink/waypoint_protocol. If start and end index are the same, just send one waypoint.</description>
