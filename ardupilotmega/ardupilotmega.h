@@ -34,6 +34,21 @@ extern "C" {
 // ENUM DEFINITIONS
 
 
+/** @brief  */
+#ifndef HAVE_ENUM_ACCELCAL_VEHICLE_POS
+#define HAVE_ENUM_ACCELCAL_VEHICLE_POS
+typedef enum ACCELCAL_VEHICLE_POS
+{
+   ACCELCAL_VEHICLE_POS_LEVEL=1, /*  | */
+   ACCELCAL_VEHICLE_POS_LEFT=2, /*  | */
+   ACCELCAL_VEHICLE_POS_RIGHT=3, /*  | */
+   ACCELCAL_VEHICLE_POS_NOSEDOWN=4, /*  | */
+   ACCELCAL_VEHICLE_POS_NOSEUP=5, /*  | */
+   ACCELCAL_VEHICLE_POS_BACK=6, /*  | */
+   ACCELCAL_VEHICLE_POS_ENUM_END=7, /*  | */
+} ACCELCAL_VEHICLE_POS;
+#endif
+
 /** @brief Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. */
 #ifndef HAVE_ENUM_MAV_CMD
 #define HAVE_ENUM_MAV_CMD
@@ -97,7 +112,7 @@ typedef enum MAV_CMD
    MAV_CMD_DO_INVERTED_FLIGHT=210, /* Change to/from inverted flight |inverted (0=normal, 1=inverted)| Empty| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_DO_GRIPPER=211, /* Mission command to operate EPM gripper |gripper number (a number from 1 to max number of grippers on the vehicle)| gripper action (0=release, 1=grab. See GRIPPER_ACTIONS enum)| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_DO_AUTOTUNE_ENABLE=212, /* Enable/disable autotune |enable (1: enable, 0:disable)| Empty| Empty| Empty| Empty| Empty| Empty|  */
-   MAV_CMD_DO_SET_POSITION_YAW_THRUST=213, /* Sets a desired vehicle turn angle and thrust change |yaw angle to adjust steering by in centidegress| Thrust - normalized to -2 .. 2| Empty| Empty| Empty| Empty| Empty|  */
+   MAV_CMD_NAV_SET_YAW_SPEED=213, /* Sets a desired vehicle turn angle and speed change |yaw angle to adjust steering by in centidegress| speed - normalized to 0 .. 1| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_DO_MOUNT_CONTROL_QUAT=220, /* Mission command to control a camera or antenna mount, using a quaternion as reference. |q1 - quaternion param #1, w (1 in null-rotation)| q2 - quaternion param #2, x (0 in null-rotation)| q3 - quaternion param #3, y (0 in null-rotation)| q4 - quaternion param #4, z (0 in null-rotation)| Empty| Empty| Empty|  */
    MAV_CMD_DO_GUIDED_MASTER=221, /* set id of master controller |System ID| Component ID| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_DO_GUIDED_LIMITS=222, /* set limits for external control |timeout - maximum time (in seconds) that external controller will be allowed to control vehicle. 0 means no timeout| absolute altitude min (in meters, AMSL) - if vehicle moves below this alt, the command will be aborted and the mission will continue.  0 means no lower altitude limit| absolute altitude max (in meters)- if vehicle moves above this alt, the command will be aborted and the mission will continue.  0 means no upper altitude limit| horizontal move limit (in meters, AMSL) - if vehicle moves more than this distance from it's location at the moment the command was executed, the command will be aborted and the mission will continue. 0 means no horizontal altitude limit| Empty| Empty| Empty|  */
@@ -164,6 +179,7 @@ typedef enum MAV_CMD
    MAV_CMD_DO_CANCEL_MAG_CAL=42426, /* Cancel a running magnetometer calibration |uint8_t bitmask of magnetometers (0 means all)| Empty| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_SET_FACTORY_TEST_MODE=42427, /* Command autopilot to get into factory test/diagnostic mode |0 means get out of test mode, 1 means get into test mode| Empty| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_DO_SEND_BANNER=42428, /* Reply with the version banner |Empty| Empty| Empty| Empty| Empty| Empty| Empty|  */
+   MAV_CMD_ACCELCAL_VEHICLE_POS=42429, /* Used when doing accelerometer calibration. When sent to the GCS tells it what position to put the vehicle in. When sent to the vehicle says what position the vehicle is in. |Position, one of the ACCELCAL_VEHICLE_POS enum values| Empty| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_GIMBAL_RESET=42501, /* Causes the gimbal to reset and boot as if it was just powered on |Empty| Empty| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_GIMBAL_AXIS_CALIBRATION_STATUS=42502, /* Reports progress and success or failure of gimbal axis calibration procedure |Gimbal axis we're reporting calibration progress for| Current calibration progress for this axis, 0x64=100%| Status of the calibration| Empty| Empty| Empty| Empty|  */
    MAV_CMD_GIMBAL_REQUEST_AXIS_CALIBRATION=42503, /* Starts commutation calibration on the gimbal |Empty| Empty| Empty| Empty| Empty| Empty| Empty|  */
@@ -678,6 +694,17 @@ typedef enum MAV_REMOTE_LOG_DATA_BLOCK_STATUSES
    MAV_REMOTE_LOG_DATA_BLOCK_ACK=1, /* This block has been received | */
    MAV_REMOTE_LOG_DATA_BLOCK_STATUSES_ENUM_END=2, /*  | */
 } MAV_REMOTE_LOG_DATA_BLOCK_STATUSES;
+#endif
+
+/** @brief Bus types for device operations */
+#ifndef HAVE_ENUM_DEVICE_OP_BUSTYPE
+#define HAVE_ENUM_DEVICE_OP_BUSTYPE
+typedef enum DEVICE_OP_BUSTYPE
+{
+   DEVICE_OP_BUSTYPE_I2C=0, /* I2C Device operation | */
+   DEVICE_OP_BUSTYPE_SPI=1, /* SPI Device operation | */
+   DEVICE_OP_BUSTYPE_ENUM_END=2, /*  | */
+} DEVICE_OP_BUSTYPE;
 #endif
 
 // MAVLINK VERSION
