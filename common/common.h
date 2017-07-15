@@ -466,8 +466,8 @@ typedef enum MAV_CMD
    MAV_CMD_REQUEST_CAMERA_SETTINGS=522, /* WIP: Request camera settings (CAMERA_SETTINGS) |Camera ID (0 for all cameras, 1 for first, 2 for second, etc.)| 0: No Action 1: Request camera settings| Reserved (all remaining params)|  */
    MAV_CMD_SET_CAMERA_SETTINGS_1=523, /* WIP: Set the camera settings part 1 (CAMERA_SETTINGS). Use NAN for reserved values and values you don't want to change. |Camera ID (1 for first, 2 for second, etc.)| Aperture (1/value)| Shutter speed in seconds| ISO sensitivity| AE mode (Auto Exposure) (0: full auto 1: full manual 2: aperture priority 3: shutter priority)| EV value (when in auto exposure)| White balance (color temperature in K) (0: Auto WB, -1: Lock at current auto value)|  */
    MAV_CMD_SET_CAMERA_SETTINGS_2=524, /* WIP: Set the camera settings part 2 (CAMERA_SETTINGS). Use NAN for reserved values and values you don't want to change. |Camera ID (1 for first, 2 for second, etc.)| Reserved for Flicker mode (0 for Auto)| Reserved for metering mode ID (Average, Center, Spot, etc.)| Reserved for image format ID (Jpeg/Raw/Jpeg+Raw)| Reserved for image quality ID (Compression)| Reserved for color mode ID (Neutral, Vivid, etc.)| Reserved|  */
-   MAV_CMD_REQUEST_STORAGE_INFORMATION=525, /* WIP: Request storage information (STORAGE_INFORMATION) |Storage ID (0 for all, 1 for first, 2 for second, etc.)| 0: No Action 1: Request storage information| Reserved (all remaining params)|  */
-   MAV_CMD_STORAGE_FORMAT=526, /* WIP: Format a storage medium. Once format is complete, a STORAGE_INFORMATION message is sent. |Storage ID (1 for first, 2 for second, etc.)| 0: No action 1: Format storage| Reserved (all remaining params)|  */
+   MAV_CMD_REQUEST_STORAGE_INFORMATION=525, /* WIP: Request storage information (STORAGE_INFORMATION). Use the command's target_component to target a specific component's storage. |Storage ID (0 for all, 1 for first, 2 for second, etc.)| 0: No Action 1: Request storage information| Reserved (all remaining params)|  */
+   MAV_CMD_STORAGE_FORMAT=526, /* WIP: Format a storage medium. Once format is complete, a STORAGE_INFORMATION message is sent. Use the command's target_component to target a specific component's storage. |Storage ID (1 for first, 2 for second, etc.)| 0: No action 1: Format storage| Reserved (all remaining params)|  */
    MAV_CMD_REQUEST_CAMERA_CAPTURE_STATUS=527, /* WIP: Request camera capture status (CAMERA_CAPTURE_STATUS) |Camera ID (0 for all cameras, 1 for first, 2 for second, etc.)| 0: No Action 1: Request camera capture status| Reserved (all remaining params)|  */
    MAV_CMD_REQUEST_FLIGHT_INFORMATION=528, /* WIP: Request flight information (FLIGHT_INFORMATION) |1: Request flight information| Reserved (all remaining params)|  */
    MAV_CMD_RESET_CAMERA_SETTINGS=529, /* WIP: Reset all camera settings to Factory Default (CAMERA_SETTINGS) |Camera ID (0 for all cameras, 1 for first, 2 for second, etc.)| 0: No Action 1: Reset all settings| Reserved (all remaining params)|  */
@@ -1051,6 +1051,19 @@ typedef enum LANDING_TARGET_TYPE
    LANDING_TARGET_TYPE_VISION_OTHER=3, /* Landing target represented by a pre-defined visual shape/feature (ex: X-marker, H-marker, square) | */
    LANDING_TARGET_TYPE_ENUM_END=4, /*  | */
 } LANDING_TARGET_TYPE;
+#endif
+
+/** @brief Result from a PARAM_EXT_SET message. */
+#ifndef HAVE_ENUM_PARAM_ACK
+#define HAVE_ENUM_PARAM_ACK
+typedef enum PARAM_ACK
+{
+   PARAM_ACK_ACCEPTED=0, /* Parameter value ACCEPTED and SET | */
+   PARAM_ACK_VALUE_UNSUPPORTED=1, /* Parameter value UNKNOWN/UNSUPPORTED | */
+   PARAM_ACK_FAILED=2, /* Parameter failed to set | */
+   PARAM_ACK_IN_PROGRESS=3, /* Parameter value received but not yet validated or set. A subsequent PARAM_EXT_ACK will follow once operation is completed with the actual result. These are for parameters that may take longer to set. Instead of waiting for an ACK and potentially timing out, you will immediately receive this response to let you know it was received. | */
+   PARAM_ACK_ENUM_END=4, /*  | */
+} PARAM_ACK;
 #endif
 
 // MAVLINK VERSION
