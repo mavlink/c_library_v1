@@ -2400,6 +2400,69 @@ static void mavlink_test_pid_tuning(uint8_t system_id, uint8_t component_id, mav
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
+static void mavlink_test_deepstall(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_DEEPSTALL >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_deepstall_t packet_in = {
+        963497464,963497672,963497880,963498088,963498296,963498504,185.0,213.0,241.0,113
+    };
+    mavlink_deepstall_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.landing_lat = packet_in.landing_lat;
+        packet1.landing_lon = packet_in.landing_lon;
+        packet1.path_lat = packet_in.path_lat;
+        packet1.path_lon = packet_in.path_lon;
+        packet1.arc_entry_lat = packet_in.arc_entry_lat;
+        packet1.arc_entry_lon = packet_in.arc_entry_lon;
+        packet1.altitude = packet_in.altitude;
+        packet1.expected_travel_distance = packet_in.expected_travel_distance;
+        packet1.cross_track_error = packet_in.cross_track_error;
+        packet1.stage = packet_in.stage;
+        
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_DEEPSTALL_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_DEEPSTALL_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_deepstall_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_deepstall_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_deepstall_pack(system_id, component_id, &msg , packet1.landing_lat , packet1.landing_lon , packet1.path_lat , packet1.path_lon , packet1.arc_entry_lat , packet1.arc_entry_lon , packet1.altitude , packet1.expected_travel_distance , packet1.cross_track_error , packet1.stage );
+    mavlink_msg_deepstall_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_deepstall_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.landing_lat , packet1.landing_lon , packet1.path_lat , packet1.path_lon , packet1.arc_entry_lat , packet1.arc_entry_lon , packet1.altitude , packet1.expected_travel_distance , packet1.cross_track_error , packet1.stage );
+    mavlink_msg_deepstall_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_deepstall_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_deepstall_send(MAVLINK_COMM_1 , packet1.landing_lat , packet1.landing_lon , packet1.path_lat , packet1.path_lon , packet1.arc_entry_lat , packet1.arc_entry_lon , packet1.altitude , packet1.expected_travel_distance , packet1.cross_track_error , packet1.stage );
+    mavlink_msg_deepstall_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
 static void mavlink_test_gimbal_report(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
@@ -2958,6 +3021,7 @@ static void mavlink_test_ardupilotmega(uint8_t system_id, uint8_t component_id, 
     mavlink_test_mag_cal_report(system_id, component_id, last_msg);
     mavlink_test_ekf_status_report(system_id, component_id, last_msg);
     mavlink_test_pid_tuning(system_id, component_id, last_msg);
+    mavlink_test_deepstall(system_id, component_id, last_msg);
     mavlink_test_gimbal_report(system_id, component_id, last_msg);
     mavlink_test_gimbal_control(system_id, component_id, last_msg);
     mavlink_test_gimbal_torque_cmd_report(system_id, component_id, last_msg);

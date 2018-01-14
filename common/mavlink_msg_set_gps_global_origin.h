@@ -6,7 +6,7 @@
 MAVPACKED(
 typedef struct __mavlink_set_gps_global_origin_t {
  int32_t latitude; /*< Latitude (WGS84), in degrees * 1E7*/
- int32_t longitude; /*< Longitude (WGS84, in degrees * 1E7*/
+ int32_t longitude; /*< Longitude (WGS84), in degrees * 1E7*/
  int32_t altitude; /*< Altitude (AMSL), in meters * 1000 (positive for up)*/
  uint8_t target_system; /*< System ID*/
 }) mavlink_set_gps_global_origin_t;
@@ -52,7 +52,7 @@ typedef struct __mavlink_set_gps_global_origin_t {
  *
  * @param target_system System ID
  * @param latitude Latitude (WGS84), in degrees * 1E7
- * @param longitude Longitude (WGS84, in degrees * 1E7
+ * @param longitude Longitude (WGS84), in degrees * 1E7
  * @param altitude Altitude (AMSL), in meters * 1000 (positive for up)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
@@ -89,7 +89,7 @@ static inline uint16_t mavlink_msg_set_gps_global_origin_pack(uint8_t system_id,
  * @param msg The MAVLink message to compress the data into
  * @param target_system System ID
  * @param latitude Latitude (WGS84), in degrees * 1E7
- * @param longitude Longitude (WGS84, in degrees * 1E7
+ * @param longitude Longitude (WGS84), in degrees * 1E7
  * @param altitude Altitude (AMSL), in meters * 1000 (positive for up)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
@@ -152,7 +152,7 @@ static inline uint16_t mavlink_msg_set_gps_global_origin_encode_chan(uint8_t sys
  *
  * @param target_system System ID
  * @param latitude Latitude (WGS84), in degrees * 1E7
- * @param longitude Longitude (WGS84, in degrees * 1E7
+ * @param longitude Longitude (WGS84), in degrees * 1E7
  * @param altitude Altitude (AMSL), in meters * 1000 (positive for up)
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
@@ -250,7 +250,7 @@ static inline int32_t mavlink_msg_set_gps_global_origin_get_latitude(const mavli
 /**
  * @brief Get field longitude from set_gps_global_origin message
  *
- * @return Longitude (WGS84, in degrees * 1E7
+ * @return Longitude (WGS84), in degrees * 1E7
  */
 static inline int32_t mavlink_msg_set_gps_global_origin_get_longitude(const mavlink_message_t* msg)
 {
