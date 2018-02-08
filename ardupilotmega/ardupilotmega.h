@@ -768,6 +768,114 @@ typedef enum DEEPSTALL_STAGE
 } DEEPSTALL_STAGE;
 #endif
 
+/** @brief A mapping of plane flight modes for custom_mode field of heartbeat */
+#ifndef HAVE_ENUM_PLANE_MODE
+#define HAVE_ENUM_PLANE_MODE
+typedef enum PLANE_MODE
+{
+   PLANE_MODE_MANUAL=0, /*  | */
+   PLANE_MODE_CIRCLE=1, /*  | */
+   PLANE_MODE_STABILIZE=2, /*  | */
+   PLANE_MODE_TRAINING=3, /*  | */
+   PLANE_MODE_ACRO=4, /*  | */
+   PLANE_MODE_FLY_BY_WIRE_A=5, /*  | */
+   PLANE_MODE_FLY_BY_WIRE_B=6, /*  | */
+   PLANE_MODE_CRUISE=7, /*  | */
+   PLANE_MODE_AUTOTUNE=8, /*  | */
+   PLANE_MODE_AUTO=10, /*  | */
+   PLANE_MODE_RTL=11, /*  | */
+   PLANE_MODE_LOITER=12, /*  | */
+   PLANE_MODE_AVOID_ADSB=14, /*  | */
+   PLANE_MODE_GUIDED=15, /*  | */
+   PLANE_MODE_INITIALIZING=16, /*  | */
+   PLANE_MODE_QSTABILIZE=17, /*  | */
+   PLANE_MODE_QHOVER=18, /*  | */
+   PLANE_MODE_QLOITER=19, /*  | */
+   PLANE_MODE_QLAND=20, /*  | */
+   PLANE_MODE_QRTL=21, /*  | */
+   PLANE_MODE_ENUM_END=22, /*  | */
+} PLANE_MODE;
+#endif
+
+/** @brief A mapping of copter flight modes for custom_mode field of heartbeat */
+#ifndef HAVE_ENUM_COPTER_MODE
+#define HAVE_ENUM_COPTER_MODE
+typedef enum COPTER_MODE
+{
+   COPTER_MODE_STABILIZE=0, /*  | */
+   COPTER_MODE_ACRO=1, /*  | */
+   COPTER_MODE_ALT_HOLD=2, /*  | */
+   COPTER_MODE_AUTO=3, /*  | */
+   COPTER_MODE_GUIDED=4, /*  | */
+   COPTER_MODE_LOITER=5, /*  | */
+   COPTER_MODE_RTL=6, /*  | */
+   COPTER_MODE_CIRCLE=7, /*  | */
+   COPTER_MODE_LAND=9, /*  | */
+   COPTER_MODE_DRIFT=11, /*  | */
+   COPTER_MODE_SPORT=13, /*  | */
+   COPTER_MODE_FLIP=14, /*  | */
+   COPTER_MODE_AUTOTUNE=15, /*  | */
+   COPTER_MODE_POSHOLD=16, /*  | */
+   COPTER_MODE_BRAKE=17, /*  | */
+   COPTER_MODE_THROW=18, /*  | */
+   COPTER_MODE_AVOID_ADSB=19, /*  | */
+   COPTER_MODE_GUIDED_NOGPS=20, /*  | */
+   COPTER_MODE_SMART_RTL=21, /*  | */
+   COPTER_MODE_ENUM_END=22, /*  | */
+} COPTER_MODE;
+#endif
+
+/** @brief A mapping of sub flight modes for custom_mode field of heartbeat */
+#ifndef HAVE_ENUM_SUB_MODE
+#define HAVE_ENUM_SUB_MODE
+typedef enum SUB_MODE
+{
+   SUB_MODE_STABILIZE=0, /*  | */
+   SUB_MODE_ACRO=1, /*  | */
+   SUB_MODE_ALT_HOLD=2, /*  | */
+   SUB_MODE_AUTO=3, /*  | */
+   SUB_MODE_GUIDED=4, /*  | */
+   SUB_MODE_CIRCLE=7, /*  | */
+   SUB_MODE_SURFACE=9, /*  | */
+   SUB_MODE_POSHOLD=16, /*  | */
+   SUB_MODE_MANUAL=19, /*  | */
+   SUB_MODE_ENUM_END=20, /*  | */
+} SUB_MODE;
+#endif
+
+/** @brief A mapping of rover flight modes for custom_mode field of heartbeat */
+#ifndef HAVE_ENUM_ROVER_MODE
+#define HAVE_ENUM_ROVER_MODE
+typedef enum ROVER_MODE
+{
+   ROVER_MODE_MANUAL=0, /*  | */
+   ROVER_MODE_ACRO=1, /*  | */
+   ROVER_MODE_STEERING=3, /*  | */
+   ROVER_MODE_HOLD=4, /*  | */
+   ROVER_MODE_AUTO=10, /*  | */
+   ROVER_MODE_RTL=11, /*  | */
+   ROVER_MODE_SMART_RTL=12, /*  | */
+   ROVER_MODE_GUIDED=15, /*  | */
+   ROVER_MODE_INITIALIZING=16, /*  | */
+   ROVER_MODE_ENUM_END=17, /*  | */
+} ROVER_MODE;
+#endif
+
+/** @brief A mapping of antenna tracker flight modes for custom_mode field of heartbeat */
+#ifndef HAVE_ENUM_TRACKER_MODE
+#define HAVE_ENUM_TRACKER_MODE
+typedef enum TRACKER_MODE
+{
+   TRACKER_MODE_MANUAL=0, /*  | */
+   TRACKER_MODE_STOP=1, /*  | */
+   TRACKER_MODE_SCAN=2, /*  | */
+   TRACKER_MODE_SERVO_TEST=3, /*  | */
+   TRACKER_MODE_AUTO=10, /*  | */
+   TRACKER_MODE_INITIALIZING=16, /*  | */
+   TRACKER_MODE_ENUM_END=17, /*  | */
+} TRACKER_MODE;
+#endif
+
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
@@ -834,6 +942,7 @@ typedef enum DEEPSTALL_STAGE
 // base include
 #include "../common/common.h"
 #include "../uAvionix/uAvionix.h"
+#include "../icarous/icarous.h"
 
 #undef MAVLINK_THIS_XML_IDX
 #define MAVLINK_THIS_XML_IDX 0
