@@ -24,7 +24,7 @@ extern "C" {
 #endif
 
 #ifndef MAVLINK_MESSAGE_CRCS
-#define MAVLINK_MESSAGE_CRCS {50, 124, 137, 0, 237, 217, 104, 119, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 214, 159, 220, 168, 24, 23, 170, 144, 67, 115, 39, 246, 185, 104, 237, 244, 222, 212, 9, 254, 230, 28, 28, 132, 221, 232, 11, 153, 41, 39, 78, 196, 0, 0, 15, 3, 0, 0, 0, 0, 0, 167, 183, 119, 191, 118, 148, 21, 0, 243, 124, 0, 0, 38, 20, 158, 152, 143, 0, 0, 0, 106, 49, 22, 143, 140, 5, 150, 0, 231, 183, 63, 54, 47, 0, 0, 0, 0, 0, 0, 175, 102, 158, 208, 56, 93, 138, 108, 32, 185, 84, 34, 174, 124, 237, 4, 76, 128, 56, 116, 134, 237, 203, 250, 87, 203, 220, 25, 226, 46, 29, 223, 85, 6, 229, 203, 1, 195, 109, 168, 181, 47, 72, 131, 127, 0, 103, 154, 178, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 163, 105, 151, 35, 150, 136, 0, 0, 0, 0, 0, 90, 104, 85, 95, 130, 184, 81, 8, 204, 49, 170, 44, 83, 46, 0}
+#define MAVLINK_MESSAGE_CRCS {50, 124, 137, 0, 237, 217, 104, 119, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 214, 159, 220, 168, 24, 23, 170, 144, 67, 115, 39, 246, 185, 104, 237, 244, 222, 212, 9, 254, 230, 28, 28, 132, 221, 232, 11, 153, 41, 39, 78, 196, 0, 0, 15, 3, 0, 0, 0, 0, 0, 167, 183, 119, 191, 118, 148, 21, 0, 243, 124, 0, 0, 38, 20, 158, 152, 143, 0, 0, 0, 106, 49, 22, 143, 140, 5, 150, 0, 231, 183, 63, 54, 47, 0, 0, 0, 0, 0, 0, 175, 102, 158, 208, 56, 93, 138, 108, 32, 185, 84, 34, 174, 124, 237, 4, 76, 128, 56, 116, 134, 237, 203, 250, 87, 203, 220, 25, 226, 46, 29, 223, 85, 6, 229, 203, 1, 195, 109, 168, 181, 47, 72, 131, 127, 0, 103, 154, 178, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 163, 105, 151, 35, 150, 179, 0, 0, 0, 0, 0, 90, 104, 85, 95, 130, 184, 81, 8, 204, 49, 170, 44, 83, 46, 0}
 #endif
 
 #include "../protocol.h"
@@ -115,91 +115,27 @@ typedef enum FIRMWARE_VERSION_TYPE
 } FIRMWARE_VERSION_TYPE;
 #endif
 
-/** @brief Flight modes of the MAV. */
-#ifndef HAVE_ENUM_FLIGHT_MODE
-#define HAVE_ENUM_FLIGHT_MODE
-typedef enum FLIGHT_MODE
+/** @brief Flags to report failure cases over the high latency telemtry. */
+#ifndef HAVE_ENUM_HL_FAILURE_FLAG
+#define HAVE_ENUM_HL_FAILURE_FLAG
+typedef enum HL_FAILURE_FLAG
 {
-   FLIGHT_MODE_MANUAL=0, /* Manual flight mode | */
-   FLIGHT_MODE_ALTCTL=1, /* Altitude hold flight mode | */
-   FLIGHT_MODE_POSCTL=2, /* Position control flight mode | */
-   FLIGHT_MODE_STABILIZED=3, /* Stabilized mode | */
-   FLIGHT_MODE_ACRO=4, /* Acro mode | */
-   FLIGHT_MODE_RATTITIDE=5, /* Rattitude mode | */
-   FLIGHT_MODE_AUTO_MISSION=6, /* Mission mode | */
-   FLIGHT_MODE_AUTO_LOITER=7, /* Loiter mode | */
-   FLIGHT_MODE_AUTO_RTL=8, /* Return to land mode | */
-   FLIGHT_MODE_AUTO_RCRECOVER=9, /* RC recover mode | */
-   FLIGHT_MODE_AUTO_RTGS=10, /* Return to ground station mode | */
-   FLIGHT_MODE_AUTO_LANDENGFAIL=11, /* Land Engine Fail mode | */
-   FLIGHT_MODE_AUTO_LANDGPSFAIL=12, /* Land GPS fail mode | */
-   FLIGHT_MODE_AUTO_TAKEOFF=13, /* Takeoff mode | */
-   FLIGHT_MODE_AUTO_LAND=14, /* Land mode | */
-   FLIGHT_MODE_AUTO_FOLLOW_TARGET=15, /* Follow target/me mode | */
-   FLIGHT_MODE_AUTO_PRECLAND=16, /* Precision landing mode | */
-   FLIGHT_MODE_DESCEND=17, /* Descend mode | */
-   FLIGHT_MODE_OFFBOARD=18, /* Offboard mode | */
-   FLIGHT_MODE_TERMINATION=19, /* Termination mode | */
-   FLIGHT_MODE_AUTO_TUNE=20, /* Auto tune mode | */
-   FLIGHT_MODE_BRAKE=21, /* Brake mode | */
-   FLIGHT_MODE_CIRCLE=22, /* Circle mode | */
-   FLIGHT_MODE_DRIFT=23, /* Drift mode | */
-   FLIGHT_MODE_GUIDED=24, /* Guided mode | */
-   FLIGHT_MODE_SPORT=25, /* Sport mode | */
-   FLIGHT_MODE_THROW=26, /* Throw mode | */
-   FLIGHT_MODE_SUPER_SIMPLE=27, /* Simplified multicopter control mode | */
-   FLIGHT_MODE_AVIOD_TRAFFIC=28, /* Avoid traffic mode | */
-   FLIGHT_MODE_FBWA=29, /* Fly by wire (version A) mode | */
-   FLIGHT_MODE_FBWB=30, /* Flz by wire (version B) mode | */
-   FLIGHT_MODE_TRAINING=31, /* Position control flight mode | */
-   FLIGHT_MODE_CRUISE=32, /* Cruise mode | */
-   FLIGHT_MODE_HOLD=33, /* Position hold mode | */
-   FLIGHT_MODE_STEERING=34, /* Steering mode | */
-   FLIGHT_MODE_SMART_RTL=35, /* Smart return-to-land-mode | */
-   FLIGHT_MODE_ENUM_END=36, /*  | */
-} FLIGHT_MODE;
-#endif
-
-/** @brief These flags encode if a certain failsafe mode is triggered. */
-#ifndef HAVE_ENUM_MAV_FAILSAFE_FLAG
-#define HAVE_ENUM_MAV_FAILSAFE_FLAG
-typedef enum MAV_FAILSAFE_FLAG
-{
-   MAV_FAILSAFE_FLAG_RESERVED2=1, /* 0b00000001 Reserved for future use. | */
-   MAV_FAILSAFE_FLAG_RESERVED1=2, /* 0b00000010 Reserved for future use. | */
-   MAV_FAILSAFE_FLAG_GEOFENCE=4, /* 0b00000100 Geofence failsafe active. | */
-   MAV_FAILSAFE_FLAG_BATTERY=8, /* 0b00001000 Battery failure failsafe active. | */
-   MAV_FAILSAFE_FLAG_GPS=16, /* 0b00010000 GPS failure failsafe active. | */
-   MAV_FAILSAFE_FLAG_ENGINE=32, /* 0b00100000 Engine failure failsafe active. | */
-   MAV_FAILSAFE_FLAG_TELEM_LOSS=64, /* 0b01000000 remote control input is enabled. | */
-   MAV_FAILSAFE_FLAG_RC_LOSS=128, /* 0b10000000 RC loss failsafe active. | */
-   MAV_FAILSAFE_FLAG_ENUM_END=129, /*  | */
-} MAV_FAILSAFE_FLAG;
-#endif
-
-/** @brief These flags encode if a certain failsafe mode is triggered. */
-#ifndef HAVE_ENUM_MAV_FAILURE_FLAG
-#define HAVE_ENUM_MAV_FAILURE_FLAG
-typedef enum MAV_FAILURE_FLAG
-{
-   MAV_FAILURE_FLAG_GPS=1, /* GPS failure. | */
-   MAV_FAILURE_FLAG_AIRSPEED=2, /* Airspeed failure. | */
-   MAV_FAILURE_FLAG_BAROMETER=4, /* Barometer failure. | */
-   MAV_FAILURE_FLAG_ACCELEROMETER=8, /* Accelerometer failure. | */
-   MAV_FAILURE_FLAG_GYROSCOPE=16, /* Gyroscope failure. | */
-   MAV_FAILURE_FLAG_MAGNETOMETER=32, /* Magnetometer. | */
-   MAV_FAILURE_FLAG_MISSION=64, /* Mission failure. | */
-   MAV_FAILURE_FLAG_ESTIMATOR=128, /* Estimator failure. | */
-   MAV_FAILURE_FLAG_LIDAR=256, /* Lidar failure. | */
-   MAV_FAILURE_FLAG_OFFBOARD_LINK=512, /* Offboard link failure. | */
-   MAV_FAILURE_FLAG_RESERVED1=1024, /* Reserved for future use. | */
-   MAV_FAILURE_FLAG_RESERVED2=2048, /* Reserved for future use. | */
-   MAV_FAILURE_FLAG_RESERVED3=4096, /* Reserved for future use. | */
-   MAV_FAILURE_FLAG_RESERVED4=8192, /* Reserved for future use. | */
-   MAV_FAILURE_FLAG_RESERVED5=16384, /* Reserved for future use. | */
-   MAV_FAILURE_FLAG_RESERVED6=32768, /* Reserved for future use. | */
-   MAV_FAILURE_FLAG_ENUM_END=32769, /*  | */
-} MAV_FAILURE_FLAG;
+   HL_FAILURE_FLAG_GPS=1, /* GPS failure. | */
+   HL_FAILURE_FLAG_DIFFERENTIAL_PRESSURE=2, /* Differential pressure sensor failure. | */
+   HL_FAILURE_FLAG_ABSOLUTE_PRESSURE=4, /* Absolute pressure sensor failure. | */
+   HL_FAILURE_FLAG_3D_ACCEL=8, /* Accelerometer sensor failure. | */
+   HL_FAILURE_FLAG_3D_GYRO=16, /* Gyroscope sensor failure. | */
+   HL_FAILURE_FLAG_3D_MAG=32, /* Magnetometer sensor failure. | */
+   HL_FAILURE_FLAG_TERRAIN=64, /* Terrain subsystem failure. | */
+   HL_FAILURE_FLAG_BATTERY=128, /* Battery failure/critical low battery. | */
+   HL_FAILURE_FLAG_RC_RECEIVER=256, /* RC receiver failure/no rc connection. | */
+   HL_FAILURE_FLAG_OFFBOARD_LINK=512, /* Offboard link failure. | */
+   HL_FAILURE_FLAG_ENGINE=1024, /* Engine failure. | */
+   HL_FAILURE_FLAG_GEOFENCE=2048, /* Geofence violation. | */
+   HL_FAILURE_FLAG_ESTIMATOR=4096, /* Estimator failure, for example measurement rejection or large variances. | */
+   HL_FAILURE_FLAG_MISSION=8192, /* Mission failure. | */
+   HL_FAILURE_FLAG_ENUM_END=8193, /*  | */
+} HL_FAILURE_FLAG;
 #endif
 
 /** @brief These flags encode the MAV mode. */
