@@ -13,12 +13,12 @@ typedef struct __mavlink_mission_item_t {
  float y; /*< PARAM6 / local: Y coordinate, global: longitude*/
  float z; /*< PARAM7 / local: Z coordinate, global: altitude (relative or absolute, depending on frame).*/
  uint16_t seq; /*< Sequence*/
- uint16_t command; /*< The scheduled action for the waypoint, as defined by MAV_CMD enum*/
+ uint16_t command; /*< The scheduled action for the waypoint.*/
  uint8_t target_system; /*< System ID*/
  uint8_t target_component; /*< Component ID*/
- uint8_t frame; /*< The coordinate system of the waypoint, as defined by MAV_FRAME enum*/
+ uint8_t frame; /*< The coordinate system of the waypoint.*/
  uint8_t current; /*< false:0, true:1*/
- uint8_t autocontinue; /*< autocontinue to next wp*/
+ uint8_t autocontinue; /*< Autocontinue to next waypoint*/
 }) mavlink_mission_item_t;
 
 #define MAVLINK_MSG_ID_MISSION_ITEM_LEN 37
@@ -83,10 +83,10 @@ typedef struct __mavlink_mission_item_t {
  * @param target_system System ID
  * @param target_component Component ID
  * @param seq Sequence
- * @param frame The coordinate system of the waypoint, as defined by MAV_FRAME enum
- * @param command The scheduled action for the waypoint, as defined by MAV_CMD enum
+ * @param frame The coordinate system of the waypoint.
+ * @param command The scheduled action for the waypoint.
  * @param current false:0, true:1
- * @param autocontinue autocontinue to next wp
+ * @param autocontinue Autocontinue to next waypoint
  * @param param1 PARAM1, see MAV_CMD enum
  * @param param2 PARAM2, see MAV_CMD enum
  * @param param3 PARAM3, see MAV_CMD enum
@@ -150,10 +150,10 @@ static inline uint16_t mavlink_msg_mission_item_pack(uint8_t system_id, uint8_t 
  * @param target_system System ID
  * @param target_component Component ID
  * @param seq Sequence
- * @param frame The coordinate system of the waypoint, as defined by MAV_FRAME enum
- * @param command The scheduled action for the waypoint, as defined by MAV_CMD enum
+ * @param frame The coordinate system of the waypoint.
+ * @param command The scheduled action for the waypoint.
  * @param current false:0, true:1
- * @param autocontinue autocontinue to next wp
+ * @param autocontinue Autocontinue to next waypoint
  * @param param1 PARAM1, see MAV_CMD enum
  * @param param2 PARAM2, see MAV_CMD enum
  * @param param3 PARAM3, see MAV_CMD enum
@@ -243,10 +243,10 @@ static inline uint16_t mavlink_msg_mission_item_encode_chan(uint8_t system_id, u
  * @param target_system System ID
  * @param target_component Component ID
  * @param seq Sequence
- * @param frame The coordinate system of the waypoint, as defined by MAV_FRAME enum
- * @param command The scheduled action for the waypoint, as defined by MAV_CMD enum
+ * @param frame The coordinate system of the waypoint.
+ * @param command The scheduled action for the waypoint.
  * @param current false:0, true:1
- * @param autocontinue autocontinue to next wp
+ * @param autocontinue Autocontinue to next waypoint
  * @param param1 PARAM1, see MAV_CMD enum
  * @param param2 PARAM2, see MAV_CMD enum
  * @param param3 PARAM3, see MAV_CMD enum
@@ -400,7 +400,7 @@ static inline uint16_t mavlink_msg_mission_item_get_seq(const mavlink_message_t*
 /**
  * @brief Get field frame from mission_item message
  *
- * @return The coordinate system of the waypoint, as defined by MAV_FRAME enum
+ * @return The coordinate system of the waypoint.
  */
 static inline uint8_t mavlink_msg_mission_item_get_frame(const mavlink_message_t* msg)
 {
@@ -410,7 +410,7 @@ static inline uint8_t mavlink_msg_mission_item_get_frame(const mavlink_message_t
 /**
  * @brief Get field command from mission_item message
  *
- * @return The scheduled action for the waypoint, as defined by MAV_CMD enum
+ * @return The scheduled action for the waypoint.
  */
 static inline uint16_t mavlink_msg_mission_item_get_command(const mavlink_message_t* msg)
 {
@@ -430,7 +430,7 @@ static inline uint8_t mavlink_msg_mission_item_get_current(const mavlink_message
 /**
  * @brief Get field autocontinue from mission_item message
  *
- * @return autocontinue to next wp
+ * @return Autocontinue to next waypoint
  */
 static inline uint8_t mavlink_msg_mission_item_get_autocontinue(const mavlink_message_t* msg)
 {

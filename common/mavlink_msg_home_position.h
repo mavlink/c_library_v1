@@ -5,9 +5,9 @@
 
 MAVPACKED(
 typedef struct __mavlink_home_position_t {
- int32_t latitude; /*< Latitude (WGS84), in degrees * 1E7*/
- int32_t longitude; /*< Longitude (WGS84, in degrees * 1E7*/
- int32_t altitude; /*< Altitude (AMSL), in meters * 1000 (positive for up)*/
+ int32_t latitude; /*< Latitude (WGS84)*/
+ int32_t longitude; /*< Longitude (WGS84)*/
+ int32_t altitude; /*< Altitude (AMSL). Positive for up.*/
  float x; /*< Local X position of this position in the local coordinate frame*/
  float y; /*< Local Y position of this position in the local coordinate frame*/
  float z; /*< Local Z position of this position in the local coordinate frame*/
@@ -68,9 +68,9 @@ typedef struct __mavlink_home_position_t {
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param msg The MAVLink message to compress the data into
  *
- * @param latitude Latitude (WGS84), in degrees * 1E7
- * @param longitude Longitude (WGS84, in degrees * 1E7
- * @param altitude Altitude (AMSL), in meters * 1000 (positive for up)
+ * @param latitude Latitude (WGS84)
+ * @param longitude Longitude (WGS84)
+ * @param altitude Altitude (AMSL). Positive for up.
  * @param x Local X position of this position in the local coordinate frame
  * @param y Local Y position of this position in the local coordinate frame
  * @param z Local Z position of this position in the local coordinate frame
@@ -121,9 +121,9 @@ static inline uint16_t mavlink_msg_home_position_pack(uint8_t system_id, uint8_t
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
- * @param latitude Latitude (WGS84), in degrees * 1E7
- * @param longitude Longitude (WGS84, in degrees * 1E7
- * @param altitude Altitude (AMSL), in meters * 1000 (positive for up)
+ * @param latitude Latitude (WGS84)
+ * @param longitude Longitude (WGS84)
+ * @param altitude Altitude (AMSL). Positive for up.
  * @param x Local X position of this position in the local coordinate frame
  * @param y Local Y position of this position in the local coordinate frame
  * @param z Local Z position of this position in the local coordinate frame
@@ -200,9 +200,9 @@ static inline uint16_t mavlink_msg_home_position_encode_chan(uint8_t system_id, 
  * @brief Send a home_position message
  * @param chan MAVLink channel to send the message
  *
- * @param latitude Latitude (WGS84), in degrees * 1E7
- * @param longitude Longitude (WGS84, in degrees * 1E7
- * @param altitude Altitude (AMSL), in meters * 1000 (positive for up)
+ * @param latitude Latitude (WGS84)
+ * @param longitude Longitude (WGS84)
+ * @param altitude Altitude (AMSL). Positive for up.
  * @param x Local X position of this position in the local coordinate frame
  * @param y Local Y position of this position in the local coordinate frame
  * @param z Local Z position of this position in the local coordinate frame
@@ -306,7 +306,7 @@ static inline void mavlink_msg_home_position_send_buf(mavlink_message_t *msgbuf,
 /**
  * @brief Get field latitude from home_position message
  *
- * @return Latitude (WGS84), in degrees * 1E7
+ * @return Latitude (WGS84)
  */
 static inline int32_t mavlink_msg_home_position_get_latitude(const mavlink_message_t* msg)
 {
@@ -316,7 +316,7 @@ static inline int32_t mavlink_msg_home_position_get_latitude(const mavlink_messa
 /**
  * @brief Get field longitude from home_position message
  *
- * @return Longitude (WGS84, in degrees * 1E7
+ * @return Longitude (WGS84)
  */
 static inline int32_t mavlink_msg_home_position_get_longitude(const mavlink_message_t* msg)
 {
@@ -326,7 +326,7 @@ static inline int32_t mavlink_msg_home_position_get_longitude(const mavlink_mess
 /**
  * @brief Get field altitude from home_position message
  *
- * @return Altitude (AMSL), in meters * 1000 (positive for up)
+ * @return Altitude (AMSL). Positive for up.
  */
 static inline int32_t mavlink_msg_home_position_get_altitude(const mavlink_message_t* msg)
 {
