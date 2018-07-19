@@ -219,7 +219,8 @@ typedef enum MAV_CMD
    MAV_CMD_GIMBAL_REQUEST_AXIS_CALIBRATION=42503, /* Starts commutation calibration on the gimbal |Empty| Empty| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_GIMBAL_FULL_RESET=42505, /* Erases gimbal application and parameters |Magic number| Magic number| Magic number| Magic number| Magic number| Magic number| Magic number|  */
    MAV_CMD_DO_WINCH=42600, /* Command to operate winch |winch number (0 for the default winch, otherwise a number from 1 to max number of winches on the vehicle)| action (0=relax, 1=relative length control, 2=rate control.  See WINCH_ACTIONS enum)| release length (cable distance to unwind in meters, negative numbers to wind in cable)| release rate (meters/second)| Empty| Empty| Empty|  */
-   MAV_CMD_ENUM_END=42601, /*  | */
+   MAV_CMD_FLASH_BOOTLOADER=42650, /* Update the bootloader |Empty| Empty| Empty| Empty| Magic number - set to 290876 to actually flash| Empty| Empty|  */
+   MAV_CMD_ENUM_END=42651, /*  | */
 } MAV_CMD;
 #endif
 
@@ -718,7 +719,8 @@ typedef enum MAG_CAL_STATUS
    MAG_CAL_RUNNING_STEP_TWO=3, /*  | */
    MAG_CAL_SUCCESS=4, /*  | */
    MAG_CAL_FAILED=5, /*  | */
-   MAG_CAL_STATUS_ENUM_END=6, /*  | */
+   MAG_CAL_BAD_ORIENTATION=6, /*  | */
+   MAG_CAL_STATUS_ENUM_END=7, /*  | */
 } MAG_CAL_STATUS;
 #endif
 
