@@ -5,10 +5,10 @@
 
 MAVPACKED(
 typedef struct __mavlink_mission_write_partial_list_t {
- int16_t start_index; /*< Start index, 0 by default and smaller / equal to the largest index of the current onboard list.*/
- int16_t end_index; /*< End index, equal or greater than start index.*/
- uint8_t target_system; /*< System ID*/
- uint8_t target_component; /*< Component ID*/
+ int16_t start_index; /*<  Start index, 0 by default and smaller / equal to the largest index of the current onboard list.*/
+ int16_t end_index; /*<  End index, equal or greater than start index.*/
+ uint8_t target_system; /*<  System ID*/
+ uint8_t target_component; /*<  Component ID*/
 }) mavlink_mission_write_partial_list_t;
 
 #define MAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST_LEN 6
@@ -50,10 +50,10 @@ typedef struct __mavlink_mission_write_partial_list_t {
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param msg The MAVLink message to compress the data into
  *
- * @param target_system System ID
- * @param target_component Component ID
- * @param start_index Start index, 0 by default and smaller / equal to the largest index of the current onboard list.
- * @param end_index End index, equal or greater than start index.
+ * @param target_system  System ID
+ * @param target_component  Component ID
+ * @param start_index  Start index, 0 by default and smaller / equal to the largest index of the current onboard list.
+ * @param end_index  End index, equal or greater than start index.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_mission_write_partial_list_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -87,10 +87,10 @@ static inline uint16_t mavlink_msg_mission_write_partial_list_pack(uint8_t syste
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
- * @param target_system System ID
- * @param target_component Component ID
- * @param start_index Start index, 0 by default and smaller / equal to the largest index of the current onboard list.
- * @param end_index End index, equal or greater than start index.
+ * @param target_system  System ID
+ * @param target_component  Component ID
+ * @param start_index  Start index, 0 by default and smaller / equal to the largest index of the current onboard list.
+ * @param end_index  End index, equal or greater than start index.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_mission_write_partial_list_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -150,10 +150,10 @@ static inline uint16_t mavlink_msg_mission_write_partial_list_encode_chan(uint8_
  * @brief Send a mission_write_partial_list message
  * @param chan MAVLink channel to send the message
  *
- * @param target_system System ID
- * @param target_component Component ID
- * @param start_index Start index, 0 by default and smaller / equal to the largest index of the current onboard list.
- * @param end_index End index, equal or greater than start index.
+ * @param target_system  System ID
+ * @param target_component  Component ID
+ * @param start_index  Start index, 0 by default and smaller / equal to the largest index of the current onboard list.
+ * @param end_index  End index, equal or greater than start index.
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -230,7 +230,7 @@ static inline void mavlink_msg_mission_write_partial_list_send_buf(mavlink_messa
 /**
  * @brief Get field target_system from mission_write_partial_list message
  *
- * @return System ID
+ * @return  System ID
  */
 static inline uint8_t mavlink_msg_mission_write_partial_list_get_target_system(const mavlink_message_t* msg)
 {
@@ -240,7 +240,7 @@ static inline uint8_t mavlink_msg_mission_write_partial_list_get_target_system(c
 /**
  * @brief Get field target_component from mission_write_partial_list message
  *
- * @return Component ID
+ * @return  Component ID
  */
 static inline uint8_t mavlink_msg_mission_write_partial_list_get_target_component(const mavlink_message_t* msg)
 {
@@ -250,7 +250,7 @@ static inline uint8_t mavlink_msg_mission_write_partial_list_get_target_componen
 /**
  * @brief Get field start_index from mission_write_partial_list message
  *
- * @return Start index, 0 by default and smaller / equal to the largest index of the current onboard list.
+ * @return  Start index, 0 by default and smaller / equal to the largest index of the current onboard list.
  */
 static inline int16_t mavlink_msg_mission_write_partial_list_get_start_index(const mavlink_message_t* msg)
 {
@@ -260,7 +260,7 @@ static inline int16_t mavlink_msg_mission_write_partial_list_get_start_index(con
 /**
  * @brief Get field end_index from mission_write_partial_list message
  *
- * @return End index, equal or greater than start index.
+ * @return  End index, equal or greater than start index.
  */
 static inline int16_t mavlink_msg_mission_write_partial_list_get_end_index(const mavlink_message_t* msg)
 {

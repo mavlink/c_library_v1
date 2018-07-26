@@ -5,9 +5,9 @@
 
 MAVPACKED(
 typedef struct __mavlink_mission_count_t {
- uint16_t count; /*< Number of mission items in the sequence*/
- uint8_t target_system; /*< System ID*/
- uint8_t target_component; /*< Component ID*/
+ uint16_t count; /*<  Number of mission items in the sequence*/
+ uint8_t target_system; /*<  System ID*/
+ uint8_t target_component; /*<  Component ID*/
 }) mavlink_mission_count_t;
 
 #define MAVLINK_MSG_ID_MISSION_COUNT_LEN 4
@@ -47,9 +47,9 @@ typedef struct __mavlink_mission_count_t {
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param msg The MAVLink message to compress the data into
  *
- * @param target_system System ID
- * @param target_component Component ID
- * @param count Number of mission items in the sequence
+ * @param target_system  System ID
+ * @param target_component  Component ID
+ * @param count  Number of mission items in the sequence
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_mission_count_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -81,9 +81,9 @@ static inline uint16_t mavlink_msg_mission_count_pack(uint8_t system_id, uint8_t
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
- * @param target_system System ID
- * @param target_component Component ID
- * @param count Number of mission items in the sequence
+ * @param target_system  System ID
+ * @param target_component  Component ID
+ * @param count  Number of mission items in the sequence
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_mission_count_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -141,9 +141,9 @@ static inline uint16_t mavlink_msg_mission_count_encode_chan(uint8_t system_id, 
  * @brief Send a mission_count message
  * @param chan MAVLink channel to send the message
  *
- * @param target_system System ID
- * @param target_component Component ID
- * @param count Number of mission items in the sequence
+ * @param target_system  System ID
+ * @param target_component  Component ID
+ * @param count  Number of mission items in the sequence
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -216,7 +216,7 @@ static inline void mavlink_msg_mission_count_send_buf(mavlink_message_t *msgbuf,
 /**
  * @brief Get field target_system from mission_count message
  *
- * @return System ID
+ * @return  System ID
  */
 static inline uint8_t mavlink_msg_mission_count_get_target_system(const mavlink_message_t* msg)
 {
@@ -226,7 +226,7 @@ static inline uint8_t mavlink_msg_mission_count_get_target_system(const mavlink_
 /**
  * @brief Get field target_component from mission_count message
  *
- * @return Component ID
+ * @return  Component ID
  */
 static inline uint8_t mavlink_msg_mission_count_get_target_component(const mavlink_message_t* msg)
 {
@@ -236,7 +236,7 @@ static inline uint8_t mavlink_msg_mission_count_get_target_component(const mavli
 /**
  * @brief Get field count from mission_count message
  *
- * @return Number of mission items in the sequence
+ * @return  Number of mission items in the sequence
  */
 static inline uint16_t mavlink_msg_mission_count_get_count(const mavlink_message_t* msg)
 {
