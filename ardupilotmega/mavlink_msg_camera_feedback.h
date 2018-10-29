@@ -8,8 +8,8 @@ typedef struct __mavlink_camera_feedback_t {
  uint64_t time_usec; /*< [us] Image timestamp (since UNIX epoch), as passed in by CAMERA_STATUS message (or autopilot if no CCB).*/
  int32_t lat; /*< [degE7] Latitude.*/
  int32_t lng; /*< [degE7] Longitude.*/
- float alt_msl; /*< [m] Altitude Absolute (AMSL).*/
- float alt_rel; /*< [m] Altitude Relative (above HOME location).*/
+ float alt_msl; /*< [m] Altitude (MSL).*/
+ float alt_rel; /*< [m] Altitude (Relative to HOME location).*/
  float roll; /*< [deg] Camera Roll angle (earth frame, +-180).*/
  float pitch; /*< [deg] Camera Pitch angle (earth frame, +-180).*/
  float yaw; /*< [deg] Camera Yaw (earth frame, 0-360, true).*/
@@ -83,8 +83,8 @@ typedef struct __mavlink_camera_feedback_t {
  * @param img_idx  Image index.
  * @param lat [degE7] Latitude.
  * @param lng [degE7] Longitude.
- * @param alt_msl [m] Altitude Absolute (AMSL).
- * @param alt_rel [m] Altitude Relative (above HOME location).
+ * @param alt_msl [m] Altitude (MSL).
+ * @param alt_rel [m] Altitude (Relative to HOME location).
  * @param roll [deg] Camera Roll angle (earth frame, +-180).
  * @param pitch [deg] Camera Pitch angle (earth frame, +-180).
  * @param yaw [deg] Camera Yaw (earth frame, 0-360, true).
@@ -147,8 +147,8 @@ static inline uint16_t mavlink_msg_camera_feedback_pack(uint8_t system_id, uint8
  * @param img_idx  Image index.
  * @param lat [degE7] Latitude.
  * @param lng [degE7] Longitude.
- * @param alt_msl [m] Altitude Absolute (AMSL).
- * @param alt_rel [m] Altitude Relative (above HOME location).
+ * @param alt_msl [m] Altitude (MSL).
+ * @param alt_rel [m] Altitude (Relative to HOME location).
  * @param roll [deg] Camera Roll angle (earth frame, +-180).
  * @param pitch [deg] Camera Pitch angle (earth frame, +-180).
  * @param yaw [deg] Camera Yaw (earth frame, 0-360, true).
@@ -237,8 +237,8 @@ static inline uint16_t mavlink_msg_camera_feedback_encode_chan(uint8_t system_id
  * @param img_idx  Image index.
  * @param lat [degE7] Latitude.
  * @param lng [degE7] Longitude.
- * @param alt_msl [m] Altitude Absolute (AMSL).
- * @param alt_rel [m] Altitude Relative (above HOME location).
+ * @param alt_msl [m] Altitude (MSL).
+ * @param alt_rel [m] Altitude (Relative to HOME location).
  * @param roll [deg] Camera Roll angle (earth frame, +-180).
  * @param pitch [deg] Camera Pitch angle (earth frame, +-180).
  * @param yaw [deg] Camera Yaw (earth frame, 0-360, true).
@@ -416,7 +416,7 @@ static inline int32_t mavlink_msg_camera_feedback_get_lng(const mavlink_message_
 /**
  * @brief Get field alt_msl from camera_feedback message
  *
- * @return [m] Altitude Absolute (AMSL).
+ * @return [m] Altitude (MSL).
  */
 static inline float mavlink_msg_camera_feedback_get_alt_msl(const mavlink_message_t* msg)
 {
@@ -426,7 +426,7 @@ static inline float mavlink_msg_camera_feedback_get_alt_msl(const mavlink_messag
 /**
  * @brief Get field alt_rel from camera_feedback message
  *
- * @return [m] Altitude Relative (above HOME location).
+ * @return [m] Altitude (Relative to HOME location).
  */
 static inline float mavlink_msg_camera_feedback_get_alt_rel(const mavlink_message_t* msg)
 {

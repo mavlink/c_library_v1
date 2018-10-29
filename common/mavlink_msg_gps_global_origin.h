@@ -7,7 +7,7 @@ MAVPACKED(
 typedef struct __mavlink_gps_global_origin_t {
  int32_t latitude; /*< [degE7] Latitude (WGS84)*/
  int32_t longitude; /*< [degE7] Longitude (WGS84)*/
- int32_t altitude; /*< [mm] Altitude (AMSL). Positive for up.*/
+ int32_t altitude; /*< [mm] Altitude (MSL). Positive for up.*/
 }) mavlink_gps_global_origin_t;
 
 #define MAVLINK_MSG_ID_GPS_GLOBAL_ORIGIN_LEN 12
@@ -49,7 +49,7 @@ typedef struct __mavlink_gps_global_origin_t {
  *
  * @param latitude [degE7] Latitude (WGS84)
  * @param longitude [degE7] Longitude (WGS84)
- * @param altitude [mm] Altitude (AMSL). Positive for up.
+ * @param altitude [mm] Altitude (MSL). Positive for up.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_gps_global_origin_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -83,7 +83,7 @@ static inline uint16_t mavlink_msg_gps_global_origin_pack(uint8_t system_id, uin
  * @param msg The MAVLink message to compress the data into
  * @param latitude [degE7] Latitude (WGS84)
  * @param longitude [degE7] Longitude (WGS84)
- * @param altitude [mm] Altitude (AMSL). Positive for up.
+ * @param altitude [mm] Altitude (MSL). Positive for up.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_gps_global_origin_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -143,7 +143,7 @@ static inline uint16_t mavlink_msg_gps_global_origin_encode_chan(uint8_t system_
  *
  * @param latitude [degE7] Latitude (WGS84)
  * @param longitude [degE7] Longitude (WGS84)
- * @param altitude [mm] Altitude (AMSL). Positive for up.
+ * @param altitude [mm] Altitude (MSL). Positive for up.
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -236,7 +236,7 @@ static inline int32_t mavlink_msg_gps_global_origin_get_longitude(const mavlink_
 /**
  * @brief Get field altitude from gps_global_origin message
  *
- * @return [mm] Altitude (AMSL). Positive for up.
+ * @return [mm] Altitude (MSL). Positive for up.
  */
 static inline int32_t mavlink_msg_gps_global_origin_get_altitude(const mavlink_message_t* msg)
 {
