@@ -1270,6 +1270,37 @@ typedef enum POSITION_TARGET_TYPEMASK
 } POSITION_TARGET_TYPEMASK;
 #endif
 
+/** @brief Airborne status of UAS. */
+#ifndef HAVE_ENUM_UTM_FLIGHT_STATE
+#define HAVE_ENUM_UTM_FLIGHT_STATE
+typedef enum UTM_FLIGHT_STATE
+{
+   UTM_FLIGHT_STATE_UNKNOWN=1, /* The flight state can't be determined. | */
+   UTM_FLIGHT_STATE_GROUND=2, /* UAS on ground. | */
+   UTM_FLIGHT_STATE_AIRBORNE=3, /* UAS airborne. | */
+   UTM_FLIGHT_STATE_EMERGENCY=16, /* UAS is in an emergency flight state. | */
+   UTM_FLIGHT_STATE_NOCTRL=32, /* UAS has no active controls. | */
+   UTM_FLIGHT_STATE_ENUM_END=33, /*  | */
+} UTM_FLIGHT_STATE;
+#endif
+
+/** @brief Flags for the global position report. */
+#ifndef HAVE_ENUM_UTM_DATA_AVAIL_FLAGS
+#define HAVE_ENUM_UTM_DATA_AVAIL_FLAGS
+typedef enum UTM_DATA_AVAIL_FLAGS
+{
+   UTM_DATA_AVAIL_FLAGS_TIME_VALID=1, /* The field time contains valid data. | */
+   UTM_DATA_AVAIL_FLAGS_UAS_ID_AVAILABLE=2, /* The field uas_id contains valid data. | */
+   UTM_DATA_AVAIL_FLAGS_POSITION_AVAILABLE=4, /* The fields lat, lon and h_acc contain valid data. | */
+   UTM_DATA_AVAIL_FLAGS_ALTITUDE_AVAILABLE=8, /* The fields alt and v_acc contain valid data. | */
+   UTM_DATA_AVAIL_FLAGS_RELATIVE_ALTITUDE_AVAILABLE=16, /* The field relative_alt contains valid data. | */
+   UTM_DATA_AVAIL_FLAGS_HORIZONTAL_VELO_AVAILABLE=32, /* The fields vx and vy contain valid data. | */
+   UTM_DATA_AVAIL_FLAGS_VERTICAL_VELO_AVAILABLE=64, /* The field vz contains valid data. | */
+   UTM_DATA_AVAIL_FLAGS_NEXT_WAYPOINT_AVAILABLE=128, /* The fields next_lat, next_lon and next_alt contain valid data. | */
+   UTM_DATA_AVAIL_FLAGS_ENUM_END=129, /*  | */
+} UTM_DATA_AVAIL_FLAGS;
+#endif
+
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
