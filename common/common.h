@@ -523,15 +523,17 @@ typedef enum MAV_CMD
    MAV_CMD_REQUEST_FLIGHT_INFORMATION=528, /* Request flight information (FLIGHT_INFORMATION) |1: Request flight information| Reserved (all remaining params)|  */
    MAV_CMD_RESET_CAMERA_SETTINGS=529, /* Reset all camera settings to Factory Default |0: No Action 1: Reset all settings| Reserved (all remaining params)|  */
    MAV_CMD_SET_CAMERA_MODE=530, /* Set camera running mode. Use NAN for reserved values. |Reserved (Set to 0)| Camera mode (see CAMERA_MODE enum)| Reserved (all remaining params)|  */
+   MAV_CMD_SET_CAMERA_ZOOM=531, /* Set camera zoom. Returns CAMERA_SETTINGS message. Use NAN for reserved values. |Zoom type| Zoom value| Reserved (all remaining params)|  */
+   MAV_CMD_SET_CAMERA_FOCUS=532, /* Set camera focus. Returns CAMERA_SETTINGS message. Use NAN for reserved values. |Focus type| Focus value| Reserved (all remaining params)|  */
    MAV_CMD_IMAGE_START_CAPTURE=2000, /* Start image capture sequence. Sends CAMERA_IMAGE_CAPTURED after each capture. Use NAN for reserved values. |Reserved (Set to 0)| Duration between two consecutive pictures (in seconds)| Number of images to capture total - 0 for unlimited capture| Capture sequence (ID to prevent double captures when a command is retransmitted, 0: unused, >= 1: used)| Reserved (all remaining params)|  */
    MAV_CMD_IMAGE_STOP_CAPTURE=2001, /* Stop image capture sequence Use NAN for reserved values. |Reserved (Set to 0)| Reserved (all remaining params)|  */
    MAV_CMD_REQUEST_CAMERA_IMAGE_CAPTURE=2002, /* Re-request a CAMERA_IMAGE_CAPTURE packet. Use NAN for reserved values. |Sequence number for missing CAMERA_IMAGE_CAPTURE packet| Reserved (all remaining params)|  */
    MAV_CMD_DO_TRIGGER_CONTROL=2003, /* Enable or disable on-board camera triggering system. |Trigger enable/disable (0 for disable, 1 for start), -1 to ignore| 1 to reset the trigger sequence, -1 or 0 to ignore| 1 to pause triggering, but without switching the camera off or retracting it. -1 to ignore|  */
    MAV_CMD_VIDEO_START_CAPTURE=2500, /* Starts video capture (recording). Use NAN for reserved values. |Reserved (Set to 0)| Frequency CAMERA_CAPTURE_STATUS messages should be sent while recording (0 for no messages, otherwise frequency in Hz)| Reserved (all remaining params)|  */
    MAV_CMD_VIDEO_STOP_CAPTURE=2501, /* Stop the current video capture (recording). Use NAN for reserved values. |Reserved (Set to 0)| Reserved (all remaining params)|  */
-   MAV_CMD_VIDEO_START_STREAMING=2502, /* Start video streaming |Camera ID (0 for all cameras, 1 for first, 2 for second, etc.)| Reserved|  */
-   MAV_CMD_VIDEO_STOP_STREAMING=2503, /* Stop the current video streaming |Camera ID (0 for all cameras, 1 for first, 2 for second, etc.)| Reserved|  */
-   MAV_CMD_REQUEST_VIDEO_STREAM_INFORMATION=2504, /* Request video stream information (VIDEO_STREAM_INFORMATION) |Camera ID (0 for all cameras, 1 for first, 2 for second, etc.)| 0: No Action 1: Request video stream information| Reserved (all remaining params)|  */
+   MAV_CMD_VIDEO_START_STREAMING=2502, /* Start video streaming |Stream ID (0 for all streams, 1 for first, 2 for second, etc.)| Reserved|  */
+   MAV_CMD_VIDEO_STOP_STREAMING=2503, /* Stop the current video streaming |Stream ID (0 for all streams, 1 for first, 2 for second, etc.)| Reserved|  */
+   MAV_CMD_REQUEST_VIDEO_STREAM_INFORMATION=2504, /* Request video stream information (VIDEO_STREAM_INFORMATION) |Stream ID (0 for all streams, 1 for first, 2 for second, etc.)| 0: No Action 1: Request video stream information| Reserved (all remaining params)|  */
    MAV_CMD_LOGGING_START=2510, /* Request to start streaming logging data over MAVLink (see also LOGGING_DATA message) |Format: 0: ULog| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)|  */
    MAV_CMD_LOGGING_STOP=2511, /* Request to stop streaming log data over MAVLink |Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)|  */
    MAV_CMD_AIRFRAME_CONFIGURATION=2520, /*  |Landing gear ID (default: 0, -1 for all)| Landing gear position (Down: 0, Up: 1, NAN for no change)| Reserved, set to NAN| Reserved, set to NAN| Reserved, set to NAN| Reserved, set to NAN| Reserved, set to NAN|  */
@@ -1185,19 +1187,56 @@ typedef enum VTOL_TRANSITION_HEADING
 } VTOL_TRANSITION_HEADING;
 #endif
 
-/** @brief Camera capability flags (Bitmap). */
+/** @brief Camera capability flags (Bitmap) */
 #ifndef HAVE_ENUM_CAMERA_CAP_FLAGS
 #define HAVE_ENUM_CAMERA_CAP_FLAGS
 typedef enum CAMERA_CAP_FLAGS
 {
-   CAMERA_CAP_FLAGS_CAPTURE_VIDEO=1, /* Camera is able to record video. | */
-   CAMERA_CAP_FLAGS_CAPTURE_IMAGE=2, /* Camera is able to capture images. | */
+   CAMERA_CAP_FLAGS_CAPTURE_VIDEO=1, /* Camera is able to record video | */
+   CAMERA_CAP_FLAGS_CAPTURE_IMAGE=2, /* Camera is able to capture images | */
    CAMERA_CAP_FLAGS_HAS_MODES=4, /* Camera has separate Video and Image/Photo modes (MAV_CMD_SET_CAMERA_MODE) | */
    CAMERA_CAP_FLAGS_CAN_CAPTURE_IMAGE_IN_VIDEO_MODE=8, /* Camera can capture images while in video mode | */
    CAMERA_CAP_FLAGS_CAN_CAPTURE_VIDEO_IN_IMAGE_MODE=16, /* Camera can capture videos while in Photo/Image mode | */
    CAMERA_CAP_FLAGS_HAS_IMAGE_SURVEY_MODE=32, /* Camera has image survey mode (MAV_CMD_SET_CAMERA_MODE) | */
-   CAMERA_CAP_FLAGS_ENUM_END=33, /*  | */
+   CAMERA_CAP_FLAGS_HAS_BASIC_ZOOM=64, /* Camera has basic zoom control (MAV_CMD_SET_CAMERA_ZOOM) | */
+   CAMERA_CAP_FLAGS_HAS_BASIC_FOCUS=128, /* Camera has basic focus control (MAV_CMD_SET_CAMERA_FOCUS) | */
+   CAMERA_CAP_FLAGS_ENUM_END=129, /*  | */
 } CAMERA_CAP_FLAGS;
+#endif
+
+/** @brief Stream status flags (Bitmap) */
+#ifndef HAVE_ENUM_VIDEO_STREAM_STATUS_FLAGS
+#define HAVE_ENUM_VIDEO_STREAM_STATUS_FLAGS
+typedef enum VIDEO_STREAM_STATUS_FLAGS
+{
+   VIDEO_STREAM_STATUS_FLAGS_RUNNING=1, /* Stream is active (running) | */
+   VIDEO_STREAM_STATUS_FLAGS_THERMAL=2, /* Stream is thermal imaging | */
+   VIDEO_STREAM_STATUS_FLAGS_ENUM_END=3, /*  | */
+} VIDEO_STREAM_STATUS_FLAGS;
+#endif
+
+/** @brief Zoom types for MAV_CMD_SET_CAMERA_ZOOM */
+#ifndef HAVE_ENUM_SET_ZOOM_TYPE
+#define HAVE_ENUM_SET_ZOOM_TYPE
+typedef enum SET_ZOOM_TYPE
+{
+   ZOOM_TYPE_STEP=0, /* Zoom one step increment (-1 for wide, 1 for tele) | */
+   ZOOM_TYPE_CONTINUOUS=1, /* Continuous zoom up/down until stopped (-1 for wide, 1 for tele, 0 to stop zooming) | */
+   ZOOM_TYPE_RANGE=2, /* Zoom value as proportion of full camera range (a value between 0.0 and 100.0) | */
+   SET_ZOOM_TYPE_ENUM_END=3, /*  | */
+} SET_ZOOM_TYPE;
+#endif
+
+/** @brief Focus types for MAV_CMD_SET_CAMERA_FOCUS */
+#ifndef HAVE_ENUM_SET_FOCUS_TYPE
+#define HAVE_ENUM_SET_FOCUS_TYPE
+typedef enum SET_FOCUS_TYPE
+{
+   FOCUS_TYPE_STEP=0, /* Focus one step increment (-1 for focusing in, 1 for focusing out towards infinity). | */
+   FOCUS_TYPE_CONTINUOUS=1, /* Continuous focus up/down until stopped (-1 for focusing in, 1 for focusing out towards infinity, 0 to stop focusing) | */
+   FOCUS_TYPE_RANGE=2, /* Zoom value as proportion of full camera range (a value between 0.0 and 100.0) | */
+   SET_FOCUS_TYPE_ENUM_END=3, /*  | */
+} SET_FOCUS_TYPE;
 #endif
 
 /** @brief Result from a PARAM_EXT_SET message. */
