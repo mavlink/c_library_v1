@@ -173,7 +173,7 @@ typedef enum UAVIONIX_ADSB_EMERGENCY_STATUS
 
 
 // base include
-
+#include "../common/common.h"
 
 #undef MAVLINK_THIS_XML_IDX
 #define MAVLINK_THIS_XML_IDX 2
