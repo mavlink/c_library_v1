@@ -1212,8 +1212,22 @@ typedef enum VIDEO_STREAM_STATUS_FLAGS
 {
    VIDEO_STREAM_STATUS_FLAGS_RUNNING=1, /* Stream is active (running) | */
    VIDEO_STREAM_STATUS_FLAGS_THERMAL=2, /* Stream is thermal imaging | */
-   VIDEO_STREAM_STATUS_FLAGS_ENUM_END=3, /*  | */
+   VIDEO_STREAM_HAS_BASIC_ZOOM=4, /* Stream has basic zoom control (MAV_CMD_SET_CAMERA_ZOOM) | */
+   VIDEO_STREAM_STATUS_FLAGS_ENUM_END=5, /*  | */
 } VIDEO_STREAM_STATUS_FLAGS;
+#endif
+
+/** @brief Video stream types */
+#ifndef HAVE_ENUM_VIDEO_STREAM_TYPE
+#define HAVE_ENUM_VIDEO_STREAM_TYPE
+typedef enum VIDEO_STREAM_TYPE
+{
+   VIDEO_STREAM_TYPE_RTSP=0, /* Stream is RTSP | */
+   VIDEO_STREAM_TYPE_RTPUDP=1, /* Stream is RTP UDP (URI gives the port number) | */
+   VIDEO_STREAM_TYPE_TCP_MPEG=2, /* Stream is MPEG on TCP | */
+   VIDEO_STREAM_TYPE_MPEG_TS_H264=3, /* Stream is h.264 on MPEG TS (URI gives the port number) | */
+   VIDEO_STREAM_TYPE_ENUM_END=4, /*  | */
+} VIDEO_STREAM_TYPE;
 #endif
 
 /** @brief Zoom types for MAV_CMD_SET_CAMERA_ZOOM */
