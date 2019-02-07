@@ -941,6 +941,21 @@ typedef enum MAV_BATTERY_CHARGE_STATE
 } MAV_BATTERY_CHARGE_STATE;
 #endif
 
+/** @brief Smart battery supply status/fault flags (bitmask) for health indication. */
+#ifndef HAVE_ENUM_MAV_SMART_BATTERY_FAULT
+#define HAVE_ENUM_MAV_SMART_BATTERY_FAULT
+typedef enum MAV_SMART_BATTERY_FAULT
+{
+   MAV_SMART_BATTERY_FAULT_DEEP_DISCHARGE=1, /* Battery has deep discharged. | */
+   MAV_SMART_BATTERY_FAULT_SPIKES=2, /* Voltage spikes. | */
+   MAV_SMART_BATTERY_FAULT_SINGLE_CELL_FAIL=4, /* Single cell has failed. | */
+   MAV_SMART_BATTERY_FAULT_OVER_CURRENT=8, /* Over-current fault. | */
+   MAV_SMART_BATTERY_FAULT_OVER_TEMPERATURE=16, /* Over-temperature fault. | */
+   MAV_SMART_BATTERY_FAULT_UNDER_TEMPERATURE=32, /* Under-temperature fault. | */
+   MAV_SMART_BATTERY_FAULT_ENUM_END=33, /*  | */
+} MAV_SMART_BATTERY_FAULT;
+#endif
+
 /** @brief Enumeration of VTOL states */
 #ifndef HAVE_ENUM_MAV_VTOL_STATE
 #define HAVE_ENUM_MAV_VTOL_STATE
