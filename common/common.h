@@ -1449,6 +1449,178 @@ typedef enum MAV_TUNNEL_PAYLOAD_TYPE
 } MAV_TUNNEL_PAYLOAD_TYPE;
 #endif
 
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_IDTYPE
+#define HAVE_ENUM_MAV_ODID_IDTYPE
+typedef enum MAV_ODID_IDTYPE
+{
+   MAV_ODID_IDTYPE_NONE=0, /* No type defined. | */
+   MAV_ODID_IDTYPE_SERIAL_NUMBER=1, /* Manufacturer Serial Number (ANSI/CTA-2063 format). | */
+   MAV_ODID_IDTYPE_CAA_ASSIGNED_ID=2, /* CAA (Civil Aviation Authority) assigned ID. Format: [ICAO Country Code].[CAA Assigned ID] | */
+   MAV_ODID_IDTYPE_UTM_ASSIGNED_ID=3, /* UTM (Unmanned Traffic Management) assigned ID (UUID RFC4122). | */
+   MAV_ODID_IDTYPE_ENUM_END=4, /*  | */
+} MAV_ODID_IDTYPE;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_UATYPE
+#define HAVE_ENUM_MAV_ODID_UATYPE
+typedef enum MAV_ODID_UATYPE
+{
+   MAV_ODID_UATYPE_NONE=0, /* No UA (Unmanned Aircraft) type defined. | */
+   MAV_ODID_UATYPE_AEROPLANE=1, /* Aeroplane/Airplane. | */
+   MAV_ODID_UATYPE_ROTORCRAFT=2, /* Rotorcraft (including Multirotor). | */
+   MAV_ODID_UATYPE_GYROPLANE=3, /* Gyroplane. | */
+   MAV_ODID_UATYPE_VTOL=4, /* VTOL (Vertical Take-Off and Landing). Fixed wing aircraft that can take off vertically. | */
+   MAV_ODID_UATYPE_ORNITHOPTER=5, /* Ornithopter. | */
+   MAV_ODID_UATYPE_GLIDER=6, /* Glider. | */
+   MAV_ODID_UATYPE_KITE=7, /* Kite. | */
+   MAV_ODID_UATYPE_FREE_BALLOON=8, /* Free Balloon. | */
+   MAV_ODID_UATYPE_CAPTIVE_BALLOON=9, /* Captive Balloon. | */
+   MAV_ODID_UATYPE_AIRSHIP=10, /* Airship. | */
+   MAV_ODID_UATYPE_FREE_FALL_PARACHUTE=11, /* Free Fall/Parachute. | */
+   MAV_ODID_UATYPE_ROCKET=12, /* Rocket. | */
+   MAV_ODID_UATYPE_GROUND_OBSTACLE=13, /* Ground Obstacle. | */
+   MAV_ODID_UATYPE_RESERVED=14, /* Reserved. | */
+   MAV_ODID_UATYPE_OTHER=15, /* Other type of aircraft not listed earlier. | */
+   MAV_ODID_UATYPE_ENUM_END=16, /*  | */
+} MAV_ODID_UATYPE;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_STATUS
+#define HAVE_ENUM_MAV_ODID_STATUS
+typedef enum MAV_ODID_STATUS
+{
+   MAV_ODID_STATUS_UNDECLARED=0, /* The status of the (UA) Unmanned Aircraft is undefined. | */
+   MAV_ODID_STATUS_GROUND=1, /* The UA is on the ground. | */
+   MAV_ODID_STATUS_AIRBORNE=2, /* The UA is in the air. | */
+   MAV_ODID_STATUS_ENUM_END=3, /*  | */
+} MAV_ODID_STATUS;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_HEIGHT_REF
+#define HAVE_ENUM_MAV_ODID_HEIGHT_REF
+typedef enum MAV_ODID_HEIGHT_REF
+{
+   MAV_ODID_HEIGHT_REF_OVER_TAKEOFF=0, /* The height field is relative to the take-off location. | */
+   MAV_ODID_HEIGHT_REF_OVER_GROUND=1, /* The height field is relative to ground. | */
+   MAV_ODID_HEIGHT_REF_ENUM_END=2, /*  | */
+} MAV_ODID_HEIGHT_REF;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_HOR_ACC
+#define HAVE_ENUM_MAV_ODID_HOR_ACC
+typedef enum MAV_ODID_HOR_ACC
+{
+   MAV_ODID_HOR_ACC_UNKNOWN=0, /* The horizontal accuracy is unknown. | */
+   MAV_ODID_HOR_ACC_10NM=1, /* The horizontal accuracy is smaller than 10 Nautical Miles. | */
+   MAV_ODID_HOR_ACC_4NM=2, /* The horizontal accuracy is smaller than 4 Nautical Miles. | */
+   MAV_ODID_HOR_ACC_2NM=3, /* The horizontal accuracy is smaller than 2 Nautical Miles. | */
+   MAV_ODID_HOR_ACC_1NM=4, /* The horizontal accuracy is smaller than 1 Nautical Miles. | */
+   MAV_ODID_HOR_ACC_0_5NM=5, /* The horizontal accuracy is smaller than 0.5 Nautical Miles. | */
+   MAV_ODID_HOR_ACC_0_3NM=6, /* The horizontal accuracy is smaller than 0.3 Nautical Miles. | */
+   MAV_ODID_HOR_ACC_0_1NM=7, /* The horizontal accuracy is smaller than 0.1 Nautical Miles. | */
+   MAV_ODID_HOR_ACC_0_05NM=8, /* The horizontal accuracy is smaller than 0.05 Nautical Miles. | */
+   MAV_ODID_HOR_ACC_30_METER=9, /* The horizontal accuracy is smaller than 30 meter. | */
+   MAV_ODID_HOR_ACC_10_METER=10, /* The horizontal accuracy is smaller than 10 meter. | */
+   MAV_ODID_HOR_ACC_3_METER=11, /* The horizontal accuracy is smaller than 3 meter. | */
+   MAV_ODID_HOR_ACC_1_METER=12, /* The horizontal accuracy is smaller than 1 meter. | */
+   MAV_ODID_HOR_ACC_ENUM_END=13, /*  | */
+} MAV_ODID_HOR_ACC;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_VER_ACC
+#define HAVE_ENUM_MAV_ODID_VER_ACC
+typedef enum MAV_ODID_VER_ACC
+{
+   MAV_ODID_VER_ACC_UNKNOWN=0, /* The vertical accuracy is unknown. | */
+   MAV_ODID_VER_ACC_150_METER=1, /* The vertical accuracy is smaller than 150 meter. | */
+   MAV_ODID_VER_ACC_45_METER=2, /* The vertical accuracy is smaller than 45 meter. | */
+   MAV_ODID_VER_ACC_25_METER=3, /* The vertical accuracy is smaller than 25 meter. | */
+   MAV_ODID_VER_ACC_10_METER=4, /* The vertical accuracy is smaller than 10 meter. | */
+   MAV_ODID_VER_ACC_3_METER=5, /* The vertical accuracy is smaller than 3 meter. | */
+   MAV_ODID_VER_ACC_1_METER=6, /* The vertical accuracy is smaller than 1 meter. | */
+   MAV_ODID_VER_ACC_ENUM_END=7, /*  | */
+} MAV_ODID_VER_ACC;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_SPEED_ACC
+#define HAVE_ENUM_MAV_ODID_SPEED_ACC
+typedef enum MAV_ODID_SPEED_ACC
+{
+   MAV_ODID_SPEED_ACC_UNKNOWN=0, /* The speed accuracy is unknown. | */
+   MAV_ODID_SPEED_ACC_10_METER_PER_SECOND=1, /* The speed accuracy is smaller than 10 meter per second. | */
+   MAV_ODID_SPEED_ACC_3_METER_PER_SECOND=2, /* The speed accuracy is smaller than 3 meter per second. | */
+   MAV_ODID_SPEED_ACC_1_METER_PER_SECOND=3, /* The speed accuracy is smaller than 1 meter per second. | */
+   MAV_ODID_SPEED_ACC_0_3_METER_PER_SECOND=4, /* The speed accuracy is smaller than 0.3 meter per second. | */
+   MAV_ODID_SPEED_ACC_ENUM_END=5, /*  | */
+} MAV_ODID_SPEED_ACC;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_TIME_ACC
+#define HAVE_ENUM_MAV_ODID_TIME_ACC
+typedef enum MAV_ODID_TIME_ACC
+{
+   MAV_ODID_TIME_ACC_UNKNOWN=0, /* The timestamp accuracy is unknown. | */
+   MAV_ODID_TIME_ACC_0_1_SECOND=1, /* The timestamp accuracy is smaller than 0.1 second. | */
+   MAV_ODID_TIME_ACC_0_2_SECOND=2, /* The timestamp accuracy is smaller than 0.2 second. | */
+   MAV_ODID_TIME_ACC_0_3_SECOND=3, /* The timestamp accuracy is smaller than 0.3 second. | */
+   MAV_ODID_TIME_ACC_0_4_SECOND=4, /* The timestamp accuracy is smaller than 0.4 second. | */
+   MAV_ODID_TIME_ACC_0_5_SECOND=5, /* The timestamp accuracy is smaller than 0.5 second. | */
+   MAV_ODID_TIME_ACC_0_6_SECOND=6, /* The timestamp accuracy is smaller than 0.6 second. | */
+   MAV_ODID_TIME_ACC_0_7_SECOND=7, /* The timestamp accuracy is smaller than 0.7 second. | */
+   MAV_ODID_TIME_ACC_0_8_SECOND=8, /* The timestamp accuracy is smaller than 0.8 second. | */
+   MAV_ODID_TIME_ACC_0_9_SECOND=9, /* The timestamp accuracy is smaller than 0.9 second. | */
+   MAV_ODID_TIME_ACC_1_0_SECOND=10, /* The timestamp accuracy is smaller than 1.0 second. | */
+   MAV_ODID_TIME_ACC_1_1_SECOND=11, /* The timestamp accuracy is smaller than 1.1 second. | */
+   MAV_ODID_TIME_ACC_1_2_SECOND=12, /* The timestamp accuracy is smaller than 1.2 second. | */
+   MAV_ODID_TIME_ACC_1_3_SECOND=13, /* The timestamp accuracy is smaller than 1.3 second. | */
+   MAV_ODID_TIME_ACC_1_4_SECOND=14, /* The timestamp accuracy is smaller than 1.4 second. | */
+   MAV_ODID_TIME_ACC_1_5_SECOND=15, /* The timestamp accuracy is smaller than 1.5 second. | */
+   MAV_ODID_TIME_ACC_ENUM_END=16, /*  | */
+} MAV_ODID_TIME_ACC;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_AUTH
+#define HAVE_ENUM_MAV_ODID_AUTH
+typedef enum MAV_ODID_AUTH
+{
+   MAV_ODID_AUTH_NONE=0, /* No authentication type is specified. | */
+   MAV_ODID_AUTH_MPUID=1, /* Manufacturer Programmed Unique ID. | */
+   MAV_ODID_AUTH_ENUM_END=2, /*  | */
+} MAV_ODID_AUTH;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_DESC_TYPE
+#define HAVE_ENUM_MAV_ODID_DESC_TYPE
+typedef enum MAV_ODID_DESC_TYPE
+{
+   MAV_ODID_DESC_TYPE_TEXT=0, /* Free-form text description of the purpose of the flight. | */
+   MAV_ODID_DESC_TYPE_REMOTE_PILOT_ID=1, /* Remote pilot ID as assigned by the Civil Aviation Authority. | */
+   MAV_ODID_DESC_TYPE_ENUM_END=2, /*  | */
+} MAV_ODID_DESC_TYPE;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_LOCATION_SRC
+#define HAVE_ENUM_MAV_ODID_LOCATION_SRC
+typedef enum MAV_ODID_LOCATION_SRC
+{
+   MAV_ODID_LOCATION_SRC_TAKEOFF=0, /* The location of the remote pilot is the same as the take-off location. | */
+   MAV_ODID_LOCATION_SRC_LIVE_GNSS=1, /* The location of the remote pilot is based on live GNSS data. | */
+   MAV_ODID_LOCATION_SRC_FIXED=2, /* The location of the remote pilot is a fixed location. | */
+   MAV_ODID_LOCATION_SRC_ENUM_END=3, /*  | */
+} MAV_ODID_LOCATION_SRC;
+#endif
+
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
