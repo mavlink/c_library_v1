@@ -1744,6 +1744,17 @@ typedef enum MAV_ODID_OPERATOR_ID_TYPE
 } MAV_ODID_OPERATOR_ID_TYPE;
 #endif
 
+/** @brief Tune formats (used for vehicle buzzer/tone generation). */
+#ifndef HAVE_ENUM_TUNE_FORMAT
+#define HAVE_ENUM_TUNE_FORMAT
+typedef enum TUNE_FORMAT
+{
+   TUNE_FORMAT_QBASIC1_1=0, /* Format is QBasic 1.1 Play: https://www.qbasic.net/en/reference/qb11/Statement/PLAY-006.htm. | */
+   TUNE_FORMAT_MML_MODERN=1, /* Format is Modern Music Markup Language (MML): https://en.wikipedia.org/wiki/Music_Macro_Language#Modern_MML. | */
+   TUNE_FORMAT_ENUM_END=2, /*  | */
+} TUNE_FORMAT;
+#endif
+
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
