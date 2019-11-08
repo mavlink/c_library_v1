@@ -1289,7 +1289,7 @@ typedef enum GPS_FIX_TYPE
 typedef enum RTK_BASELINE_COORDINATE_SYSTEM
 {
    RTK_BASELINE_COORDINATE_SYSTEM_ECEF=0, /* Earth-centered, Earth-fixed | */
-   RTK_BASELINE_COORDINATE_SYSTEM_NED=1, /* North, East, Down | */
+   RTK_BASELINE_COORDINATE_SYSTEM_NED=1, /* RTK basestation centered, north, east, down | */
    RTK_BASELINE_COORDINATE_SYSTEM_ENUM_END=2, /*  | */
 } RTK_BASELINE_COORDINATE_SYSTEM;
 #endif

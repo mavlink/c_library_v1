@@ -12,9 +12,9 @@ typedef struct __mavlink_gps_input_t {
  float alt; /*< [m] Altitude (MSL). Positive for up.*/
  float hdop; /*< [m] GPS HDOP horizontal dilution of position*/
  float vdop; /*< [m] GPS VDOP vertical dilution of position*/
- float vn; /*< [m/s] GPS velocity in NORTH direction in earth-fixed NED frame*/
- float ve; /*< [m/s] GPS velocity in EAST direction in earth-fixed NED frame*/
- float vd; /*< [m/s] GPS velocity in DOWN direction in earth-fixed NED frame*/
+ float vn; /*< [m/s] GPS velocity in north direction in earth-fixed NED frame*/
+ float ve; /*< [m/s] GPS velocity in east direction in earth-fixed NED frame*/
+ float vd; /*< [m/s] GPS velocity in down direction in earth-fixed NED frame*/
  float speed_accuracy; /*< [m/s] GPS speed accuracy*/
  float horiz_accuracy; /*< [m] GPS horizontal accuracy*/
  float vert_accuracy; /*< [m] GPS vertical accuracy*/
@@ -103,9 +103,9 @@ typedef struct __mavlink_gps_input_t {
  * @param alt [m] Altitude (MSL). Positive for up.
  * @param hdop [m] GPS HDOP horizontal dilution of position
  * @param vdop [m] GPS VDOP vertical dilution of position
- * @param vn [m/s] GPS velocity in NORTH direction in earth-fixed NED frame
- * @param ve [m/s] GPS velocity in EAST direction in earth-fixed NED frame
- * @param vd [m/s] GPS velocity in DOWN direction in earth-fixed NED frame
+ * @param vn [m/s] GPS velocity in north direction in earth-fixed NED frame
+ * @param ve [m/s] GPS velocity in east direction in earth-fixed NED frame
+ * @param vd [m/s] GPS velocity in down direction in earth-fixed NED frame
  * @param speed_accuracy [m/s] GPS speed accuracy
  * @param horiz_accuracy [m] GPS horizontal accuracy
  * @param vert_accuracy [m] GPS vertical accuracy
@@ -182,9 +182,9 @@ static inline uint16_t mavlink_msg_gps_input_pack(uint8_t system_id, uint8_t com
  * @param alt [m] Altitude (MSL). Positive for up.
  * @param hdop [m] GPS HDOP horizontal dilution of position
  * @param vdop [m] GPS VDOP vertical dilution of position
- * @param vn [m/s] GPS velocity in NORTH direction in earth-fixed NED frame
- * @param ve [m/s] GPS velocity in EAST direction in earth-fixed NED frame
- * @param vd [m/s] GPS velocity in DOWN direction in earth-fixed NED frame
+ * @param vn [m/s] GPS velocity in north direction in earth-fixed NED frame
+ * @param ve [m/s] GPS velocity in east direction in earth-fixed NED frame
+ * @param vd [m/s] GPS velocity in down direction in earth-fixed NED frame
  * @param speed_accuracy [m/s] GPS speed accuracy
  * @param horiz_accuracy [m] GPS horizontal accuracy
  * @param vert_accuracy [m] GPS vertical accuracy
@@ -287,9 +287,9 @@ static inline uint16_t mavlink_msg_gps_input_encode_chan(uint8_t system_id, uint
  * @param alt [m] Altitude (MSL). Positive for up.
  * @param hdop [m] GPS HDOP horizontal dilution of position
  * @param vdop [m] GPS VDOP vertical dilution of position
- * @param vn [m/s] GPS velocity in NORTH direction in earth-fixed NED frame
- * @param ve [m/s] GPS velocity in EAST direction in earth-fixed NED frame
- * @param vd [m/s] GPS velocity in DOWN direction in earth-fixed NED frame
+ * @param vn [m/s] GPS velocity in north direction in earth-fixed NED frame
+ * @param ve [m/s] GPS velocity in east direction in earth-fixed NED frame
+ * @param vd [m/s] GPS velocity in down direction in earth-fixed NED frame
  * @param speed_accuracy [m/s] GPS speed accuracy
  * @param horiz_accuracy [m] GPS horizontal accuracy
  * @param vert_accuracy [m] GPS vertical accuracy
@@ -536,7 +536,7 @@ static inline float mavlink_msg_gps_input_get_vdop(const mavlink_message_t* msg)
 /**
  * @brief Get field vn from gps_input message
  *
- * @return [m/s] GPS velocity in NORTH direction in earth-fixed NED frame
+ * @return [m/s] GPS velocity in north direction in earth-fixed NED frame
  */
 static inline float mavlink_msg_gps_input_get_vn(const mavlink_message_t* msg)
 {
@@ -546,7 +546,7 @@ static inline float mavlink_msg_gps_input_get_vn(const mavlink_message_t* msg)
 /**
  * @brief Get field ve from gps_input message
  *
- * @return [m/s] GPS velocity in EAST direction in earth-fixed NED frame
+ * @return [m/s] GPS velocity in east direction in earth-fixed NED frame
  */
 static inline float mavlink_msg_gps_input_get_ve(const mavlink_message_t* msg)
 {
@@ -556,7 +556,7 @@ static inline float mavlink_msg_gps_input_get_ve(const mavlink_message_t* msg)
 /**
  * @brief Get field vd from gps_input message
  *
- * @return [m/s] GPS velocity in DOWN direction in earth-fixed NED frame
+ * @return [m/s] GPS velocity in down direction in earth-fixed NED frame
  */
 static inline float mavlink_msg_gps_input_get_vd(const mavlink_message_t* msg)
 {
