@@ -1770,6 +1770,162 @@ typedef enum TUNE_FORMAT
 } TUNE_FORMAT;
 #endif
 
+/** @brief Type of AIS vessel, enum duplicated from AIS standard, https://gpsd.gitlab.io/gpsd/AIVDM.html */
+#ifndef HAVE_ENUM_AIS_TYPE
+#define HAVE_ENUM_AIS_TYPE
+typedef enum AIS_TYPE
+{
+   AIS_TYPE_UNKNOWN=0, /* Not available (default). | */
+   AIS_TYPE_RESERVED_1=1, /*  | */
+   AIS_TYPE_RESERVED_2=2, /*  | */
+   AIS_TYPE_RESERVED_3=3, /*  | */
+   AIS_TYPE_RESERVED_4=4, /*  | */
+   AIS_TYPE_RESERVED_5=5, /*  | */
+   AIS_TYPE_RESERVED_6=6, /*  | */
+   AIS_TYPE_RESERVED_7=7, /*  | */
+   AIS_TYPE_RESERVED_8=8, /*  | */
+   AIS_TYPE_RESERVED_9=9, /*  | */
+   AIS_TYPE_RESERVED_10=10, /*  | */
+   AIS_TYPE_RESERVED_11=11, /*  | */
+   AIS_TYPE_RESERVED_12=12, /*  | */
+   AIS_TYPE_RESERVED_13=13, /*  | */
+   AIS_TYPE_RESERVED_14=14, /*  | */
+   AIS_TYPE_RESERVED_15=15, /*  | */
+   AIS_TYPE_RESERVED_16=16, /*  | */
+   AIS_TYPE_RESERVED_17=17, /*  | */
+   AIS_TYPE_RESERVED_18=18, /*  | */
+   AIS_TYPE_RESERVED_19=19, /*  | */
+   AIS_TYPE_WIG=20, /* Wing In Ground effect. | */
+   AIS_TYPE_WIG_HAZARDOUS_A=21, /*  | */
+   AIS_TYPE_WIG_HAZARDOUS_B=22, /*  | */
+   AIS_TYPE_WIG_HAZARDOUS_C=23, /*  | */
+   AIS_TYPE_WIG_HAZARDOUS_D=24, /*  | */
+   AIS_TYPE_WIG_RESERVED_1=25, /*  | */
+   AIS_TYPE_WIG_RESERVED_2=26, /*  | */
+   AIS_TYPE_WIG_RESERVED_3=27, /*  | */
+   AIS_TYPE_WIG_RESERVED_4=28, /*  | */
+   AIS_TYPE_WIG_RESERVED_5=29, /*  | */
+   AIS_TYPE_FISHING=30, /*  | */
+   AIS_TYPE_TOWING=31, /*  | */
+   AIS_TYPE_TOWING_LARGE=32, /* Towing: length exceeds 200m or breadth exceeds 25m. | */
+   AIS_TYPE_DREDGING=33, /* Dredging or other underwater ops. | */
+   AIS_TYPE_DIVING=34, /*  | */
+   AIS_TYPE_MILITARY=35, /*  | */
+   AIS_TYPE_SAILING=36, /*  | */
+   AIS_TYPE_PLEASURE=37, /*  | */
+   AIS_TYPE_RESERVED_20=38, /*  | */
+   AIS_TYPE_RESERVED_21=39, /*  | */
+   AIS_TYPE_HSC=40, /* High Speed Craft. | */
+   AIS_TYPE_HSC_HAZARDOUS_A=41, /*  | */
+   AIS_TYPE_HSC_HAZARDOUS_B=42, /*  | */
+   AIS_TYPE_HSC_HAZARDOUS_C=43, /*  | */
+   AIS_TYPE_HSC_HAZARDOUS_D=44, /*  | */
+   AIS_TYPE_HSC_RESERVED_1=45, /*  | */
+   AIS_TYPE_HSC_RESERVED_2=46, /*  | */
+   AIS_TYPE_HSC_RESERVED_3=47, /*  | */
+   AIS_TYPE_HSC_RESERVED_4=48, /*  | */
+   AIS_TYPE_HSC_UNKNOWN=49, /*  | */
+   AIS_TYPE_PILOT=50, /*  | */
+   AIS_TYPE_SAR=51, /* Search And Rescue vessel. | */
+   AIS_TYPE_TUG=52, /*  | */
+   AIS_TYPE_PORT_TENDER=53, /*  | */
+   AIS_TYPE_ANTI_POLLUTION=54, /* Anti-pollution equipment. | */
+   AIS_TYPE_LAW_ENFORCEMENT=55, /*  | */
+   AIS_TYPE_SPARE_LOCAL_1=56, /*  | */
+   AIS_TYPE_SPARE_LOCAL_2=57, /*  | */
+   AIS_TYPE_MEDICAL_TRANSPORT=58, /*  | */
+   AIS_TYPE_NONECOMBATANT=59, /* Noncombatant ship according to RR Resolution No. 18. | */
+   AIS_TYPE_PASSENGER=60, /*  | */
+   AIS_TYPE_PASSENGER_HAZARDOUS_A=61, /*  | */
+   AIS_TYPE_PASSENGER_HAZARDOUS_B=62, /*  | */
+   AIS_TYPE_AIS_TYPE_PASSENGER_HAZARDOUS_C=63, /*  | */
+   AIS_TYPE_PASSENGER_HAZARDOUS_D=64, /*  | */
+   AIS_TYPE_PASSENGER_RESERVED_1=65, /*  | */
+   AIS_TYPE_PASSENGER_RESERVED_2=66, /*  | */
+   AIS_TYPE_PASSENGER_RESERVED_3=67, /*  | */
+   AIS_TYPE_AIS_TYPE_PASSENGER_RESERVED_4=68, /*  | */
+   AIS_TYPE_PASSENGER_UNKNOWN=69, /*  | */
+   AIS_TYPE_CARGO=70, /*  | */
+   AIS_TYPE_CARGO_HAZARDOUS_A=71, /*  | */
+   AIS_TYPE_CARGO_HAZARDOUS_B=72, /*  | */
+   AIS_TYPE_CARGO_HAZARDOUS_C=73, /*  | */
+   AIS_TYPE_CARGO_HAZARDOUS_D=74, /*  | */
+   AIS_TYPE_CARGO_RESERVED_1=75, /*  | */
+   AIS_TYPE_CARGO_RESERVED_2=76, /*  | */
+   AIS_TYPE_CARGO_RESERVED_3=77, /*  | */
+   AIS_TYPE_CARGO_RESERVED_4=78, /*  | */
+   AIS_TYPE_CARGO_UNKNOWN=79, /*  | */
+   AIS_TYPE_TANKER=80, /*  | */
+   AIS_TYPE_TANKER_HAZARDOUS_A=81, /*  | */
+   AIS_TYPE_TANKER_HAZARDOUS_B=82, /*  | */
+   AIS_TYPE_TANKER_HAZARDOUS_C=83, /*  | */
+   AIS_TYPE_TANKER_HAZARDOUS_D=84, /*  | */
+   AIS_TYPE_TANKER_RESERVED_1=85, /*  | */
+   AIS_TYPE_TANKER_RESERVED_2=86, /*  | */
+   AIS_TYPE_TANKER_RESERVED_3=87, /*  | */
+   AIS_TYPE_TANKER_RESERVED_4=88, /*  | */
+   AIS_TYPE_TANKER_UNKNOWN=89, /*  | */
+   AIS_TYPE_OTHER=90, /*  | */
+   AIS_TYPE_OTHER_HAZARDOUS_A=91, /*  | */
+   AIS_TYPE_OTHER_HAZARDOUS_B=92, /*  | */
+   AIS_TYPE_OTHER_HAZARDOUS_C=93, /*  | */
+   AIS_TYPE_OTHER_HAZARDOUS_D=94, /*  | */
+   AIS_TYPE_OTHER_RESERVED_1=95, /*  | */
+   AIS_TYPE_OTHER_RESERVED_2=96, /*  | */
+   AIS_TYPE_OTHER_RESERVED_3=97, /*  | */
+   AIS_TYPE_OTHER_RESERVED_4=98, /*  | */
+   AIS_TYPE_OTHER_UNKNOWN=99, /*  | */
+   AIS_TYPE_ENUM_END=100, /*  | */
+} AIS_TYPE;
+#endif
+
+/** @brief Navigational status of AIS vessel, enum duplicated from AIS standard, https://gpsd.gitlab.io/gpsd/AIVDM.html */
+#ifndef HAVE_ENUM_AIS_NAV_STATUS
+#define HAVE_ENUM_AIS_NAV_STATUS
+typedef enum AIS_NAV_STATUS
+{
+   UNDER_WAY=0, /* Under way using engine. | */
+   AIS_NAV_ANCHORED=1, /*  | */
+   AIS_NAV_UN_COMMANDED=2, /*  | */
+   AIS_NAV_RESTRICTED_MANOEUVERABILITY=3, /*  | */
+   AIS_NAV_DRAUGHT_CONSTRAINED=4, /*  | */
+   AIS_NAV_MOORED=5, /*  | */
+   AIS_NAV_AGROUND=6, /*  | */
+   AIS_NAV_FISHING=7, /*  | */
+   AIS_NAV_SAILING=8, /*  | */
+   AIS_NAV_RESERVED_HSC=9, /*  | */
+   AIS_NAV_RESERVED_WIG=10, /*  | */
+   AIS_NAV_RESERVED_1=11, /*  | */
+   AIS_NAV_RESERVED_2=12, /*  | */
+   AIS_NAV_RESERVED_3=13, /*  | */
+   AIS_NAV_AIS_SART=14, /* Search And Rescue Transponder. | */
+   AIS_NAV_UNKNOWN=15, /* Not available (default). | */
+   AIS_NAV_STATUS_ENUM_END=16, /*  | */
+} AIS_NAV_STATUS;
+#endif
+
+/** @brief These flags are used in the AIS_VESSEL.fields bitmask to indicate validity of data in the other message fields. When set, the data is valid. */
+#ifndef HAVE_ENUM_AIS_FLAGS
+#define HAVE_ENUM_AIS_FLAGS
+typedef enum AIS_FLAGS
+{
+   AIS_FLAGS_POSITION_ACCURACY=1, /* 1 = Position accuracy less than 10m, 0 = position accuracy greater than 10m. | */
+   AIS_FLAGS_VALID_COG=2, /*  | */
+   AIS_FLAGS_VALID_VELOCITY=4, /*  | */
+   AIS_FLAGS_HIGH_VELOCITY=8, /* 1 = Velocity over 52.5765m/s (102.2 knots) | */
+   AIS_FLAGS_VALID_TURN_RATE=16, /*  | */
+   AIS_FLAGS_TURN_RATE_SIGN_ONLY=32, /* Only the sign of the returned turn rate value is valid, either greater than 5deg/30s or less than -5deg/30s | */
+   AIS_FLAGS_VALID_DIMENSIONS=64, /*  | */
+   AIS_FLAGS_LARGE_BOW_DIMENSION=128, /* Distance to bow is larger than 511m | */
+   AIS_FLAGS_LARGE_STERN_DIMENSION=256, /* Distance to stern is larger than 511m | */
+   AIS_FLAGS_LARGE_PORT_DIMENSION=512, /* Distance to port side is larger than 63m | */
+   AIS_FLAGS_LARGE_STARBOARD_DIMENSION=1024, /* Distance to starboard side is larger than 63m | */
+   AIS_FLAGS_VALID_CALLSIGN=2048, /*  | */
+   AIS_FLAGS_VALID_NAME=4096, /*  | */
+   AIS_FLAGS_ENUM_END=4097, /*  | */
+} AIS_FLAGS;
+#endif
+
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
