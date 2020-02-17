@@ -42,7 +42,7 @@ typedef enum MAV_AUTOPILOT
    MAV_AUTOPILOT_GENERIC=0, /* Generic autopilot, full support for everything | */
    MAV_AUTOPILOT_RESERVED=1, /* Reserved for future use. | */
    MAV_AUTOPILOT_SLUGS=2, /* SLUGS autopilot, http://slugsuav.soe.ucsc.edu | */
-   MAV_AUTOPILOT_ARDUPILOTMEGA=3, /* ArduPilot - Plane/Copter/Rover/Sub/Tracker, http://ardupilot.org | */
+   MAV_AUTOPILOT_ARDUPILOTMEGA=3, /* ArduPilot - Plane/Copter/Rover/Sub/Tracker, https://ardupilot.org | */
    MAV_AUTOPILOT_OPENPILOT=4, /* OpenPilot, http://openpilot.org | */
    MAV_AUTOPILOT_GENERIC_WAYPOINTS_ONLY=5, /* Generic autopilot only supporting simple waypoints | */
    MAV_AUTOPILOT_GENERIC_WAYPOINTS_AND_SIMPLE_NAVIGATION_ONLY=6, /* Generic autopilot supporting waypoints and other simple navigation commands | */
