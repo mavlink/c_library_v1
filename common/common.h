@@ -654,6 +654,33 @@ typedef enum ORBIT_YAW_BEHAVIOUR
 } ORBIT_YAW_BEHAVIOUR;
 #endif
 
+/** @brief Possible responses from a WIFI_CONFIG_AP message. */
+#ifndef HAVE_ENUM_WIFI_CONFIG_AP_RESPONSE
+#define HAVE_ENUM_WIFI_CONFIG_AP_RESPONSE
+typedef enum WIFI_CONFIG_AP_RESPONSE
+{
+   WIFI_CONFIG_AP_RESPONSE_UNDEFINED=0, /* Undefined response. Likely an indicative of a system that doesn't support this request. | */
+   WIFI_CONFIG_AP_RESPONSE_ACCEPTED=1, /* Changes accepted. | */
+   WIFI_CONFIG_AP_RESPONSE_REJECTED=2, /* Changes rejected. | */
+   WIFI_CONFIG_AP_RESPONSE_MODE_ERROR=3, /* Invalid Mode. | */
+   WIFI_CONFIG_AP_RESPONSE_SSID_ERROR=4, /* Invalid SSID. | */
+   WIFI_CONFIG_AP_RESPONSE_PASSWORD_ERROR=5, /* Invalid Password. | */
+   WIFI_CONFIG_AP_RESPONSE_ENUM_END=6, /*  | */
+} WIFI_CONFIG_AP_RESPONSE;
+#endif
+
+/** @brief WiFi Mode. */
+#ifndef HAVE_ENUM_WIFI_CONFIG_AP_MODE
+#define HAVE_ENUM_WIFI_CONFIG_AP_MODE
+typedef enum WIFI_CONFIG_AP_MODE
+{
+   WIFI_CONFIG_AP_MODE_UNDEFINED=0, /* WiFi mode is undefined. | */
+   WIFI_CONFIG_AP_MODE_AP=1, /* WiFi configured as an access point. | */
+   WIFI_CONFIG_AP_MODE_STATION=2, /* WiFi configured as a station connected to an existing local WiFi network. | */
+   WIFI_CONFIG_AP_MODE_ENUM_END=3, /*  | */
+} WIFI_CONFIG_AP_MODE;
+#endif
+
 /** @brief Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. NaN and INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current yaw or latitude rather than a specific value). See https://mavlink.io/en/guide/xml_schema.html#MAV_CMD for information about the structure of the MAV_CMD entries */
 #ifndef HAVE_ENUM_MAV_CMD
 #define HAVE_ENUM_MAV_CMD
