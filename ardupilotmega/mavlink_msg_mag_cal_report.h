@@ -3,7 +3,7 @@
 
 #define MAVLINK_MSG_ID_MAG_CAL_REPORT 192
 
-MAVPACKED(
+
 typedef struct __mavlink_mag_cal_report_t {
  float fitness; /*< [mgauss] RMS milligauss residuals.*/
  float ofs_x; /*<  X offset.*/
@@ -19,7 +19,7 @@ typedef struct __mavlink_mag_cal_report_t {
  uint8_t cal_mask; /*<  Bitmask of compasses being calibrated.*/
  uint8_t cal_status; /*<  Calibration Status.*/
  uint8_t autosaved; /*<  0=requires a MAV_CMD_DO_ACCEPT_MAG_CAL, 1=saved to parameters.*/
-}) mavlink_mag_cal_report_t;
+} mavlink_mag_cal_report_t;
 
 #define MAVLINK_MSG_ID_MAG_CAL_REPORT_LEN 44
 #define MAVLINK_MSG_ID_MAG_CAL_REPORT_MIN_LEN 44

@@ -3,7 +3,7 @@
 
 #define MAVLINK_MSG_ID_SERVO_OUTPUT_RAW 36
 
-MAVPACKED(
+
 typedef struct __mavlink_servo_output_raw_t {
  uint32_t time_usec; /*< [us] Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude of the number.*/
  uint16_t servo1_raw; /*< [us] Servo output 1 value*/
@@ -15,7 +15,7 @@ typedef struct __mavlink_servo_output_raw_t {
  uint16_t servo7_raw; /*< [us] Servo output 7 value*/
  uint16_t servo8_raw; /*< [us] Servo output 8 value*/
  uint8_t port; /*<  Servo output port (set of 8 outputs = 1 port). Flight stacks running on Pixhawk should use: 0 = MAIN, 1 = AUX.*/
-}) mavlink_servo_output_raw_t;
+} mavlink_servo_output_raw_t;
 
 #define MAVLINK_MSG_ID_SERVO_OUTPUT_RAW_LEN 21
 #define MAVLINK_MSG_ID_SERVO_OUTPUT_RAW_MIN_LEN 21

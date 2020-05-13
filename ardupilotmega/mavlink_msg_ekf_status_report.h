@@ -3,7 +3,7 @@
 
 #define MAVLINK_MSG_ID_EKF_STATUS_REPORT 193
 
-MAVPACKED(
+
 typedef struct __mavlink_ekf_status_report_t {
  float velocity_variance; /*<  Velocity variance.*/
  float pos_horiz_variance; /*<  Horizontal Position variance.*/
@@ -11,7 +11,7 @@ typedef struct __mavlink_ekf_status_report_t {
  float compass_variance; /*<  Compass variance.*/
  float terrain_alt_variance; /*<  Terrain Altitude variance.*/
  uint16_t flags; /*<  Flags.*/
-}) mavlink_ekf_status_report_t;
+} mavlink_ekf_status_report_t;
 
 #define MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN 22
 #define MAVLINK_MSG_ID_EKF_STATUS_REPORT_MIN_LEN 22
