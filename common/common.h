@@ -1230,6 +1230,33 @@ typedef enum MAV_SMART_BATTERY_FAULT
 } MAV_SMART_BATTERY_FAULT;
 #endif
 
+/** @brief Flags to report status/failure cases for a power generator (used in GENERATOR_STATUS). Note that FAULTS are conditions that cause the generator to fail. Warnings are conditions that require attention before the next use (they indicate the system is not operating properly). */
+#ifndef HAVE_ENUM_GENERATOR_STATUS_FLAG
+#define HAVE_ENUM_GENERATOR_STATUS_FLAG
+typedef enum GENERATOR_STATUS_FLAG
+{
+   GENERATOR_STATUS_FLAG_OFF=1, /* Generator is off. | */
+   GENERATOR_STATUS_FLAG_READY=2, /* Generator is ready to start generating power. | */
+   GENERATOR_STATUS_FLAG_GENERATING=4, /* Generator is generating power. | */
+   GENERATOR_STATUS_FLAG_CHARGING=8, /* Generator is charging the batteries (generating enough power to charge and provide the load). | */
+   GENERATOR_STATUS_FLAG_REDUCED_POWER=16, /* Generator is operating at a reduced maximum power. | */
+   GENERATOR_STATUS_FLAG_MAXPOWER=32, /* Generator is providing the maximum output. | */
+   GENERATOR_STATUS_FLAG_OVERTEMP_WARNING=64, /* Generator is near the maximum operating temperature, cooling is insufficient. | */
+   GENERATOR_STATUS_FLAG_OVERTEMP_FAULT=128, /* Generator hit the maximum operating temperature and shutdown. | */
+   GENERATOR_STATUS_FLAG_ELECTRONICS_OVERTEMP_WARNING=256, /* Power electronics are near the maximum operating temperature, cooling is insufficient. | */
+   GENERATOR_STATUS_FLAG_ELECTRONICS_OVERTEMP_FAULT=512, /* Power electronics hit the maximum operating temperature and shutdown. | */
+   GENERATOR_STATUS_FLAG_ELECTRONICS_FAULT=1024, /* Power electronics experienced a fault and shutdown. | */
+   GENERATOR_STATUS_FLAG_POWERSOURCE_FAULT=2048, /* The power source supplying the generator failed e.g. mechanical generator stopped, tether is no longer providing power, solar cell is in shade, hydrogen reaction no longer happening. | */
+   GENERATOR_STATUS_FLAG_COMMUNICATION_WARNING=4096, /* Generator controller having communication problems. | */
+   GENERATOR_STATUS_FLAG_COOLING_WARNING=8192, /* Power electronic or generator cooling system error. | */
+   GENERATOR_STATUS_FLAG_POWER_RAIL_FAULT=16384, /* Generator controller power rail experienced a fault. | */
+   GENERATOR_STATUS_FLAG_OVERCURRENT_FAULT=32768, /* Generator controller exceeded the overcurrent threshold and shutdown to prevent damage. | */
+   GENERATOR_STATUS_FLAG_BATTERY_OVERCHARGE_CURRENT_FAULT=65536, /* Generator controller detected a high current going into the batteries and shutdown to prevent battery damage. | */
+   GENERATOR_STATUS_FLAG_OVERVOLTAGE_FAULT=131072, /* Generator controller exceeded it's overvoltage threshold and shutdown to prevent it exceeding the voltage rating. | */
+   GENERATOR_STATUS_FLAG_ENUM_END=131073, /*  | */
+} GENERATOR_STATUS_FLAG;
+#endif
+
 /** @brief Enumeration of VTOL states */
 #ifndef HAVE_ENUM_MAV_VTOL_STATE
 #define HAVE_ENUM_MAV_VTOL_STATE
