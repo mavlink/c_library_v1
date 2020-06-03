@@ -102,7 +102,8 @@ typedef enum MAV_TYPE
    MAV_TYPE_CHARGING_STATION=31, /* Charging station | */
    MAV_TYPE_FLARM=32, /* FLARM collision avoidance system | */
    MAV_TYPE_SERVO=33, /* Servo | */
-   MAV_TYPE_ENUM_END=34, /*  | */
+   MAV_TYPE_ODID=34, /* Open Drone ID. See https://mavlink.io/en/services/opendroneid.html. | */
+   MAV_TYPE_ENUM_END=35, /*  | */
 } MAV_TYPE;
 #endif
 
@@ -355,6 +356,9 @@ typedef enum MAV_COMPONENT
    MAV_COMP_ID_IMU_3=202, /* Inertial Measurement Unit (IMU) #3. | */
    MAV_COMP_ID_GPS=220, /* GPS #1. | */
    MAV_COMP_ID_GPS2=221, /* GPS #2. | */
+   MAV_COMP_ID_ODID_TXRX_1=236, /* Open Drone ID transmitter/receiver (Bluetooth/WiFi/Internet). | */
+   MAV_COMP_ID_ODID_TXRX_2=237, /* Open Drone ID transmitter/receiver (Bluetooth/WiFi/Internet). | */
+   MAV_COMP_ID_ODID_TXRX_3=238, /* Open Drone ID transmitter/receiver (Bluetooth/WiFi/Internet). | */
    MAV_COMP_ID_UDP_BRIDGE=240, /* Component to bridge MAVLink to UDP (i.e. from a UART). | */
    MAV_COMP_ID_UART_BRIDGE=241, /* Component to bridge to UART (i.e. from UDP). | */
    MAV_COMP_ID_TUNNEL_NODE=242, /* Component handling TUNNEL messages (e.g. vendor specific GUI of a component). | */
@@ -1872,21 +1876,21 @@ typedef enum MAV_ODID_SPEED_ACC
 typedef enum MAV_ODID_TIME_ACC
 {
    MAV_ODID_TIME_ACC_UNKNOWN=0, /* The timestamp accuracy is unknown. | */
-   MAV_ODID_TIME_ACC_0_1_SECOND=1, /* The timestamp accuracy is smaller than 0.1 second. | */
-   MAV_ODID_TIME_ACC_0_2_SECOND=2, /* The timestamp accuracy is smaller than 0.2 second. | */
-   MAV_ODID_TIME_ACC_0_3_SECOND=3, /* The timestamp accuracy is smaller than 0.3 second. | */
-   MAV_ODID_TIME_ACC_0_4_SECOND=4, /* The timestamp accuracy is smaller than 0.4 second. | */
-   MAV_ODID_TIME_ACC_0_5_SECOND=5, /* The timestamp accuracy is smaller than 0.5 second. | */
-   MAV_ODID_TIME_ACC_0_6_SECOND=6, /* The timestamp accuracy is smaller than 0.6 second. | */
-   MAV_ODID_TIME_ACC_0_7_SECOND=7, /* The timestamp accuracy is smaller than 0.7 second. | */
-   MAV_ODID_TIME_ACC_0_8_SECOND=8, /* The timestamp accuracy is smaller than 0.8 second. | */
-   MAV_ODID_TIME_ACC_0_9_SECOND=9, /* The timestamp accuracy is smaller than 0.9 second. | */
-   MAV_ODID_TIME_ACC_1_0_SECOND=10, /* The timestamp accuracy is smaller than 1.0 second. | */
-   MAV_ODID_TIME_ACC_1_1_SECOND=11, /* The timestamp accuracy is smaller than 1.1 second. | */
-   MAV_ODID_TIME_ACC_1_2_SECOND=12, /* The timestamp accuracy is smaller than 1.2 second. | */
-   MAV_ODID_TIME_ACC_1_3_SECOND=13, /* The timestamp accuracy is smaller than 1.3 second. | */
-   MAV_ODID_TIME_ACC_1_4_SECOND=14, /* The timestamp accuracy is smaller than 1.4 second. | */
-   MAV_ODID_TIME_ACC_1_5_SECOND=15, /* The timestamp accuracy is smaller than 1.5 second. | */
+   MAV_ODID_TIME_ACC_0_1_SECOND=1, /* The timestamp accuracy is smaller than or equal to 0.1 second. | */
+   MAV_ODID_TIME_ACC_0_2_SECOND=2, /* The timestamp accuracy is smaller than or equal to 0.2 second. | */
+   MAV_ODID_TIME_ACC_0_3_SECOND=3, /* The timestamp accuracy is smaller than or equal to 0.3 second. | */
+   MAV_ODID_TIME_ACC_0_4_SECOND=4, /* The timestamp accuracy is smaller than or equal to 0.4 second. | */
+   MAV_ODID_TIME_ACC_0_5_SECOND=5, /* The timestamp accuracy is smaller than or equal to 0.5 second. | */
+   MAV_ODID_TIME_ACC_0_6_SECOND=6, /* The timestamp accuracy is smaller than or equal to 0.6 second. | */
+   MAV_ODID_TIME_ACC_0_7_SECOND=7, /* The timestamp accuracy is smaller than or equal to 0.7 second. | */
+   MAV_ODID_TIME_ACC_0_8_SECOND=8, /* The timestamp accuracy is smaller than or equal to 0.8 second. | */
+   MAV_ODID_TIME_ACC_0_9_SECOND=9, /* The timestamp accuracy is smaller than or equal to 0.9 second. | */
+   MAV_ODID_TIME_ACC_1_0_SECOND=10, /* The timestamp accuracy is smaller than or equal to 1.0 second. | */
+   MAV_ODID_TIME_ACC_1_1_SECOND=11, /* The timestamp accuracy is smaller than or equal to 1.1 second. | */
+   MAV_ODID_TIME_ACC_1_2_SECOND=12, /* The timestamp accuracy is smaller than or equal to 1.2 second. | */
+   MAV_ODID_TIME_ACC_1_3_SECOND=13, /* The timestamp accuracy is smaller than or equal to 1.3 second. | */
+   MAV_ODID_TIME_ACC_1_4_SECOND=14, /* The timestamp accuracy is smaller than or equal to 1.4 second. | */
+   MAV_ODID_TIME_ACC_1_5_SECOND=15, /* The timestamp accuracy is smaller than or equal to 1.5 second. | */
    MAV_ODID_TIME_ACC_ENUM_END=16, /*  | */
 } MAV_ODID_TIME_ACC;
 #endif
