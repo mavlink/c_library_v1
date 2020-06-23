@@ -1814,7 +1814,8 @@ typedef enum MAV_ODID_STATUS
    MAV_ODID_STATUS_UNDECLARED=0, /* The status of the (UA) Unmanned Aircraft is undefined. | */
    MAV_ODID_STATUS_GROUND=1, /* The UA is on the ground. | */
    MAV_ODID_STATUS_AIRBORNE=2, /* The UA is in the air. | */
-   MAV_ODID_STATUS_ENUM_END=3, /*  | */
+   MAV_ODID_STATUS_EMERGENCY=3, /* The UA is having an emergency. | */
+   MAV_ODID_STATUS_ENUM_END=4, /*  | */
 } MAV_ODID_STATUS;
 #endif
 
@@ -1931,15 +1932,56 @@ typedef enum MAV_ODID_DESC_TYPE
 #endif
 
 /** @brief  */
-#ifndef HAVE_ENUM_MAV_ODID_LOCATION_SRC
-#define HAVE_ENUM_MAV_ODID_LOCATION_SRC
-typedef enum MAV_ODID_LOCATION_SRC
+#ifndef HAVE_ENUM_MAV_ODID_OPERATOR_LOCATION_TYPE
+#define HAVE_ENUM_MAV_ODID_OPERATOR_LOCATION_TYPE
+typedef enum MAV_ODID_OPERATOR_LOCATION_TYPE
 {
-   MAV_ODID_LOCATION_SRC_TAKEOFF=0, /* The location of the operator is the same as the take-off location. | */
-   MAV_ODID_LOCATION_SRC_LIVE_GNSS=1, /* The location of the operator is based on live GNSS data. | */
-   MAV_ODID_LOCATION_SRC_FIXED=2, /* The location of the operator is a fixed location. | */
-   MAV_ODID_LOCATION_SRC_ENUM_END=3, /*  | */
-} MAV_ODID_LOCATION_SRC;
+   MAV_ODID_OPERATOR_LOCATION_TYPE_TAKEOFF=0, /* The location of the operator is the same as the take-off location. | */
+   MAV_ODID_OPERATOR_LOCATION_TYPE_LIVE_GNSS=1, /* The location of the operator is based on live GNSS data. | */
+   MAV_ODID_OPERATOR_LOCATION_TYPE_FIXED=2, /* The location of the operator is a fixed location. | */
+   MAV_ODID_OPERATOR_LOCATION_TYPE_ENUM_END=3, /*  | */
+} MAV_ODID_OPERATOR_LOCATION_TYPE;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_CLASSIFICATION_TYPE
+#define HAVE_ENUM_MAV_ODID_CLASSIFICATION_TYPE
+typedef enum MAV_ODID_CLASSIFICATION_TYPE
+{
+   MAV_ODID_CLASSIFICATION_TYPE_UNDECLARED=0, /* The classification type for the UA is undeclared. | */
+   MAV_ODID_CLASSIFICATION_TYPE_EU=1, /* The classification type for the UA follows EU (European Union) specifications. | */
+   MAV_ODID_CLASSIFICATION_TYPE_ENUM_END=2, /*  | */
+} MAV_ODID_CLASSIFICATION_TYPE;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_CATEGORY_EU
+#define HAVE_ENUM_MAV_ODID_CATEGORY_EU
+typedef enum MAV_ODID_CATEGORY_EU
+{
+   MAV_ODID_CATEGORY_EU_UNDECLARED=0, /* The category for the UA, according to the EU specification, is undeclared. | */
+   MAV_ODID_CATEGORY_EU_OPEN=1, /* The category for the UA, according to the EU specification, is the Open category. | */
+   MAV_ODID_CATEGORY_EU_SPECIFIC=2, /* The category for the UA, according to the EU specification, is the Specific category. | */
+   MAV_ODID_CATEGORY_EU_CERTIFIED=3, /* The category for the UA, according to the EU specification, is the Certified category. | */
+   MAV_ODID_CATEGORY_EU_ENUM_END=4, /*  | */
+} MAV_ODID_CATEGORY_EU;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_MAV_ODID_CLASS_EU
+#define HAVE_ENUM_MAV_ODID_CLASS_EU
+typedef enum MAV_ODID_CLASS_EU
+{
+   MAV_ODID_CLASS_EU_UNDECLARED=0, /* The class for the UA, according to the EU specification, is undeclared. | */
+   MAV_ODID_CLASS_EU_CLASS_0=1, /* The class for the UA, according to the EU specification, is Class 0. | */
+   MAV_ODID_CLASS_EU_CLASS_1=2, /* The class for the UA, according to the EU specification, is Class 1. | */
+   MAV_ODID_CLASS_EU_CLASS_2=3, /* The class for the UA, according to the EU specification, is Class 2. | */
+   MAV_ODID_CLASS_EU_CLASS_3=4, /* The class for the UA, according to the EU specification, is Class 3. | */
+   MAV_ODID_CLASS_EU_CLASS_4=5, /* The class for the UA, according to the EU specification, is Class 4. | */
+   MAV_ODID_CLASS_EU_CLASS_5=6, /* The class for the UA, according to the EU specification, is Class 5. | */
+   MAV_ODID_CLASS_EU_CLASS_6=7, /* The class for the UA, according to the EU specification, is Class 6. | */
+   MAV_ODID_CLASS_EU_ENUM_END=8, /*  | */
+} MAV_ODID_CLASS_EU;
 #endif
 
 /** @brief  */
