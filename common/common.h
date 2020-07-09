@@ -631,6 +631,38 @@ typedef enum UAVCAN_NODE_MODE
 } UAVCAN_NODE_MODE;
 #endif
 
+/** @brief Indicates the ESC connection type. */
+#ifndef HAVE_ENUM_ESC_CONNECTION_TYPE
+#define HAVE_ENUM_ESC_CONNECTION_TYPE
+typedef enum ESC_CONNECTION_TYPE
+{
+   ESC_CONNECTION_TYPE_PPM=0, /* Traditional PPM ESC. | */
+   ESC_CONNECTION_TYPE_SERIAL=1, /* Serial Bus connected ESC. | */
+   ESC_CONNECTION_TYPE_ONESHOT=2, /* One Shot PPM ESC. | */
+   ESC_CONNECTION_TYPE_I2C=3, /* I2C ESC. | */
+   ESC_CONNECTION_TYPE_CAN=4, /* CAN-Bus ESC. | */
+   ESC_CONNECTION_TYPE_DSHOT=5, /* DShot ESC. | */
+   ESC_CONNECTION_TYPE_ENUM_END=6, /*  | */
+} ESC_CONNECTION_TYPE;
+#endif
+
+/** @brief Flags to report ESC failures. */
+#ifndef HAVE_ENUM_ESC_FAILURE_FLAGS
+#define HAVE_ENUM_ESC_FAILURE_FLAGS
+typedef enum ESC_FAILURE_FLAGS
+{
+   ESC_FAILURE_NONE=0, /* No ESC failure. | */
+   ESC_FAILURE_OVER_CURRENT=1, /* Over current failure. | */
+   ESC_FAILURE_OVER_VOLTAGE=2, /* Over voltage failure. | */
+   ESC_FAILURE_OVER_TEMPERATURE=4, /* Over temperature failure. | */
+   ESC_FAILURE_OVER_RPM=8, /* Over RPM failure. | */
+   ESC_FAILURE_INCONSISTENT_CMD=16, /* Inconsistent command failure i.e. out of bounds. | */
+   ESC_FAILURE_MOTOR_STUCK=32, /* Motor stuck failure. | */
+   ESC_FAILURE_GENERIC=64, /* Generic ESC failure. | */
+   ESC_FAILURE_FLAGS_ENUM_END=65, /*  | */
+} ESC_FAILURE_FLAGS;
+#endif
+
 /** @brief Flags to indicate the status of camera storage. */
 #ifndef HAVE_ENUM_STORAGE_STATUS
 #define HAVE_ENUM_STORAGE_STATUS
