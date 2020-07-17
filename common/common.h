@@ -1321,7 +1321,9 @@ typedef enum MAV_GENERATOR_STATUS_FLAG
    MAV_GENERATOR_STATUS_FLAG_BATTERY_UNDERVOLT_FAULT=262144, /* Batteries are under voltage (generator will not start). | */
    MAV_GENERATOR_STATUS_FLAG_START_INHIBITED=524288, /* Generator start is inhibited by e.g. a safety switch. | */
    MAV_GENERATOR_STATUS_FLAG_MAINTENANCE_REQUIRED=1048576, /* Generator requires maintenance. | */
-   MAV_GENERATOR_STATUS_FLAG_ENUM_END=1048577, /*  | */
+   MAV_GENERATOR_STATUS_FLAG_WARMING_UP=2097152, /* Generator is not ready to generate yet. | */
+   MAV_GENERATOR_STATUS_FLAG_IDLE=4194304, /* Generator is idle. | */
+   MAV_GENERATOR_STATUS_FLAG_ENUM_END=4194305, /*  | */
 } MAV_GENERATOR_STATUS_FLAG;
 #endif
 
