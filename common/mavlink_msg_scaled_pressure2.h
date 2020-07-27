@@ -8,7 +8,7 @@ typedef struct __mavlink_scaled_pressure2_t {
  uint32_t time_boot_ms; /*< [ms] Timestamp (time since system boot).*/
  float press_abs; /*< [hPa] Absolute pressure*/
  float press_diff; /*< [hPa] Differential pressure*/
- int16_t temperature; /*< [cdegC] Temperature measurement*/
+ int16_t temperature; /*< [cdegC] Absolute pressure temperature*/
 } mavlink_scaled_pressure2_t;
 
 #define MAVLINK_MSG_ID_SCALED_PRESSURE2_LEN 14
@@ -53,7 +53,7 @@ typedef struct __mavlink_scaled_pressure2_t {
  * @param time_boot_ms [ms] Timestamp (time since system boot).
  * @param press_abs [hPa] Absolute pressure
  * @param press_diff [hPa] Differential pressure
- * @param temperature [cdegC] Temperature measurement
+ * @param temperature [cdegC] Absolute pressure temperature
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_scaled_pressure2_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -90,7 +90,7 @@ static inline uint16_t mavlink_msg_scaled_pressure2_pack(uint8_t system_id, uint
  * @param time_boot_ms [ms] Timestamp (time since system boot).
  * @param press_abs [hPa] Absolute pressure
  * @param press_diff [hPa] Differential pressure
- * @param temperature [cdegC] Temperature measurement
+ * @param temperature [cdegC] Absolute pressure temperature
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_scaled_pressure2_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -153,7 +153,7 @@ static inline uint16_t mavlink_msg_scaled_pressure2_encode_chan(uint8_t system_i
  * @param time_boot_ms [ms] Timestamp (time since system boot).
  * @param press_abs [hPa] Absolute pressure
  * @param press_diff [hPa] Differential pressure
- * @param temperature [cdegC] Temperature measurement
+ * @param temperature [cdegC] Absolute pressure temperature
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -260,7 +260,7 @@ static inline float mavlink_msg_scaled_pressure2_get_press_diff(const mavlink_me
 /**
  * @brief Get field temperature from scaled_pressure2 message
  *
- * @return [cdegC] Temperature measurement
+ * @return [cdegC] Absolute pressure temperature
  */
 static inline int16_t mavlink_msg_scaled_pressure2_get_temperature(const mavlink_message_t* msg)
 {
