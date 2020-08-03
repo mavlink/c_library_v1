@@ -2326,6 +2326,19 @@ typedef enum FAILURE_TYPE
 } FAILURE_TYPE;
 #endif
 
+/** @brief Winch status flags used in WINCH_STATUS */
+#ifndef HAVE_ENUM_MAV_WINCH_STATUS_FLAG
+#define HAVE_ENUM_MAV_WINCH_STATUS_FLAG
+typedef enum MAV_WINCH_STATUS_FLAG
+{
+   MAV_WINCH_STATUS_HEALTHY=1, /* Winch is healthy | */
+   MAV_WINCH_STATUS_FULLY_RETRACTED=2, /* Winch thread is fully retracted | */
+   MAV_WINCH_STATUS_MOVING=4, /* Winch motor is moving | */
+   MAV_WINCH_STATUS_CLUTCH_ENGAGED=8, /* Winch clutch is engaged allowing motor to move freely | */
+   MAV_WINCH_STATUS_FLAG_ENUM_END=9, /*  | */
+} MAV_WINCH_STATUS_FLAG;
+#endif
+
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
