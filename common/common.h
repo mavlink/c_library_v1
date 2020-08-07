@@ -347,6 +347,7 @@ typedef enum MAV_COMPONENT
    MAV_COMP_ID_GIMBAL5=174, /* Gimbal #5. | */
    MAV_COMP_ID_GIMBAL6=175, /* Gimbal #6. | */
    MAV_COMP_ID_MISSIONPLANNER=190, /* Component that can generate/supply a mission flight plan (e.g. GCS or developer API). | */
+   MAV_COMP_ID_ONBOARD_COMPUTER=191, /* Component that lives on the onboard computer (companion computer) and has some generic functionalities, such as settings system parameters and monitoring the status of some processes that don't directly speak mavlink and so on. | */
    MAV_COMP_ID_PATHPLANNER=195, /* Component that finds an optimal path between points based on a certain constraint (e.g. minimum snap, shortest path, cost, etc.). | */
    MAV_COMP_ID_OBSTACLE_AVOIDANCE=196, /* Component that plans a collision free path between two points. | */
    MAV_COMP_ID_VISUAL_INERTIAL_ODOMETRY=197, /* Component that provides position estimates using VIO techniques. | */
@@ -546,8 +547,6 @@ typedef enum GIMBAL_MANAGER_CAP_FLAGS
    GIMBAL_MANAGER_CAP_FLAGS_SUPPORTS_INFINITE_YAW=2048, /* Based on GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_INFINITE_YAW. | */
    GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_LOCAL=65536, /* Gimbal manager supports to point to a local position. | */
    GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL=131072, /* Gimbal manager supports to point to a global latitude, longitude, altitude position. | */
-   GIMBAL_MANAGER_CAP_FLAGS_HAS_TRACKING_POINT=262144, /* Gimbal manager supports tracking of a point on the camera. | */
-   GIMBAL_MANAGER_CAP_FLAGS_HAS_TRACKING_RECTANGLE=524288, /* Gimbal manager supports tracking of a point on the camera. | */
    GIMBAL_MANAGER_CAP_FLAGS_SUPPORTS_FOCAL_LENGTH_SCALE=1048576, /* Gimbal manager supports pitching and yawing at an angular velocity scaled by focal length (the more zoomed in, the slower the movement). | */
    GIMBAL_MANAGER_CAP_FLAGS_SUPPORTS_NUDGING=2097152, /* Gimbal manager supports nudging when pointing to a location or tracking. | */
    GIMBAL_MANAGER_CAP_FLAGS_SUPPORTS_OVERRIDE=4194304, /* Gimbal manager supports overriding when pointing to a location or tracking. | */
@@ -600,7 +599,8 @@ typedef enum GIMBAL_DEVICE_ERROR_FLAGS
    GIMBAL_DEVICE_ERROR_FLAGS_MOTOR_ERROR=32, /* There is an error with the gimbal motor's. | */
    GIMBAL_DEVICE_ERROR_FLAGS_SOFTWARE_ERROR=64, /* There is an error with the gimbal's software. | */
    GIMBAL_DEVICE_ERROR_FLAGS_COMMS_ERROR=128, /* There is an error with the gimbal's communication. | */
-   GIMBAL_DEVICE_ERROR_FLAGS_ENUM_END=129, /*  | */
+   GIMBAL_DEVICE_ERROR_FLAGS_CALIBRATION_RUNNING=256, /* Gimbal is currently calibrating. | */
+   GIMBAL_DEVICE_ERROR_FLAGS_ENUM_END=257, /*  | */
 } GIMBAL_DEVICE_ERROR_FLAGS;
 #endif
 
@@ -884,12 +884,13 @@ typedef enum MAV_CMD
    MAV_CMD_JUMP_TAG=600, /* Tagged jump target. Can be jumped to with MAV_CMD_DO_JUMP_TAG. |Tag.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_DO_JUMP_TAG=601, /* Jump to the matching tag in the mission list. Repeat this action for the specified number of times. A mission should contain a single matching tag for each jump. If this is not the case then a jump to a missing tag should complete the mission, and a jump where there are multiple matching tags should always select the one with the lowest mission sequence number. |Target tag to jump to.| Repeat count.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_DO_GIMBAL_MANAGER_TILTPAN=1000, /* High level setpoint to be sent to a gimbal manager to set a gimbal attitude. It is possible to set combinations of the values below. E.g. an angle as well as a desired angular rate can be used to get to this angle at a certain angular rate, or an angular rate only will result in continuous turning. NaN is to be used to signal unset. Note: a gimbal is never to react to this command but only the gimbal manager. |Tilt/pitch rate (positive to tilt up).| Pan/yaw rate (positive to pan to the right).| Tilt/pitch angle (positive to tilt up, relative to vehicle for PAN mode, relative to world horizon for HOLD mode).| Pan/yaw angle (positive to pan to the right, relative to vehicle for PAN mode, absolute to North for HOLD mode).| Gimbal manager flags to use.| Reserved (default:0)| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)|  */
-   MAV_CMD_DO_GIMBAL_MANAGER_TRACK_POINT=1001, /* If the gimbal manager supports visual tracking (GIMBAL_MANAGER_CAP_FLAGS_HAS_TRACKING_POINT is set), this command allows to initiate the tracking. Such a tracking gimbal manager would usually be an integrated camera/gimbal, or alternatively a companion computer connected to a camera. |Point to track x value.| Point to track y value.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)|  */
-   MAV_CMD_DO_GIMBAL_MANAGER_TRACK_RECTANGLE=1002, /* If the gimbal supports visual tracking (GIMBAL_MANAGER_CAP_FLAGS_HAS_TRACKING_RECTANGLE is set), this command allows to initiate the tracking. Such a tracking gimbal manager would usually be an integrated camera/gimbal, or alternatively a companion computer connected to a camera. |Top left corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).| Top left corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).| Bottom right corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).| Bottom right corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).| Reserved (default:0)| Reserved (default:0)| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)|  */
    MAV_CMD_IMAGE_START_CAPTURE=2000, /* Start image capture sequence. Sends CAMERA_IMAGE_CAPTURED after each capture. Use NaN for reserved values. |Reserved (Set to 0)| Desired elapsed time between two consecutive pictures (in seconds). Minimum values depend on hardware (typically greater than 2 seconds).| Total number of images to capture. 0 to capture forever/until MAV_CMD_IMAGE_STOP_CAPTURE.| Capture sequence number starting from 1. This is only valid for single-capture (param3 == 1). Increment the capture ID for each capture command to prevent double captures when a command is re-transmitted. Use 0 to ignore it.| Reserved (all remaining params)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_IMAGE_STOP_CAPTURE=2001, /* Stop image capture sequence Use NaN for reserved values. |Reserved (Set to 0)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:0)| Reserved (default:0)| Reserved (default:NaN)|  */
    MAV_CMD_REQUEST_CAMERA_IMAGE_CAPTURE=2002, /* Re-request a CAMERA_IMAGE_CAPTURED message. |Sequence number for missing CAMERA_IMAGE_CAPTURED message| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:0)| Reserved (default:0)| Reserved (default:NaN)|  */
    MAV_CMD_DO_TRIGGER_CONTROL=2003, /* Enable or disable on-board camera triggering system. |Trigger enable/disable (0 for disable, 1 for start), -1 to ignore| 1 to reset the trigger sequence, -1 or 0 to ignore| 1 to pause triggering, but without switching the camera off or retracting it. -1 to ignore| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+   MAV_CMD_CAMERA_TRACK_POINT=2004, /* If the camera supports point visual tracking (CAMERA_CAP_FLAGS_HAS_TRACKING_POINT is set), this command allows to initiate the tracking. |Point to track x value (normalized 0..1, 0 is left, 1 is right).| Point to track y value (normalized 0..1, 0 is top, 1 is bottom).| Point radius (normalized 0..1, 0 is image left, 1 is image right).| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+   MAV_CMD_CAMERA_TRACK_RECTANGLE=2005, /* If the camera supports rectangle visual tracking (CAMERA_CAP_FLAGS_HAS_TRACKING_RECTANGLE is set), this command allows to initiate the tracking. |Top left corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).| Top left corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).| Bottom right corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).| Bottom right corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+   MAV_CMD_CAMERA_STOP_TRACKING=2010, /* Stops ongoing tracking. |Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_VIDEO_START_CAPTURE=2500, /* Starts video capture (recording). |Video Stream ID (0 for all streams)| Frequency CAMERA_CAPTURE_STATUS messages should be sent while recording (0 for no messages, otherwise frequency)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)|  */
    MAV_CMD_VIDEO_STOP_CAPTURE=2501, /* Stop the current video capture (recording). |Video Stream ID (0 for all streams)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)|  */
    MAV_CMD_VIDEO_START_STREAMING=2502, /* Start video streaming |Video Stream ID (0 for all streams, 1 for first, 2 for second, etc.)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
@@ -1631,7 +1632,10 @@ typedef enum CAMERA_CAP_FLAGS
    CAMERA_CAP_FLAGS_HAS_BASIC_ZOOM=64, /* Camera has basic zoom control (MAV_CMD_SET_CAMERA_ZOOM) | */
    CAMERA_CAP_FLAGS_HAS_BASIC_FOCUS=128, /* Camera has basic focus control (MAV_CMD_SET_CAMERA_FOCUS) | */
    CAMERA_CAP_FLAGS_HAS_VIDEO_STREAM=256, /* Camera has video streaming capabilities (request VIDEO_STREAM_INFORMATION with MAV_CMD_REQUEST_MESSAGE for video streaming info) | */
-   CAMERA_CAP_FLAGS_ENUM_END=257, /*  | */
+   CAMERA_CAP_FLAGS_HAS_TRACKING_POINT=512, /* Camera supports tracking of a point on the camera view. | */
+   CAMERA_CAP_FLAGS_HAS_TRACKING_RECTANGLE=1024, /* Camera supports tracking of a selection rectangle on the camera view. | */
+   CAMERA_CAP_FLAGS_HAS_TRACKING_GEO_STATUS=2048, /* Camera supports tracking geo status (CAMERA_TRACKING_GEO_STATUS). | */
+   CAMERA_CAP_FLAGS_ENUM_END=2049, /*  | */
 } CAMERA_CAP_FLAGS;
 #endif
 
@@ -1657,6 +1661,43 @@ typedef enum VIDEO_STREAM_TYPE
    VIDEO_STREAM_TYPE_MPEG_TS_H264=3, /* Stream is h.264 on MPEG TS (URI gives the port number) | */
    VIDEO_STREAM_TYPE_ENUM_END=4, /*  | */
 } VIDEO_STREAM_TYPE;
+#endif
+
+/** @brief Camera tracking status flags */
+#ifndef HAVE_ENUM_CAMERA_TRACKING_STATUS_FLAGS
+#define HAVE_ENUM_CAMERA_TRACKING_STATUS_FLAGS
+typedef enum CAMERA_TRACKING_STATUS_FLAGS
+{
+   CAMERA_TRACKING_STATUS_FLAGS_IDLE=0, /* Camera is not tracking | */
+   CAMERA_TRACKING_STATUS_FLAGS_ACTIVE=1, /* Camera is tracking | */
+   CAMERA_TRACKING_STATUS_FLAGS_ERROR=2, /* Camera tracking in error state | */
+   CAMERA_TRACKING_STATUS_FLAGS_ENUM_END=3, /*  | */
+} CAMERA_TRACKING_STATUS_FLAGS;
+#endif
+
+/** @brief Camera tracking modes */
+#ifndef HAVE_ENUM_CAMERA_TRACKING_MODE
+#define HAVE_ENUM_CAMERA_TRACKING_MODE
+typedef enum CAMERA_TRACKING_MODE
+{
+   CAMERA_TRACKING_NONE=0, /* Not tracking | */
+   CAMERA_TRACKING_POINT=1, /* Target is a point | */
+   CAMERA_TRACKING_RECTANGLE=2, /* Target is a rectangle | */
+   CAMERA_TRACKING_MODE_ENUM_END=3, /*  | */
+} CAMERA_TRACKING_MODE;
+#endif
+
+/** @brief Camera tracking target data (shows where tracked target is within image) */
+#ifndef HAVE_ENUM_CAMERA_TRACKING_TARGET_DATA
+#define HAVE_ENUM_CAMERA_TRACKING_TARGET_DATA
+typedef enum CAMERA_TRACKING_TARGET_DATA
+{
+   CAMERA_TRACKING_TARGET_NONE=0, /* No target data | */
+   CAMERA_TRACKING_TARGET_EMBEDDED=1, /* Target data embedded in image data (proprietary) | */
+   CAMERA_TRACKING_TARGET_RENDERED=2, /* Target data rendered in image | */
+   CAMERA_TRACKING_TARGET_IN_STATUS=4, /* Target data within status message (Point or Rectangle) | */
+   CAMERA_TRACKING_TARGET_DATA_ENUM_END=5, /*  | */
+} CAMERA_TRACKING_TARGET_DATA;
 #endif
 
 /** @brief Zoom types for MAV_CMD_SET_CAMERA_ZOOM */
