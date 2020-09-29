@@ -1062,26 +1062,39 @@ typedef enum MAV_BATTERY_CHARGE_STATE
    MAV_BATTERY_CHARGE_STATE_LOW=2, /* Battery state is low, warn and monitor close. | */
    MAV_BATTERY_CHARGE_STATE_CRITICAL=3, /* Battery state is critical, return or abort immediately. | */
    MAV_BATTERY_CHARGE_STATE_EMERGENCY=4, /* Battery state is too low for ordinary abort sequence. Perform fastest possible emergency stop to prevent damage. | */
-   MAV_BATTERY_CHARGE_STATE_FAILED=5, /* Battery failed, damage unavoidable. | */
-   MAV_BATTERY_CHARGE_STATE_UNHEALTHY=6, /* Battery is diagnosed to be defective or an error occurred, usage is discouraged / prohibited. | */
+   MAV_BATTERY_CHARGE_STATE_FAILED=5, /* Battery failed, damage unavoidable. Possible causes (faults) are listed in MAV_BATTERY_FAULT. | */
+   MAV_BATTERY_CHARGE_STATE_UNHEALTHY=6, /* Battery is diagnosed to be defective or an error occurred, usage is discouraged / prohibited. Possible causes (faults) are listed in MAV_BATTERY_FAULT. | */
    MAV_BATTERY_CHARGE_STATE_CHARGING=7, /* Battery is charging. | */
    MAV_BATTERY_CHARGE_STATE_ENUM_END=8, /*  | */
 } MAV_BATTERY_CHARGE_STATE;
 #endif
 
-/** @brief Smart battery supply status/fault flags (bitmask) for health indication. */
-#ifndef HAVE_ENUM_MAV_SMART_BATTERY_FAULT
-#define HAVE_ENUM_MAV_SMART_BATTERY_FAULT
-typedef enum MAV_SMART_BATTERY_FAULT
+/** @brief Battery mode. Note, the normal operation mode (i.e. when flying) should be reported as MAV_BATTERY_MODE_UNKNOWN to allow message trimming in normal flight. */
+#ifndef HAVE_ENUM_MAV_BATTERY_MODE
+#define HAVE_ENUM_MAV_BATTERY_MODE
+typedef enum MAV_BATTERY_MODE
 {
-   MAV_SMART_BATTERY_FAULT_DEEP_DISCHARGE=1, /* Battery has deep discharged. | */
-   MAV_SMART_BATTERY_FAULT_SPIKES=2, /* Voltage spikes. | */
-   MAV_SMART_BATTERY_FAULT_SINGLE_CELL_FAIL=4, /* Single cell has failed. | */
-   MAV_SMART_BATTERY_FAULT_OVER_CURRENT=8, /* Over-current fault. | */
-   MAV_SMART_BATTERY_FAULT_OVER_TEMPERATURE=16, /* Over-temperature fault. | */
-   MAV_SMART_BATTERY_FAULT_UNDER_TEMPERATURE=32, /* Under-temperature fault. | */
-   MAV_SMART_BATTERY_FAULT_ENUM_END=33, /*  | */
-} MAV_SMART_BATTERY_FAULT;
+   MAV_BATTERY_MODE_UNKNOWN=0, /* Battery mode not supported/unknown battery mode/normal operation. | */
+   MAV_BATTERY_MODE_AUTO_DISCHARGING=1, /* Battery is auto discharging (towards storage level). | */
+   MAV_BATTERY_MODE_HOT_SWAP=2, /* Battery in hot-swap mode (current limited to prevent spikes that might damage sensitive electrical circuits). | */
+   MAV_BATTERY_MODE_ENUM_END=3, /*  | */
+} MAV_BATTERY_MODE;
+#endif
+
+/** @brief Smart battery supply status/fault flags (bitmask) for health indication. The battery must also report either MAV_BATTERY_CHARGE_STATE_FAILED or MAV_BATTERY_CHARGE_STATE_UNHEALTHY if any of these are set. */
+#ifndef HAVE_ENUM_MAV_BATTERY_FAULT
+#define HAVE_ENUM_MAV_BATTERY_FAULT
+typedef enum MAV_BATTERY_FAULT
+{
+   MAV_BATTERY_FAULT_DEEP_DISCHARGE=1, /* Battery has deep discharged. | */
+   MAV_BATTERY_FAULT_SPIKES=2, /* Voltage spikes. | */
+   MAV_BATTERY_FAULT_CELL_FAIL=4, /* One or more cells have failed. Battery should also report MAV_BATTERY_CHARGE_STATE_FAILE (and should not be used). | */
+   MAV_BATTERY_FAULT_OVER_CURRENT=8, /* Over-current fault. | */
+   MAV_BATTERY_FAULT_OVER_TEMPERATURE=16, /* Over-temperature fault. | */
+   MAV_BATTERY_FAULT_UNDER_TEMPERATURE=32, /* Under-temperature fault. | */
+   MAV_BATTERY_FAULT_INCOMPATIBLE_VOLTAGE=64, /* Vehicle voltage is not compatible with this battery (batteries on same power rail should have similar voltage). | */
+   MAV_BATTERY_FAULT_ENUM_END=65, /*  | */
+} MAV_BATTERY_FAULT;
 #endif
 
 /** @brief Flags to report status/failure cases for a power generator (used in GENERATOR_STATUS). Note that FAULTS are conditions that cause the generator to fail. Warnings are conditions that require attention before the next use (they indicate the system is not operating properly). */
