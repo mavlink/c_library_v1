@@ -5,14 +5,14 @@
 
 
 typedef struct __mavlink_rc_channels_override_t {
- uint16_t chan1_raw; /*< [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field.*/
- uint16_t chan2_raw; /*< [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field.*/
- uint16_t chan3_raw; /*< [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field.*/
- uint16_t chan4_raw; /*< [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field.*/
- uint16_t chan5_raw; /*< [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field.*/
- uint16_t chan6_raw; /*< [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field.*/
- uint16_t chan7_raw; /*< [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field.*/
- uint16_t chan8_raw; /*< [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field.*/
+ uint16_t chan1_raw; /*< [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.*/
+ uint16_t chan2_raw; /*< [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.*/
+ uint16_t chan3_raw; /*< [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.*/
+ uint16_t chan4_raw; /*< [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.*/
+ uint16_t chan5_raw; /*< [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.*/
+ uint16_t chan6_raw; /*< [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.*/
+ uint16_t chan7_raw; /*< [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.*/
+ uint16_t chan8_raw; /*< [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.*/
  uint8_t target_system; /*<  System ID*/
  uint8_t target_component; /*<  Component ID*/
 } mavlink_rc_channels_override_t;
@@ -70,14 +70,14 @@ typedef struct __mavlink_rc_channels_override_t {
  *
  * @param target_system  System ID
  * @param target_component  Component ID
- * @param chan1_raw [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field.
- * @param chan2_raw [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field.
- * @param chan3_raw [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field.
- * @param chan4_raw [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field.
- * @param chan5_raw [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field.
- * @param chan6_raw [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field.
- * @param chan7_raw [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field.
- * @param chan8_raw [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field.
+ * @param chan1_raw [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan2_raw [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan3_raw [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan4_raw [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan5_raw [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan6_raw [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan7_raw [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan8_raw [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_rc_channels_override_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -125,14 +125,14 @@ static inline uint16_t mavlink_msg_rc_channels_override_pack(uint8_t system_id, 
  * @param msg The MAVLink message to compress the data into
  * @param target_system  System ID
  * @param target_component  Component ID
- * @param chan1_raw [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field.
- * @param chan2_raw [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field.
- * @param chan3_raw [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field.
- * @param chan4_raw [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field.
- * @param chan5_raw [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field.
- * @param chan6_raw [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field.
- * @param chan7_raw [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field.
- * @param chan8_raw [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field.
+ * @param chan1_raw [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan2_raw [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan3_raw [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan4_raw [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan5_raw [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan6_raw [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan7_raw [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan8_raw [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_rc_channels_override_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -206,14 +206,14 @@ static inline uint16_t mavlink_msg_rc_channels_override_encode_chan(uint8_t syst
  *
  * @param target_system  System ID
  * @param target_component  Component ID
- * @param chan1_raw [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field.
- * @param chan2_raw [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field.
- * @param chan3_raw [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field.
- * @param chan4_raw [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field.
- * @param chan5_raw [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field.
- * @param chan6_raw [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field.
- * @param chan7_raw [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field.
- * @param chan8_raw [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field.
+ * @param chan1_raw [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan2_raw [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan3_raw [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan4_raw [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan5_raw [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan6_raw [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan7_raw [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
+ * @param chan8_raw [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -334,7 +334,7 @@ static inline uint8_t mavlink_msg_rc_channels_override_get_target_component(cons
 /**
  * @brief Get field chan1_raw from rc_channels_override message
  *
- * @return [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field.
+ * @return [us] RC channel 1 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 static inline uint16_t mavlink_msg_rc_channels_override_get_chan1_raw(const mavlink_message_t* msg)
 {
@@ -344,7 +344,7 @@ static inline uint16_t mavlink_msg_rc_channels_override_get_chan1_raw(const mavl
 /**
  * @brief Get field chan2_raw from rc_channels_override message
  *
- * @return [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field.
+ * @return [us] RC channel 2 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 static inline uint16_t mavlink_msg_rc_channels_override_get_chan2_raw(const mavlink_message_t* msg)
 {
@@ -354,7 +354,7 @@ static inline uint16_t mavlink_msg_rc_channels_override_get_chan2_raw(const mavl
 /**
  * @brief Get field chan3_raw from rc_channels_override message
  *
- * @return [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field.
+ * @return [us] RC channel 3 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 static inline uint16_t mavlink_msg_rc_channels_override_get_chan3_raw(const mavlink_message_t* msg)
 {
@@ -364,7 +364,7 @@ static inline uint16_t mavlink_msg_rc_channels_override_get_chan3_raw(const mavl
 /**
  * @brief Get field chan4_raw from rc_channels_override message
  *
- * @return [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field.
+ * @return [us] RC channel 4 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 static inline uint16_t mavlink_msg_rc_channels_override_get_chan4_raw(const mavlink_message_t* msg)
 {
@@ -374,7 +374,7 @@ static inline uint16_t mavlink_msg_rc_channels_override_get_chan4_raw(const mavl
 /**
  * @brief Get field chan5_raw from rc_channels_override message
  *
- * @return [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field.
+ * @return [us] RC channel 5 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 static inline uint16_t mavlink_msg_rc_channels_override_get_chan5_raw(const mavlink_message_t* msg)
 {
@@ -384,7 +384,7 @@ static inline uint16_t mavlink_msg_rc_channels_override_get_chan5_raw(const mavl
 /**
  * @brief Get field chan6_raw from rc_channels_override message
  *
- * @return [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field.
+ * @return [us] RC channel 6 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 static inline uint16_t mavlink_msg_rc_channels_override_get_chan6_raw(const mavlink_message_t* msg)
 {
@@ -394,7 +394,7 @@ static inline uint16_t mavlink_msg_rc_channels_override_get_chan6_raw(const mavl
 /**
  * @brief Get field chan7_raw from rc_channels_override message
  *
- * @return [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field.
+ * @return [us] RC channel 7 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 static inline uint16_t mavlink_msg_rc_channels_override_get_chan7_raw(const mavlink_message_t* msg)
 {
@@ -404,7 +404,7 @@ static inline uint16_t mavlink_msg_rc_channels_override_get_chan7_raw(const mavl
 /**
  * @brief Get field chan8_raw from rc_channels_override message
  *
- * @return [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field.
+ * @return [us] RC channel 8 value. A value of UINT16_MAX means to ignore this field. A value of 0 means to release this channel back to the RC radio.
  */
 static inline uint16_t mavlink_msg_rc_channels_override_get_chan8_raw(const mavlink_message_t* msg)
 {
