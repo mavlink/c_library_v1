@@ -9,8 +9,8 @@ typedef struct __mavlink_hil_gps_t {
  int32_t lat; /*< [degE7] Latitude (WGS84)*/
  int32_t lon; /*< [degE7] Longitude (WGS84)*/
  int32_t alt; /*< [mm] Altitude (MSL). Positive for up.*/
- uint16_t eph; /*<  GPS HDOP horizontal dilution of position (unitless). If unknown, set to: UINT16_MAX*/
- uint16_t epv; /*<  GPS VDOP vertical dilution of position (unitless). If unknown, set to: UINT16_MAX*/
+ uint16_t eph; /*<  GPS HDOP horizontal dilution of position (unitless * 100). If unknown, set to: UINT16_MAX*/
+ uint16_t epv; /*<  GPS VDOP vertical dilution of position (unitless * 100). If unknown, set to: UINT16_MAX*/
  uint16_t vel; /*< [cm/s] GPS ground speed. If unknown, set to: 65535*/
  int16_t vn; /*< [cm/s] GPS velocity in north direction in earth-fixed NED frame*/
  int16_t ve; /*< [cm/s] GPS velocity in east direction in earth-fixed NED frame*/
@@ -82,8 +82,8 @@ typedef struct __mavlink_hil_gps_t {
  * @param lat [degE7] Latitude (WGS84)
  * @param lon [degE7] Longitude (WGS84)
  * @param alt [mm] Altitude (MSL). Positive for up.
- * @param eph  GPS HDOP horizontal dilution of position (unitless). If unknown, set to: UINT16_MAX
- * @param epv  GPS VDOP vertical dilution of position (unitless). If unknown, set to: UINT16_MAX
+ * @param eph  GPS HDOP horizontal dilution of position (unitless * 100). If unknown, set to: UINT16_MAX
+ * @param epv  GPS VDOP vertical dilution of position (unitless * 100). If unknown, set to: UINT16_MAX
  * @param vel [cm/s] GPS ground speed. If unknown, set to: 65535
  * @param vn [cm/s] GPS velocity in north direction in earth-fixed NED frame
  * @param ve [cm/s] GPS velocity in east direction in earth-fixed NED frame
@@ -146,8 +146,8 @@ static inline uint16_t mavlink_msg_hil_gps_pack(uint8_t system_id, uint8_t compo
  * @param lat [degE7] Latitude (WGS84)
  * @param lon [degE7] Longitude (WGS84)
  * @param alt [mm] Altitude (MSL). Positive for up.
- * @param eph  GPS HDOP horizontal dilution of position (unitless). If unknown, set to: UINT16_MAX
- * @param epv  GPS VDOP vertical dilution of position (unitless). If unknown, set to: UINT16_MAX
+ * @param eph  GPS HDOP horizontal dilution of position (unitless * 100). If unknown, set to: UINT16_MAX
+ * @param epv  GPS VDOP vertical dilution of position (unitless * 100). If unknown, set to: UINT16_MAX
  * @param vel [cm/s] GPS ground speed. If unknown, set to: 65535
  * @param vn [cm/s] GPS velocity in north direction in earth-fixed NED frame
  * @param ve [cm/s] GPS velocity in east direction in earth-fixed NED frame
@@ -236,8 +236,8 @@ static inline uint16_t mavlink_msg_hil_gps_encode_chan(uint8_t system_id, uint8_
  * @param lat [degE7] Latitude (WGS84)
  * @param lon [degE7] Longitude (WGS84)
  * @param alt [mm] Altitude (MSL). Positive for up.
- * @param eph  GPS HDOP horizontal dilution of position (unitless). If unknown, set to: UINT16_MAX
- * @param epv  GPS VDOP vertical dilution of position (unitless). If unknown, set to: UINT16_MAX
+ * @param eph  GPS HDOP horizontal dilution of position (unitless * 100). If unknown, set to: UINT16_MAX
+ * @param epv  GPS VDOP vertical dilution of position (unitless * 100). If unknown, set to: UINT16_MAX
  * @param vel [cm/s] GPS ground speed. If unknown, set to: 65535
  * @param vn [cm/s] GPS velocity in north direction in earth-fixed NED frame
  * @param ve [cm/s] GPS velocity in east direction in earth-fixed NED frame
@@ -406,7 +406,7 @@ static inline int32_t mavlink_msg_hil_gps_get_alt(const mavlink_message_t* msg)
 /**
  * @brief Get field eph from hil_gps message
  *
- * @return  GPS HDOP horizontal dilution of position (unitless). If unknown, set to: UINT16_MAX
+ * @return  GPS HDOP horizontal dilution of position (unitless * 100). If unknown, set to: UINT16_MAX
  */
 static inline uint16_t mavlink_msg_hil_gps_get_eph(const mavlink_message_t* msg)
 {
@@ -416,7 +416,7 @@ static inline uint16_t mavlink_msg_hil_gps_get_eph(const mavlink_message_t* msg)
 /**
  * @brief Get field epv from hil_gps message
  *
- * @return  GPS VDOP vertical dilution of position (unitless). If unknown, set to: UINT16_MAX
+ * @return  GPS VDOP vertical dilution of position (unitless * 100). If unknown, set to: UINT16_MAX
  */
 static inline uint16_t mavlink_msg_hil_gps_get_epv(const mavlink_message_t* msg)
 {
