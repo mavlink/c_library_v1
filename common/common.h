@@ -510,10 +510,11 @@ typedef enum WIFI_CONFIG_AP_MODE
 #define HAVE_ENUM_COMP_METADATA_TYPE
 typedef enum COMP_METADATA_TYPE
 {
-   COMP_METADATA_TYPE_VERSION=0, /* Version information which also includes information on other optional supported COMP_METADATA_TYPE's. Must be supported. Only downloadable from vehicle. | */
+   COMP_METADATA_TYPE_GENERAL=0, /* General information which also includes information on other optional supported COMP_METADATA_TYPE's. Must be supported. Only downloadable from vehicle. | */
    COMP_METADATA_TYPE_PARAMETER=1, /* Parameter meta data. | */
    COMP_METADATA_TYPE_COMMANDS=2, /* Meta data which specifies the commands the vehicle supports. (WIP) | */
-   COMP_METADATA_TYPE_ENUM_END=3, /*  | */
+   COMP_METADATA_TYPE_PERIPHERALS=3, /* Meta data which specifies potential external peripherals that do not talk MAVLink | */
+   COMP_METADATA_TYPE_ENUM_END=4, /*  | */
 } COMP_METADATA_TYPE;
 #endif
 
