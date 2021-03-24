@@ -34,6 +34,20 @@ extern "C" {
 // ENUM DEFINITIONS
 
 
+/** @brief WiFi wireless security protocols. */
+#ifndef HAVE_ENUM_WIFI_NETWORK_SECURITY
+#define HAVE_ENUM_WIFI_NETWORK_SECURITY
+typedef enum WIFI_NETWORK_SECURITY
+{
+   WIFI_NETWORK_SECURITY_UNDEFINED=0, /* Undefined or unknown security protocol. | */
+   WIFI_NETWORK_SECURITY_OPEN=1, /* Open network, no security. | */
+   WIFI_NETWORK_SECURITY_WEP=2, /* WEP. | */
+   WIFI_NETWORK_SECURITY_WPA1=3, /* WPA1. | */
+   WIFI_NETWORK_SECURITY_WPA2=4, /* WPA2. | */
+   WIFI_NETWORK_SECURITY_WPA3=5, /* WPA3. | */
+   WIFI_NETWORK_SECURITY_ENUM_END=6, /*  | */
+} WIFI_NETWORK_SECURITY;
+#endif
 
 // MAVLINK VERSION
 
