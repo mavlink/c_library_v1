@@ -49,6 +49,20 @@ typedef enum WIFI_NETWORK_SECURITY
 } WIFI_NETWORK_SECURITY;
 #endif
 
+/** @brief Types of airspeed sensor/data. May be be used in AIRSPEED message to estimate accuracy of indicated speed. */
+#ifndef HAVE_ENUM_AIRSPEED_SENSOR_TYPE
+#define HAVE_ENUM_AIRSPEED_SENSOR_TYPE
+typedef enum AIRSPEED_SENSOR_TYPE
+{
+   AIRSPEED_SENSOR_TYPE_UNKNOWN=0, /* Airspeed sensor type unknown/not supplied. | */
+   AIRSPEED_SENSOR_TYPE_DIFFERENTIAL=1, /* Differential airspeed sensor | */
+   AIRSPEED_SENSOR_TYPE_MASS_FLOW=2, /* Mass-flow airspeed sensor. | */
+   AIRSPEED_SENSOR_TYPE_WINDVANE=3, /* Windvane airspeed sensor. | */
+   AIRSPEED_SENSOR_TYPE_SYNTHETIC=4, /* Synthetic/calculated airspeed. | */
+   AIRSPEED_SENSOR_TYPE_ENUM_END=5, /*  | */
+} AIRSPEED_SENSOR_TYPE;
+#endif
+
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
