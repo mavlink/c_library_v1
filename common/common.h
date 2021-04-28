@@ -517,7 +517,8 @@ typedef enum COMP_METADATA_TYPE
    COMP_METADATA_TYPE_PARAMETER=1, /* Parameter meta data. | */
    COMP_METADATA_TYPE_COMMANDS=2, /* Meta data which specifies the commands the vehicle supports. (WIP) | */
    COMP_METADATA_TYPE_PERIPHERALS=3, /* Meta data which specifies potential external peripherals that do not talk MAVLink | */
-   COMP_METADATA_TYPE_ENUM_END=4, /*  | */
+   COMP_METADATA_TYPE_EVENTS=4, /* Meta data for events interface | */
+   COMP_METADATA_TYPE_ENUM_END=5, /*  | */
 } COMP_METADATA_TYPE;
 #endif
 
@@ -2024,6 +2025,26 @@ typedef enum MAG_CAL_STATUS
    MAG_CAL_BAD_RADIUS=7, /*  | */
    MAG_CAL_STATUS_ENUM_END=8, /*  | */
 } MAG_CAL_STATUS;
+#endif
+
+/** @brief Reason for an event error response. */
+#ifndef HAVE_ENUM_MAV_EVENT_ERROR_REASON
+#define HAVE_ENUM_MAV_EVENT_ERROR_REASON
+typedef enum MAV_EVENT_ERROR_REASON
+{
+   MAV_EVENT_ERROR_REASON_UNAVAILABLE=0, /* The requested event is not available (anymore). | */
+   MAV_EVENT_ERROR_REASON_ENUM_END=1, /*  | */
+} MAV_EVENT_ERROR_REASON;
+#endif
+
+/** @brief Flags for CURRENT_EVENT_SEQUENCE. */
+#ifndef HAVE_ENUM_MAV_EVENT_CURRENT_SEQUENCE_FLAGS
+#define HAVE_ENUM_MAV_EVENT_CURRENT_SEQUENCE_FLAGS
+typedef enum MAV_EVENT_CURRENT_SEQUENCE_FLAGS
+{
+   MAV_EVENT_CURRENT_SEQUENCE_FLAGS_RESET=1, /* A sequence reset has happened (e.g. vehicle reboot). | */
+   MAV_EVENT_CURRENT_SEQUENCE_FLAGS_ENUM_END=2, /*  | */
+} MAV_EVENT_CURRENT_SEQUENCE_FLAGS;
 #endif
 
 // MAVLINK VERSION
