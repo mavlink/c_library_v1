@@ -75,6 +75,7 @@ typedef enum AIRSPEED_SENSOR_TYPE
 #endif
 
 // MESSAGE DEFINITIONS
+#include "./mavlink_msg_mission_changed.h"
 #include "./mavlink_msg_mission_checksum.h"
 
 // base include
