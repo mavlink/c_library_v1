@@ -1662,7 +1662,8 @@ typedef enum MAV_ODID_ID_TYPE
    MAV_ODID_ID_TYPE_SERIAL_NUMBER=1, /* Manufacturer Serial Number (ANSI/CTA-2063 format). | */
    MAV_ODID_ID_TYPE_CAA_REGISTRATION_ID=2, /* CAA (Civil Aviation Authority) registered ID. Format: [ICAO Country Code].[CAA Assigned ID]. | */
    MAV_ODID_ID_TYPE_UTM_ASSIGNED_UUID=3, /* UTM (Unmanned Traffic Management) assigned UUID (RFC4122). | */
-   MAV_ODID_ID_TYPE_ENUM_END=4, /*  | */
+   MAV_ODID_ID_TYPE_SPECIFIC_SESSION_ID=4, /* A 20 byte ID for a specific flight/session. The exact ID type is indicated by the first byte of uas_id and these type values are managed by ICAO. | */
+   MAV_ODID_ID_TYPE_ENUM_END=5, /*  | */
 } MAV_ODID_ID_TYPE;
 #endif
 
@@ -1802,7 +1803,8 @@ typedef enum MAV_ODID_AUTH_TYPE
    MAV_ODID_AUTH_TYPE_OPERATOR_ID_SIGNATURE=2, /* Signature for the Operator ID. | */
    MAV_ODID_AUTH_TYPE_MESSAGE_SET_SIGNATURE=3, /* Signature for the entire message set. | */
    MAV_ODID_AUTH_TYPE_NETWORK_REMOTE_ID=4, /* Authentication is provided by Network Remote ID. | */
-   MAV_ODID_AUTH_TYPE_ENUM_END=5, /*  | */
+   MAV_ODID_AUTH_TYPE_SPECIFIC_AUTHENTICATION=5, /* The exact authentication type is indicated by the first byte of authentication_data and these type values are managed by ICAO. | */
+   MAV_ODID_AUTH_TYPE_ENUM_END=6, /*  | */
 } MAV_ODID_AUTH_TYPE;
 #endif
 
