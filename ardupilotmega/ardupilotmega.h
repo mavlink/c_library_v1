@@ -147,6 +147,8 @@ typedef enum MAV_CMD
    MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL=214, /* Mission command to set camera trigger interval for this flight. If triggering is enabled, the camera is triggered each time this interval expires. This command can also be used to set the shutter integration time for the camera. |Camera trigger cycle time. -1 or 0 to ignore.| Camera shutter integration time. Should be less than trigger cycle time. -1 or 0 to ignore.| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_DO_SET_RESUME_REPEAT_DIST=215, /* Set the distance to be repeated on mission resume |Distance.| Empty.| Empty.| Empty.| Empty.| Empty.| Empty.|  */
    MAV_CMD_DO_SPRAYER=216, /* Control attached liquid sprayer |0: disable sprayer. 1: enable sprayer.| Empty.| Empty.| Empty.| Empty.| Empty.| Empty.|  */
+   MAV_CMD_DO_SEND_SCRIPT_MESSAGE=217, /* Pass instructions onto scripting, a script should be checking for a new command |uint16 ID value to be passed to scripting| float value to be passed to scripting| float value to be passed to scripting| float value to be passed to scripting| Empty.| Empty.| Empty.|  */
+   MAV_CMD_DO_AUX_FUNCTION=218, /* Execute auxiliary function |Auxiliary Function.| Switch Level.| Empty.| Empty.| Empty.| Empty.| Empty.|  */
    MAV_CMD_DO_MOUNT_CONTROL_QUAT=220, /* Mission command to control a camera or antenna mount, using a quaternion as reference. |quaternion param q1, w (1 in null-rotation)| quaternion param q2, x (0 in null-rotation)| quaternion param q3, y (0 in null-rotation)| quaternion param q4, z (0 in null-rotation)| Empty| Empty| Empty|  */
    MAV_CMD_DO_GUIDED_MASTER=221, /* set id of master controller |System ID| Component ID| Empty| Empty| Empty| Empty| Empty|  */
    MAV_CMD_DO_GUIDED_LIMITS=222, /* Set limits for external control |Timeout - maximum time that external controller will be allowed to control vehicle. 0 means no timeout.| Altitude (MSL) min - if vehicle moves below this alt, the command will be aborted and the mission will continue. 0 means no lower altitude limit.| Altitude (MSL) max - if vehicle moves above this alt, the command will be aborted and the mission will continue. 0 means no upper altitude limit.| Horizontal move limit - if vehicle moves more than this distance from its location at the moment the command was executed, the command will be aborted and the mission will continue. 0 means no horizontal move limit.| Empty| Empty| Empty|  */
@@ -251,6 +253,7 @@ typedef enum MAV_CMD
         in earth field given by inclination, declination and intensity. |Magnetic declination.| Magnetic inclination.| Magnetic intensity.| Yaw.| Empty.| Empty.| Empty.|  */
    MAV_CMD_FIXED_MAG_CAL_FIELD=42005, /* Magnetometer calibration based on fixed expected field values. |Field strength X.| Field strength Y.| Field strength Z.| Empty.| Empty.| Empty.| Empty.|  */
    MAV_CMD_FIXED_MAG_CAL_YAW=42006, /* Magnetometer calibration based on provided known yaw. This allows for fast calibration using WMM field tables in the vehicle, given only the known yaw of the vehicle. If Latitude and longitude are both zero then use the current vehicle location. |Yaw of vehicle in earth frame.| CompassMask, 0 for all.| Latitude.| Longitude.| Empty.| Empty.| Empty.|  */
+   MAV_CMD_SET_EKF_SOURCE_SET=42007, /* Set EKF sensor source set. |Source Set Id.| Empty.| Empty.| Empty.| Empty.| Empty.| Empty.|  */
    MAV_CMD_DO_START_MAG_CAL=42424, /* Initiate a magnetometer calibration. |Bitmask of magnetometers to calibrate. Use 0 to calibrate all sensors that can be started (sensors may not start if disabled, unhealthy, etc.). The command will NACK if calibration does not start for a sensor explicitly specified by the bitmask.| Automatically retry on failure (0=no retry, 1=retry).| Save without user input (0=require input, 1=autosave).| Delay.| Autoreboot (0=user reboot, 1=autoreboot).| Empty.| Empty.|  */
    MAV_CMD_DO_ACCEPT_MAG_CAL=42425, /* Accept a magnetometer calibration. |Bitmask of magnetometers that calibration is accepted (0 means all).| Empty.| Empty.| Empty.| Empty.| Empty.| Empty.|  */
    MAV_CMD_DO_CANCEL_MAG_CAL=42426, /* Cancel a running magnetometer calibration. |Bitmask of magnetometers to cancel a running calibration (0 means all).| Empty.| Empty.| Empty.| Empty.| Empty.| Empty.|  */
@@ -688,6 +691,18 @@ typedef enum GOPRO_BURST_RATE
 #endif
 
 /** @brief  */
+#ifndef HAVE_ENUM_MAV_CMD_DO_AUX_FUNCTION_SWITCH_LEVEL
+#define HAVE_ENUM_MAV_CMD_DO_AUX_FUNCTION_SWITCH_LEVEL
+typedef enum MAV_CMD_DO_AUX_FUNCTION_SWITCH_LEVEL
+{
+   MAV_CMD_DO_AUX_FUNCTION_SWITCH_LEVEL_LOW=0, /* Switch Low. |Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+   MAV_CMD_DO_AUX_FUNCTION_SWITCH_LEVEL_MIDDLE=1, /* Switch Middle. |Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+   MAV_CMD_DO_AUX_FUNCTION_SWITCH_LEVEL_HIGH=2, /* Switch High. |Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+   MAV_CMD_DO_AUX_FUNCTION_SWITCH_LEVEL_ENUM_END=3, /*  | */
+} MAV_CMD_DO_AUX_FUNCTION_SWITCH_LEVEL;
+#endif
+
+/** @brief  */
 #ifndef HAVE_ENUM_LED_CONTROL_PATTERN
 #define HAVE_ENUM_LED_CONTROL_PATTERN
 typedef enum LED_CONTROL_PATTERN
@@ -845,7 +860,8 @@ typedef enum COPTER_MODE
    COPTER_MODE_ZIGZAG=24, /*  | */
    COPTER_MODE_SYSTEMID=25, /*  | */
    COPTER_MODE_AUTOROTATE=26, /*  | */
-   COPTER_MODE_ENUM_END=27, /*  | */
+   COPTER_MODE_AUTO_RTL=27, /*  | */
+   COPTER_MODE_ENUM_END=28, /*  | */
 } COPTER_MODE;
 #endif
 
