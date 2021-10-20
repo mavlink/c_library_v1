@@ -19,7 +19,7 @@ typedef struct __mavlink_hil_sensor_t {
  float diff_pressure; /*< [hPa] Differential pressure (airspeed)*/
  float pressure_alt; /*<  Altitude calculated from pressure*/
  float temperature; /*< [degC] Temperature*/
- uint32_t fields_updated; /*<  Bitmap for fields that have updated since last message, bit 0 = xacc, bit 12: temperature, bit 31: full reset of attitude/position/velocities/etc was performed in sim.*/
+ uint32_t fields_updated; /*<  Bitmap for fields that have updated since last message*/
 } mavlink_hil_sensor_t;
 
 #define MAVLINK_MSG_ID_HIL_SENSOR_LEN 64
@@ -97,7 +97,7 @@ typedef struct __mavlink_hil_sensor_t {
  * @param diff_pressure [hPa] Differential pressure (airspeed)
  * @param pressure_alt  Altitude calculated from pressure
  * @param temperature [degC] Temperature
- * @param fields_updated  Bitmap for fields that have updated since last message, bit 0 = xacc, bit 12: temperature, bit 31: full reset of attitude/position/velocities/etc was performed in sim.
+ * @param fields_updated  Bitmap for fields that have updated since last message
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_hil_sensor_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -167,7 +167,7 @@ static inline uint16_t mavlink_msg_hil_sensor_pack(uint8_t system_id, uint8_t co
  * @param diff_pressure [hPa] Differential pressure (airspeed)
  * @param pressure_alt  Altitude calculated from pressure
  * @param temperature [degC] Temperature
- * @param fields_updated  Bitmap for fields that have updated since last message, bit 0 = xacc, bit 12: temperature, bit 31: full reset of attitude/position/velocities/etc was performed in sim.
+ * @param fields_updated  Bitmap for fields that have updated since last message
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_hil_sensor_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -263,7 +263,7 @@ static inline uint16_t mavlink_msg_hil_sensor_encode_chan(uint8_t system_id, uin
  * @param diff_pressure [hPa] Differential pressure (airspeed)
  * @param pressure_alt  Altitude calculated from pressure
  * @param temperature [degC] Temperature
- * @param fields_updated  Bitmap for fields that have updated since last message, bit 0 = xacc, bit 12: temperature, bit 31: full reset of attitude/position/velocities/etc was performed in sim.
+ * @param fields_updated  Bitmap for fields that have updated since last message
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -524,7 +524,7 @@ static inline float mavlink_msg_hil_sensor_get_temperature(const mavlink_message
 /**
  * @brief Get field fields_updated from hil_sensor message
  *
- * @return  Bitmap for fields that have updated since last message, bit 0 = xacc, bit 12: temperature, bit 31: full reset of attitude/position/velocities/etc was performed in sim.
+ * @return  Bitmap for fields that have updated since last message
  */
 static inline uint32_t mavlink_msg_hil_sensor_get_fields_updated(const mavlink_message_t* msg)
 {
