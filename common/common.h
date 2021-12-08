@@ -141,8 +141,19 @@ typedef enum MAV_SYS_STATUS_SENSOR
    MAV_SYS_STATUS_PREARM_CHECK=268435456, /* 0x10000000 pre-arm check status. Always healthy when armed | */
    MAV_SYS_STATUS_OBSTACLE_AVOIDANCE=536870912, /* 0x20000000 Avoidance/collision prevention | */
    MAV_SYS_STATUS_SENSOR_PROPULSION=1073741824, /* 0x40000000 propulsion (actuator, esc, motor or propellor) | */
-   MAV_SYS_STATUS_SENSOR_ENUM_END=1073741825, /*  | */
+   MAV_SYS_STATUS_EXTENSION_USED=2147483648, /* 0x80000000 Extended bit-field are used for further sensor status bits (needs to be set in onboard_control_sensors_present only) | */
+   MAV_SYS_STATUS_SENSOR_ENUM_END=2147483649, /*  | */
 } MAV_SYS_STATUS_SENSOR;
+#endif
+
+/** @brief These encode the sensors whose status is sent as part of the SYS_STATUS message in the extended fields. */
+#ifndef HAVE_ENUM_MAV_SYS_STATUS_SENSOR_EXTENDED
+#define HAVE_ENUM_MAV_SYS_STATUS_SENSOR_EXTENDED
+typedef enum MAV_SYS_STATUS_SENSOR_EXTENDED
+{
+   MAV_SYS_STATUS_RECOVERY_SYSTEM=1, /* 0x01 Recovery system (parachute, balloon, retracts etc) | */
+   MAV_SYS_STATUS_SENSOR_EXTENDED_ENUM_END=2, /*  | */
+} MAV_SYS_STATUS_SENSOR_EXTENDED;
 #endif
 
 /** @brief Co-ordinate frames used by MAVLink. Not all frames are supported by all commands, messages, or vehicles.
