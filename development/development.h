@@ -298,7 +298,9 @@ typedef enum COMPONENT_CAP_FLAGS1
    COMPONENT_CAP_FLAGS1_GIMBAL_V2=8, /* Component supports the gimbal v2 protocol. | */
    COMPONENT_CAP_FLAGS1_MAVLINK_FTP=16, /* Component supports the MAVLink FTP protocol. | */
    COMPONENT_CAP_FLAGS1_EVENTS_INTERFACE=32, /* Component supports the events interface protocol. | */
-   COMPONENT_CAP_FLAGS1_ENUM_END=33, /*  | */
+   COMPONENT_CAP_FLAGS1_CAMERA=64, /* Component supports the camera v1 protocol. | */
+   COMPONENT_CAP_FLAGS1_CAMERA_V2=128, /* Component supports the camera v2 protocol. | */
+   COMPONENT_CAP_FLAGS1_ENUM_END=129, /*  | */
 } COMPONENT_CAP_FLAGS1;
 #endif
 
