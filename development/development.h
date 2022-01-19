@@ -287,23 +287,6 @@ typedef enum MAV_CMD
 } MAV_CMD;
 #endif
 
-/** @brief Component capability flags 1 (Bitmap) */
-#ifndef HAVE_ENUM_COMPONENT_CAP_FLAGS1
-#define HAVE_ENUM_COMPONENT_CAP_FLAGS1
-typedef enum COMPONENT_CAP_FLAGS1
-{
-   COMPONENT_CAP_FLAGS1_PARAM=1, /* Component has parameters, and supports the parameter protocol (PARAM messages). | */
-   COMPONENT_CAP_FLAGS1_PARAM_EXT=2, /* Component has parameters, and supports the extended parameter protocol (PARAM_EXT messages). | */
-   COMPONENT_CAP_FLAGS1_COMPONENT_INFORMATION=4, /* Component supports the component information protocol. | */
-   COMPONENT_CAP_FLAGS1_GIMBAL_V2=8, /* Component supports the gimbal v2 protocol. | */
-   COMPONENT_CAP_FLAGS1_MAVLINK_FTP=16, /* Component supports the MAVLink FTP protocol. | */
-   COMPONENT_CAP_FLAGS1_EVENTS_INTERFACE=32, /* Component supports the events interface protocol. | */
-   COMPONENT_CAP_FLAGS1_CAMERA=64, /* Component supports the camera v1 protocol. | */
-   COMPONENT_CAP_FLAGS1_CAMERA_V2=128, /* Component supports the camera v2 protocol. | */
-   COMPONENT_CAP_FLAGS1_ENUM_END=129, /*  | */
-} COMPONENT_CAP_FLAGS1;
-#endif
-
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
