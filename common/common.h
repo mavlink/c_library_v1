@@ -811,6 +811,7 @@ typedef enum MAV_CMD
    MAV_CMD_USER_3=31012, /* User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER item. |User defined| User defined| User defined| User defined| User defined| User defined| User defined|  */
    MAV_CMD_USER_4=31013, /* User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER item. |User defined| User defined| User defined| User defined| User defined| User defined| User defined|  */
    MAV_CMD_USER_5=31014, /* User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER item. |User defined| User defined| User defined| User defined| User defined| User defined| User defined|  */
+   MAV_CMD_CAN_FORWARD=32000, /* Request forwarding of CAN packets from the given CAN bus to this component. CAN Frames are sent using CAN_FRAME and CANFD_FRAME messages |Bus number (0 to disable forwarding, 1 for first bus, 2 for 2nd bus, 3 for 3rd bus).| Empty.| Empty.| Empty.| Empty.| Empty.| Empty.|  */
    MAV_CMD_FIXED_MAG_CAL_YAW=42006, /* Magnetometer calibration based on provided known yaw. This allows for fast calibration using WMM field tables in the vehicle, given only the known yaw of the vehicle. If Latitude and longitude are both zero then use the current vehicle location. |Yaw of vehicle in earth frame.| CompassMask, 0 for all.| Latitude.| Longitude.| Empty.| Empty.| Empty.|  */
    MAV_CMD_DO_WINCH=42600, /* Command to operate winch. |Winch instance number.| Action to perform.| Length of line to release (negative to wind).| Release rate (negative to wind).| Empty.| Empty.| Empty.|  */
    MAV_CMD_ENUM_END=42601, /*  | */
@@ -2384,6 +2385,18 @@ typedef enum HIGHRES_IMU_UPDATED_FLAGS
    HIGHRES_IMU_UPDATED_ALL=65535, /* All fields in HIGHRES_IMU have been updated. | */
    HIGHRES_IMU_UPDATED_FLAGS_ENUM_END=65536, /*  | */
 } HIGHRES_IMU_UPDATED_FLAGS;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_CAN_FILTER_OP
+#define HAVE_ENUM_CAN_FILTER_OP
+typedef enum CAN_FILTER_OP
+{
+   CAN_FILTER_REPLACE=0, /*  | */
+   CAN_FILTER_ADD=1, /*  | */
+   CAN_FILTER_REMOVE=2, /*  | */
+   CAN_FILTER_OP_ENUM_END=3, /*  | */
+} CAN_FILTER_OP;
 #endif
 
 // MAVLINK VERSION
