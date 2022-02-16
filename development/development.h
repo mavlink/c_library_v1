@@ -86,6 +86,77 @@ typedef enum PARAM_TRANSACTION_ACTION
 } PARAM_TRANSACTION_ACTION;
 #endif
 
+/** @brief Standard modes with a well understood meaning across flight stacks and vehicle types.
+        For example, most flight stack have the concept of a "return" or "RTL" mode that takes a vehicle to safety, even though the precise mechanics of this mode may differ.
+        Modes may be set using MAV_CMD_DO_SET_STANDARD_MODE.
+       */
+#ifndef HAVE_ENUM_MAV_STANDARD_MODE
+#define HAVE_ENUM_MAV_STANDARD_MODE
+typedef enum MAV_STANDARD_MODE
+{
+   MAV_STANDARD_MODE_NON_STANDARD=0, /* Non standard mode.
+          This may be used when reporting the mode if the current flight mode is not a standard mode.
+         | */
+   MAV_STANDARD_MODE_POSITION_HOLD=1, /* Position mode (manual).
+          Position-controlled and stabilized manual mode.
+          When sticks are released vehicles return to their level-flight orientation and hold both position and altitude against wind and external forces.
+          This mode can only be set by vehicles that can hold a fixed position.
+          Multicopter (MC) vehicles actively brake and hold both position and altitude against wind and external forces.
+          Hybrid MC/FW ("VTOL") vehicles first transition to multicopter mode (if needed) but otherwise behave in the same way as MC vehicles.
+          Fixed-wing (FW) vehicles must not support this mode.
+          Other vehicle types must not support this mode (this may be revisited through the PR process).
+         | */
+   MAV_STANDARD_MODE_ORBIT=2, /* Orbit (manual).
+          Position-controlled and stabilized manual mode.
+          The vehicle circles around a fixed setpoint in the horizontal plane at a particular radius, altitude, and direction.
+          Flight stacks may further allow manual control over the setpoint position, radius, direction, speed, and/or altitude of the circle, but this is not mandated.
+          Flight stacks may support the [MAV_CMD_DO_ORBIT](https://mavlink.io/en/messages/common.html#MAV_CMD_DO_ORBIT) for changing the orbit parameters.
+          MC and FW vehicles may support this mode.
+          Hybrid MC/FW ("VTOL") vehicles may support this mode in MC/FW or both modes; if the mode is not supported by the current configuration the vehicle should transition to the supported configuration.
+          Other vehicle types must not support this mode (this may be revisited through the PR process).
+         | */
+   MAV_STANDARD_MODE_CRUISE=3, /* Cruise mode (manual).
+          Position-controlled and stabilized manual mode.
+          When sticks are released vehicles return to their level-flight orientation and hold their original track against wind and external forces.
+          Fixed-wing (FW) vehicles level orientation and maintain current track and altitude against wind and external forces.
+          Hybrid MC/FW ("VTOL") vehicles first transition to FW mode (if needed) but otherwise behave in the same way as MC vehicles.
+          Multicopter (MC) vehicles must not support this mode.
+          Other vehicle types must not support this mode (this may be revisited through the PR process).
+         | */
+   MAV_STANDARD_MODE_ALTITUDE_HOLD=4, /* Altitude hold (manual).
+          Altitude-controlled and stabilized manual mode.
+          When sticks are released vehicles return to their level-flight orientation and hold their altitude.
+          MC vehicles continue with existing momentum and may move with wind (or other external forces).
+          FW vehicles continue with current heading, but may be moved off-track by wind.
+          Hybrid MC/FW ("VTOL") vehicles behave according to their current configuration/mode (FW or MC).
+          Other vehicle types must not support this mode (this may be revisited through the PR process).
+         | */
+   MAV_STANDARD_MODE_RETURN_HOME=5, /* Return home mode (auto).
+          Automatic mode that returns vehicle to home via a safe flight path.
+          It may also automatically land the vehicle (i.e. RTL).
+          The precise flight path and landing behaviour depend on vehicle configuration and type.
+         | */
+   MAV_STANDARD_MODE_SAFE_RECOVERY=6, /* Safe recovery mode (auto).
+          Automatic mode that takes vehicle to a predefined safe location via a safe flight path (rally point or mission defined landing) .
+          It may also automatically land the vehicle.
+          The precise return location, flight path, and landing behaviour depend on vehicle configuration and type.
+         | */
+   MAV_STANDARD_MODE_MISSION=7, /* Mission mode (automatic).
+          Automatic mode that executes MAVLink missions.
+          Missions are executed from the current waypoint as soon as the mode is enabled.
+         | */
+   MAV_STANDARD_MODE_LAND=8, /* Land mode (auto).
+          Automatic mode that lands the vehicle at the current location.
+          The precise landing behaviour depends on vehicle configuration and type.
+         | */
+   MAV_STANDARD_MODE_TAKEOFF=9, /* Takeoff mode (auto).
+          Automatic takeoff mode.
+          The precise takeoff behaviour depends on vehicle configuration and type.
+         | */
+   MAV_STANDARD_MODE_ENUM_END=10, /*  | */
+} MAV_STANDARD_MODE;
+#endif
+
 /** @brief Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. NaN and INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current yaw or latitude rather than a specific value). See https://mavlink.io/en/guide/xml_schema.html#MAV_CMD for information about the structure of the MAV_CMD entries */
 #ifndef HAVE_ENUM_MAV_CMD
 #define HAVE_ENUM_MAV_CMD
@@ -174,6 +245,9 @@ typedef enum MAV_CMD
           Command protocol information: https://mavlink.io/en/services/command.html. |Component id of the component to be upgraded. If set to 0, all components should be upgraded.| 0: Do not reboot component after the action is executed, 1: Reboot component after the action is executed.| Reserved| Reserved| Reserved| Reserved| WIP: upgrade progress report rate (can be used for more granular control).|  */
    MAV_CMD_OVERRIDE_GOTO=252, /* Override current mission with command to pause mission, pause mission and move to position, continue/resume mission. When param 1 indicates that the mission is paused (MAV_GOTO_DO_HOLD), param 2 defines whether it holds in place or moves to another position. |MAV_GOTO_DO_HOLD: pause mission and either hold or move to specified position (depending on param2), MAV_GOTO_DO_CONTINUE: resume mission.| MAV_GOTO_HOLD_AT_CURRENT_POSITION: hold at current position, MAV_GOTO_HOLD_AT_SPECIFIED_POSITION: hold at specified position.| Coordinate frame of hold point.| Desired yaw angle.| Latitude/X position.| Longitude/Y position.| Altitude/Z position.|  */
    MAV_CMD_OBLIQUE_SURVEY=260, /* Mission command to set a Camera Auto Mount Pivoting Oblique Survey (Replaces CAM_TRIGG_DIST for this purpose). The camera is triggered each time this distance is exceeded, then the mount moves to the next position. Params 4~6 set-up the angle limits and number of positions for oblique survey, where mount-enabled vehicles automatically roll the camera between shots to emulate an oblique camera setup (providing an increased HFOV). This command can also be used to set the shutter integration time for the camera. |Camera trigger distance. 0 to stop triggering.| Camera shutter integration time. 0 to ignore| The minimum interval in which the camera is capable of taking subsequent pictures repeatedly. 0 to ignore.| Total number of roll positions at which the camera will capture photos (images captures spread evenly across the limits defined by param5).| Angle limits that the camera can be rolled to left and right of center.| Fixed pitch angle that the camera will hold in oblique mode if the mount is actuated in the pitch axis.| Empty|  */
+   MAV_CMD_DO_SET_STANDARD_MODE=262, /* Enable the specified standard MAVLink mode.
+          If the mode is not supported the vehicle should ACK with MAV_RESULT_FAILED.
+         |The mode to set.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:NaN)|  */
    MAV_CMD_MISSION_START=300, /* start running a mission |first_item: the first mission item to run| last_item:  the last mission item to run (after this item is run, the mission ends)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_GROUP_START=301, /* Define start of a group of mission items. When control reaches this command a GROUP_START message is emitted.
           The end of a group is marked using MAV_CMD_GROUP_END with the same group id.
