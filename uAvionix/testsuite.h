@@ -1,6 +1,6 @@
 /** @file
  *    @brief MAVLink comm protocol testsuite generated from uAvionix.xml
- *    @see http://qgroundcontrol.org/mavlink/
+ *    @see https://mavlink.io/en/
  */
 #pragma once
 #ifndef UAVIONIX_TESTSUITE_H

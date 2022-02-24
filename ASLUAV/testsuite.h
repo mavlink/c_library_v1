@@ -1,6 +1,6 @@
 /** @file
  *    @brief MAVLink comm protocol testsuite generated from ASLUAV.xml
- *    @see http://qgroundcontrol.org/mavlink/
+ *    @see https://mavlink.io/en/
  */
 #pragma once
 #ifndef ASLUAV_TESTSUITE_H
@@ -91,6 +91,11 @@ static void mavlink_test_command_int_stamped(uint8_t system_id, uint8_t componen
     mavlink_msg_command_int_stamped_send(MAVLINK_COMM_1 , packet1.utc_time , packet1.vehicle_timestamp , packet1.target_system , packet1.target_component , packet1.frame , packet1.command , packet1.current , packet1.autocontinue , packet1.param1 , packet1.param2 , packet1.param3 , packet1.param4 , packet1.x , packet1.y , packet1.z );
     mavlink_msg_command_int_stamped_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("COMMAND_INT_STAMPED") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_COMMAND_INT_STAMPED) != NULL);
+#endif
 }
 
 static void mavlink_test_command_long_stamped(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
@@ -157,6 +162,11 @@ static void mavlink_test_command_long_stamped(uint8_t system_id, uint8_t compone
     mavlink_msg_command_long_stamped_send(MAVLINK_COMM_1 , packet1.utc_time , packet1.vehicle_timestamp , packet1.target_system , packet1.target_component , packet1.command , packet1.confirmation , packet1.param1 , packet1.param2 , packet1.param3 , packet1.param4 , packet1.param5 , packet1.param6 , packet1.param7 );
     mavlink_msg_command_long_stamped_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("COMMAND_LONG_STAMPED") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_COMMAND_LONG_STAMPED) != NULL);
+#endif
 }
 
 static void mavlink_test_ASLUAV(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)

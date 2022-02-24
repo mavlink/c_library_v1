@@ -1,6 +1,6 @@
 /** @file
  *    @brief MAVLink comm protocol testsuite generated from icarous.xml
- *    @see http://qgroundcontrol.org/mavlink/
+ *    @see https://mavlink.io/en/
  */
 #pragma once
 #ifndef ICAROUS_TESTSUITE_H

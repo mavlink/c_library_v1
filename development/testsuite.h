@@ -1,6 +1,6 @@
 /** @file
  *    @brief MAVLink comm protocol testsuite generated from development.xml
- *    @see http://qgroundcontrol.org/mavlink/
+ *    @see https://mavlink.io/en/
  */
 #pragma once
 #ifndef DEVELOPMENT_TESTSUITE_H
@@ -82,6 +82,11 @@ static void mavlink_test_param_ack_transaction(uint8_t system_id, uint8_t compon
     mavlink_msg_param_ack_transaction_send(MAVLINK_COMM_1 , packet1.target_system , packet1.target_component , packet1.param_id , packet1.param_value , packet1.param_type , packet1.param_result );
     mavlink_msg_param_ack_transaction_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("PARAM_ACK_TRANSACTION") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_PARAM_ACK_TRANSACTION) != NULL);
+#endif
 }
 
 static void mavlink_test_mission_changed(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
@@ -140,6 +145,11 @@ static void mavlink_test_mission_changed(uint8_t system_id, uint8_t component_id
     mavlink_msg_mission_changed_send(MAVLINK_COMM_1 , packet1.start_index , packet1.end_index , packet1.origin_sysid , packet1.origin_compid , packet1.mission_type );
     mavlink_msg_mission_changed_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("MISSION_CHANGED") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_MISSION_CHANGED) != NULL);
+#endif
 }
 
 static void mavlink_test_mission_checksum(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
@@ -195,6 +205,11 @@ static void mavlink_test_mission_checksum(uint8_t system_id, uint8_t component_i
     mavlink_msg_mission_checksum_send(MAVLINK_COMM_1 , packet1.mission_type , packet1.checksum );
     mavlink_msg_mission_checksum_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("MISSION_CHECKSUM") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_MISSION_CHECKSUM) != NULL);
+#endif
 }
 
 static void mavlink_test_development(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
