@@ -1,12 +1,12 @@
 /** @file
- *  @brief MAVLink comm protocol built from auterion.xml
+ *  @brief MAVLink comm protocol built from matrixpilot.xml
  *  @see http://mavlink.org
  */
 #pragma once
 #ifndef MAVLINK_H
 #define MAVLINK_H
 
-#define MAVLINK_PRIMARY_XML_HASH -5979934500962163669
+#define MAVLINK_PRIMARY_XML_HASH -1687439172309883304
 
 #ifndef MAVLINK_STX
 #define MAVLINK_STX 254
@@ -29,6 +29,6 @@
 #endif
 
 #include "version.h"
-#include "auterion.h"
+#include "matrixpilot.h"
 
 #endif // MAVLINK_H

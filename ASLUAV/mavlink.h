@@ -1,12 +1,12 @@
 /** @file
- *  @brief MAVLink comm protocol built from ras_a.xml
+ *  @brief MAVLink comm protocol built from ASLUAV.xml
  *  @see http://mavlink.org
  */
 #pragma once
 #ifndef MAVLINK_H
 #define MAVLINK_H
 
-#define MAVLINK_PRIMARY_XML_HASH 1202543651008924787
+#define MAVLINK_PRIMARY_XML_HASH 3906774350665062693
 
 #ifndef MAVLINK_STX
 #define MAVLINK_STX 254
@@ -29,6 +29,6 @@
 #endif
 
 #include "version.h"
-#include "ras_a.h"
+#include "ASLUAV.h"
 
 #endif // MAVLINK_H
