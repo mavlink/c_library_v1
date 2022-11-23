@@ -18,8 +18,8 @@ typedef struct __mavlink_sim_state_t {
  float xgyro; /*< [rad/s] Angular speed around X axis*/
  float ygyro; /*< [rad/s] Angular speed around Y axis*/
  float zgyro; /*< [rad/s] Angular speed around Z axis*/
- float lat; /*< [deg] Latitude*/
- float lon; /*< [deg] Longitude*/
+ float lat; /*< [deg] Latitude (lower precision). Both this and the lat_int field should be set.*/
+ float lon; /*< [deg] Longitude (lower precision). Both this and the lon_int field should be set.*/
  float alt; /*< [m] Altitude*/
  float std_dev_horz; /*<  Horizontal position standard deviation*/
  float std_dev_vert; /*<  Vertical position standard deviation*/
@@ -114,8 +114,8 @@ typedef struct __mavlink_sim_state_t {
  * @param xgyro [rad/s] Angular speed around X axis
  * @param ygyro [rad/s] Angular speed around Y axis
  * @param zgyro [rad/s] Angular speed around Z axis
- * @param lat [deg] Latitude
- * @param lon [deg] Longitude
+ * @param lat [deg] Latitude (lower precision). Both this and the lat_int field should be set.
+ * @param lon [deg] Longitude (lower precision). Both this and the lon_int field should be set.
  * @param alt [m] Altitude
  * @param std_dev_horz  Horizontal position standard deviation
  * @param std_dev_vert  Vertical position standard deviation
@@ -202,8 +202,8 @@ static inline uint16_t mavlink_msg_sim_state_pack(uint8_t system_id, uint8_t com
  * @param xgyro [rad/s] Angular speed around X axis
  * @param ygyro [rad/s] Angular speed around Y axis
  * @param zgyro [rad/s] Angular speed around Z axis
- * @param lat [deg] Latitude
- * @param lon [deg] Longitude
+ * @param lat [deg] Latitude (lower precision). Both this and the lat_int field should be set.
+ * @param lon [deg] Longitude (lower precision). Both this and the lon_int field should be set.
  * @param alt [m] Altitude
  * @param std_dev_horz  Horizontal position standard deviation
  * @param std_dev_vert  Vertical position standard deviation
@@ -316,8 +316,8 @@ static inline uint16_t mavlink_msg_sim_state_encode_chan(uint8_t system_id, uint
  * @param xgyro [rad/s] Angular speed around X axis
  * @param ygyro [rad/s] Angular speed around Y axis
  * @param zgyro [rad/s] Angular speed around Z axis
- * @param lat [deg] Latitude
- * @param lon [deg] Longitude
+ * @param lat [deg] Latitude (lower precision). Both this and the lat_int field should be set.
+ * @param lon [deg] Longitude (lower precision). Both this and the lon_int field should be set.
  * @param alt [m] Altitude
  * @param std_dev_horz  Horizontal position standard deviation
  * @param std_dev_vert  Vertical position standard deviation
@@ -598,7 +598,7 @@ static inline float mavlink_msg_sim_state_get_zgyro(const mavlink_message_t* msg
 /**
  * @brief Get field lat from sim_state message
  *
- * @return [deg] Latitude
+ * @return [deg] Latitude (lower precision). Both this and the lat_int field should be set.
  */
 static inline float mavlink_msg_sim_state_get_lat(const mavlink_message_t* msg)
 {
@@ -608,7 +608,7 @@ static inline float mavlink_msg_sim_state_get_lat(const mavlink_message_t* msg)
 /**
  * @brief Get field lon from sim_state message
  *
- * @return [deg] Longitude
+ * @return [deg] Longitude (lower precision). Both this and the lon_int field should be set.
  */
 static inline float mavlink_msg_sim_state_get_lon(const mavlink_message_t* msg)
 {
