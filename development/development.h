@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 554806679634195427
+#define MAVLINK_DEVELOPMENT_XML_HASH -2420146613484195272
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,18 +48,15 @@ typedef enum WIFI_NETWORK_SECURITY
 } WIFI_NETWORK_SECURITY;
 #endif
 
-/** @brief Types of airspeed sensor/data. May be be used in AIRSPEED message to estimate accuracy of indicated speed. */
-#ifndef HAVE_ENUM_AIRSPEED_SENSOR_TYPE
-#define HAVE_ENUM_AIRSPEED_SENSOR_TYPE
-typedef enum AIRSPEED_SENSOR_TYPE
+/** @brief Airspeed sensor flags */
+#ifndef HAVE_ENUM_AIRSPEED_SENSOR_FLAGS
+#define HAVE_ENUM_AIRSPEED_SENSOR_FLAGS
+typedef enum AIRSPEED_SENSOR_FLAGS
 {
-   AIRSPEED_SENSOR_TYPE_UNKNOWN=0, /* Airspeed sensor type unknown/not supplied. | */
-   AIRSPEED_SENSOR_TYPE_DIFFERENTIAL=1, /* Differential airspeed sensor | */
-   AIRSPEED_SENSOR_TYPE_MASS_FLOW=2, /* Mass-flow airspeed sensor. | */
-   AIRSPEED_SENSOR_TYPE_WINDVANE=3, /* Windvane airspeed sensor. | */
-   AIRSPEED_SENSOR_TYPE_SYNTHETIC=4, /* Synthetic/calculated airspeed. | */
-   AIRSPEED_SENSOR_TYPE_ENUM_END=5, /*  | */
-} AIRSPEED_SENSOR_TYPE;
+   AIRSPEED_SENSOR_UNHEALTHY=0, /* Airspeed sensor is unhealthy | */
+   AIRSPEED_SENSOR_USING=1, /* True if the data from this sensor is being actively used by the flight controller for guidance, navigation or control. | */
+   AIRSPEED_SENSOR_FLAGS_ENUM_END=2, /*  | */
+} AIRSPEED_SENSOR_FLAGS;
 #endif
 
 /** @brief Possible transport layers to set and get parameters via mavlink during a parameter transaction. */
