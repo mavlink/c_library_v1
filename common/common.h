@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_COMMON.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_COMMON_XML_HASH 1190590725930844251
+#define MAVLINK_COMMON_XML_HASH 5621565076135611740
 
 #ifdef __cplusplus
 extern "C" {
@@ -2031,12 +2031,12 @@ typedef enum AIS_TYPE
    AIS_TYPE_PASSENGER=60, /*  | */
    AIS_TYPE_PASSENGER_HAZARDOUS_A=61, /*  | */
    AIS_TYPE_PASSENGER_HAZARDOUS_B=62, /*  | */
-   AIS_TYPE_AIS_TYPE_PASSENGER_HAZARDOUS_C=63, /*  | */
+   AIS_TYPE_PASSENGER_HAZARDOUS_C=63, /*  | */
    AIS_TYPE_PASSENGER_HAZARDOUS_D=64, /*  | */
    AIS_TYPE_PASSENGER_RESERVED_1=65, /*  | */
    AIS_TYPE_PASSENGER_RESERVED_2=66, /*  | */
    AIS_TYPE_PASSENGER_RESERVED_3=67, /*  | */
-   AIS_TYPE_AIS_TYPE_PASSENGER_RESERVED_4=68, /*  | */
+   AIS_TYPE_PASSENGER_RESERVED_4=68, /*  | */
    AIS_TYPE_PASSENGER_UNKNOWN=69, /*  | */
    AIS_TYPE_CARGO=70, /*  | */
    AIS_TYPE_CARGO_HAZARDOUS_A=71, /*  | */
