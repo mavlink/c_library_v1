@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH -6969777103980426190
+#define MAVLINK_DEVELOPMENT_XML_HASH 4977173657297105841
 
 #ifdef __cplusplus
 extern "C" {
@@ -480,6 +480,33 @@ typedef enum MAV_BATTERY_STATUS_FLAGS
    MAV_BATTERY_STATUS_FLAGS_EXTENDED=4294967295, /* Reserved (not used). If set, this will indicate that an additional status field exists for higher status values. | */
    MAV_BATTERY_STATUS_FLAGS_ENUM_END=4294967296, /*  | */
 } MAV_BATTERY_STATUS_FLAGS;
+#endif
+
+/** @brief These flags indicate the sensor reporting capabilities for TARGET_ABSOLUTE. */
+#ifndef HAVE_ENUM_TARGET_ABSOLUTE_SENSOR_CAPABILITY_FLAGS
+#define HAVE_ENUM_TARGET_ABSOLUTE_SENSOR_CAPABILITY_FLAGS
+typedef enum TARGET_ABSOLUTE_SENSOR_CAPABILITY_FLAGS
+{
+   TARGET_ABSOLUTE_SENSOR_CAPABILITY_POSITION=1, /*  | */
+   TARGET_ABSOLUTE_SENSOR_CAPABILITY_VELOCITY=2, /*  | */
+   TARGET_ABSOLUTE_SENSOR_CAPABILITY_ACCELERATION=4, /*  | */
+   TARGET_ABSOLUTE_SENSOR_CAPABILITY_ATTITUDE=8, /*  | */
+   TARGET_ABSOLUTE_SENSOR_CAPABILITY_RATES=16, /*  | */
+   TARGET_ABSOLUTE_SENSOR_CAPABILITY_FLAGS_ENUM_END=17, /*  | */
+} TARGET_ABSOLUTE_SENSOR_CAPABILITY_FLAGS;
+#endif
+
+/** @brief The frame of a target observation from an onboard sensor. */
+#ifndef HAVE_ENUM_TARGET_OBS_FRAME
+#define HAVE_ENUM_TARGET_OBS_FRAME
+typedef enum TARGET_OBS_FRAME
+{
+   TARGET_OBS_FRAME_LOCAL_NED=0, /* NED local tangent frame (x: North, y: East, z: Down) with origin fixed relative to earth. | */
+   TARGET_OBS_FRAME_BODY_FRD=1, /* FRD local frame aligned to the vehicle's attitude (x: Forward, y: Right, z: Down) with an origin that travels with vehicle. | */
+   TARGET_OBS_FRAME_LOCAL_OFFSET_NED=2, /* NED local tangent frame (x: North, y: East, z: Down) with an origin that travels with vehicle. | */
+   TARGET_OBS_FRAME_OTHER=3, /* Other sensor frame for target observations neither in local NED nor in body FRD. | */
+   TARGET_OBS_FRAME_ENUM_END=4, /*  | */
+} TARGET_OBS_FRAME;
 #endif
 
 // MAVLINK VERSION
