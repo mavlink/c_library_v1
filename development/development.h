@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 7595236002381023918
+#define MAVLINK_DEVELOPMENT_XML_HASH -4837026002856792465
 
 #ifdef __cplusplus
 extern "C" {
@@ -151,6 +151,23 @@ typedef enum MAV_STANDARD_MODE
          | */
    MAV_STANDARD_MODE_ENUM_END=10, /*  | */
 } MAV_STANDARD_MODE;
+#endif
+
+/** @brief Mode properties.
+       */
+#ifndef HAVE_ENUM_MAV_MODE_PROPERTY
+#define HAVE_ENUM_MAV_MODE_PROPERTY
+typedef enum MAV_MODE_PROPERTY
+{
+   MAV_MODE_PROPERTY_ADVANCED=1, /* If set, this mode is an advanced mode.
+          For example a rate-controlled manual mode might be advanced, whereas a position-controlled manual mode is not.
+          A GCS can optionally use this flag to configure the UI for its intended users.
+         | */
+   MAV_MODE_PROPERTY_NOT_USER_SELECTABLE=2, /* If set, this mode should not be added to the list of selectable modes.
+          The mode might still be selected by the FC directly (for example as part of a failsafe).
+         | */
+   MAV_MODE_PROPERTY_ENUM_END=3, /*  | */
+} MAV_MODE_PROPERTY;
 #endif
 
 /** @brief Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. NaN and INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current yaw or latitude rather than a specific value). See https://mavlink.io/en/guide/xml_schema.html#MAV_CMD for information about the structure of the MAV_CMD entries */
