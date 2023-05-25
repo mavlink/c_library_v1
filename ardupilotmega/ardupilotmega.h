@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_ARDUPILOTMEGA.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_ARDUPILOTMEGA_XML_HASH 7539083963092569175
+#define MAVLINK_ARDUPILOTMEGA_XML_HASH -730931159335377361
 
 #ifdef __cplusplus
 extern "C" {
@@ -1066,6 +1066,7 @@ typedef enum OSD_PARAM_CONFIG_ERROR
 #include "../uAvionix/uAvionix.h"
 #include "../icarous/icarous.h"
 #include "../cubepilot/cubepilot.h"
+#include "../csAirLink/csAirLink.h"
 
 
 #if MAVLINK_ARDUPILOTMEGA_XML_HASH == MAVLINK_PRIMARY_XML_HASH
