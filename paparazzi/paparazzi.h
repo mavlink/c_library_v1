@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_PAPARAZZI.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_PAPARAZZI_XML_HASH -2726169179699732839
+#define MAVLINK_PAPARAZZI_XML_HASH -2113087237217461000
 
 #ifdef __cplusplus
 extern "C" {
