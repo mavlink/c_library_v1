@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_STORM32.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_STORM32_XML_HASH 3775823245607920632
+#define MAVLINK_STORM32_XML_HASH 309700490126042272
 
 #ifdef __cplusplus
 extern "C" {
@@ -445,27 +445,6 @@ typedef enum MAV_CMD
    MAV_CMD_QSHOT_DO_CONFIGURE=60020, /* Command to set the shot manager mode. |Set shot mode.| Set shot state or command. The allowed values are specific to the selected shot mode.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_ENUM_END=60021, /*  | */
 } MAV_CMD;
-#endif
-
-/** @brief RADIO_RC_CHANNELS flags (bitmask). */
-#ifndef HAVE_ENUM_RADIO_RC_CHANNELS_FLAGS
-#define HAVE_ENUM_RADIO_RC_CHANNELS_FLAGS
-typedef enum RADIO_RC_CHANNELS_FLAGS
-{
-   RADIO_RC_CHANNELS_FLAGS_FAILSAFE=1, /* Failsafe is active. | */
-   RADIO_RC_CHANNELS_FLAGS_FRAME_MISSED=2, /* Indicates that the current frame has not been received. Channel values are frozen. | */
-   RADIO_RC_CHANNELS_FLAGS_ENUM_END=3, /*  | */
-} RADIO_RC_CHANNELS_FLAGS;
-#endif
-
-/** @brief RADIO_LINK_STATS flags (bitmask). */
-#ifndef HAVE_ENUM_RADIO_LINK_STATS_FLAGS
-#define HAVE_ENUM_RADIO_LINK_STATS_FLAGS
-typedef enum RADIO_LINK_STATS_FLAGS
-{
-   RADIO_LINK_STATS_FLAGS_RSSI_DBM=1, /* Rssi are in negative dBm. Values 0..254 corresponds to 0..-254 dBm. | */
-   RADIO_LINK_STATS_FLAGS_ENUM_END=2, /*  | */
-} RADIO_LINK_STATS_FLAGS;
 #endif
 
 // MAVLINK VERSION

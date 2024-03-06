@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 4462185571833326522
+#define MAVLINK_DEVELOPMENT_XML_HASH -4618281476528471211
 
 #ifdef __cplusplus
 extern "C" {
@@ -558,6 +558,17 @@ typedef enum TARGET_OBS_FRAME
    TARGET_OBS_FRAME_OTHER=3, /* Other sensor frame for target observations neither in local NED nor in body FRD. | */
    TARGET_OBS_FRAME_ENUM_END=4, /*  | */
 } TARGET_OBS_FRAME;
+#endif
+
+/** @brief RADIO_RC_CHANNELS flags (bitmask). */
+#ifndef HAVE_ENUM_RADIO_RC_CHANNELS_FLAGS
+#define HAVE_ENUM_RADIO_RC_CHANNELS_FLAGS
+typedef enum RADIO_RC_CHANNELS_FLAGS
+{
+   RADIO_RC_CHANNELS_FLAGS_FAILSAFE=1, /* Failsafe is active. The content of the RC channels data in the RADIO_RC_CHANNELS message is implementation dependent. | */
+   RADIO_RC_CHANNELS_FLAGS_OUTDATED=2, /* Channel data may be out of date. This is set when the receiver is unable to validate incoming data from the transmitter and has therefore resent the last valid data it received. | */
+   RADIO_RC_CHANNELS_FLAGS_ENUM_END=3, /*  | */
+} RADIO_RC_CHANNELS_FLAGS;
 #endif
 
 // MAVLINK VERSION
