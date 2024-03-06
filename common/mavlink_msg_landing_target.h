@@ -106,6 +106,60 @@ static inline uint16_t mavlink_msg_landing_target_pack(uint8_t system_id, uint8_
 }
 
 /**
+ * @brief Pack a landing_target message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param time_usec [us] Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude of the number.
+ * @param target_num  The ID of the target if multiple targets are present
+ * @param frame  Coordinate frame used for following fields.
+ * @param angle_x [rad] X-axis angular offset of the target from the center of the image
+ * @param angle_y [rad] Y-axis angular offset of the target from the center of the image
+ * @param distance [m] Distance to the target from the vehicle
+ * @param size_x [rad] Size of target along x-axis
+ * @param size_y [rad] Size of target along y-axis
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_landing_target_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint64_t time_usec, uint8_t target_num, uint8_t frame, float angle_x, float angle_y, float distance, float size_x, float size_y)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_LANDING_TARGET_LEN];
+    _mav_put_uint64_t(buf, 0, time_usec);
+    _mav_put_float(buf, 8, angle_x);
+    _mav_put_float(buf, 12, angle_y);
+    _mav_put_float(buf, 16, distance);
+    _mav_put_float(buf, 20, size_x);
+    _mav_put_float(buf, 24, size_y);
+    _mav_put_uint8_t(buf, 28, target_num);
+    _mav_put_uint8_t(buf, 29, frame);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_LANDING_TARGET_LEN);
+#else
+    mavlink_landing_target_t packet;
+    packet.time_usec = time_usec;
+    packet.angle_x = angle_x;
+    packet.angle_y = angle_y;
+    packet.distance = distance;
+    packet.size_x = size_x;
+    packet.size_y = size_y;
+    packet.target_num = target_num;
+    packet.frame = frame;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_LANDING_TARGET_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_LANDING_TARGET;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LANDING_TARGET_MIN_LEN, MAVLINK_MSG_ID_LANDING_TARGET_LEN, MAVLINK_MSG_ID_LANDING_TARGET_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LANDING_TARGET_MIN_LEN, MAVLINK_MSG_ID_LANDING_TARGET_LEN);
+#endif
+}
+
+/**
  * @brief Pack a landing_target message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -180,6 +234,20 @@ static inline uint16_t mavlink_msg_landing_target_encode(uint8_t system_id, uint
 static inline uint16_t mavlink_msg_landing_target_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_landing_target_t* landing_target)
 {
     return mavlink_msg_landing_target_pack_chan(system_id, component_id, chan, msg, landing_target->time_usec, landing_target->target_num, landing_target->frame, landing_target->angle_x, landing_target->angle_y, landing_target->distance, landing_target->size_x, landing_target->size_y);
+}
+
+/**
+ * @brief Encode a landing_target struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param landing_target C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_landing_target_encode_status(uint8_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_landing_target_t* landing_target)
+{
+    return mavlink_msg_landing_target_pack_status(system_id, component_id, _status, msg,  landing_target->time_usec, landing_target->target_num, landing_target->frame, landing_target->angle_x, landing_target->angle_y, landing_target->distance, landing_target->size_x, landing_target->size_y);
 }
 
 /**

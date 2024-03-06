@@ -82,6 +82,48 @@ static inline uint16_t mavlink_msg_scaled_pressure_pack(uint8_t system_id, uint8
 }
 
 /**
+ * @brief Pack a scaled_pressure message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param time_boot_ms [ms] Timestamp (time since system boot).
+ * @param press_abs [hPa] Absolute pressure
+ * @param press_diff [hPa] Differential pressure 1
+ * @param temperature [cdegC] Absolute pressure temperature
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_scaled_pressure_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint32_t time_boot_ms, float press_abs, float press_diff, int16_t temperature)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_SCALED_PRESSURE_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, press_abs);
+    _mav_put_float(buf, 8, press_diff);
+    _mav_put_int16_t(buf, 12, temperature);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_SCALED_PRESSURE_LEN);
+#else
+    mavlink_scaled_pressure_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.press_abs = press_abs;
+    packet.press_diff = press_diff;
+    packet.temperature = temperature;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_SCALED_PRESSURE_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_SCALED_PRESSURE;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCALED_PRESSURE_MIN_LEN, MAVLINK_MSG_ID_SCALED_PRESSURE_LEN, MAVLINK_MSG_ID_SCALED_PRESSURE_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCALED_PRESSURE_MIN_LEN, MAVLINK_MSG_ID_SCALED_PRESSURE_LEN);
+#endif
+}
+
+/**
  * @brief Pack a scaled_pressure message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -144,6 +186,20 @@ static inline uint16_t mavlink_msg_scaled_pressure_encode(uint8_t system_id, uin
 static inline uint16_t mavlink_msg_scaled_pressure_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_scaled_pressure_t* scaled_pressure)
 {
     return mavlink_msg_scaled_pressure_pack_chan(system_id, component_id, chan, msg, scaled_pressure->time_boot_ms, scaled_pressure->press_abs, scaled_pressure->press_diff, scaled_pressure->temperature);
+}
+
+/**
+ * @brief Encode a scaled_pressure struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param scaled_pressure C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_scaled_pressure_encode_status(uint8_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_scaled_pressure_t* scaled_pressure)
+{
+    return mavlink_msg_scaled_pressure_pack_status(system_id, component_id, _status, msg,  scaled_pressure->time_boot_ms, scaled_pressure->press_abs, scaled_pressure->press_diff, scaled_pressure->temperature);
 }
 
 /**

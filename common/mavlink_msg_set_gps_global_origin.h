@@ -82,6 +82,48 @@ static inline uint16_t mavlink_msg_set_gps_global_origin_pack(uint8_t system_id,
 }
 
 /**
+ * @brief Pack a set_gps_global_origin message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param target_system  System ID
+ * @param latitude [degE7] Latitude (WGS84)
+ * @param longitude [degE7] Longitude (WGS84)
+ * @param altitude [mm] Altitude (MSL). Positive for up.
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_set_gps_global_origin_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t target_system, int32_t latitude, int32_t longitude, int32_t altitude)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN];
+    _mav_put_int32_t(buf, 0, latitude);
+    _mav_put_int32_t(buf, 4, longitude);
+    _mav_put_int32_t(buf, 8, altitude);
+    _mav_put_uint8_t(buf, 12, target_system);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN);
+#else
+    mavlink_set_gps_global_origin_t packet;
+    packet.latitude = latitude;
+    packet.longitude = longitude;
+    packet.altitude = altitude;
+    packet.target_system = target_system;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_MIN_LEN, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_MIN_LEN, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN);
+#endif
+}
+
+/**
  * @brief Pack a set_gps_global_origin message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -144,6 +186,20 @@ static inline uint16_t mavlink_msg_set_gps_global_origin_encode(uint8_t system_i
 static inline uint16_t mavlink_msg_set_gps_global_origin_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_set_gps_global_origin_t* set_gps_global_origin)
 {
     return mavlink_msg_set_gps_global_origin_pack_chan(system_id, component_id, chan, msg, set_gps_global_origin->target_system, set_gps_global_origin->latitude, set_gps_global_origin->longitude, set_gps_global_origin->altitude);
+}
+
+/**
+ * @brief Encode a set_gps_global_origin struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param set_gps_global_origin C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_set_gps_global_origin_encode_status(uint8_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_set_gps_global_origin_t* set_gps_global_origin)
+{
+    return mavlink_msg_set_gps_global_origin_pack_status(system_id, component_id, _status, msg,  set_gps_global_origin->target_system, set_gps_global_origin->latitude, set_gps_global_origin->longitude, set_gps_global_origin->altitude);
 }
 
 /**
