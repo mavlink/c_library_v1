@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_COMMON.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_COMMON_XML_HASH 3116254131143582563
+#define MAVLINK_COMMON_XML_HASH 2661434556120131310
 
 #ifdef __cplusplus
 extern "C" {
@@ -841,6 +841,7 @@ typedef enum MAV_CMD
           The command should return MAV_RESULT_TEMPORARILY_REJECTED if the system is already armed.
          |Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_ILLUMINATOR_ON_OFF=405, /* Turns illuminators ON/OFF. An illuminator is a light source that is used for lighting up dark areas external to the system: e.g. a torch or searchlight (as opposed to a light source for illuminating the system itself, e.g. an indicator light). |0: Illuminators OFF, 1: Illuminators ON| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+   MAV_CMD_DO_ILLUMINATOR_CONFIGURE=406, /* Configures illuminator settings. An illuminator is a light source that is used for lighting up dark areas external to the system: e.g. a torch or searchlight (as opposed to a light source for illuminating the system itself, e.g. an indicator light). |Mode| 0%: Off, 100%: Max Brightness| Strobe period in seconds where 0 means strobing is not used| Strobe duty cycle where 100% means it is on constantly and 0 means strobing is not used| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_GET_HOME_POSITION=410, /* Request the home position from the vehicle.
 	  The vehicle will ACK the command and then emit the HOME_POSITION message. |Reserved| Reserved| Reserved| Reserved| Reserved| Reserved| Reserved|  */
    MAV_CMD_INJECT_FAILURE=420, /* Inject artificial failure for testing purposes. Note that autopilots should implement an additional protection before accepting this command such as a specific param setting. |The unit which is affected by the failure.| The type how the failure manifests itself.| Instance affected by failure (0 to signal all).| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
@@ -2659,6 +2660,30 @@ typedef enum SAFETY_SWITCH_STATE
    SAFETY_SWITCH_STATE_DANGEROUS=1, /* Safety switch is NOT engaged and motors, propellers and other actuators should be considered active. | */
    SAFETY_SWITCH_STATE_ENUM_END=2, /*  | */
 } SAFETY_SWITCH_STATE;
+#endif
+
+/** @brief Modes of illuminator */
+#ifndef HAVE_ENUM_ILLUMINATOR_MODE
+#define HAVE_ENUM_ILLUMINATOR_MODE
+typedef enum ILLUMINATOR_MODE
+{
+   ILLUMINATOR_MODE_UNKNOWN=0, /* Illuminator mode is not specified/unknown | */
+   ILLUMINATOR_MODE_INTERNAL_CONTROL=1, /* Illuminator behavior is controlled by MAV_CMD_DO_ILLUMINATOR_CONFIGURE settings | */
+   ILLUMINATOR_MODE_EXTERNAL_SYNC=2, /* Illuminator behavior is controlled by external factors: e.g. an external hardware signal | */
+   ILLUMINATOR_MODE_ENUM_END=3, /*  | */
+} ILLUMINATOR_MODE;
+#endif
+
+/** @brief Illuminator module error flags (bitmap, 0 means no error) */
+#ifndef HAVE_ENUM_ILLUMINATOR_ERROR_FLAGS
+#define HAVE_ENUM_ILLUMINATOR_ERROR_FLAGS
+typedef enum ILLUMINATOR_ERROR_FLAGS
+{
+   ILLUMINATOR_ERROR_FLAGS_THERMAL_THROTTLING=1, /* Illuminator thermal throttling error. | */
+   ILLUMINATOR_ERROR_FLAGS_OVER_TEMPERATURE_SHUTDOWN=2, /* Illuminator over temperature shutdown error. | */
+   ILLUMINATOR_ERROR_FLAGS_THERMISTOR_FAILURE=3, /* Illuminator thermistor failure. | */
+   ILLUMINATOR_ERROR_FLAGS_ENUM_END=4, /*  | */
+} ILLUMINATOR_ERROR_FLAGS;
 #endif
 
 // MAVLINK VERSION
