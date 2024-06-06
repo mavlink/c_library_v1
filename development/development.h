@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 4795875607251255728
+#define MAVLINK_DEVELOPMENT_XML_HASH 5748757267330890226
 
 #ifdef __cplusplus
 extern "C" {
@@ -586,6 +586,18 @@ typedef enum RADIO_RC_CHANNELS_FLAGS
    RADIO_RC_CHANNELS_FLAGS_OUTDATED=2, /* Channel data may be out of date. This is set when the receiver is unable to validate incoming data from the transmitter and has therefore resent the last valid data it received. | */
    RADIO_RC_CHANNELS_FLAGS_ENUM_END=3, /*  | */
 } RADIO_RC_CHANNELS_FLAGS;
+#endif
+
+/** @brief Fuel types for use in FUEL_TYPE. Fuel types specify the units for the maximum, available and consumed fuel, and for the flow rates. */
+#ifndef HAVE_ENUM_MAV_FUEL_TYPE
+#define HAVE_ENUM_MAV_FUEL_TYPE
+typedef enum MAV_FUEL_TYPE
+{
+   MAV_FUEL_TYPE_UNKNOWN=0, /* Not specified. Fuel levels are normalized (i.e. maximum is 1, and other levels are relative to 1. | */
+   MAV_FUEL_TYPE_LIQUID=1, /* A generic liquid fuel. Fuel levels are in millilitres (ml). Fuel rates are in millilitres/second. | */
+   MAV_FUEL_TYPE_GAS=2, /* A gas tank. Fuel levels are in kilo-Pascal (kPa), and flow rates are in milliliters per second (ml/s). | */
+   MAV_FUEL_TYPE_ENUM_END=3, /*  | */
+} MAV_FUEL_TYPE;
 #endif
 
 // MAVLINK VERSION
