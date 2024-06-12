@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 5748757267330890226
+#define MAVLINK_DEVELOPMENT_XML_HASH -8350813249353446037
 
 #ifdef __cplusplus
 extern "C" {
@@ -598,6 +598,75 @@ typedef enum MAV_FUEL_TYPE
    MAV_FUEL_TYPE_GAS=2, /* A gas tank. Fuel levels are in kilo-Pascal (kPa), and flow rates are in milliliters per second (ml/s). | */
    MAV_FUEL_TYPE_ENUM_END=3, /*  | */
 } MAV_FUEL_TYPE;
+#endif
+
+/** @brief Flags indicating errors in a GPS receiver. */
+#ifndef HAVE_ENUM_GPS_SYSTEM_ERROR_FLAGS
+#define HAVE_ENUM_GPS_SYSTEM_ERROR_FLAGS
+typedef enum GPS_SYSTEM_ERROR_FLAGS
+{
+   GPS_SYSTEM_ERROR_INCOMING_CORRECTIONS=1, /* There are problems with incoming correction streams. | */
+   GPS_SYSTEM_ERROR_CONFIGURATION=2, /* There are problems with the configuration. | */
+   GPS_SYSTEM_ERROR_SOFTWARE=4, /* There are problems with the software on the GPS receiver. | */
+   GPS_SYSTEM_ERROR_ANTENNA=8, /* There are problems with an antenna connected to the GPS receiver. | */
+   GPS_SYSTEM_ERROR_EVENT_CONGESTION=16, /* There are problems handling all incoming events. | */
+   GPS_SYSTEM_ERROR_CPU_OVERLOAD=32, /* The GPS receiver CPU is overloaded. | */
+   GPS_SYSTEM_ERROR_OUTPUT_CONGESTION=64, /* The GPS receiver is experiencing output congestion. | */
+   GPS_SYSTEM_ERROR_FLAGS_ENUM_END=65, /*  | */
+} GPS_SYSTEM_ERROR_FLAGS;
+#endif
+
+/** @brief Signal authentication state in a GPS receiver. */
+#ifndef HAVE_ENUM_GPS_AUTHENTICATION_STATE
+#define HAVE_ENUM_GPS_AUTHENTICATION_STATE
+typedef enum GPS_AUTHENTICATION_STATE
+{
+   GPS_AUTHENTICATION_STATE_UNKNOWN=0, /* The GPS receiver does not provide GPS signal authentication info. | */
+   GPS_AUTHENTICATION_STATE_INITIALIZING=1, /* The GPS receiver is initializing signal authentication. | */
+   GPS_AUTHENTICATION_STATE_ERROR=2, /* The GPS receiver encountered an error while initializing signal authentication. | */
+   GPS_AUTHENTICATION_STATE_OK=3, /* The GPS receiver has correctly authenticated all signals. | */
+   GPS_AUTHENTICATION_STATE_DISABLED=4, /* GPS signal authentication is disabled on the receiver. | */
+   GPS_AUTHENTICATION_STATE_ENUM_END=5, /*  | */
+} GPS_AUTHENTICATION_STATE;
+#endif
+
+/** @brief Signal jamming state in a GPS receiver. */
+#ifndef HAVE_ENUM_GPS_JAMMING_STATE
+#define HAVE_ENUM_GPS_JAMMING_STATE
+typedef enum GPS_JAMMING_STATE
+{
+   GPS_JAMMING_STATE_UNKNOWN=0, /* The GPS receiver does not provide GPS signal jamming info. | */
+   GPS_JAMMING_STATE_OK=1, /* The GPS receiver detected no signal jamming. | */
+   GPS_JAMMING_STATE_MITIGATED=2, /* The GPS receiver detected and mitigated signal jamming. | */
+   GPS_JAMMING_STATE_DETECTED=3, /* The GPS receiver detected signal jamming. | */
+   GPS_JAMMING_STATE_ENUM_END=4, /*  | */
+} GPS_JAMMING_STATE;
+#endif
+
+/** @brief Signal spoofing state in a GPS receiver. */
+#ifndef HAVE_ENUM_GPS_SPOOFING_STATE
+#define HAVE_ENUM_GPS_SPOOFING_STATE
+typedef enum GPS_SPOOFING_STATE
+{
+   GPS_SPOOFING_STATE_UNKNOWN=0, /* The GPS receiver does not provide GPS signal spoofing info. | */
+   GPS_SPOOFING_STATE_OK=1, /* The GPS receiver detected no signal spoofing. | */
+   GPS_SPOOFING_STATE_MITIGATED=2, /* The GPS receiver detected and mitigated signal spoofing. | */
+   GPS_SPOOFING_STATE_DETECTED=3, /* The GPS receiver detected signal spoofing but still has a fix. | */
+   GPS_SPOOFING_STATE_ENUM_END=4, /*  | */
+} GPS_SPOOFING_STATE;
+#endif
+
+/** @brief State of RAIM processing. */
+#ifndef HAVE_ENUM_GPS_RAIM_STATE
+#define HAVE_ENUM_GPS_RAIM_STATE
+typedef enum GPS_RAIM_STATE
+{
+   GPS_RAIM_STATE_UNKNOWN=0, /* RAIM capability is unknown. | */
+   GPS_RAIM_STATE_DISABLED=1, /* RAIM is disabled. | */
+   GPS_RAIM_STATE_OK=2, /* RAIM integrity check was successful. | */
+   GPS_RAIM_STATE_FAILED=3, /* RAIM integrity check failed. | */
+   GPS_RAIM_STATE_ENUM_END=4, /*  | */
+} GPS_RAIM_STATE;
 #endif
 
 // MAVLINK VERSION
