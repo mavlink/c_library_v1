@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_COMMON.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_COMMON_XML_HASH 6006294982407620393
+#define MAVLINK_COMMON_XML_HASH 8878056142684234744
 
 #ifdef __cplusplus
 extern "C" {
@@ -1702,9 +1702,21 @@ typedef enum VIDEO_STREAM_TYPE
    VIDEO_STREAM_TYPE_RTSP=0, /* Stream is RTSP | */
    VIDEO_STREAM_TYPE_RTPUDP=1, /* Stream is RTP UDP (URI gives the port number) | */
    VIDEO_STREAM_TYPE_TCP_MPEG=2, /* Stream is MPEG on TCP | */
-   VIDEO_STREAM_TYPE_MPEG_TS_H264=3, /* Stream is h.264 on MPEG TS (URI gives the port number) | */
+   VIDEO_STREAM_TYPE_MPEG_TS=3, /* Stream is MPEG TS (URI gives the port number) | */
    VIDEO_STREAM_TYPE_ENUM_END=4, /*  | */
 } VIDEO_STREAM_TYPE;
+#endif
+
+/** @brief Video stream encodings */
+#ifndef HAVE_ENUM_VIDEO_STREAM_ENCODING
+#define HAVE_ENUM_VIDEO_STREAM_ENCODING
+typedef enum VIDEO_STREAM_ENCODING
+{
+   VIDEO_STREAM_ENCODING_UNKNOWN=0, /* Stream encoding is unknown | */
+   VIDEO_STREAM_ENCODING_H264=1, /* Stream encoding is H.264 | */
+   VIDEO_STREAM_ENCODING_H265=2, /* Stream encoding is H.265 | */
+   VIDEO_STREAM_ENCODING_ENUM_END=3, /*  | */
+} VIDEO_STREAM_ENCODING;
 #endif
 
 /** @brief Camera tracking status flags */
