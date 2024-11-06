@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH -3823560828088816659
+#define MAVLINK_DEVELOPMENT_XML_HASH -2562031203199929641
 
 #ifdef __cplusplus
 extern "C" {
@@ -549,8 +549,48 @@ typedef enum MAV_CMD
    MAV_CMD_EXTERNAL_WIND_ESTIMATE=43004, /* Set an external estimate of wind direction and speed.
           This might be used to provide an initial wind estimate to the estimator (EKF) in the case where the vehicle is wind dead-reckoning, extending the time when operating without GPS before before position drift builds to an unsafe level. For this use case the command might reasonably be sent every few minutes when operating at altitude, and the value is cleared if the estimator resets itself.
          |Horizontal wind speed.| Estimated 1 sigma accuracy of wind speed. Set to NaN if unknown.| Azimuth (relative to true north) from where the wind is blowing.| Estimated 1 sigma accuracy of wind direction. Set to NaN if unknown.| Empty| Empty| Empty|  */
-   MAV_CMD_ENUM_END=43005, /*  | */
+   MAV_CMD_REQUEST_OPERATOR_CONTROL=43005, /* Request GCS control of a system (or of a specific component in a system).
+
+          A controlled system should only accept MAVLink commands and command-like messages that are sent by its controlling GCS, or from other components with the same system id.
+          Commands from other systems should be rejected with MAV_RESULT_PERMISSION_DENIED (except for this command, which may be acknowledged with MAV_RESULT_ACCEPTED if control is granted).
+          Command-like messages should be ignored (or rejected if that is supported by their associated protocol).
+
+          GCS control of the whole system is managed via a single component that we will refer to here as the "system manager component".
+          This component streams the CONTROL_STATUS message and sets the GCS_CONTROL_STATUS_FLAGS_SYSTEM_MANAGER flag.
+          Other components in the system should monitor for the CONTROL_STATUS message with this flag, and set their controlling GCS to match its published system id.
+          A GCS that wants to control the system should also monitor for the same message and flag, and address the MAV_CMD_REQUEST_OPERATOR_CONTROL to its component id.
+          Note that integrators are required to ensure that there is only one system manager component in the system (i.e. one component emitting the message with GCS_CONTROL_STATUS_FLAGS_SYSTEM_MANAGER set).
+   
+          The MAV_CMD_REQUEST_OPERATOR_CONTROL command is sent by a GCS to the system manager component to request or release control of a system, specifying whether subsequent takeover requests from another GCS are automatically granted, or require permission.
+
+          The system manager component should grant control to the GCS if the system does not require takeover permission (or is uncontrolled) and ACK the request with MAV_RESULT_ACCEPTED.
+          The system manager component should then stream CONTROL_STATUS indicating its controlling system: all other components with the same system id should monitor this message and set their own controlling GCS to match that of the system manager component.
+
+          If the system manager component cannot grant control (because takeover requires permission), the request should be rejected with MAV_RESULT_PERMISSION_DENIED.
+          The system manager component should then send this same command to the current owning GCS in order to notify of the request.
+          The owning GCS would ACK with MAV_RESULT_ACCEPTED, and might choose to release control of the vehicle, or re-request control with the takeover bit set to allow permission. 
+          Note that the pilots of both GCS should co-ordinate safe handover offline.
+          
+          Note that in most systems the only controlled component will be the "system manager component", and that will be the autopilot.
+          However separate GCS control of a particular component is also permitted, if supported by the component.
+          In this case the GCS will address MAV_CMD_REQUEST_OPERATOR_CONTROL to the specific component it wants to control.
+          The component will then stream CONTROL_STATUS for its controlling GCS (it must not set GCS_CONTROL_STATUS_FLAGS_SYSTEM_MANAGER).
+          The component should fall back to the system GCS (if any) when it is not directly controlled, and may stop emitting CONTROL_STATUS.
+          The flow is otherwise the same as for requesting control over the whole system.
+         |System ID of GCS requesting control. 0 when command sent from GCS to autopilot (autopilot determines requesting GCS sysid from message header). Sysid of GCS requesting control when command sent by autopilot to controlling GCS.| 0: Release control, 1: Request control.| Enable automatic granting of ownership on request (by default reject request and notify current owner). 0: Ask current owner and reject request, 1: Allow automatic takeover.| Empty| Empty| Empty| Empty|  */
+   MAV_CMD_ENUM_END=43006, /*  | */
 } MAV_CMD;
+#endif
+
+/** @brief CONTROL_STATUS flags. */
+#ifndef HAVE_ENUM_GCS_CONTROL_STATUS_FLAGS
+#define HAVE_ENUM_GCS_CONTROL_STATUS_FLAGS
+typedef enum GCS_CONTROL_STATUS_FLAGS
+{
+   GCS_CONTROL_STATUS_FLAGS_SYSTEM_MANAGER=1, /* If set, this CONTROL_STATUS publishes the controlling GCS for the whole system. If unset, the CONTROL_STATUS indicates the controlling GCS for just the component emitting the message. Note that to request control of the system a GCS should send MAV_CMD_REQUEST_OPERATOR_CONTROL to the component emitting CONTROL_STATUS with this flag set. | */
+   GCS_CONTROL_STATUS_FLAGS_TAKEOVER_ALLOWED=2, /* Takeover allowed (requests for control will be granted). If not set requests for control will be rejected, but the controlling GCS will be notified (and may release control or allow takeover). | */
+   GCS_CONTROL_STATUS_FLAGS_ENUM_END=3, /*  | */
+} GCS_CONTROL_STATUS_FLAGS;
 #endif
 
 /** @brief These flags indicate the sensor reporting capabilities for TARGET_ABSOLUTE. */
