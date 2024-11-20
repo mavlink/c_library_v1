@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 4358659378346315738
+#define MAVLINK_DEVELOPMENT_XML_HASH -26254410404760892
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,21 +32,6 @@ extern "C" {
 
 // ENUM DEFINITIONS
 
-
-/** @brief WiFi wireless security protocols. */
-#ifndef HAVE_ENUM_WIFI_NETWORK_SECURITY
-#define HAVE_ENUM_WIFI_NETWORK_SECURITY
-typedef enum WIFI_NETWORK_SECURITY
-{
-   WIFI_NETWORK_SECURITY_UNDEFINED=0, /* Undefined or unknown security protocol. | */
-   WIFI_NETWORK_SECURITY_OPEN=1, /* Open network, no security. | */
-   WIFI_NETWORK_SECURITY_WEP=2, /* WEP. | */
-   WIFI_NETWORK_SECURITY_WPA1=3, /* WPA1. | */
-   WIFI_NETWORK_SECURITY_WPA2=4, /* WPA2. | */
-   WIFI_NETWORK_SECURITY_WPA3=5, /* WPA3. | */
-   WIFI_NETWORK_SECURITY_ENUM_END=6, /*  | */
-} WIFI_NETWORK_SECURITY;
-#endif
 
 /** @brief Airspeed sensor flags */
 #ifndef HAVE_ENUM_AIRSPEED_SENSOR_FLAGS
