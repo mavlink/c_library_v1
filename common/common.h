@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_COMMON.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_COMMON_XML_HASH -3871972396571850330
+#define MAVLINK_COMMON_XML_HASH 7288398220810282933
 
 #ifdef __cplusplus
 extern "C" {
@@ -1365,6 +1365,18 @@ typedef enum MAV_BATTERY_FAULT
    BATTERY_FAULT_INCOMPATIBLE_CELLS_CONFIGURATION=256, /* Battery is not compatible due to cell configuration (e.g. 5s1p when vehicle requires 6s). | */
    MAV_BATTERY_FAULT_ENUM_END=257, /*  | */
 } MAV_BATTERY_FAULT;
+#endif
+
+/** @brief Fuel types for use in FUEL_TYPE. Fuel types specify the units for the maximum, available and consumed fuel, and for the flow rates. */
+#ifndef HAVE_ENUM_MAV_FUEL_TYPE
+#define HAVE_ENUM_MAV_FUEL_TYPE
+typedef enum MAV_FUEL_TYPE
+{
+   MAV_FUEL_TYPE_UNKNOWN=0, /* Not specified. Fuel levels are normalized (i.e. maximum is 1, and other levels are relative to 1). | */
+   MAV_FUEL_TYPE_LIQUID=1, /* A generic liquid fuel. Fuel levels are in millilitres (ml). Fuel rates are in millilitres/second. | */
+   MAV_FUEL_TYPE_GAS=2, /* A gas tank. Fuel levels are in kilo-Pascal (kPa), and flow rates are in milliliters per second (ml/s). | */
+   MAV_FUEL_TYPE_ENUM_END=3, /*  | */
+} MAV_FUEL_TYPE;
 #endif
 
 /** @brief Flags to report status/failure cases for a power generator (used in GENERATOR_STATUS). Note that FAULTS are conditions that cause the generator to fail. Warnings are conditions that require attention before the next use (they indicate the system is not operating properly). */
