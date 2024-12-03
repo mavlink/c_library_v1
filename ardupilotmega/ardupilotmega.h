@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_ARDUPILOTMEGA.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_ARDUPILOTMEGA_XML_HASH 6527460461599260657
+#define MAVLINK_ARDUPILOTMEGA_XML_HASH -7264925471184350929
 
 #ifdef __cplusplus
 extern "C" {
@@ -57,7 +57,8 @@ typedef enum HEADING_TYPE
 {
    HEADING_TYPE_COURSE_OVER_GROUND=0, /*  | */
    HEADING_TYPE_HEADING=1, /*  | */
-   HEADING_TYPE_ENUM_END=2, /*  | */
+   HEADING_TYPE_DEFAULT=2, /*  | */
+   HEADING_TYPE_ENUM_END=3, /*  | */
 } HEADING_TYPE;
 #endif
 
@@ -307,6 +308,7 @@ typedef enum MAV_CMD
    MAV_CMD_UAVCAN_GET_NODE_INFO=5200, /* Commands the vehicle to respond with a sequence of messages UAVCAN_NODE_INFO, one message per every UAVCAN node that is online. Note that some of the response messages can be lost, which the receiver can detect easily by checking whether every received UAVCAN_NODE_STATUS has a matching message UAVCAN_NODE_INFO received earlier; if not, this command should be sent again in order to request re-transmission of the node information messages. |Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)|  */
    MAV_CMD_DO_SET_SAFETY_SWITCH_STATE=5300, /* Change state of safety switch. |New safety switch state.| Empty.| Empty.| Empty| Empty.| Empty.| Empty.|  */
    MAV_CMD_DO_ADSB_OUT_IDENT=10001, /* Trigger the start of an ADSB-out IDENT. This should only be used when requested to do so by an Air Traffic Controller in controlled airspace. This starts the IDENT which is then typically held for 18 seconds by the hardware per the Mode A, C, and S transponder spec. |Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)| Reserved (set to 0)|  */
+   MAV_CMD_LOWEHEISER_SET_STATE=10151, /* Set Loweheiser desired states |EFI Index| Desired Engine/EFI State (0: Power Off, 1:Running)| Desired Governor State (0:manual throttle, 1:Governed throttle)| Manual throttle level, 0% - 100%| Electronic Start up (0:Off, 1:On)| Empty| Empty|  */
    MAV_CMD_PAYLOAD_PREPARE_DEPLOY=30001, /* Deploy payload on a Lat / Lon / Alt position. This includes the navigation to reach the required release position and velocity. |Operation mode. 0: prepare single payload deploy (overwriting previous requests), but do not execute it. 1: execute payload deploy immediately (rejecting further deploy commands during execution, but allowing abort). 2: add payload deploy to existing deployment list.| Desired approach vector in compass heading. A negative value indicates the system can define the approach vector at will.| Desired ground speed at release time. This can be overridden by the airframe in case it needs to meet minimum airspeed. A negative value indicates the system can define the ground speed at will.| Minimum altitude clearance to the release position. A negative value indicates the system can define the clearance at will.| Latitude.| Longitude.| Altitude (MSL)|  */
    MAV_CMD_PAYLOAD_CONTROL_DEPLOY=30002, /* Control the payload deployment. |Operation mode. 0: Abort deployment, continue normal mission. 1: switch to payload deployment mode. 100: delete first payload deployment request. 101: delete all payload deployment requests.| Reserved| Reserved| Reserved| Reserved| Reserved| Reserved|  */
    MAV_CMD_WAYPOINT_USER_1=31000, /* User defined waypoint item. Ground Station will show the Vehicle as flying through this item. |User defined| User defined| User defined| User defined| Latitude unscaled| Longitude unscaled| Altitude (MSL)|  */
@@ -349,13 +351,14 @@ typedef enum MAV_CMD
    MAV_CMD_BATTERY_RESET=42651, /* Reset battery capacity for batteries that accumulate consumed battery via integration. |Bitmask of batteries to reset. Least significant bit is for the first battery.| Battery percentage remaining to set.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_DEBUG_TRAP=42700, /* Issue a trap signal to the autopilot process, presumably to enter the debugger. |Magic number - set to 32451 to actually trap.| Empty.| Empty.| Empty.| Empty.| Empty.| Empty.|  */
    MAV_CMD_SCRIPTING=42701, /* Control onboard scripting. |Scripting command to execute| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
-   MAV_CMD_NAV_SCRIPT_TIME=42702, /* Scripting command as NAV command with wait for completion. |integer command number (0 to 255)| timeout for operation in seconds. Zero means no timeout (0 to 255)| argument1.| argument2.| Empty| Empty| Empty|  */
+   MAV_CMD_NAV_SCRIPT_TIME=42702, /* Scripting command as NAV command with wait for completion. |integer command number (0 to 255)| timeout for operation in seconds. Zero means no timeout (0 to 255)| argument1.| argument2.| argument3.| argument4.| Empty|  */
    MAV_CMD_NAV_ATTITUDE_TIME=42703, /* Maintain an attitude for a specified time. |Time to maintain specified attitude and climb rate| Roll angle in degrees (positive is lean right, negative is lean left)| Pitch angle in degrees (positive is lean back, negative is lean forward)| Yaw angle| Climb rate| Empty| Empty|  */
    MAV_CMD_GUIDED_CHANGE_SPEED=43000, /* Change flight speed at a given rate. This slews the vehicle at a controllable rate between it's previous speed and the new one. (affects GUIDED only. Outside GUIDED, aircraft ignores these commands. Designed for onboard companion-computer command-and-control, not normally operator/GCS control.) |Airspeed or groundspeed.| Target Speed| Acceleration rate, 0 to take effect instantly| Empty| Empty| Empty| Empty|  */
    MAV_CMD_GUIDED_CHANGE_ALTITUDE=43001, /* Change target altitude at a given rate. This slews the vehicle at a controllable rate between it's previous altitude and the new one. (affects GUIDED only. Outside GUIDED, aircraft ignores these commands. Designed for onboard companion-computer command-and-control, not normally operator/GCS control.) |Empty| Empty| Rate of change, toward new altitude. 0 for maximum rate change. Positive numbers only, as negative numbers will not converge on the new target alt.| Empty| Empty| Empty| Target Altitude|  */
    MAV_CMD_GUIDED_CHANGE_HEADING=43002, /* Change to target heading at a given rate, overriding previous heading/s. This slews the vehicle at a controllable rate between it's previous heading and the new one. (affects GUIDED only. Exiting GUIDED returns aircraft to normal behaviour defined elsewhere. Designed for onboard companion-computer command-and-control, not normally operator/GCS control.) |course-over-ground or raw vehicle heading.| Target heading.| Maximum centripetal accelearation, ie rate of change,  toward new heading.| Empty| Empty| Empty| Empty|  */
    MAV_CMD_EXTERNAL_POSITION_ESTIMATE=43003, /* Provide an external position estimate for use when dead-reckoning. This is meant to be used for occasional position resets that may be provided by a external system such as a remote pilot using landmarks over a video link. |Timestamp that this message was sent as a time in the transmitters time domain. The sender should wrap this time back to zero based on required timing accuracy for the application and the limitations of a 32 bit float. For example, wrapping at 10 hours would give approximately 1ms accuracy. Recipient must handle time wrap in any timing jitter correction applied to this field. Wrap rollover time should not be at not more than 250 seconds, which would give approximately 10 microsecond accuracy.| The time spent in processing the sensor data that is the basis for this position. The recipient can use this to improve time alignment of the data. Set to zero if not known.| estimated one standard deviation accuracy of the measurement. Set to NaN if not known.| Empty| Latitude| Longitude| Altitude, not used. Should be sent as NaN. May be supported in a future version of this message.|  */
-   MAV_CMD_ENUM_END=43004, /*  | */
+   MAV_CMD_SET_HAGL=43005, /* Provide a value for height above ground level. This can be used for things like fixed wing and VTOL landing. |Height above ground level.| estimated one standard deviation accuracy of the measurement. Set to NaN if not known.| Timeout for this data. The flight controller should only consider this data valid within the timeout window.| Empty| Empty| Empty| Empty|  */
+   MAV_CMD_ENUM_END=43006, /*  | */
 } MAV_CMD;
 #endif
 
@@ -370,6 +373,23 @@ typedef enum SCRIPTING_CMD
    SCRIPTING_CMD_STOP_AND_RESTART=3, /* Stop execution of scripts and restart. | */
    SCRIPTING_CMD_ENUM_END=4, /*  | */
 } SCRIPTING_CMD;
+#endif
+
+/** @brief  */
+#ifndef HAVE_ENUM_SECURE_COMMAND_OP
+#define HAVE_ENUM_SECURE_COMMAND_OP
+typedef enum SECURE_COMMAND_OP
+{
+   SECURE_COMMAND_GET_SESSION_KEY=0, /* Get an 8 byte session key which is used for remote secure updates which operate on flight controller data such as bootloader public keys. Return data will be 8 bytes on success. The session key remains valid until either the flight controller reboots or another SECURE_COMMAND_GET_SESSION_KEY is run. | */
+   SECURE_COMMAND_GET_REMOTEID_SESSION_KEY=1, /* Get an 8 byte session key which is used for remote secure updates which operate on RemoteID module data. Return data will be 8 bytes on success. The session key remains valid until either the remote ID module reboots or another SECURE_COMMAND_GET_REMOTEID_SESSION_KEY is run. | */
+   SECURE_COMMAND_REMOVE_PUBLIC_KEYS=2, /* Remove range of public keys from the bootloader. Command data consists of two bytes, first byte if index of first public key to remove. Second byte is the number of keys to remove. If all keys are removed then secure boot is disabled and insecure firmware can be loaded. | */
+   SECURE_COMMAND_GET_PUBLIC_KEYS=3, /* Get current public keys from the bootloader. Command data consists of two bytes, first byte is index of first public key to fetch, 2nd byte is number of keys to fetch. Total data needs to fit in data portion of reply (max 6 keys for 32 byte keys). Reply data has the index of the first key in the first byte, followed by the keys. Returned keys may be less than the number of keys requested if there are less keys installed than requested. | */
+   SECURE_COMMAND_SET_PUBLIC_KEYS=4, /* Set current public keys in the bootloader. Data consists of a one byte public key index followed by the public keys. With 32 byte keys this allows for up to 6 keys to be set in one request. Keys outside of the range that is being set will remain unchanged. | */
+   SECURE_COMMAND_GET_REMOTEID_CONFIG=5, /* Get config data for remote ID module. This command should be sent to the component ID of the flight controller which will forward it to the RemoteID module either over mavlink or DroneCAN. Data format is specific to the RemoteID implementation, see RemoteID firmware documentation for details. | */
+   SECURE_COMMAND_SET_REMOTEID_CONFIG=6, /* Set config data for remote ID module. This command should be sent to the component ID of the flight controller which will forward it to the RemoteID module either over mavlink or DroneCAN. Data format is specific to the RemoteID implementation, see RemoteID firmware documentation for details. | */
+   SECURE_COMMAND_FLASH_BOOTLOADER=7, /* Flash bootloader from local storage. Data is the filename to use for the bootloader. This is intended to be used with MAVFtp to upload a new bootloader to a microSD before flashing. | */
+   SECURE_COMMAND_OP_ENUM_END=8, /*  | */
+} SECURE_COMMAND_OP;
 #endif
 
 /** @brief  */
@@ -406,7 +426,9 @@ typedef enum RALLY_FLAGS
 {
    FAVORABLE_WIND=1, /* Flag set when requiring favorable winds for landing. | */
    LAND_IMMEDIATELY=2, /* Flag set when plane is to immediately descend to break altitude and land without GCS intervention. Flag not set when plane is to loiter at Rally point until commanded to land. | */
-   RALLY_FLAGS_ENUM_END=3, /*  | */
+   ALT_FRAME_VALID=4, /* True if the following altitude frame value is valid. | */
+   ALT_FRAME=24, /* 2 bit value representing altitude frame. 0: absolute, 1: relative home, 2: relative origin, 3: relative terrain | */
+   RALLY_FLAGS_ENUM_END=25, /*  | */
 } RALLY_FLAGS;
 #endif
 
@@ -815,7 +837,8 @@ typedef enum EKF_STATUS_FLAGS
    EKF_PRED_POS_HORIZ_REL=256, /* Set if EKF's predicted horizontal position (relative) estimate is good. | */
    EKF_PRED_POS_HORIZ_ABS=512, /* Set if EKF's predicted horizontal position (absolute) estimate is good. | */
    EKF_UNINITIALIZED=1024, /* Set if EKF has never been healthy. | */
-   EKF_STATUS_FLAGS_ENUM_END=1025, /*  | */
+   EKF_GPS_GLITCHING=32768, /* Set if EKF believes the GPS input data is faulty. | */
+   EKF_STATUS_FLAGS_ENUM_END=32769, /*  | */
 } EKF_STATUS_FLAGS;
 #endif
 
@@ -1100,6 +1123,7 @@ typedef enum OSD_PARAM_CONFIG_ERROR
 #include "../common/common.h"
 #include "../uAvionix/uAvionix.h"
 #include "../icarous/icarous.h"
+#include "../loweheiser/loweheiser.h"
 #include "../cubepilot/cubepilot.h"
 #include "../csAirLink/csAirLink.h"
 
