@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_STORM32.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_STORM32_XML_HASH 584334816096236978
+#define MAVLINK_STORM32_XML_HASH 2024516430461760657
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,38 +46,6 @@ typedef enum MAV_STORM32_TUNNEL_PAYLOAD_TYPE
    MAV_STORM32_TUNNEL_PAYLOAD_TYPE_STORM32_CH3_OUT=205, /* Registered for STorM32 gimbal controller. For communication with camera. | */
    MAV_STORM32_TUNNEL_PAYLOAD_TYPE_ENUM_END=206, /*  | */
 } MAV_STORM32_TUNNEL_PAYLOAD_TYPE;
-#endif
-
-/** @brief STorM32 gimbal prearm check flags. */
-#ifndef HAVE_ENUM_MAV_STORM32_GIMBAL_PREARM_FLAGS
-#define HAVE_ENUM_MAV_STORM32_GIMBAL_PREARM_FLAGS
-typedef enum MAV_STORM32_GIMBAL_PREARM_FLAGS
-{
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_IS_NORMAL=1, /* STorM32 gimbal is in normal state. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_IMUS_WORKING=2, /* The IMUs are healthy and working normally. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_MOTORS_WORKING=4, /* The motors are active and working normally. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_ENCODERS_WORKING=8, /* The encoders are healthy and working normally. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_VOLTAGE_OK=16, /* A battery voltage is applied and is in range. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_VIRTUALCHANNELS_RECEIVING=32, /* Virtual input channels are receiving data. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_MAVLINK_RECEIVING=64, /* Mavlink messages are being received. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_STORM32LINK_QFIX=128, /* The STorM32Link data indicates QFix. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_STORM32LINK_WORKING=256, /* The STorM32Link is working. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_CAMERA_CONNECTED=512, /* The camera has been found and is connected. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_AUX0_LOW=1024, /* The signal on the AUX0 input pin is low. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_AUX1_LOW=2048, /* The signal on the AUX1 input pin is low. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_NTLOGGER_WORKING=4096, /* The NTLogger is working normally. | */
-   MAV_STORM32_GIMBAL_PREARM_FLAGS_ENUM_END=4097, /*  | */
-} MAV_STORM32_GIMBAL_PREARM_FLAGS;
-#endif
-
-/** @brief STorM32 camera prearm check flags. */
-#ifndef HAVE_ENUM_MAV_STORM32_CAMERA_PREARM_FLAGS
-#define HAVE_ENUM_MAV_STORM32_CAMERA_PREARM_FLAGS
-typedef enum MAV_STORM32_CAMERA_PREARM_FLAGS
-{
-   MAV_STORM32_CAMERA_PREARM_FLAGS_CONNECTED=1, /* The camera has been found and is connected. | */
-   MAV_STORM32_CAMERA_PREARM_FLAGS_ENUM_END=2, /*  | */
-} MAV_STORM32_CAMERA_PREARM_FLAGS;
 #endif
 
 /** @brief Gimbal manager capability flags. */
@@ -476,6 +444,44 @@ typedef enum MAV_CMD
    MAV_CMD_QSHOT_DO_CONFIGURE=60020, /* Command to set the shot manager mode. |Set shot mode.| Set shot state or command. The allowed values are specific to the selected shot mode.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
    MAV_CMD_ENUM_END=60021, /*  | */
 } MAV_CMD;
+#endif
+
+/** @brief RADIO_LINK_STATS flags (bitmask).
+        The RX_RECEIVE and TX_RECEIVE flags indicate from which antenna the received data are taken for processing.
+        If a flag is set then the data received on antenna2 is processed, else the data received on antenna1 is used.
+        The RX_TRANSMIT and TX_TRANSMIT flags specify which antenna are transmitting data.
+        Both antenna 1 and antenna 2 transmit flags can be set simultaneously, e.g., in case of dual-band or dual-frequency systems.
+        If neither flag is set then antenna 1 should be assumed.
+       */
+#ifndef HAVE_ENUM_MLRS_RADIO_LINK_STATS_FLAGS
+#define HAVE_ENUM_MLRS_RADIO_LINK_STATS_FLAGS
+typedef enum MLRS_RADIO_LINK_STATS_FLAGS
+{
+   MLRS_RADIO_LINK_STATS_FLAGS_RSSI_DBM=1, /* Rssi values are in negative dBm. Values 1..254 corresponds to -1..-254 dBm. 0: no reception, UINT8_MAX: unknown. | */
+   MLRS_RADIO_LINK_STATS_FLAGS_RX_RECEIVE_ANTENNA2=2, /* Rx receive antenna. When set the data received on antenna 2 are taken, else the data stems from antenna 1. | */
+   MLRS_RADIO_LINK_STATS_FLAGS_RX_TRANSMIT_ANTENNA1=4, /* Rx transmit antenna. Data are transmitted on antenna 1. | */
+   MLRS_RADIO_LINK_STATS_FLAGS_RX_TRANSMIT_ANTENNA2=8, /* Rx transmit antenna. Data are transmitted on antenna 2. | */
+   MLRS_RADIO_LINK_STATS_FLAGS_TX_RECEIVE_ANTENNA2=16, /* Tx receive antenna. When set the data received on antenna 2 are taken, else the data stems from antenna 1. | */
+   MLRS_RADIO_LINK_STATS_FLAGS_TX_TRANSMIT_ANTENNA1=32, /* Tx transmit antenna. Data are transmitted on antenna 1. | */
+   MLRS_RADIO_LINK_STATS_FLAGS_TX_TRANSMIT_ANTENNA2=64, /* Tx transmit antenna. Data are transmitted on antenna 2. | */
+   MLRS_RADIO_LINK_STATS_FLAGS_ENUM_END=65, /*  | */
+} MLRS_RADIO_LINK_STATS_FLAGS;
+#endif
+
+/** @brief RADIO_LINK_TYPE enum. */
+#ifndef HAVE_ENUM_MLRS_RADIO_LINK_TYPE
+#define HAVE_ENUM_MLRS_RADIO_LINK_TYPE
+typedef enum MLRS_RADIO_LINK_TYPE
+{
+   MLRS_RADIO_LINK_TYPE_GENERIC=0, /* Unknown radio link type. | */
+   MLRS_RADIO_LINK_TYPE_HERELINK=1, /* Radio link is HereLink. | */
+   MLRS_RADIO_LINK_TYPE_DRAGONLINK=2, /* Radio link is Dragon Link. | */
+   MLRS_RADIO_LINK_TYPE_RFD900=3, /* Radio link is RFD900. | */
+   MLRS_RADIO_LINK_TYPE_CROSSFIRE=4, /* Radio link is Crossfire. | */
+   MLRS_RADIO_LINK_TYPE_EXPRESSLRS=5, /* Radio link is ExpressLRS. | */
+   MLRS_RADIO_LINK_TYPE_MLRS=6, /* Radio link is mLRS. | */
+   MLRS_RADIO_LINK_TYPE_ENUM_END=7, /*  | */
+} MLRS_RADIO_LINK_TYPE;
 #endif
 
 // MAVLINK VERSION
