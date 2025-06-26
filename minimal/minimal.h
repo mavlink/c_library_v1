@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_MINIMAL.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_MINIMAL_XML_HASH -7245925926619632775
+#define MAVLINK_MINIMAL_XML_HASH -6279725321152704810
 
 #ifdef __cplusplus
 extern "C" {
@@ -116,7 +116,8 @@ typedef enum MAV_TYPE
    MAV_TYPE_SPACECRAFT_ORBITER=45, /* Orbiter spacecraft. Includes satellites orbiting terrestrial and extra-terrestrial bodies. Follows NASA Spacecraft Classification. | */
    MAV_TYPE_GROUND_QUADRUPED=46, /* A generic four-legged ground vehicle (e.g., a robot dog). | */
    MAV_TYPE_VTOL_GYRODYNE=47, /* VTOL hybrid of helicopter and autogyro. It has a main rotor for lift and separate propellers for forward flight. The rotor must be powered for hover but can autorotate in cruise flight. See: https://en.wikipedia.org/wiki/Gyrodyne | */
-   MAV_TYPE_ENUM_END=48, /*  | */
+   MAV_TYPE_GRIPPER=48, /* Gripper | */
+   MAV_TYPE_ENUM_END=49, /*  | */
 } MAV_TYPE;
 #endif
 
