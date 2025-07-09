@@ -59,7 +59,7 @@ static inline uint16_t mavlink_msg_statustext_pack(uint8_t system_id, uint8_t co
 #else
     mavlink_statustext_t packet;
     packet.severity = severity;
-    mav_array_memcpy(packet.text, text, sizeof(char)*50);
+    mav_array_assign_char(packet.text, text, 50);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_STATUSTEXT_LEN);
 #endif
 
@@ -123,7 +123,7 @@ static inline uint16_t mavlink_msg_statustext_pack_chan(uint8_t system_id, uint8
 #else
     mavlink_statustext_t packet;
     packet.severity = severity;
-    mav_array_memcpy(packet.text, text, sizeof(char)*50);
+    mav_array_assign_char(packet.text, text, 50);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_STATUSTEXT_LEN);
 #endif
 
@@ -191,7 +191,7 @@ static inline void mavlink_msg_statustext_send(mavlink_channel_t chan, uint8_t s
 #else
     mavlink_statustext_t packet;
     packet.severity = severity;
-    mav_array_memcpy(packet.text, text, sizeof(char)*50);
+    mav_array_assign_char(packet.text, text, 50);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_STATUSTEXT, (const char *)&packet, MAVLINK_MSG_ID_STATUSTEXT_MIN_LEN, MAVLINK_MSG_ID_STATUSTEXT_LEN, MAVLINK_MSG_ID_STATUSTEXT_CRC);
 #endif
 }
@@ -212,7 +212,7 @@ static inline void mavlink_msg_statustext_send_struct(mavlink_channel_t chan, co
 
 #if MAVLINK_MSG_ID_STATUSTEXT_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -228,7 +228,7 @@ static inline void mavlink_msg_statustext_send_buf(mavlink_message_t *msgbuf, ma
 #else
     mavlink_statustext_t *packet = (mavlink_statustext_t *)msgbuf;
     packet->severity = severity;
-    mav_array_memcpy(packet->text, text, sizeof(char)*50);
+    mav_array_assign_char(packet->text, text, 50);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_STATUSTEXT, (const char *)packet, MAVLINK_MSG_ID_STATUSTEXT_MIN_LEN, MAVLINK_MSG_ID_STATUSTEXT_LEN, MAVLINK_MSG_ID_STATUSTEXT_CRC);
 #endif
 }
