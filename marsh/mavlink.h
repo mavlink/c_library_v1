@@ -1,12 +1,12 @@
 /** @file
- *  @brief MAVLink comm protocol built from uAvionix.xml
+ *  @brief MAVLink comm protocol built from marsh.xml
  *  @see http://mavlink.org
  */
 #pragma once
 #ifndef MAVLINK_H
 #define MAVLINK_H
 
-#define MAVLINK_PRIMARY_XML_HASH -4756653865288157987
+#define MAVLINK_PRIMARY_XML_HASH -785310112052882603
 
 #ifndef MAVLINK_STX
 #define MAVLINK_STX 254
@@ -29,6 +29,6 @@
 #endif
 
 #include "version.h"
-#include "uAvionix.h"
+#include "marsh.h"
 
 #endif // MAVLINK_H
