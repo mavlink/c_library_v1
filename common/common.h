@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_COMMON.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_COMMON_XML_HASH 2741172697735872041
+#define MAVLINK_COMMON_XML_HASH -2060464713948705121
 
 #ifdef __cplusplus
 extern "C" {
@@ -2797,6 +2797,19 @@ typedef enum HIL_ACTUATOR_CONTROLS_FLAGS
    HIL_ACTUATOR_CONTROLS_FLAGS_LOCKSTEP=1, /* Simulation is using lockstep | */
    HIL_ACTUATOR_CONTROLS_FLAGS_ENUM_END=2, /*  | */
 } HIL_ACTUATOR_CONTROLS_FLAGS;
+#endif
+
+/** @brief Flags used to report computer status. */
+#ifndef HAVE_ENUM_COMPUTER_STATUS_FLAGS
+#define HAVE_ENUM_COMPUTER_STATUS_FLAGS
+typedef enum COMPUTER_STATUS_FLAGS
+{
+   COMPUTER_STATUS_FLAGS_UNDER_VOLTAGE=1, /* Indicates if the system is experiencing voltage outside of acceptable range. | */
+   COMPUTER_STATUS_FLAGS_CPU_THROTTLE=2, /* Indicates if CPU throttling is active. | */
+   COMPUTER_STATUS_FLAGS_THERMAL_THROTTLE=4, /* Indicates if thermal throttling is active. | */
+   COMPUTER_STATUS_FLAGS_DISK_FULL=8, /* Indicates if main disk is full. | */
+   COMPUTER_STATUS_FLAGS_ENUM_END=9, /*  | */
+} COMPUTER_STATUS_FLAGS;
 #endif
 
 // MAVLINK VERSION
