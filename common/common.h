@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_COMMON.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_COMMON_XML_HASH -4765908332631340531
+#define MAVLINK_COMMON_XML_HASH 4748412543164148158
 
 #ifdef __cplusplus
 extern "C" {
@@ -1028,6 +1028,21 @@ typedef enum MAV_PARAM_TYPE
    MAV_PARAM_TYPE_REAL64=10, /* 64-bit floating-point | */
    MAV_PARAM_TYPE_ENUM_END=11, /*  | */
 } MAV_PARAM_TYPE;
+#endif
+
+/** @brief Parameter protocol error types (see PARAM_ERROR). */
+#ifndef HAVE_ENUM_MAV_PARAM_ERROR
+#define HAVE_ENUM_MAV_PARAM_ERROR
+typedef enum MAV_PARAM_ERROR
+{
+   MAV_PARAM_ERROR_NO_ERROR=0, /* No error occurred (not expected in PARAM_ERROR but may be used in future implementations. | */
+   MAV_PARAM_ERROR_DOES_NOT_EXIST=1, /* Parameter does not exist | */
+   MAV_PARAM_ERROR_VALUE_OUT_OF_RANGE=2, /* Parameter value does not fit within accepted range | */
+   MAV_PARAM_ERROR_PERMISSION_DENIED=3, /* Caller is not permitted to set the value of this parameter | */
+   MAV_PARAM_ERROR_COMPONENT_NOT_FOUND=4, /* Unknown component specified | */
+   MAV_PARAM_ERROR_READ_ONLY=5, /* Parameter is read-only | */
+   MAV_PARAM_ERROR_ENUM_END=6, /*  | */
+} MAV_PARAM_ERROR;
 #endif
 
 /** @brief Specifies the datatype of a MAVLink extended parameter. */
