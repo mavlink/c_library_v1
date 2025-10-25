@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_COMMON.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_COMMON_XML_HASH -4490606719981547545
+#define MAVLINK_COMMON_XML_HASH 7712455141222878139
 
 #ifdef __cplusplus
 extern "C" {
@@ -2829,6 +2829,17 @@ typedef enum COMPUTER_STATUS_FLAGS
    COMPUTER_STATUS_FLAGS_DISK_FULL=8, /* Indicates if main disk is full. | */
    COMPUTER_STATUS_FLAGS_ENUM_END=9, /*  | */
 } COMPUTER_STATUS_FLAGS;
+#endif
+
+/** @brief Airspeed sensor flags */
+#ifndef HAVE_ENUM_AIRSPEED_SENSOR_FLAGS
+#define HAVE_ENUM_AIRSPEED_SENSOR_FLAGS
+typedef enum AIRSPEED_SENSOR_FLAGS
+{
+   AIRSPEED_SENSOR_UNHEALTHY=1, /* Airspeed sensor is unhealthy | */
+   AIRSPEED_SENSOR_USING=2, /* True if the data from this sensor is being actively used by the flight controller for guidance, navigation or control. | */
+   AIRSPEED_SENSOR_FLAGS_ENUM_END=3, /*  | */
+} AIRSPEED_SENSOR_FLAGS;
 #endif
 
 // MAVLINK VERSION
