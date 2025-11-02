@@ -115,7 +115,7 @@ static inline uint16_t mavlink_msg_home_position_pack(uint8_t system_id, uint8_t
     packet.approach_x = approach_x;
     packet.approach_y = approach_y;
     packet.approach_z = approach_z;
-    mav_array_assign_float(packet.q, q, 4);
+    mav_array_memcpy(packet.q, q, sizeof(float)*4);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_HOME_POSITION_LEN);
 #endif
 
@@ -235,7 +235,7 @@ static inline uint16_t mavlink_msg_home_position_pack_chan(uint8_t system_id, ui
     packet.approach_x = approach_x;
     packet.approach_y = approach_y;
     packet.approach_z = approach_z;
-    mav_array_assign_float(packet.q, q, 4);
+    mav_array_memcpy(packet.q, q, sizeof(float)*4);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_HOME_POSITION_LEN);
 #endif
 
@@ -331,7 +331,7 @@ static inline void mavlink_msg_home_position_send(mavlink_channel_t chan, int32_
     packet.approach_x = approach_x;
     packet.approach_y = approach_y;
     packet.approach_z = approach_z;
-    mav_array_assign_float(packet.q, q, 4);
+    mav_array_memcpy(packet.q, q, sizeof(float)*4);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_HOME_POSITION, (const char *)&packet, MAVLINK_MSG_ID_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_HOME_POSITION_LEN, MAVLINK_MSG_ID_HOME_POSITION_CRC);
 #endif
 }
@@ -384,7 +384,7 @@ static inline void mavlink_msg_home_position_send_buf(mavlink_message_t *msgbuf,
     packet->approach_x = approach_x;
     packet->approach_y = approach_y;
     packet->approach_z = approach_z;
-    mav_array_assign_float(packet->q, q, 4);
+    mav_array_memcpy(packet->q, q, sizeof(float)*4);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_HOME_POSITION, (const char *)packet, MAVLINK_MSG_ID_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_HOME_POSITION_LEN, MAVLINK_MSG_ID_HOME_POSITION_CRC);
 #endif
 }

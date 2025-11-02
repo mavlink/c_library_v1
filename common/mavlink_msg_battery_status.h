@@ -101,7 +101,7 @@ static inline uint16_t mavlink_msg_battery_status_pack(uint8_t system_id, uint8_
     packet.battery_function = battery_function;
     packet.type = type;
     packet.battery_remaining = battery_remaining;
-    mav_array_assign_uint16_t(packet.voltages, voltages, 10);
+    mav_array_memcpy(packet.voltages, voltages, sizeof(uint16_t)*10);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_BATTERY_STATUS_LEN);
 #endif
 
@@ -207,7 +207,7 @@ static inline uint16_t mavlink_msg_battery_status_pack_chan(uint8_t system_id, u
     packet.battery_function = battery_function;
     packet.type = type;
     packet.battery_remaining = battery_remaining;
-    mav_array_assign_uint16_t(packet.voltages, voltages, 10);
+    mav_array_memcpy(packet.voltages, voltages, sizeof(uint16_t)*10);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_BATTERY_STATUS_LEN);
 #endif
 
@@ -296,7 +296,7 @@ static inline void mavlink_msg_battery_status_send(mavlink_channel_t chan, uint8
     packet.battery_function = battery_function;
     packet.type = type;
     packet.battery_remaining = battery_remaining;
-    mav_array_assign_uint16_t(packet.voltages, voltages, 10);
+    mav_array_memcpy(packet.voltages, voltages, sizeof(uint16_t)*10);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_BATTERY_STATUS, (const char *)&packet, MAVLINK_MSG_ID_BATTERY_STATUS_MIN_LEN, MAVLINK_MSG_ID_BATTERY_STATUS_LEN, MAVLINK_MSG_ID_BATTERY_STATUS_CRC);
 #endif
 }
@@ -347,7 +347,7 @@ static inline void mavlink_msg_battery_status_send_buf(mavlink_message_t *msgbuf
     packet->battery_function = battery_function;
     packet->type = type;
     packet->battery_remaining = battery_remaining;
-    mav_array_assign_uint16_t(packet->voltages, voltages, 10);
+    mav_array_memcpy(packet->voltages, voltages, sizeof(uint16_t)*10);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_BATTERY_STATUS, (const char *)packet, MAVLINK_MSG_ID_BATTERY_STATUS_MIN_LEN, MAVLINK_MSG_ID_BATTERY_STATUS_LEN, MAVLINK_MSG_ID_BATTERY_STATUS_CRC);
 #endif
 }
