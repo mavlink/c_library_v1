@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 3909539048046515593
+#define MAVLINK_DEVELOPMENT_XML_HASH 5961461680382457054
 
 #ifdef __cplusplus
 extern "C" {
@@ -621,6 +621,19 @@ typedef enum GLOBAL_POSITION_FLAGS
    GLOBAL_POSITION_PRIMARY=2, /* True if the data originates from or is consumed by the primary estimator. | */
    GLOBAL_POSITION_FLAGS_ENUM_END=3, /*  | */
 } GLOBAL_POSITION_FLAGS;
+#endif
+
+/** @brief ESC firmware type identifier. */
+#ifndef HAVE_ENUM_ESC_FIRMWARE
+#define HAVE_ENUM_ESC_FIRMWARE
+typedef enum ESC_FIRMWARE
+{
+   ESC_FIRMWARE_UNKNOWN=0, /* Unknown firmware. | */
+   ESC_FIRMWARE_AM32=1, /* AM32 open source ESC firmware. | */
+   ESC_FIRMWARE_BLUEJAY=2, /* Bluejay open source ESC firmware. | */
+   ESC_FIRMWARE_BLHELI32=3, /* BLHeli32 ESC firmware. | */
+   ESC_FIRMWARE_ENUM_END=4, /*  | */
+} ESC_FIRMWARE;
 #endif
 
 // MAVLINK VERSION
