@@ -6,7 +6,7 @@
 
 typedef struct __mavlink_statustext_t {
  uint8_t severity; /*<  Severity of status. Relies on the definitions within RFC-5424.*/
- char text[50]; /*<  Status text message, without null termination character*/
+ char text[50]; /*<  Status text message, without null termination character. UTF-8 encoded.*/
 } mavlink_statustext_t;
 
 #define MAVLINK_MSG_ID_STATUSTEXT_LEN 51
@@ -45,7 +45,7 @@ typedef struct __mavlink_statustext_t {
  * @param msg The MAVLink message to compress the data into
  *
  * @param severity  Severity of status. Relies on the definitions within RFC-5424.
- * @param text  Status text message, without null termination character
+ * @param text  Status text message, without null termination character. UTF-8 encoded.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_statustext_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -75,7 +75,7 @@ static inline uint16_t mavlink_msg_statustext_pack(uint8_t system_id, uint8_t co
  * @param msg The MAVLink message to compress the data into
  *
  * @param severity  Severity of status. Relies on the definitions within RFC-5424.
- * @param text  Status text message, without null termination character
+ * @param text  Status text message, without null termination character. UTF-8 encoded.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_statustext_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
@@ -108,7 +108,7 @@ static inline uint16_t mavlink_msg_statustext_pack_status(uint8_t system_id, uin
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
  * @param severity  Severity of status. Relies on the definitions within RFC-5424.
- * @param text  Status text message, without null termination character
+ * @param text  Status text message, without null termination character. UTF-8 encoded.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_statustext_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -177,7 +177,7 @@ static inline uint16_t mavlink_msg_statustext_encode_status(uint8_t system_id, u
  * @param chan MAVLink channel to send the message
  *
  * @param severity  Severity of status. Relies on the definitions within RFC-5424.
- * @param text  Status text message, without null termination character
+ * @param text  Status text message, without null termination character. UTF-8 encoded.
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -252,7 +252,7 @@ static inline uint8_t mavlink_msg_statustext_get_severity(const mavlink_message_
 /**
  * @brief Get field text from statustext message
  *
- * @return  Status text message, without null termination character
+ * @return  Status text message, without null termination character. UTF-8 encoded.
  */
 static inline uint16_t mavlink_msg_statustext_get_text(const mavlink_message_t* msg, char *text)
 {
