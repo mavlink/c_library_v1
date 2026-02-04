@@ -10,7 +10,7 @@ typedef struct __mavlink_set_attitude_target_t {
  float body_roll_rate; /*< [rad/s] Body roll rate*/
  float body_pitch_rate; /*< [rad/s] Body pitch rate*/
  float body_yaw_rate; /*< [rad/s] Body yaw rate*/
- float thrust; /*<  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)*/
+ float thrust; /*<  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse thrust)*/
  uint8_t target_system; /*<  System ID*/
  uint8_t target_component; /*<  Component ID*/
  uint8_t type_mask; /*<  Bitmap to indicate which dimensions should be ignored by the vehicle.*/
@@ -73,7 +73,7 @@ typedef struct __mavlink_set_attitude_target_t {
  * @param body_roll_rate [rad/s] Body roll rate
  * @param body_pitch_rate [rad/s] Body pitch rate
  * @param body_yaw_rate [rad/s] Body yaw rate
- * @param thrust  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)
+ * @param thrust  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse thrust)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_set_attitude_target_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -124,7 +124,7 @@ static inline uint16_t mavlink_msg_set_attitude_target_pack(uint8_t system_id, u
  * @param body_roll_rate [rad/s] Body roll rate
  * @param body_pitch_rate [rad/s] Body pitch rate
  * @param body_yaw_rate [rad/s] Body yaw rate
- * @param thrust  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)
+ * @param thrust  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse thrust)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_set_attitude_target_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
@@ -178,7 +178,7 @@ static inline uint16_t mavlink_msg_set_attitude_target_pack_status(uint8_t syste
  * @param body_roll_rate [rad/s] Body roll rate
  * @param body_pitch_rate [rad/s] Body pitch rate
  * @param body_yaw_rate [rad/s] Body yaw rate
- * @param thrust  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)
+ * @param thrust  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse thrust)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_set_attitude_target_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -268,7 +268,7 @@ static inline uint16_t mavlink_msg_set_attitude_target_encode_status(uint8_t sys
  * @param body_roll_rate [rad/s] Body roll rate
  * @param body_pitch_rate [rad/s] Body pitch rate
  * @param body_yaw_rate [rad/s] Body yaw rate
- * @param thrust  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)
+ * @param thrust  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse thrust)
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -441,7 +441,7 @@ static inline float mavlink_msg_set_attitude_target_get_body_yaw_rate(const mavl
 /**
  * @brief Get field thrust from set_attitude_target message
  *
- * @return  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)
+ * @return  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse thrust)
  */
 static inline float mavlink_msg_set_attitude_target_get_thrust(const mavlink_message_t* msg)
 {
