@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH -7369901149428924177
+#define MAVLINK_DEVELOPMENT_XML_HASH -3307116014143473165
 
 #ifdef __cplusplus
 extern "C" {
@@ -596,18 +596,31 @@ typedef enum ACTUATOR_TEST_GROUP
 } ACTUATOR_TEST_GROUP;
 #endif
 
+/** @brief ESC firmware type identifier. */
+#ifndef HAVE_ENUM_ESC_FIRMWARE
+#define HAVE_ENUM_ESC_FIRMWARE
+typedef enum ESC_FIRMWARE
+{
+   ESC_FIRMWARE_UNKNOWN=0, /* Unknown firmware. | */
+   ESC_FIRMWARE_AM32=1, /* AM32 open source ESC firmware. | */
+   ESC_FIRMWARE_BLUEJAY=2, /* Bluejay open source ESC firmware. | */
+   ESC_FIRMWARE_BLHELI32=3, /* BLHeli32 ESC firmware. | */
+   ESC_FIRMWARE_ENUM_END=4, /*  | */
+} ESC_FIRMWARE;
+#endif
+
 /** @brief Source for GLOBAL_POSITION measurement or estimate. */
 #ifndef HAVE_ENUM_GLOBAL_POSITION_SRC
 #define HAVE_ENUM_GLOBAL_POSITION_SRC
 typedef enum GLOBAL_POSITION_SRC
 {
-   GLOBAL_POSITION_UNKNOWN=0, /* Source is unknown or not one of the listed types. | */
-   GLOBAL_POSITION_GNSS=1, /* Global Navigation Satellite System (e.g.: GPS, Galileo, Glonass, BeiDou). | */
-   GLOBAL_POSITION_VISION=2, /* Vision system (e.g.: map matching). | */
-   GLOBAL_POSITION_PSEUDOLITES=3, /* Pseudo-satellite system (performs GNSS-like function, but usually with transceiver beacons). | */
-   GLOBAL_POSITION_TRN=4, /* Terrain referenced navigation. | */
-   GLOBAL_POSITION_MAGNETIC=5, /* Magnetic positioning. | */
-   GLOBAL_POSITION_ESTIMATOR=6, /* Estimated position based on various sensors (eg. a Kalman Filter). | */
+   GLOBAL_POSITION_SRC_UNKNOWN=0, /* Source is unknown or not one of the listed types. | */
+   GLOBAL_POSITION_SRC_GNSS=1, /* Global Navigation Satellite System (e.g.: GPS, Galileo, Glonass, BeiDou). | */
+   GLOBAL_POSITION_SRC_VISION=2, /* Vision system (e.g.: map matching). | */
+   GLOBAL_POSITION_SRC_PSEUDOLITES=3, /* A pseudo-satellite system using transceiver beacons to perform GNSS-like positioning. | */
+   GLOBAL_POSITION_SRC_TERRAIN=4, /* Terrain referenced navigation. | */
+   GLOBAL_POSITION_SRC_MAGNETIC=5, /* Magnetic positioning. | */
+   GLOBAL_POSITION_SRC_ESTIMATOR=6, /* Estimated position based on various sensors (eg. a Kalman Filter). | */
    GLOBAL_POSITION_SRC_ENUM_END=7, /*  | */
 } GLOBAL_POSITION_SRC;
 #endif
@@ -621,19 +634,6 @@ typedef enum GLOBAL_POSITION_FLAGS
    GLOBAL_POSITION_PRIMARY=2, /* True if the data originates from or is consumed by the primary estimator. | */
    GLOBAL_POSITION_FLAGS_ENUM_END=3, /*  | */
 } GLOBAL_POSITION_FLAGS;
-#endif
-
-/** @brief ESC firmware type identifier. */
-#ifndef HAVE_ENUM_ESC_FIRMWARE
-#define HAVE_ENUM_ESC_FIRMWARE
-typedef enum ESC_FIRMWARE
-{
-   ESC_FIRMWARE_UNKNOWN=0, /* Unknown firmware. | */
-   ESC_FIRMWARE_AM32=1, /* AM32 open source ESC firmware. | */
-   ESC_FIRMWARE_BLUEJAY=2, /* Bluejay open source ESC firmware. | */
-   ESC_FIRMWARE_BLHELI32=3, /* BLHeli32 ESC firmware. | */
-   ESC_FIRMWARE_ENUM_END=4, /*  | */
-} ESC_FIRMWARE;
 #endif
 
 // MAVLINK VERSION
