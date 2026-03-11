@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_COMMON.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_COMMON_XML_HASH -2241840629646327812
+#define MAVLINK_COMMON_XML_HASH 3750298033476006481
 
 #ifdef __cplusplus
 extern "C" {
@@ -280,11 +280,13 @@ typedef enum GIMBAL_DEVICE_CAP_FLAGS
    GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_INFINITE_YAW=2048, /* Gimbal device supports yawing/panning infinitely (e.g. using slip disk). | */
    GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_YAW_IN_EARTH_FRAME=4096, /* Gimbal device supports yaw angles and angular velocities relative to North (earth frame). This usually requires support by an autopilot via AUTOPILOT_STATE_FOR_GIMBAL_DEVICE. Support can go on and off during runtime, which is reported by the flag GIMBAL_DEVICE_FLAGS_CAN_ACCEPT_YAW_IN_EARTH_FRAME. | */
    GIMBAL_DEVICE_CAP_FLAGS_HAS_RC_INPUTS=8192, /* Gimbal device supports radio control inputs as an alternative input for controlling the gimbal orientation. | */
-   GIMBAL_DEVICE_CAP_FLAGS_ENUM_END=8193, /*  | */
+   GIMBAL_DEVICE_CAP_FLAGS_CAN_POINT_LOCATION_LOCAL=65536, /* Gimbal device supports to point to a local position. | */
+   GIMBAL_DEVICE_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL=131072, /* Gimbal device supports to point to a global latitude, longitude, altitude position. | */
+   GIMBAL_DEVICE_CAP_FLAGS_ENUM_END=131073, /*  | */
 } GIMBAL_DEVICE_CAP_FLAGS;
 #endif
 
-/** @brief Gimbal manager high level capability flags (bitmap). The first 16 bits are identical to the GIMBAL_DEVICE_CAP_FLAGS. However, the gimbal manager does not need to copy the flags from the gimbal but can also enhance the capabilities and thus add flags. */
+/** @brief Gimbal manager high level capability flags (bitmap). The flags are identical to the GIMBAL_DEVICE_CAP_FLAGS. However, the gimbal manager does not need to copy the flags from the gimbal but can also enhance the capabilities and thus add flags. */
 #ifndef HAVE_ENUM_GIMBAL_MANAGER_CAP_FLAGS
 #define HAVE_ENUM_GIMBAL_MANAGER_CAP_FLAGS
 typedef enum GIMBAL_MANAGER_CAP_FLAGS
@@ -303,8 +305,8 @@ typedef enum GIMBAL_MANAGER_CAP_FLAGS
    GIMBAL_MANAGER_CAP_FLAGS_SUPPORTS_INFINITE_YAW=2048, /* Based on GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_INFINITE_YAW. | */
    GIMBAL_MANAGER_CAP_FLAGS_SUPPORTS_YAW_IN_EARTH_FRAME=4096, /* Based on GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_YAW_IN_EARTH_FRAME. | */
    GIMBAL_MANAGER_CAP_FLAGS_HAS_RC_INPUTS=8192, /* Based on GIMBAL_DEVICE_CAP_FLAGS_HAS_RC_INPUTS. | */
-   GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_LOCAL=65536, /* Gimbal manager supports to point to a local position. | */
-   GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL=131072, /* Gimbal manager supports to point to a global latitude, longitude, altitude position. | */
+   GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_LOCAL=65536, /* Based on GIMBAL_DEVICE_CAP_FLAGS_CAN_POINT_LOCATION_LOCAL. | */
+   GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL=131072, /* Based on GIMBAL_DEVICE_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL. | */
    GIMBAL_MANAGER_CAP_FLAGS_ENUM_END=131073, /*  | */
 } GIMBAL_MANAGER_CAP_FLAGS;
 #endif
