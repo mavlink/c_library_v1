@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH -3889985900870295200
+#define MAVLINK_DEVELOPMENT_XML_HASH 4761120495994248450
 
 #ifdef __cplusplus
 extern "C" {
@@ -607,6 +607,27 @@ typedef enum ESC_FIRMWARE
    ESC_FIRMWARE_BLHELI32=3, /* BLHeli32 ESC firmware. | */
    ESC_FIRMWARE_ENUM_END=4, /*  | */
 } ESC_FIRMWARE;
+#endif
+
+/** @brief Altitude reference for RANGING_BEACON alt field. */
+#ifndef HAVE_ENUM_RANGING_BEACON_ALT_TYPE
+#define HAVE_ENUM_RANGING_BEACON_ALT_TYPE
+typedef enum RANGING_BEACON_ALT_TYPE
+{
+   RANGING_BEACON_ALT_TYPE_WGS84=0, /* Altitude above WGS84 ellipsoid. | */
+   RANGING_BEACON_ALT_TYPE_MSL=1, /* Altitude above Mean Sea Level (AMSL). | */
+   RANGING_BEACON_ALT_TYPE_ENUM_END=2, /*  | */
+} RANGING_BEACON_ALT_TYPE;
+#endif
+
+/** @brief Status flags for a RANGING_BEACON. */
+#ifndef HAVE_ENUM_RANGING_BEACON_STATUS_FLAG
+#define HAVE_ENUM_RANGING_BEACON_STATUS_FLAG
+typedef enum RANGING_BEACON_STATUS_FLAG
+{
+   RANGING_BEACON_STATUS_FLAG_STATION_SIGNAL_POOR=1, /* Station signal is poor. This might indicate channel fading, interference, or other signal quality issues. | */
+   RANGING_BEACON_STATUS_FLAG_ENUM_END=2, /*  | */
+} RANGING_BEACON_STATUS_FLAG;
 #endif
 
 // MAVLINK VERSION
