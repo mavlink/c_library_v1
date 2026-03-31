@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 4761120495994248450
+#define MAVLINK_DEVELOPMENT_XML_HASH -7987115979072719664
 
 #ifdef __cplusplus
 extern "C" {
@@ -461,7 +461,10 @@ typedef enum MAV_CMD
    MAV_CMD_EXTERNAL_WIND_ESTIMATE=43004, /* Set an external estimate of wind direction and speed.
           This might be used to provide an initial wind estimate to the estimator (EKF) in the case where the vehicle is wind dead-reckoning, extending the time when operating without GPS before before position drift builds to an unsafe level. For this use case the command might reasonably be sent every few minutes when operating at altitude, and the value is cleared if the estimator resets itself.
          |Horizontal wind speed.| Estimated 1 sigma accuracy of wind speed. Set to NaN if unknown.| Azimuth (relative to true north) from where the wind is blowing.| Estimated 1 sigma accuracy of wind direction. Set to NaN if unknown.| Empty| Empty| Empty|  */
-   MAV_CMD_ENUM_END=43005, /*  | */
+   MAV_CMD_ESTIMATOR_SENSOR_ENABLE=43006, /* Enable or disable a specific estimator sensor fusion source at runtime.
+          This allows a GCS or companion computer to dynamically control which sensors the estimator fuses without changing parameters.
+         |Sensor fusion source type.| Sensor instance (0-based, for multi-instance).| Enable (1) or Disable (0) the source.| Estimator instance (0-based, for systems with multiple estimators).| Empty| Empty| Empty|  */
+   MAV_CMD_ENUM_END=43007, /*  | */
 } MAV_CMD;
 #endif
 
@@ -628,6 +631,24 @@ typedef enum RANGING_BEACON_STATUS_FLAG
    RANGING_BEACON_STATUS_FLAG_STATION_SIGNAL_POOR=1, /* Station signal is poor. This might indicate channel fading, interference, or other signal quality issues. | */
    RANGING_BEACON_STATUS_FLAG_ENUM_END=2, /*  | */
 } RANGING_BEACON_STATUS_FLAG;
+#endif
+
+/** @brief Estimator sensor fusion source types. Used in MAV_CMD_ESTIMATOR_SENSOR_ENABLE and as array index in ESTIMATOR_SENSOR_FUSION_STATUS. */
+#ifndef HAVE_ENUM_ESTIMATOR_SENSOR_FUSION_SOURCE
+#define HAVE_ENUM_ESTIMATOR_SENSOR_FUSION_SOURCE
+typedef enum ESTIMATOR_SENSOR_FUSION_SOURCE
+{
+   ESTIMATOR_SENSOR_FUSION_SOURCE_GPS=0, /* GNSS | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_OF=1, /* Optical Flow | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_EV=2, /* External Vision | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_AGP=3, /* Auxiliary Global Position | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_BARO=4, /* Barometer | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_RNG=5, /* Range Finder | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_MAG=6, /* Magnetometer | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_ASPD=7, /* Airspeed | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_RANGING_BEACON=8, /* Ranging Beacon | */
+   ESTIMATOR_SENSOR_FUSION_SOURCE_ENUM_END=9, /*  | */
+} ESTIMATOR_SENSOR_FUSION_SOURCE;
 #endif
 
 // MAVLINK VERSION
