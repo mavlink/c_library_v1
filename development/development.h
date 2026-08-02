@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_DEVELOPMENT.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_DEVELOPMENT_XML_HASH 963400686592694710
+#define MAVLINK_DEVELOPMENT_XML_HASH 396649092227945769
 
 #ifdef __cplusplus
 extern "C" {
@@ -667,6 +667,19 @@ typedef enum ESTIMATOR_SENSOR_FUSION_SOURCE
    ESTIMATOR_SENSOR_FUSION_SOURCE_RANGING_BEACON=8, /* Ranging Beacon | */
    ESTIMATOR_SENSOR_FUSION_SOURCE_ENUM_END=9, /*  | */
 } ESTIMATOR_SENSOR_FUSION_SOURCE;
+#endif
+
+/** @brief Source of manual control input currently selected by the autopilot's manual control arbitration. */
+#ifndef HAVE_ENUM_MAV_MANUAL_INPUT_SOURCE
+#define HAVE_ENUM_MAV_MANUAL_INPUT_SOURCE
+typedef enum MAV_MANUAL_INPUT_SOURCE
+{
+   MAV_MANUAL_INPUT_SOURCE_NONE=0, /* No manual input messages are currently being provided. | */
+   MAV_MANUAL_INPUT_SOURCE_RC=1, /* Manual input messages are being provided by a radio control (RC) receiver. | */
+   MAV_MANUAL_INPUT_SOURCE_MAVLINK=2, /* Manual input messages are being provided by a MAVLink enabled input device (e.g. via MANUAL_CONTROL messages). The specific device is identified by the sender_system_id and sender_component_id fields. | */
+   MAV_MANUAL_INPUT_SOURCE_MIXED=3, /* Manual input messages are being provided simultaneously by both a radio control (RC) receiver and a MAVLink enabled input device. | */
+   MAV_MANUAL_INPUT_SOURCE_ENUM_END=4, /*  | */
+} MAV_MANUAL_INPUT_SOURCE;
 #endif
 
 // MAVLINK VERSION
