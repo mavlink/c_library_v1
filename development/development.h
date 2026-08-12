@@ -682,6 +682,55 @@ typedef enum MAV_MANUAL_INPUT_SOURCE
 } MAV_MANUAL_INPUT_SOURCE;
 #endif
 
+/** @brief Status flags for the EFI Electronic Control Unit (ECU). Reported in EFI_PERFORMANCE. Each bit is an independent boolean condition. A flag that is 0 means either "not asserted" or "not supported by this ECU"; the two cannot be distinguished from the bitmask alone. */
+#ifndef HAVE_ENUM_EFI_PERFORMANCE_STATUS_FLAGS
+#define HAVE_ENUM_EFI_PERFORMANCE_STATUS_FLAGS
+typedef enum EFI_PERFORMANCE_STATUS_FLAGS
+{
+   EFI_PERFORMANCE_STATUS_FLAGS_ENGINE_RUNNING=1, /* Engine is running. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_STARTER_ACTIVE=2, /* Starter motor is engaged / engine is cranking. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_ENGINE_SHUTTING_DOWN=4, /* Controlled engine shutdown is in progress. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_EMERGENCY_STOP=8, /* Emergency stop has been asserted. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_REV_LIMIT_EXCEEDED=16, /* Engine rev limiter is active. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_FAULT=32, /* An unclassified fault (check-engine) has been detected by the ECU. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_WARNING_LEVEL_1=64, /* Severity level 1 warning is active. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_WARNING_LEVEL_2=128, /* Severity level 2 warning is active. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_MAINTENANCE_REQUIRED=256, /* ECU reports that maintenance/service is due. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_COMMS_ERROR=512, /* ECU/engine internal communication error. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_POWER_REDUCTION_ACTIVE=1024, /* ECU is limiting/reducing engine output power. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_CRANK_SENSOR_FAULT=2048, /* Crankshaft / RPM sensor has faulted. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_THROTTLE_SENSOR_FAULT=4096, /* Throttle-position sensor has faulted. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_ENGINE_TEMP_SENSOR_FAULT=8192, /* Engine-temperature sensor has faulted. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_AIR_TEMP_SENSOR_FAULT=16384, /* Intake-air-temperature sensor has faulted. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_AIR_PRESSURE_SENSOR_FAULT=32768, /* Intake-air-pressure sensor has faulted. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_ECU_OVER_TEMPERATURE=65536, /* ECU temperature has exceeded the warning threshold. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_ENGINE_OVER_TEMPERATURE=131072, /* Engine temperature has exceeded the fault threshold (overheating). | */
+   EFI_PERFORMANCE_STATUS_FLAGS_ENGINE_TEMP_ABOVE_NOMINAL=262144, /* Engine temperature is above nominal (warning). | */
+   EFI_PERFORMANCE_STATUS_FLAGS_ENGINE_TEMP_BELOW_NOMINAL=524288, /* Engine temperature is below nominal (not yet warmed up). | */
+   EFI_PERFORMANCE_STATUS_FLAGS_EGT_ABOVE_NOMINAL=1048576, /* Exhaust-gas temperature is above nominal. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_LOW_COOLANT_LEVEL=2097152, /* Coolant level is low. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_COOLANT_FLOW_FAULT=4194304, /* Coolant water-flow fault. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_FUEL_PUMP_ACTIVE=8388608, /* Fuel pump is active. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_LOW_FUEL_PRESSURE=16777216, /* Fuel pressure is below the minimum operating threshold. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_HIGH_FUEL_PRESSURE=33554432, /* Fuel pressure is above the maximum operating threshold. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_WATER_IN_FUEL=67108864, /* Water has been detected in the fuel. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_LOW_OIL_PRESSURE=134217728, /* Oil pressure is below the minimum operating threshold. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_HIGH_OIL_PRESSURE=268435456, /* Oil pressure is above the maximum operating threshold. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_LOW_OIL_LEVEL=536870912, /* Oil level is low. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_IGNITION_ACTIVE=1073741824, /* Ignition system is active. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_IGNITION_REDUNDANCY_LOST=2147483648, /* Redundant (dual) ignition degraded - only one spark source is firing. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_PREHEAT_ACTIVE=4294967296, /* Glow/preheat is active. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_LOW_SUPPLY_VOLTAGE=8589934592, /* ECU supply/system voltage is low. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_CHARGING_ACTIVE=17179869184, /* Alternator/charging system is active. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_DETONATION_OBSERVED=34359738368, /* Detonation/knock has been observed. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_MISFIRE_OBSERVED=68719476736, /* Misfire has been observed. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_DEBRIS_DETECTED=137438953472, /* Foreign debris has been detected. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_HIGH_BOOST_PRESSURE=274877906944, /* Boost pressure is above threshold. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_EGR_SYSTEM_FAULT=549755813888, /* Exhaust-gas-recirculation (EGR) system fault. | */
+   EFI_PERFORMANCE_STATUS_FLAGS_ENUM_END=549755813889, /*  | */
+} EFI_PERFORMANCE_STATUS_FLAGS;
+#endif
+
 // MAVLINK VERSION
 
 #ifndef MAVLINK_VERSION
