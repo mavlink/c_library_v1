@@ -220,7 +220,7 @@ static inline uint16_t mavlink_msg_command_int_stamped_pack_status(uint8_t syste
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN, 0);
 #endif
 }
 
@@ -493,16 +493,6 @@ static inline uint64_t mavlink_msg_command_int_stamped_get_vehicle_timestamp(con
 }
 
 /**
- * @brief Get field target_system from command_int_stamped message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_command_int_stamped_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  42);
-}
-
-/**
  * @brief Get field target_component from command_int_stamped message
  *
  * @return  Component ID
@@ -641,7 +631,7 @@ static inline void mavlink_msg_command_int_stamped_decode(const mavlink_message_
     command_int_stamped->y = mavlink_msg_command_int_stamped_get_y(msg);
     command_int_stamped->z = mavlink_msg_command_int_stamped_get_z(msg);
     command_int_stamped->command = mavlink_msg_command_int_stamped_get_command(msg);
-    command_int_stamped->target_system = mavlink_msg_command_int_stamped_get_target_system(msg);
+    command_int_stamped->target_system = _MAV_RETURN_uint8_t(msg, 42);
     command_int_stamped->target_component = mavlink_msg_command_int_stamped_get_target_component(msg);
     command_int_stamped->frame = mavlink_msg_command_int_stamped_get_frame(msg);
     command_int_stamped->current = mavlink_msg_command_int_stamped_get_current(msg);
@@ -651,4 +641,5 @@ static inline void mavlink_msg_command_int_stamped_decode(const mavlink_message_
         memset(command_int_stamped, 0, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN);
     memcpy(command_int_stamped, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

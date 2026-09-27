@@ -144,7 +144,7 @@ static inline uint16_t mavlink_msg_attitude_target_pack_status(uint8_t system_id
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_ATTITUDE_TARGET_MIN_LEN, MAVLINK_MSG_ID_ATTITUDE_TARGET_LEN, MAVLINK_MSG_ID_ATTITUDE_TARGET_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_ATTITUDE_TARGET_MIN_LEN, MAVLINK_MSG_ID_ATTITUDE_TARGET_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_ATTITUDE_TARGET_MIN_LEN, MAVLINK_MSG_ID_ATTITUDE_TARGET_LEN, 0);
 #endif
 }
 
@@ -417,4 +417,5 @@ static inline void mavlink_msg_attitude_target_decode(const mavlink_message_t* m
         memset(attitude_target, 0, MAVLINK_MSG_ID_ATTITUDE_TARGET_LEN);
     memcpy(attitude_target, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

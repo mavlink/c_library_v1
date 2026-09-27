@@ -121,7 +121,7 @@ static inline uint16_t mavlink_msg_remote_log_block_status_pack_status(uint8_t s
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_MIN_LEN, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_MIN_LEN, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_MIN_LEN, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN, 0);
 #endif
 }
 
@@ -286,16 +286,6 @@ static inline void mavlink_msg_remote_log_block_status_send_buf(mavlink_message_
 
 
 /**
- * @brief Get field target_system from remote_log_block_status message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_remote_log_block_status_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  4);
-}
-
-/**
  * @brief Get field target_component from remote_log_block_status message
  *
  * @return  Component ID.
@@ -335,7 +325,7 @@ static inline void mavlink_msg_remote_log_block_status_decode(const mavlink_mess
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     remote_log_block_status->seqno = mavlink_msg_remote_log_block_status_get_seqno(msg);
-    remote_log_block_status->target_system = mavlink_msg_remote_log_block_status_get_target_system(msg);
+    remote_log_block_status->target_system = _MAV_RETURN_uint8_t(msg, 4);
     remote_log_block_status->target_component = mavlink_msg_remote_log_block_status_get_target_component(msg);
     remote_log_block_status->status = mavlink_msg_remote_log_block_status_get_status(msg);
 #else
@@ -343,4 +333,5 @@ static inline void mavlink_msg_remote_log_block_status_decode(const mavlink_mess
         memset(remote_log_block_status, 0, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN);
     memcpy(remote_log_block_status, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

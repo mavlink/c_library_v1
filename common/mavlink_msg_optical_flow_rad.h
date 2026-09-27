@@ -193,7 +193,7 @@ static inline uint16_t mavlink_msg_optical_flow_rad_pack_status(uint8_t system_i
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_MIN_LEN, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_LEN, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_MIN_LEN, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_MIN_LEN, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_LEN, 0);
 #endif
 }
 
@@ -567,4 +567,5 @@ static inline void mavlink_msg_optical_flow_rad_decode(const mavlink_message_t* 
         memset(optical_flow_rad, 0, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_LEN);
     memcpy(optical_flow_rad, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

@@ -103,7 +103,7 @@ static inline uint16_t mavlink_msg_message_interval_pack_status(uint8_t system_i
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MESSAGE_INTERVAL_MIN_LEN, MAVLINK_MSG_ID_MESSAGE_INTERVAL_LEN, MAVLINK_MSG_ID_MESSAGE_INTERVAL_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MESSAGE_INTERVAL_MIN_LEN, MAVLINK_MSG_ID_MESSAGE_INTERVAL_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MESSAGE_INTERVAL_MIN_LEN, MAVLINK_MSG_ID_MESSAGE_INTERVAL_LEN, 0);
 #endif
 }
 
@@ -287,4 +287,5 @@ static inline void mavlink_msg_message_interval_decode(const mavlink_message_t* 
         memset(message_interval, 0, MAVLINK_MSG_ID_MESSAGE_INTERVAL_LEN);
     memcpy(message_interval, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

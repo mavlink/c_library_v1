@@ -229,7 +229,7 @@ static inline uint16_t mavlink_msg_set_position_target_global_int_pack_status(ui
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_MIN_LEN, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_MIN_LEN, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_MIN_LEN, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN, 0);
 #endif
 }
 
@@ -500,16 +500,6 @@ static inline uint32_t mavlink_msg_set_position_target_global_int_get_time_boot_
 }
 
 /**
- * @brief Get field target_system from set_position_target_global_int message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_set_position_target_global_int_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  50);
-}
-
-/**
  * @brief Get field target_component from set_position_target_global_int message
  *
  * @return  Component ID
@@ -671,7 +661,7 @@ static inline void mavlink_msg_set_position_target_global_int_decode(const mavli
     set_position_target_global_int->yaw = mavlink_msg_set_position_target_global_int_get_yaw(msg);
     set_position_target_global_int->yaw_rate = mavlink_msg_set_position_target_global_int_get_yaw_rate(msg);
     set_position_target_global_int->type_mask = mavlink_msg_set_position_target_global_int_get_type_mask(msg);
-    set_position_target_global_int->target_system = mavlink_msg_set_position_target_global_int_get_target_system(msg);
+    set_position_target_global_int->target_system = _MAV_RETURN_uint8_t(msg, 50);
     set_position_target_global_int->target_component = mavlink_msg_set_position_target_global_int_get_target_component(msg);
     set_position_target_global_int->coordinate_frame = mavlink_msg_set_position_target_global_int_get_coordinate_frame(msg);
 #else
@@ -679,4 +669,5 @@ static inline void mavlink_msg_set_position_target_global_int_decode(const mavli
         memset(set_position_target_global_int, 0, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN);
     memcpy(set_position_target_global_int, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

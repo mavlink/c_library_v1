@@ -121,7 +121,7 @@ static inline uint16_t mavlink_msg_scaled_pressure3_pack_status(uint8_t system_i
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCALED_PRESSURE3_MIN_LEN, MAVLINK_MSG_ID_SCALED_PRESSURE3_LEN, MAVLINK_MSG_ID_SCALED_PRESSURE3_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCALED_PRESSURE3_MIN_LEN, MAVLINK_MSG_ID_SCALED_PRESSURE3_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCALED_PRESSURE3_MIN_LEN, MAVLINK_MSG_ID_SCALED_PRESSURE3_LEN, 0);
 #endif
 }
 
@@ -343,4 +343,5 @@ static inline void mavlink_msg_scaled_pressure3_decode(const mavlink_message_t* 
         memset(scaled_pressure3, 0, MAVLINK_MSG_ID_SCALED_PRESSURE3_LEN);
     memcpy(scaled_pressure3, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

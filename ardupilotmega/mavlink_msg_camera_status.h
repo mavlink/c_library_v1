@@ -166,7 +166,7 @@ static inline uint16_t mavlink_msg_camera_status_pack_status(uint8_t system_id, 
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CAMERA_STATUS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_STATUS_LEN, MAVLINK_MSG_ID_CAMERA_STATUS_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CAMERA_STATUS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_STATUS_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CAMERA_STATUS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_STATUS_LEN, 0);
 #endif
 }
 
@@ -381,16 +381,6 @@ static inline uint64_t mavlink_msg_camera_status_get_time_usec(const mavlink_mes
 }
 
 /**
- * @brief Get field target_system from camera_status message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_camera_status_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  26);
-}
-
-/**
  * @brief Get field cam_idx from camera_status message
  *
  * @return  Camera ID.
@@ -475,7 +465,7 @@ static inline void mavlink_msg_camera_status_decode(const mavlink_message_t* msg
     camera_status->p3 = mavlink_msg_camera_status_get_p3(msg);
     camera_status->p4 = mavlink_msg_camera_status_get_p4(msg);
     camera_status->img_idx = mavlink_msg_camera_status_get_img_idx(msg);
-    camera_status->target_system = mavlink_msg_camera_status_get_target_system(msg);
+    camera_status->target_system = _MAV_RETURN_uint8_t(msg, 26);
     camera_status->cam_idx = mavlink_msg_camera_status_get_cam_idx(msg);
     camera_status->event_id = mavlink_msg_camera_status_get_event_id(msg);
 #else
@@ -483,4 +473,5 @@ static inline void mavlink_msg_camera_status_decode(const mavlink_message_t* msg
         memset(camera_status, 0, MAVLINK_MSG_ID_CAMERA_STATUS_LEN);
     memcpy(camera_status, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

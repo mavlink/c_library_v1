@@ -184,7 +184,7 @@ static inline uint16_t mavlink_msg_command_long_pack_status(uint8_t system_id, u
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_LONG_MIN_LEN, MAVLINK_MSG_ID_COMMAND_LONG_LEN, MAVLINK_MSG_ID_COMMAND_LONG_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_LONG_MIN_LEN, MAVLINK_MSG_ID_COMMAND_LONG_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_LONG_MIN_LEN, MAVLINK_MSG_ID_COMMAND_LONG_LEN, 0);
 #endif
 }
 
@@ -405,16 +405,6 @@ static inline void mavlink_msg_command_long_send_buf(mavlink_message_t *msgbuf, 
 
 
 /**
- * @brief Get field target_system from command_long message
- *
- * @return  System which should execute the command
- */
-static inline uint8_t mavlink_msg_command_long_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  30);
-}
-
-/**
  * @brief Get field target_component from command_long message
  *
  * @return  Component which should execute the command, 0 for all components
@@ -531,7 +521,7 @@ static inline void mavlink_msg_command_long_decode(const mavlink_message_t* msg,
     command_long->param6 = mavlink_msg_command_long_get_param6(msg);
     command_long->param7 = mavlink_msg_command_long_get_param7(msg);
     command_long->command = mavlink_msg_command_long_get_command(msg);
-    command_long->target_system = mavlink_msg_command_long_get_target_system(msg);
+    command_long->target_system = _MAV_RETURN_uint8_t(msg, 30);
     command_long->target_component = mavlink_msg_command_long_get_target_component(msg);
     command_long->confirmation = mavlink_msg_command_long_get_confirmation(msg);
 #else
@@ -539,4 +529,5 @@ static inline void mavlink_msg_command_long_decode(const mavlink_message_t* msg,
         memset(command_long, 0, MAVLINK_MSG_ID_COMMAND_LONG_LEN);
     memcpy(command_long, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

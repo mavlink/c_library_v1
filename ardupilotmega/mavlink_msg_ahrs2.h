@@ -139,7 +139,7 @@ static inline uint16_t mavlink_msg_ahrs2_pack_status(uint8_t system_id, uint8_t 
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AHRS2_MIN_LEN, MAVLINK_MSG_ID_AHRS2_LEN, MAVLINK_MSG_ID_AHRS2_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AHRS2_MIN_LEN, MAVLINK_MSG_ID_AHRS2_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AHRS2_MIN_LEN, MAVLINK_MSG_ID_AHRS2_LEN, 0);
 #endif
 }
 
@@ -399,4 +399,5 @@ static inline void mavlink_msg_ahrs2_decode(const mavlink_message_t* msg, mavlin
         memset(ahrs2, 0, MAVLINK_MSG_ID_AHRS2_LEN);
     memcpy(ahrs2, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

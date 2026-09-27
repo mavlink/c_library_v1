@@ -211,7 +211,7 @@ static inline uint16_t mavlink_msg_mission_item_pack_status(uint8_t system_id, u
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_ITEM_MIN_LEN, MAVLINK_MSG_ID_MISSION_ITEM_LEN, MAVLINK_MSG_ID_MISSION_ITEM_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_ITEM_MIN_LEN, MAVLINK_MSG_ID_MISSION_ITEM_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_ITEM_MIN_LEN, MAVLINK_MSG_ID_MISSION_ITEM_LEN, 0);
 #endif
 }
 
@@ -456,16 +456,6 @@ static inline void mavlink_msg_mission_item_send_buf(mavlink_message_t *msgbuf, 
 
 
 /**
- * @brief Get field target_system from mission_item message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_mission_item_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  32);
-}
-
-/**
  * @brief Get field target_component from mission_item message
  *
  * @return  Component ID
@@ -613,7 +603,7 @@ static inline void mavlink_msg_mission_item_decode(const mavlink_message_t* msg,
     mission_item->z = mavlink_msg_mission_item_get_z(msg);
     mission_item->seq = mavlink_msg_mission_item_get_seq(msg);
     mission_item->command = mavlink_msg_mission_item_get_command(msg);
-    mission_item->target_system = mavlink_msg_mission_item_get_target_system(msg);
+    mission_item->target_system = _MAV_RETURN_uint8_t(msg, 32);
     mission_item->target_component = mavlink_msg_mission_item_get_target_component(msg);
     mission_item->frame = mavlink_msg_mission_item_get_frame(msg);
     mission_item->current = mavlink_msg_mission_item_get_current(msg);
@@ -623,4 +613,5 @@ static inline void mavlink_msg_mission_item_decode(const mavlink_message_t* msg,
         memset(mission_item, 0, MAVLINK_MSG_ID_MISSION_ITEM_LEN);
     memcpy(mission_item, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

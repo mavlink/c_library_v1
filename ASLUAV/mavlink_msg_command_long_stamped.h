@@ -202,7 +202,7 @@ static inline uint16_t mavlink_msg_command_long_stamped_pack_status(uint8_t syst
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_MIN_LEN, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_MIN_LEN, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_MIN_LEN, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN, 0);
 #endif
 }
 
@@ -459,16 +459,6 @@ static inline uint64_t mavlink_msg_command_long_stamped_get_vehicle_timestamp(co
 }
 
 /**
- * @brief Get field target_system from command_long_stamped message
- *
- * @return  System which should execute the command
- */
-static inline uint8_t mavlink_msg_command_long_stamped_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  42);
-}
-
-/**
  * @brief Get field target_component from command_long_stamped message
  *
  * @return  Component which should execute the command, 0 for all components
@@ -587,7 +577,7 @@ static inline void mavlink_msg_command_long_stamped_decode(const mavlink_message
     command_long_stamped->param6 = mavlink_msg_command_long_stamped_get_param6(msg);
     command_long_stamped->param7 = mavlink_msg_command_long_stamped_get_param7(msg);
     command_long_stamped->command = mavlink_msg_command_long_stamped_get_command(msg);
-    command_long_stamped->target_system = mavlink_msg_command_long_stamped_get_target_system(msg);
+    command_long_stamped->target_system = _MAV_RETURN_uint8_t(msg, 42);
     command_long_stamped->target_component = mavlink_msg_command_long_stamped_get_target_component(msg);
     command_long_stamped->confirmation = mavlink_msg_command_long_stamped_get_confirmation(msg);
 #else
@@ -595,4 +585,5 @@ static inline void mavlink_msg_command_long_stamped_decode(const mavlink_message
         memset(command_long_stamped, 0, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN);
     memcpy(command_long_stamped, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

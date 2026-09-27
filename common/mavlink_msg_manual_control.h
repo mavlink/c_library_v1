@@ -139,7 +139,7 @@ static inline uint16_t mavlink_msg_manual_control_pack_status(uint8_t system_id,
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MANUAL_CONTROL_MIN_LEN, MAVLINK_MSG_ID_MANUAL_CONTROL_LEN, MAVLINK_MSG_ID_MANUAL_CONTROL_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MANUAL_CONTROL_MIN_LEN, MAVLINK_MSG_ID_MANUAL_CONTROL_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MANUAL_CONTROL_MIN_LEN, MAVLINK_MSG_ID_MANUAL_CONTROL_LEN, 0);
 #endif
 }
 
@@ -320,16 +320,6 @@ static inline void mavlink_msg_manual_control_send_buf(mavlink_message_t *msgbuf
 
 
 /**
- * @brief Get field target from manual_control message
- *
- * @return  The system to be controlled.
- */
-static inline uint8_t mavlink_msg_manual_control_get_target(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  10);
-}
-
-/**
  * @brief Get field x from manual_control message
  *
  * @return  X-axis, normalized to the range [-1000,1000]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to forward(1000)-backward(-1000) movement on a joystick and the pitch of a vehicle.
@@ -393,10 +383,11 @@ static inline void mavlink_msg_manual_control_decode(const mavlink_message_t* ms
     manual_control->z = mavlink_msg_manual_control_get_z(msg);
     manual_control->r = mavlink_msg_manual_control_get_r(msg);
     manual_control->buttons = mavlink_msg_manual_control_get_buttons(msg);
-    manual_control->target = mavlink_msg_manual_control_get_target(msg);
+    manual_control->target = _MAV_RETURN_uint8_t(msg, 10);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_MANUAL_CONTROL_LEN? msg->len : MAVLINK_MSG_ID_MANUAL_CONTROL_LEN;
         memset(manual_control, 0, MAVLINK_MSG_ID_MANUAL_CONTROL_LEN);
     memcpy(manual_control, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

@@ -274,7 +274,7 @@ static inline uint16_t mavlink_msg_sim_state_pack_status(uint8_t system_id, uint
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SIM_STATE_MIN_LEN, MAVLINK_MSG_ID_SIM_STATE_LEN, MAVLINK_MSG_ID_SIM_STATE_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SIM_STATE_MIN_LEN, MAVLINK_MSG_ID_SIM_STATE_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SIM_STATE_MIN_LEN, MAVLINK_MSG_ID_SIM_STATE_LEN, 0);
 #endif
 }
 
@@ -819,4 +819,5 @@ static inline void mavlink_msg_sim_state_decode(const mavlink_message_t* msg, ma
         memset(sim_state, 0, MAVLINK_MSG_ID_SIM_STATE_LEN);
     memcpy(sim_state, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

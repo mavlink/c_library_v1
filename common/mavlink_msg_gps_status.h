@@ -139,7 +139,7 @@ static inline uint16_t mavlink_msg_gps_status_pack_status(uint8_t system_id, uin
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS_STATUS_MIN_LEN, MAVLINK_MSG_ID_GPS_STATUS_LEN, MAVLINK_MSG_ID_GPS_STATUS_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS_STATUS_MIN_LEN, MAVLINK_MSG_ID_GPS_STATUS_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS_STATUS_MIN_LEN, MAVLINK_MSG_ID_GPS_STATUS_LEN, 0);
 #endif
 }
 
@@ -393,4 +393,5 @@ static inline void mavlink_msg_gps_status_decode(const mavlink_message_t* msg, m
         memset(gps_status, 0, MAVLINK_MSG_ID_GPS_STATUS_LEN);
     memcpy(gps_status, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

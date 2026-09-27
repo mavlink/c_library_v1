@@ -180,7 +180,7 @@ static inline uint16_t mavlink_msg_set_home_position_pack_status(uint8_t system_
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, 0);
 #endif
 }
 
@@ -395,16 +395,6 @@ static inline void mavlink_msg_set_home_position_send_buf(mavlink_message_t *msg
 
 
 /**
- * @brief Get field target_system from set_home_position message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_set_home_position_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  52);
-}
-
-/**
  * @brief Get field latitude from set_home_position message
  *
  * @return [degE7] Latitude (WGS84)
@@ -523,10 +513,11 @@ static inline void mavlink_msg_set_home_position_decode(const mavlink_message_t*
     set_home_position->approach_x = mavlink_msg_set_home_position_get_approach_x(msg);
     set_home_position->approach_y = mavlink_msg_set_home_position_get_approach_y(msg);
     set_home_position->approach_z = mavlink_msg_set_home_position_get_approach_z(msg);
-    set_home_position->target_system = mavlink_msg_set_home_position_get_target_system(msg);
+    set_home_position->target_system = _MAV_RETURN_uint8_t(msg, 52);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_SET_HOME_POSITION_LEN? msg->len : MAVLINK_MSG_ID_SET_HOME_POSITION_LEN;
         memset(set_home_position, 0, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN);
     memcpy(set_home_position, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

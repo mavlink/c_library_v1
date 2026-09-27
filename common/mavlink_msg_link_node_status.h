@@ -184,7 +184,7 @@ static inline uint16_t mavlink_msg_link_node_status_pack_status(uint8_t system_i
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LINK_NODE_STATUS_MIN_LEN, MAVLINK_MSG_ID_LINK_NODE_STATUS_LEN, MAVLINK_MSG_ID_LINK_NODE_STATUS_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LINK_NODE_STATUS_MIN_LEN, MAVLINK_MSG_ID_LINK_NODE_STATUS_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LINK_NODE_STATUS_MIN_LEN, MAVLINK_MSG_ID_LINK_NODE_STATUS_LEN, 0);
 #endif
 }
 
@@ -539,4 +539,5 @@ static inline void mavlink_msg_link_node_status_decode(const mavlink_message_t* 
         memset(link_node_status, 0, MAVLINK_MSG_ID_LINK_NODE_STATUS_LEN);
     memcpy(link_node_status, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

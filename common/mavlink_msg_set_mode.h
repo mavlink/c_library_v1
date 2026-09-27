@@ -112,7 +112,7 @@ static inline uint16_t mavlink_msg_set_mode_pack_status(uint8_t system_id, uint8
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_MODE_MIN_LEN, MAVLINK_MSG_ID_SET_MODE_LEN, MAVLINK_MSG_ID_SET_MODE_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_MODE_MIN_LEN, MAVLINK_MSG_ID_SET_MODE_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_MODE_MIN_LEN, MAVLINK_MSG_ID_SET_MODE_LEN, 0);
 #endif
 }
 
@@ -269,16 +269,6 @@ static inline void mavlink_msg_set_mode_send_buf(mavlink_message_t *msgbuf, mavl
 
 
 /**
- * @brief Get field target_system from set_mode message
- *
- * @return  The system setting the mode
- */
-static inline uint8_t mavlink_msg_set_mode_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  4);
-}
-
-/**
  * @brief Get field base_mode from set_mode message
  *
  * @return  The new base mode.
@@ -308,11 +298,12 @@ static inline void mavlink_msg_set_mode_decode(const mavlink_message_t* msg, mav
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     set_mode->custom_mode = mavlink_msg_set_mode_get_custom_mode(msg);
-    set_mode->target_system = mavlink_msg_set_mode_get_target_system(msg);
+    set_mode->target_system = _MAV_RETURN_uint8_t(msg, 4);
     set_mode->base_mode = mavlink_msg_set_mode_get_base_mode(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_SET_MODE_LEN? msg->len : MAVLINK_MSG_ID_SET_MODE_LEN;
         memset(set_mode, 0, MAVLINK_MSG_ID_SET_MODE_LEN);
     memcpy(set_mode, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

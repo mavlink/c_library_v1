@@ -103,7 +103,7 @@ static inline uint16_t mavlink_msg_hwstatus_pack_status(uint8_t system_id, uint8
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_HWSTATUS_MIN_LEN, MAVLINK_MSG_ID_HWSTATUS_LEN, MAVLINK_MSG_ID_HWSTATUS_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_HWSTATUS_MIN_LEN, MAVLINK_MSG_ID_HWSTATUS_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_HWSTATUS_MIN_LEN, MAVLINK_MSG_ID_HWSTATUS_LEN, 0);
 #endif
 }
 
@@ -287,4 +287,5 @@ static inline void mavlink_msg_hwstatus_decode(const mavlink_message_t* msg, mav
         memset(hwstatus, 0, MAVLINK_MSG_ID_HWSTATUS_LEN);
     memcpy(hwstatus, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

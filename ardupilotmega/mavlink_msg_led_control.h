@@ -135,7 +135,7 @@ static inline uint16_t mavlink_msg_led_control_pack_status(uint8_t system_id, ui
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LED_CONTROL_MIN_LEN, MAVLINK_MSG_ID_LED_CONTROL_LEN, MAVLINK_MSG_ID_LED_CONTROL_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LED_CONTROL_MIN_LEN, MAVLINK_MSG_ID_LED_CONTROL_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LED_CONTROL_MIN_LEN, MAVLINK_MSG_ID_LED_CONTROL_LEN, 0);
 #endif
 }
 
@@ -310,16 +310,6 @@ static inline void mavlink_msg_led_control_send_buf(mavlink_message_t *msgbuf, m
 
 
 /**
- * @brief Get field target_system from led_control message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_led_control_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  0);
-}
-
-/**
  * @brief Get field target_component from led_control message
  *
  * @return  Component ID.
@@ -378,7 +368,7 @@ static inline uint16_t mavlink_msg_led_control_get_custom_bytes(const mavlink_me
 static inline void mavlink_msg_led_control_decode(const mavlink_message_t* msg, mavlink_led_control_t* led_control)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    led_control->target_system = mavlink_msg_led_control_get_target_system(msg);
+    led_control->target_system = _MAV_RETURN_uint8_t(msg, 0);
     led_control->target_component = mavlink_msg_led_control_get_target_component(msg);
     led_control->instance = mavlink_msg_led_control_get_instance(msg);
     led_control->pattern = mavlink_msg_led_control_get_pattern(msg);
@@ -389,4 +379,5 @@ static inline void mavlink_msg_led_control_decode(const mavlink_message_t* msg, 
         memset(led_control, 0, MAVLINK_MSG_ID_LED_CONTROL_LEN);
     memcpy(led_control, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

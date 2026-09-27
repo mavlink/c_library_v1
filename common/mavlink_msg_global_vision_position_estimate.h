@@ -148,7 +148,7 @@ static inline uint16_t mavlink_msg_global_vision_position_estimate_pack_status(u
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE_MIN_LEN, MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE_LEN, MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE_MIN_LEN, MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE_MIN_LEN, MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE_LEN, 0);
 #endif
 }
 
@@ -427,4 +427,5 @@ static inline void mavlink_msg_global_vision_position_estimate_decode(const mavl
         memset(global_vision_position_estimate, 0, MAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE_LEN);
     memcpy(global_vision_position_estimate, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

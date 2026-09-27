@@ -175,7 +175,7 @@ static inline uint16_t mavlink_msg_rc_channels_override_pack_status(uint8_t syst
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_MIN_LEN, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_MIN_LEN, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_MIN_LEN, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN, 0);
 #endif
 }
 
@@ -388,16 +388,6 @@ static inline void mavlink_msg_rc_channels_override_send_buf(mavlink_message_t *
 
 
 /**
- * @brief Get field target_system from rc_channels_override message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_rc_channels_override_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  16);
-}
-
-/**
  * @brief Get field target_component from rc_channels_override message
  *
  * @return  Component ID
@@ -504,11 +494,12 @@ static inline void mavlink_msg_rc_channels_override_decode(const mavlink_message
     rc_channels_override->chan6_raw = mavlink_msg_rc_channels_override_get_chan6_raw(msg);
     rc_channels_override->chan7_raw = mavlink_msg_rc_channels_override_get_chan7_raw(msg);
     rc_channels_override->chan8_raw = mavlink_msg_rc_channels_override_get_chan8_raw(msg);
-    rc_channels_override->target_system = mavlink_msg_rc_channels_override_get_target_system(msg);
+    rc_channels_override->target_system = _MAV_RETURN_uint8_t(msg, 16);
     rc_channels_override->target_component = mavlink_msg_rc_channels_override_get_target_component(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN? msg->len : MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN;
         memset(rc_channels_override, 0, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN);
     memcpy(rc_channels_override, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

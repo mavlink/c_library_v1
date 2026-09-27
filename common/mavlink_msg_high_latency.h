@@ -301,7 +301,7 @@ static inline uint16_t mavlink_msg_high_latency_pack_status(uint8_t system_id, u
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN, 0);
 #endif
 }
 
@@ -903,4 +903,5 @@ static inline void mavlink_msg_high_latency_decode(const mavlink_message_t* msg,
         memset(high_latency, 0, MAVLINK_MSG_ID_HIGH_LATENCY_LEN);
     memcpy(high_latency, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

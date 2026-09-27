@@ -112,7 +112,7 @@ static inline uint16_t mavlink_msg_power_status_pack_status(uint8_t system_id, u
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_POWER_STATUS_LEN, MAVLINK_MSG_ID_POWER_STATUS_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_POWER_STATUS_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_POWER_STATUS_LEN, 0);
 #endif
 }
 
@@ -315,4 +315,5 @@ static inline void mavlink_msg_power_status_decode(const mavlink_message_t* msg,
         memset(power_status, 0, MAVLINK_MSG_ID_POWER_STATUS_LEN);
     memcpy(power_status, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

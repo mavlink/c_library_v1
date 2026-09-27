@@ -117,7 +117,7 @@ static inline uint16_t mavlink_msg_file_transfer_protocol_pack_status(uint8_t sy
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_MIN_LEN, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_LEN, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_MIN_LEN, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_MIN_LEN, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_LEN, 0);
 #endif
 }
 
@@ -286,16 +286,6 @@ static inline uint8_t mavlink_msg_file_transfer_protocol_get_target_network(cons
 }
 
 /**
- * @brief Get field target_system from file_transfer_protocol message
- *
- * @return  System ID (0 for broadcast)
- */
-static inline uint8_t mavlink_msg_file_transfer_protocol_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  1);
-}
-
-/**
  * @brief Get field target_component from file_transfer_protocol message
  *
  * @return  Component ID (0 for broadcast)
@@ -325,7 +315,7 @@ static inline void mavlink_msg_file_transfer_protocol_decode(const mavlink_messa
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     file_transfer_protocol->target_network = mavlink_msg_file_transfer_protocol_get_target_network(msg);
-    file_transfer_protocol->target_system = mavlink_msg_file_transfer_protocol_get_target_system(msg);
+    file_transfer_protocol->target_system = _MAV_RETURN_uint8_t(msg, 1);
     file_transfer_protocol->target_component = mavlink_msg_file_transfer_protocol_get_target_component(msg);
     mavlink_msg_file_transfer_protocol_get_payload(msg, file_transfer_protocol->payload);
 #else
@@ -333,4 +323,5 @@ static inline void mavlink_msg_file_transfer_protocol_decode(const mavlink_messa
         memset(file_transfer_protocol, 0, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_LEN);
     memcpy(file_transfer_protocol, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

@@ -130,7 +130,7 @@ static inline uint16_t mavlink_msg_mount_status_pack_status(uint8_t system_id, u
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_STATUS_MIN_LEN, MAVLINK_MSG_ID_MOUNT_STATUS_LEN, MAVLINK_MSG_ID_MOUNT_STATUS_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_STATUS_MIN_LEN, MAVLINK_MSG_ID_MOUNT_STATUS_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_STATUS_MIN_LEN, MAVLINK_MSG_ID_MOUNT_STATUS_LEN, 0);
 #endif
 }
 
@@ -303,16 +303,6 @@ static inline void mavlink_msg_mount_status_send_buf(mavlink_message_t *msgbuf, 
 
 
 /**
- * @brief Get field target_system from mount_status message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_mount_status_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  12);
-}
-
-/**
  * @brief Get field target_component from mount_status message
  *
  * @return  Component ID.
@@ -364,11 +354,12 @@ static inline void mavlink_msg_mount_status_decode(const mavlink_message_t* msg,
     mount_status->pointing_a = mavlink_msg_mount_status_get_pointing_a(msg);
     mount_status->pointing_b = mavlink_msg_mount_status_get_pointing_b(msg);
     mount_status->pointing_c = mavlink_msg_mount_status_get_pointing_c(msg);
-    mount_status->target_system = mavlink_msg_mount_status_get_target_system(msg);
+    mount_status->target_system = _MAV_RETURN_uint8_t(msg, 12);
     mount_status->target_component = mavlink_msg_mount_status_get_target_component(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_MOUNT_STATUS_LEN? msg->len : MAVLINK_MSG_ID_MOUNT_STATUS_LEN;
         memset(mount_status, 0, MAVLINK_MSG_ID_MOUNT_STATUS_LEN);
     memcpy(mount_status, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

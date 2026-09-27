@@ -117,7 +117,7 @@ static inline uint16_t mavlink_msg_script_item_pack_status(uint8_t system_id, ui
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCRIPT_ITEM_MIN_LEN, MAVLINK_MSG_ID_SCRIPT_ITEM_LEN, MAVLINK_MSG_ID_SCRIPT_ITEM_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCRIPT_ITEM_MIN_LEN, MAVLINK_MSG_ID_SCRIPT_ITEM_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCRIPT_ITEM_MIN_LEN, MAVLINK_MSG_ID_SCRIPT_ITEM_LEN, 0);
 #endif
 }
 
@@ -276,16 +276,6 @@ static inline void mavlink_msg_script_item_send_buf(mavlink_message_t *msgbuf, m
 
 
 /**
- * @brief Get field target_system from script_item message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_script_item_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  2);
-}
-
-/**
  * @brief Get field target_component from script_item message
  *
  * @return  Component ID
@@ -325,7 +315,7 @@ static inline void mavlink_msg_script_item_decode(const mavlink_message_t* msg, 
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     script_item->seq = mavlink_msg_script_item_get_seq(msg);
-    script_item->target_system = mavlink_msg_script_item_get_target_system(msg);
+    script_item->target_system = _MAV_RETURN_uint8_t(msg, 2);
     script_item->target_component = mavlink_msg_script_item_get_target_component(msg);
     mavlink_msg_script_item_get_name(msg, script_item->name);
 #else
@@ -333,4 +323,5 @@ static inline void mavlink_msg_script_item_decode(const mavlink_message_t* msg, 
         memset(script_item, 0, MAVLINK_MSG_ID_SCRIPT_ITEM_LEN);
     memcpy(script_item, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

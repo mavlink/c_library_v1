@@ -117,7 +117,7 @@ static inline uint16_t mavlink_msg_remote_log_data_block_pack_status(uint8_t sys
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_MIN_LEN, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_MIN_LEN, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_MIN_LEN, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN, 0);
 #endif
 }
 
@@ -276,16 +276,6 @@ static inline void mavlink_msg_remote_log_data_block_send_buf(mavlink_message_t 
 
 
 /**
- * @brief Get field target_system from remote_log_data_block message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_remote_log_data_block_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  4);
-}
-
-/**
  * @brief Get field target_component from remote_log_data_block message
  *
  * @return  Component ID.
@@ -325,7 +315,7 @@ static inline void mavlink_msg_remote_log_data_block_decode(const mavlink_messag
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     remote_log_data_block->seqno = mavlink_msg_remote_log_data_block_get_seqno(msg);
-    remote_log_data_block->target_system = mavlink_msg_remote_log_data_block_get_target_system(msg);
+    remote_log_data_block->target_system = _MAV_RETURN_uint8_t(msg, 4);
     remote_log_data_block->target_component = mavlink_msg_remote_log_data_block_get_target_component(msg);
     mavlink_msg_remote_log_data_block_get_data(msg, remote_log_data_block->data);
 #else
@@ -333,4 +323,5 @@ static inline void mavlink_msg_remote_log_data_block_decode(const mavlink_messag
         memset(remote_log_data_block, 0, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN);
     memcpy(remote_log_data_block, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

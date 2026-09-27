@@ -117,7 +117,7 @@ static inline uint16_t mavlink_msg_memory_vect_pack_status(uint8_t system_id, ui
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MEMORY_VECT_MIN_LEN, MAVLINK_MSG_ID_MEMORY_VECT_LEN, MAVLINK_MSG_ID_MEMORY_VECT_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MEMORY_VECT_MIN_LEN, MAVLINK_MSG_ID_MEMORY_VECT_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MEMORY_VECT_MIN_LEN, MAVLINK_MSG_ID_MEMORY_VECT_LEN, 0);
 #endif
 }
 
@@ -333,4 +333,5 @@ static inline void mavlink_msg_memory_vect_decode(const mavlink_message_t* msg, 
         memset(memory_vect, 0, MAVLINK_MSG_ID_MEMORY_VECT_LEN);
     memcpy(memory_vect, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

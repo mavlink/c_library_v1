@@ -117,7 +117,7 @@ static inline uint16_t mavlink_msg_change_operator_control_pack_status(uint8_t s
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_MIN_LEN, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_MIN_LEN, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_MIN_LEN, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN, 0);
 #endif
 }
 
@@ -276,16 +276,6 @@ static inline void mavlink_msg_change_operator_control_send_buf(mavlink_message_
 
 
 /**
- * @brief Get field target_system from change_operator_control message
- *
- * @return  System the GCS requests control for
- */
-static inline uint8_t mavlink_msg_change_operator_control_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  0);
-}
-
-/**
  * @brief Get field control_request from change_operator_control message
  *
  * @return  0: request control of this MAV, 1: Release control of this MAV
@@ -324,7 +314,7 @@ static inline uint16_t mavlink_msg_change_operator_control_get_passkey(const mav
 static inline void mavlink_msg_change_operator_control_decode(const mavlink_message_t* msg, mavlink_change_operator_control_t* change_operator_control)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    change_operator_control->target_system = mavlink_msg_change_operator_control_get_target_system(msg);
+    change_operator_control->target_system = _MAV_RETURN_uint8_t(msg, 0);
     change_operator_control->control_request = mavlink_msg_change_operator_control_get_control_request(msg);
     change_operator_control->version = mavlink_msg_change_operator_control_get_version(msg);
     mavlink_msg_change_operator_control_get_passkey(msg, change_operator_control->passkey);
@@ -333,4 +323,5 @@ static inline void mavlink_msg_change_operator_control_decode(const mavlink_mess
         memset(change_operator_control, 0, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN);
     memcpy(change_operator_control, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

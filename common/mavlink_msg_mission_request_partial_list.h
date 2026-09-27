@@ -121,7 +121,7 @@ static inline uint16_t mavlink_msg_mission_request_partial_list_pack_status(uint
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_MIN_LEN, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_MIN_LEN, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_MIN_LEN, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN, 0);
 #endif
 }
 
@@ -286,16 +286,6 @@ static inline void mavlink_msg_mission_request_partial_list_send_buf(mavlink_mes
 
 
 /**
- * @brief Get field target_system from mission_request_partial_list message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_mission_request_partial_list_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  4);
-}
-
-/**
  * @brief Get field target_component from mission_request_partial_list message
  *
  * @return  Component ID
@@ -336,11 +326,12 @@ static inline void mavlink_msg_mission_request_partial_list_decode(const mavlink
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mission_request_partial_list->start_index = mavlink_msg_mission_request_partial_list_get_start_index(msg);
     mission_request_partial_list->end_index = mavlink_msg_mission_request_partial_list_get_end_index(msg);
-    mission_request_partial_list->target_system = mavlink_msg_mission_request_partial_list_get_target_system(msg);
+    mission_request_partial_list->target_system = _MAV_RETURN_uint8_t(msg, 4);
     mission_request_partial_list->target_component = mavlink_msg_mission_request_partial_list_get_target_component(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN? msg->len : MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN;
         memset(mission_request_partial_list, 0, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN);
     memcpy(mission_request_partial_list, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

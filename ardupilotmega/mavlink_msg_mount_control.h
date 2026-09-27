@@ -139,7 +139,7 @@ static inline uint16_t mavlink_msg_mount_control_pack_status(uint8_t system_id, 
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_CONTROL_MIN_LEN, MAVLINK_MSG_ID_MOUNT_CONTROL_LEN, MAVLINK_MSG_ID_MOUNT_CONTROL_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_CONTROL_MIN_LEN, MAVLINK_MSG_ID_MOUNT_CONTROL_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_CONTROL_MIN_LEN, MAVLINK_MSG_ID_MOUNT_CONTROL_LEN, 0);
 #endif
 }
 
@@ -320,16 +320,6 @@ static inline void mavlink_msg_mount_control_send_buf(mavlink_message_t *msgbuf,
 
 
 /**
- * @brief Get field target_system from mount_control message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_mount_control_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  12);
-}
-
-/**
  * @brief Get field target_component from mount_control message
  *
  * @return  Component ID.
@@ -391,7 +381,7 @@ static inline void mavlink_msg_mount_control_decode(const mavlink_message_t* msg
     mount_control->input_a = mavlink_msg_mount_control_get_input_a(msg);
     mount_control->input_b = mavlink_msg_mount_control_get_input_b(msg);
     mount_control->input_c = mavlink_msg_mount_control_get_input_c(msg);
-    mount_control->target_system = mavlink_msg_mount_control_get_target_system(msg);
+    mount_control->target_system = _MAV_RETURN_uint8_t(msg, 12);
     mount_control->target_component = mavlink_msg_mount_control_get_target_component(msg);
     mount_control->save_position = mavlink_msg_mount_control_get_save_position(msg);
 #else
@@ -399,4 +389,5 @@ static inline void mavlink_msg_mount_control_decode(const mavlink_message_t* msg
         memset(mount_control, 0, MAVLINK_MSG_ID_MOUNT_CONTROL_LEN);
     memcpy(mount_control, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

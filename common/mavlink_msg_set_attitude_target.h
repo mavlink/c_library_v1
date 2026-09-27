@@ -162,7 +162,7 @@ static inline uint16_t mavlink_msg_set_attitude_target_pack_status(uint8_t syste
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_MIN_LEN, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_MIN_LEN, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_MIN_LEN, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN, 0);
 #endif
 }
 
@@ -371,16 +371,6 @@ static inline uint32_t mavlink_msg_set_attitude_target_get_time_boot_ms(const ma
 }
 
 /**
- * @brief Get field target_system from set_attitude_target message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_set_attitude_target_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  36);
-}
-
-/**
  * @brief Get field target_component from set_attitude_target message
  *
  * @return  Component ID
@@ -465,7 +455,7 @@ static inline void mavlink_msg_set_attitude_target_decode(const mavlink_message_
     set_attitude_target->body_pitch_rate = mavlink_msg_set_attitude_target_get_body_pitch_rate(msg);
     set_attitude_target->body_yaw_rate = mavlink_msg_set_attitude_target_get_body_yaw_rate(msg);
     set_attitude_target->thrust = mavlink_msg_set_attitude_target_get_thrust(msg);
-    set_attitude_target->target_system = mavlink_msg_set_attitude_target_get_target_system(msg);
+    set_attitude_target->target_system = _MAV_RETURN_uint8_t(msg, 36);
     set_attitude_target->target_component = mavlink_msg_set_attitude_target_get_target_component(msg);
     set_attitude_target->type_mask = mavlink_msg_set_attitude_target_get_type_mask(msg);
 #else
@@ -473,4 +463,5 @@ static inline void mavlink_msg_set_attitude_target_decode(const mavlink_message_
         memset(set_attitude_target, 0, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN);
     memcpy(set_attitude_target, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

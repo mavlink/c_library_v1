@@ -126,7 +126,7 @@ static inline uint16_t mavlink_msg_v2_extension_pack_status(uint8_t system_id, u
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_V2_EXTENSION_MIN_LEN, MAVLINK_MSG_ID_V2_EXTENSION_LEN, MAVLINK_MSG_ID_V2_EXTENSION_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_V2_EXTENSION_MIN_LEN, MAVLINK_MSG_ID_V2_EXTENSION_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_V2_EXTENSION_MIN_LEN, MAVLINK_MSG_ID_V2_EXTENSION_LEN, 0);
 #endif
 }
 
@@ -303,16 +303,6 @@ static inline uint8_t mavlink_msg_v2_extension_get_target_network(const mavlink_
 }
 
 /**
- * @brief Get field target_system from v2_extension message
- *
- * @return  System ID (0 for broadcast)
- */
-static inline uint8_t mavlink_msg_v2_extension_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  3);
-}
-
-/**
  * @brief Get field target_component from v2_extension message
  *
  * @return  Component ID (0 for broadcast)
@@ -353,7 +343,7 @@ static inline void mavlink_msg_v2_extension_decode(const mavlink_message_t* msg,
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     v2_extension->message_type = mavlink_msg_v2_extension_get_message_type(msg);
     v2_extension->target_network = mavlink_msg_v2_extension_get_target_network(msg);
-    v2_extension->target_system = mavlink_msg_v2_extension_get_target_system(msg);
+    v2_extension->target_system = _MAV_RETURN_uint8_t(msg, 3);
     v2_extension->target_component = mavlink_msg_v2_extension_get_target_component(msg);
     mavlink_msg_v2_extension_get_payload(msg, v2_extension->payload);
 #else
@@ -361,4 +351,5 @@ static inline void mavlink_msg_v2_extension_decode(const mavlink_message_t* msg,
         memset(v2_extension, 0, MAVLINK_MSG_ID_V2_EXTENSION_LEN);
     memcpy(v2_extension, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

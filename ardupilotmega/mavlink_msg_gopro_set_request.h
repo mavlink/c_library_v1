@@ -117,7 +117,7 @@ static inline uint16_t mavlink_msg_gopro_set_request_pack_status(uint8_t system_
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_MIN_LEN, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_MIN_LEN, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_MIN_LEN, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN, 0);
 #endif
 }
 
@@ -276,16 +276,6 @@ static inline void mavlink_msg_gopro_set_request_send_buf(mavlink_message_t *msg
 
 
 /**
- * @brief Get field target_system from gopro_set_request message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_gopro_set_request_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  0);
-}
-
-/**
  * @brief Get field target_component from gopro_set_request message
  *
  * @return  Component ID.
@@ -324,7 +314,7 @@ static inline uint16_t mavlink_msg_gopro_set_request_get_value(const mavlink_mes
 static inline void mavlink_msg_gopro_set_request_decode(const mavlink_message_t* msg, mavlink_gopro_set_request_t* gopro_set_request)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    gopro_set_request->target_system = mavlink_msg_gopro_set_request_get_target_system(msg);
+    gopro_set_request->target_system = _MAV_RETURN_uint8_t(msg, 0);
     gopro_set_request->target_component = mavlink_msg_gopro_set_request_get_target_component(msg);
     gopro_set_request->cmd_id = mavlink_msg_gopro_set_request_get_cmd_id(msg);
     mavlink_msg_gopro_set_request_get_value(msg, gopro_set_request->value);
@@ -333,4 +323,5 @@ static inline void mavlink_msg_gopro_set_request_decode(const mavlink_message_t*
         memset(gopro_set_request, 0, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN);
     memcpy(gopro_set_request, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

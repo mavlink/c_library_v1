@@ -139,7 +139,7 @@ static inline uint16_t mavlink_msg_ekf_status_report_pack_status(uint8_t system_
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_EKF_STATUS_REPORT_MIN_LEN, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN, MAVLINK_MSG_ID_EKF_STATUS_REPORT_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_EKF_STATUS_REPORT_MIN_LEN, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_EKF_STATUS_REPORT_MIN_LEN, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN, 0);
 #endif
 }
 
@@ -399,4 +399,5 @@ static inline void mavlink_msg_ekf_status_report_decode(const mavlink_message_t*
         memset(ekf_status_report, 0, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN);
     memcpy(ekf_status_report, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

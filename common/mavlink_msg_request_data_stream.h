@@ -130,7 +130,7 @@ static inline uint16_t mavlink_msg_request_data_stream_pack_status(uint8_t syste
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_MIN_LEN, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_MIN_LEN, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_MIN_LEN, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN, 0);
 #endif
 }
 
@@ -303,16 +303,6 @@ static inline void mavlink_msg_request_data_stream_send_buf(mavlink_message_t *m
 
 
 /**
- * @brief Get field target_system from request_data_stream message
- *
- * @return  The target requested to send the message stream.
- */
-static inline uint8_t mavlink_msg_request_data_stream_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  2);
-}
-
-/**
  * @brief Get field target_component from request_data_stream message
  *
  * @return  The target requested to send the message stream.
@@ -362,7 +352,7 @@ static inline void mavlink_msg_request_data_stream_decode(const mavlink_message_
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     request_data_stream->req_message_rate = mavlink_msg_request_data_stream_get_req_message_rate(msg);
-    request_data_stream->target_system = mavlink_msg_request_data_stream_get_target_system(msg);
+    request_data_stream->target_system = _MAV_RETURN_uint8_t(msg, 2);
     request_data_stream->target_component = mavlink_msg_request_data_stream_get_target_component(msg);
     request_data_stream->req_stream_id = mavlink_msg_request_data_stream_get_req_stream_id(msg);
     request_data_stream->start_stop = mavlink_msg_request_data_stream_get_start_stop(msg);
@@ -371,4 +361,5 @@ static inline void mavlink_msg_request_data_stream_decode(const mavlink_message_
         memset(request_data_stream, 0, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN);
     memcpy(request_data_stream, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

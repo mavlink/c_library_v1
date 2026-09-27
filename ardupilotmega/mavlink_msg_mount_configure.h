@@ -139,7 +139,7 @@ static inline uint16_t mavlink_msg_mount_configure_pack_status(uint8_t system_id
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_CONFIGURE_MIN_LEN, MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN, MAVLINK_MSG_ID_MOUNT_CONFIGURE_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_CONFIGURE_MIN_LEN, MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MOUNT_CONFIGURE_MIN_LEN, MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN, 0);
 #endif
 }
 
@@ -320,16 +320,6 @@ static inline void mavlink_msg_mount_configure_send_buf(mavlink_message_t *msgbu
 
 
 /**
- * @brief Get field target_system from mount_configure message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_mount_configure_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  0);
-}
-
-/**
  * @brief Get field target_component from mount_configure message
  *
  * @return  Component ID.
@@ -388,7 +378,7 @@ static inline uint8_t mavlink_msg_mount_configure_get_stab_yaw(const mavlink_mes
 static inline void mavlink_msg_mount_configure_decode(const mavlink_message_t* msg, mavlink_mount_configure_t* mount_configure)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mount_configure->target_system = mavlink_msg_mount_configure_get_target_system(msg);
+    mount_configure->target_system = _MAV_RETURN_uint8_t(msg, 0);
     mount_configure->target_component = mavlink_msg_mount_configure_get_target_component(msg);
     mount_configure->mount_mode = mavlink_msg_mount_configure_get_mount_mode(msg);
     mount_configure->stab_roll = mavlink_msg_mount_configure_get_stab_roll(msg);
@@ -399,4 +389,5 @@ static inline void mavlink_msg_mount_configure_decode(const mavlink_message_t* m
         memset(mount_configure, 0, MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN);
     memcpy(mount_configure, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

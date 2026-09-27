@@ -211,7 +211,7 @@ static inline uint16_t mavlink_msg_mission_item_int_pack_status(uint8_t system_i
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_ITEM_INT_MIN_LEN, MAVLINK_MSG_ID_MISSION_ITEM_INT_LEN, MAVLINK_MSG_ID_MISSION_ITEM_INT_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_ITEM_INT_MIN_LEN, MAVLINK_MSG_ID_MISSION_ITEM_INT_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_ITEM_INT_MIN_LEN, MAVLINK_MSG_ID_MISSION_ITEM_INT_LEN, 0);
 #endif
 }
 
@@ -456,16 +456,6 @@ static inline void mavlink_msg_mission_item_int_send_buf(mavlink_message_t *msgb
 
 
 /**
- * @brief Get field target_system from mission_item_int message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_mission_item_int_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  32);
-}
-
-/**
  * @brief Get field target_component from mission_item_int message
  *
  * @return  Component ID
@@ -613,7 +603,7 @@ static inline void mavlink_msg_mission_item_int_decode(const mavlink_message_t* 
     mission_item_int->z = mavlink_msg_mission_item_int_get_z(msg);
     mission_item_int->seq = mavlink_msg_mission_item_int_get_seq(msg);
     mission_item_int->command = mavlink_msg_mission_item_int_get_command(msg);
-    mission_item_int->target_system = mavlink_msg_mission_item_int_get_target_system(msg);
+    mission_item_int->target_system = _MAV_RETURN_uint8_t(msg, 32);
     mission_item_int->target_component = mavlink_msg_mission_item_int_get_target_component(msg);
     mission_item_int->frame = mavlink_msg_mission_item_int_get_frame(msg);
     mission_item_int->current = mavlink_msg_mission_item_int_get_current(msg);
@@ -623,4 +613,5 @@ static inline void mavlink_msg_mission_item_int_decode(const mavlink_message_t* 
         memset(mission_item_int, 0, MAVLINK_MSG_ID_MISSION_ITEM_INT_LEN);
     memcpy(mission_item_int, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

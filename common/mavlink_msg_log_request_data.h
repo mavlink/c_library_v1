@@ -130,7 +130,7 @@ static inline uint16_t mavlink_msg_log_request_data_pack_status(uint8_t system_i
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, 0);
 #endif
 }
 
@@ -303,16 +303,6 @@ static inline void mavlink_msg_log_request_data_send_buf(mavlink_message_t *msgb
 
 
 /**
- * @brief Get field target_system from log_request_data message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_log_request_data_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  10);
-}
-
-/**
  * @brief Get field target_component from log_request_data message
  *
  * @return  Component ID
@@ -364,11 +354,12 @@ static inline void mavlink_msg_log_request_data_decode(const mavlink_message_t* 
     log_request_data->ofs = mavlink_msg_log_request_data_get_ofs(msg);
     log_request_data->count = mavlink_msg_log_request_data_get_count(msg);
     log_request_data->id = mavlink_msg_log_request_data_get_id(msg);
-    log_request_data->target_system = mavlink_msg_log_request_data_get_target_system(msg);
+    log_request_data->target_system = _MAV_RETURN_uint8_t(msg, 10);
     log_request_data->target_component = mavlink_msg_log_request_data_get_target_component(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN? msg->len : MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN;
         memset(log_request_data, 0, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN);
     memcpy(log_request_data, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

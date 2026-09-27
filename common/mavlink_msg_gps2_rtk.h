@@ -202,7 +202,7 @@ static inline uint16_t mavlink_msg_gps2_rtk_pack_status(uint8_t system_id, uint8
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS2_RTK_MIN_LEN, MAVLINK_MSG_ID_GPS2_RTK_LEN, MAVLINK_MSG_ID_GPS2_RTK_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS2_RTK_MIN_LEN, MAVLINK_MSG_ID_GPS2_RTK_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS2_RTK_MIN_LEN, MAVLINK_MSG_ID_GPS2_RTK_LEN, 0);
 #endif
 }
 
@@ -595,4 +595,5 @@ static inline void mavlink_msg_gps2_rtk_decode(const mavlink_message_t* msg, mav
         memset(gps2_rtk, 0, MAVLINK_MSG_ID_GPS2_RTK_LEN);
     memcpy(gps2_rtk, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

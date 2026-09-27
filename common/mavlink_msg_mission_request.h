@@ -112,7 +112,7 @@ static inline uint16_t mavlink_msg_mission_request_pack_status(uint8_t system_id
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_REQUEST_MIN_LEN, MAVLINK_MSG_ID_MISSION_REQUEST_LEN, MAVLINK_MSG_ID_MISSION_REQUEST_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_REQUEST_MIN_LEN, MAVLINK_MSG_ID_MISSION_REQUEST_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_MISSION_REQUEST_MIN_LEN, MAVLINK_MSG_ID_MISSION_REQUEST_LEN, 0);
 #endif
 }
 
@@ -269,16 +269,6 @@ static inline void mavlink_msg_mission_request_send_buf(mavlink_message_t *msgbu
 
 
 /**
- * @brief Get field target_system from mission_request message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_mission_request_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  2);
-}
-
-/**
  * @brief Get field target_component from mission_request message
  *
  * @return  Component ID
@@ -308,11 +298,12 @@ static inline void mavlink_msg_mission_request_decode(const mavlink_message_t* m
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mission_request->seq = mavlink_msg_mission_request_get_seq(msg);
-    mission_request->target_system = mavlink_msg_mission_request_get_target_system(msg);
+    mission_request->target_system = _MAV_RETURN_uint8_t(msg, 2);
     mission_request->target_component = mavlink_msg_mission_request_get_target_component(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_REQUEST_LEN? msg->len : MAVLINK_MSG_ID_MISSION_REQUEST_LEN;
         memset(mission_request, 0, MAVLINK_MSG_ID_MISSION_REQUEST_LEN);
     memcpy(mission_request, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

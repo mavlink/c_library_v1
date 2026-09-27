@@ -126,7 +126,7 @@ static inline uint16_t mavlink_msg_param_set_pack_status(uint8_t system_id, uint
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PARAM_SET_MIN_LEN, MAVLINK_MSG_ID_PARAM_SET_LEN, MAVLINK_MSG_ID_PARAM_SET_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PARAM_SET_MIN_LEN, MAVLINK_MSG_ID_PARAM_SET_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PARAM_SET_MIN_LEN, MAVLINK_MSG_ID_PARAM_SET_LEN, 0);
 #endif
 }
 
@@ -293,16 +293,6 @@ static inline void mavlink_msg_param_set_send_buf(mavlink_message_t *msgbuf, mav
 
 
 /**
- * @brief Get field target_system from param_set message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_param_set_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  4);
-}
-
-/**
  * @brief Get field target_component from param_set message
  *
  * @return  Component ID
@@ -352,7 +342,7 @@ static inline void mavlink_msg_param_set_decode(const mavlink_message_t* msg, ma
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     param_set->param_value = mavlink_msg_param_set_get_param_value(msg);
-    param_set->target_system = mavlink_msg_param_set_get_target_system(msg);
+    param_set->target_system = _MAV_RETURN_uint8_t(msg, 4);
     param_set->target_component = mavlink_msg_param_set_get_target_component(msg);
     mavlink_msg_param_set_get_param_id(msg, param_set->param_id);
     param_set->param_type = mavlink_msg_param_set_get_param_type(msg);
@@ -361,4 +351,5 @@ static inline void mavlink_msg_param_set_decode(const mavlink_message_t* msg, ma
         memset(param_set, 0, MAVLINK_MSG_ID_PARAM_SET_LEN);
     memcpy(param_set, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

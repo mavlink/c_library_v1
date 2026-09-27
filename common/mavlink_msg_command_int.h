@@ -202,7 +202,7 @@ static inline uint16_t mavlink_msg_command_int_pack_status(uint8_t system_id, ui
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, 0);
 #endif
 }
 
@@ -439,16 +439,6 @@ static inline void mavlink_msg_command_int_send_buf(mavlink_message_t *msgbuf, m
 
 
 /**
- * @brief Get field target_system from command_int message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_command_int_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  30);
-}
-
-/**
  * @brief Get field target_component from command_int message
  *
  * @return  Component ID
@@ -585,7 +575,7 @@ static inline void mavlink_msg_command_int_decode(const mavlink_message_t* msg, 
     command_int->y = mavlink_msg_command_int_get_y(msg);
     command_int->z = mavlink_msg_command_int_get_z(msg);
     command_int->command = mavlink_msg_command_int_get_command(msg);
-    command_int->target_system = mavlink_msg_command_int_get_target_system(msg);
+    command_int->target_system = _MAV_RETURN_uint8_t(msg, 30);
     command_int->target_component = mavlink_msg_command_int_get_target_component(msg);
     command_int->frame = mavlink_msg_command_int_get_frame(msg);
     command_int->current = mavlink_msg_command_int_get_current(msg);
@@ -595,4 +585,5 @@ static inline void mavlink_msg_command_int_decode(const mavlink_message_t* msg, 
         memset(command_int, 0, MAVLINK_MSG_ID_COMMAND_INT_LEN);
     memcpy(command_int, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

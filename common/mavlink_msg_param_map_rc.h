@@ -162,7 +162,7 @@ static inline uint16_t mavlink_msg_param_map_rc_pack_status(uint8_t system_id, u
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PARAM_MAP_RC_MIN_LEN, MAVLINK_MSG_ID_PARAM_MAP_RC_LEN, MAVLINK_MSG_ID_PARAM_MAP_RC_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PARAM_MAP_RC_MIN_LEN, MAVLINK_MSG_ID_PARAM_MAP_RC_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PARAM_MAP_RC_MIN_LEN, MAVLINK_MSG_ID_PARAM_MAP_RC_LEN, 0);
 #endif
 }
 
@@ -361,16 +361,6 @@ static inline void mavlink_msg_param_map_rc_send_buf(mavlink_message_t *msgbuf, 
 
 
 /**
- * @brief Get field target_system from param_map_rc message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_param_map_rc_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  18);
-}
-
-/**
  * @brief Get field target_component from param_map_rc message
  *
  * @return  Component ID
@@ -464,7 +454,7 @@ static inline void mavlink_msg_param_map_rc_decode(const mavlink_message_t* msg,
     param_map_rc->param_value_min = mavlink_msg_param_map_rc_get_param_value_min(msg);
     param_map_rc->param_value_max = mavlink_msg_param_map_rc_get_param_value_max(msg);
     param_map_rc->param_index = mavlink_msg_param_map_rc_get_param_index(msg);
-    param_map_rc->target_system = mavlink_msg_param_map_rc_get_target_system(msg);
+    param_map_rc->target_system = _MAV_RETURN_uint8_t(msg, 18);
     param_map_rc->target_component = mavlink_msg_param_map_rc_get_target_component(msg);
     mavlink_msg_param_map_rc_get_param_id(msg, param_map_rc->param_id);
     param_map_rc->parameter_rc_channel_index = mavlink_msg_param_map_rc_get_parameter_rc_channel_index(msg);
@@ -473,4 +463,5 @@ static inline void mavlink_msg_param_map_rc_decode(const mavlink_message_t* msg,
         memset(param_map_rc, 0, MAVLINK_MSG_ID_PARAM_MAP_RC_LEN);
     memcpy(param_map_rc, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

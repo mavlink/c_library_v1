@@ -103,7 +103,7 @@ static inline uint16_t mavlink_msg_gopro_set_response_pack_status(uint8_t system
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GOPRO_SET_RESPONSE_MIN_LEN, MAVLINK_MSG_ID_GOPRO_SET_RESPONSE_LEN, MAVLINK_MSG_ID_GOPRO_SET_RESPONSE_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GOPRO_SET_RESPONSE_MIN_LEN, MAVLINK_MSG_ID_GOPRO_SET_RESPONSE_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GOPRO_SET_RESPONSE_MIN_LEN, MAVLINK_MSG_ID_GOPRO_SET_RESPONSE_LEN, 0);
 #endif
 }
 
@@ -287,4 +287,5 @@ static inline void mavlink_msg_gopro_set_response_decode(const mavlink_message_t
         memset(gopro_set_response, 0, MAVLINK_MSG_ID_GOPRO_SET_RESPONSE_LEN);
     memcpy(gopro_set_response, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

@@ -121,7 +121,7 @@ static inline uint16_t mavlink_msg_ping_pack_status(uint8_t system_id, uint8_t c
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PING_MIN_LEN, MAVLINK_MSG_ID_PING_LEN, MAVLINK_MSG_ID_PING_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PING_MIN_LEN, MAVLINK_MSG_ID_PING_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_PING_MIN_LEN, MAVLINK_MSG_ID_PING_LEN, 0);
 #endif
 }
 
@@ -306,16 +306,6 @@ static inline uint32_t mavlink_msg_ping_get_seq(const mavlink_message_t* msg)
 }
 
 /**
- * @brief Get field target_system from ping message
- *
- * @return  0: request ping from all receiving systems. If greater than 0: message is a ping response and number is the system id of the requesting system
- */
-static inline uint8_t mavlink_msg_ping_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  12);
-}
-
-/**
  * @brief Get field target_component from ping message
  *
  * @return  0: request ping from all receiving components. If greater than 0: message is a ping response and number is the component id of the requesting component.
@@ -336,11 +326,12 @@ static inline void mavlink_msg_ping_decode(const mavlink_message_t* msg, mavlink
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     ping->time_usec = mavlink_msg_ping_get_time_usec(msg);
     ping->seq = mavlink_msg_ping_get_seq(msg);
-    ping->target_system = mavlink_msg_ping_get_target_system(msg);
+    ping->target_system = _MAV_RETURN_uint8_t(msg, 12);
     ping->target_component = mavlink_msg_ping_get_target_component(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_PING_LEN? msg->len : MAVLINK_MSG_ID_PING_LEN;
         memset(ping, 0, MAVLINK_MSG_ID_PING_LEN);
     memcpy(ping, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

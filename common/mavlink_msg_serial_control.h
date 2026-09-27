@@ -135,7 +135,7 @@ static inline uint16_t mavlink_msg_serial_control_pack_status(uint8_t system_id,
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SERIAL_CONTROL_MIN_LEN, MAVLINK_MSG_ID_SERIAL_CONTROL_LEN, MAVLINK_MSG_ID_SERIAL_CONTROL_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SERIAL_CONTROL_MIN_LEN, MAVLINK_MSG_ID_SERIAL_CONTROL_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SERIAL_CONTROL_MIN_LEN, MAVLINK_MSG_ID_SERIAL_CONTROL_LEN, 0);
 #endif
 }
 
@@ -389,4 +389,5 @@ static inline void mavlink_msg_serial_control_decode(const mavlink_message_t* ms
         memset(serial_control, 0, MAVLINK_MSG_ID_SERIAL_CONTROL_LEN);
     memcpy(serial_control, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

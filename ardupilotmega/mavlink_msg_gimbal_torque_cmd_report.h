@@ -130,7 +130,7 @@ static inline uint16_t mavlink_msg_gimbal_torque_cmd_report_pack_status(uint8_t 
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_MIN_LEN, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_MIN_LEN, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_MIN_LEN, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN, 0);
 #endif
 }
 
@@ -303,16 +303,6 @@ static inline void mavlink_msg_gimbal_torque_cmd_report_send_buf(mavlink_message
 
 
 /**
- * @brief Get field target_system from gimbal_torque_cmd_report message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_gimbal_torque_cmd_report_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  6);
-}
-
-/**
  * @brief Get field target_component from gimbal_torque_cmd_report message
  *
  * @return  Component ID.
@@ -364,11 +354,12 @@ static inline void mavlink_msg_gimbal_torque_cmd_report_decode(const mavlink_mes
     gimbal_torque_cmd_report->rl_torque_cmd = mavlink_msg_gimbal_torque_cmd_report_get_rl_torque_cmd(msg);
     gimbal_torque_cmd_report->el_torque_cmd = mavlink_msg_gimbal_torque_cmd_report_get_el_torque_cmd(msg);
     gimbal_torque_cmd_report->az_torque_cmd = mavlink_msg_gimbal_torque_cmd_report_get_az_torque_cmd(msg);
-    gimbal_torque_cmd_report->target_system = mavlink_msg_gimbal_torque_cmd_report_get_target_system(msg);
+    gimbal_torque_cmd_report->target_system = _MAV_RETURN_uint8_t(msg, 6);
     gimbal_torque_cmd_report->target_component = mavlink_msg_gimbal_torque_cmd_report_get_target_component(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN? msg->len : MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN;
         memset(gimbal_torque_cmd_report, 0, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN);
     memcpy(gimbal_torque_cmd_report, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

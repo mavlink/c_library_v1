@@ -103,7 +103,7 @@ static inline uint16_t mavlink_msg_autopilot_version_request_pack_status(uint8_t
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_MIN_LEN, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_MIN_LEN, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_MIN_LEN, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN, 0);
 #endif
 }
 
@@ -252,16 +252,6 @@ static inline void mavlink_msg_autopilot_version_request_send_buf(mavlink_messag
 
 
 /**
- * @brief Get field target_system from autopilot_version_request message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_autopilot_version_request_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  0);
-}
-
-/**
  * @brief Get field target_component from autopilot_version_request message
  *
  * @return  Component ID.
@@ -280,11 +270,12 @@ static inline uint8_t mavlink_msg_autopilot_version_request_get_target_component
 static inline void mavlink_msg_autopilot_version_request_decode(const mavlink_message_t* msg, mavlink_autopilot_version_request_t* autopilot_version_request)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    autopilot_version_request->target_system = mavlink_msg_autopilot_version_request_get_target_system(msg);
+    autopilot_version_request->target_system = _MAV_RETURN_uint8_t(msg, 0);
     autopilot_version_request->target_component = mavlink_msg_autopilot_version_request_get_target_component(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN? msg->len : MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN;
         memset(autopilot_version_request, 0, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN);
     memcpy(autopilot_version_request, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

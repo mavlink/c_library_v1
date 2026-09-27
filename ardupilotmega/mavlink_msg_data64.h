@@ -108,7 +108,7 @@ static inline uint16_t mavlink_msg_data64_pack_status(uint8_t system_id, uint8_t
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_DATA64_MIN_LEN, MAVLINK_MSG_ID_DATA64_LEN, MAVLINK_MSG_ID_DATA64_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_DATA64_MIN_LEN, MAVLINK_MSG_ID_DATA64_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_DATA64_MIN_LEN, MAVLINK_MSG_ID_DATA64_LEN, 0);
 #endif
 }
 
@@ -305,4 +305,5 @@ static inline void mavlink_msg_data64_decode(const mavlink_message_t* msg, mavli
         memset(data64, 0, MAVLINK_MSG_ID_DATA64_LEN);
     memcpy(data64, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

@@ -175,7 +175,7 @@ static inline uint16_t mavlink_msg_scaled_imu2_pack_status(uint8_t system_id, ui
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCALED_IMU2_MIN_LEN, MAVLINK_MSG_ID_SCALED_IMU2_LEN, MAVLINK_MSG_ID_SCALED_IMU2_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCALED_IMU2_MIN_LEN, MAVLINK_MSG_ID_SCALED_IMU2_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SCALED_IMU2_MIN_LEN, MAVLINK_MSG_ID_SCALED_IMU2_LEN, 0);
 #endif
 }
 
@@ -511,4 +511,5 @@ static inline void mavlink_msg_scaled_imu2_decode(const mavlink_message_t* msg, 
         memset(scaled_imu2, 0, MAVLINK_MSG_ID_SCALED_IMU2_LEN);
     memcpy(scaled_imu2, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

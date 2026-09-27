@@ -193,7 +193,7 @@ static inline uint16_t mavlink_msg_airspeed_autocal_pack_status(uint8_t system_i
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AIRSPEED_AUTOCAL_MIN_LEN, MAVLINK_MSG_ID_AIRSPEED_AUTOCAL_LEN, MAVLINK_MSG_ID_AIRSPEED_AUTOCAL_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AIRSPEED_AUTOCAL_MIN_LEN, MAVLINK_MSG_ID_AIRSPEED_AUTOCAL_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AIRSPEED_AUTOCAL_MIN_LEN, MAVLINK_MSG_ID_AIRSPEED_AUTOCAL_LEN, 0);
 #endif
 }
 
@@ -567,4 +567,5 @@ static inline void mavlink_msg_airspeed_autocal_decode(const mavlink_message_t* 
         memset(airspeed_autocal, 0, MAVLINK_MSG_ID_AIRSPEED_AUTOCAL_LEN);
     memcpy(airspeed_autocal, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

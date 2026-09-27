@@ -184,7 +184,7 @@ static inline uint16_t mavlink_msg_digicam_configure_pack_status(uint8_t system_
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_MIN_LEN, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_MIN_LEN, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_MIN_LEN, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN, 0);
 #endif
 }
 
@@ -405,16 +405,6 @@ static inline void mavlink_msg_digicam_configure_send_buf(mavlink_message_t *msg
 
 
 /**
- * @brief Get field target_system from digicam_configure message
- *
- * @return  System ID.
- */
-static inline uint8_t mavlink_msg_digicam_configure_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  6);
-}
-
-/**
  * @brief Get field target_component from digicam_configure message
  *
  * @return  Component ID.
@@ -525,7 +515,7 @@ static inline void mavlink_msg_digicam_configure_decode(const mavlink_message_t*
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     digicam_configure->extra_value = mavlink_msg_digicam_configure_get_extra_value(msg);
     digicam_configure->shutter_speed = mavlink_msg_digicam_configure_get_shutter_speed(msg);
-    digicam_configure->target_system = mavlink_msg_digicam_configure_get_target_system(msg);
+    digicam_configure->target_system = _MAV_RETURN_uint8_t(msg, 6);
     digicam_configure->target_component = mavlink_msg_digicam_configure_get_target_component(msg);
     digicam_configure->mode = mavlink_msg_digicam_configure_get_mode(msg);
     digicam_configure->aperture = mavlink_msg_digicam_configure_get_aperture(msg);
@@ -539,4 +529,5 @@ static inline void mavlink_msg_digicam_configure_decode(const mavlink_message_t*
         memset(digicam_configure, 0, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN);
     memcpy(digicam_configure, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

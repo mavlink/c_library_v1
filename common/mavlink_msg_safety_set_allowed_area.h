@@ -166,7 +166,7 @@ static inline uint16_t mavlink_msg_safety_set_allowed_area_pack_status(uint8_t s
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_MIN_LEN, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_MIN_LEN, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_MIN_LEN, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN, 0);
 #endif
 }
 
@@ -371,16 +371,6 @@ static inline void mavlink_msg_safety_set_allowed_area_send_buf(mavlink_message_
 
 
 /**
- * @brief Get field target_system from safety_set_allowed_area message
- *
- * @return  System ID
- */
-static inline uint8_t mavlink_msg_safety_set_allowed_area_get_target_system(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  24);
-}
-
-/**
  * @brief Get field target_component from safety_set_allowed_area message
  *
  * @return  Component ID
@@ -475,7 +465,7 @@ static inline void mavlink_msg_safety_set_allowed_area_decode(const mavlink_mess
     safety_set_allowed_area->p2x = mavlink_msg_safety_set_allowed_area_get_p2x(msg);
     safety_set_allowed_area->p2y = mavlink_msg_safety_set_allowed_area_get_p2y(msg);
     safety_set_allowed_area->p2z = mavlink_msg_safety_set_allowed_area_get_p2z(msg);
-    safety_set_allowed_area->target_system = mavlink_msg_safety_set_allowed_area_get_target_system(msg);
+    safety_set_allowed_area->target_system = _MAV_RETURN_uint8_t(msg, 24);
     safety_set_allowed_area->target_component = mavlink_msg_safety_set_allowed_area_get_target_component(msg);
     safety_set_allowed_area->frame = mavlink_msg_safety_set_allowed_area_get_frame(msg);
 #else
@@ -483,4 +473,5 @@ static inline void mavlink_msg_safety_set_allowed_area_decode(const mavlink_mess
         memset(safety_set_allowed_area, 0, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN);
     memcpy(safety_set_allowed_area, _MAV_PAYLOAD(msg), len);
 #endif
+
 }

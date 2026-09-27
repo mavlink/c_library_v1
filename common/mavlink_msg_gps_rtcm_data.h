@@ -108,7 +108,7 @@ static inline uint16_t mavlink_msg_gps_rtcm_data_pack_status(uint8_t system_id, 
 #if MAVLINK_CRC_EXTRA
     return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS_RTCM_DATA_MIN_LEN, MAVLINK_MSG_ID_GPS_RTCM_DATA_LEN, MAVLINK_MSG_ID_GPS_RTCM_DATA_CRC);
 #else
-    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS_RTCM_DATA_MIN_LEN, MAVLINK_MSG_ID_GPS_RTCM_DATA_LEN);
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_GPS_RTCM_DATA_MIN_LEN, MAVLINK_MSG_ID_GPS_RTCM_DATA_LEN, 0);
 #endif
 }
 
@@ -305,4 +305,5 @@ static inline void mavlink_msg_gps_rtcm_data_decode(const mavlink_message_t* msg
         memset(gps_rtcm_data, 0, MAVLINK_MSG_ID_GPS_RTCM_DATA_LEN);
     memcpy(gps_rtcm_data, _MAV_PAYLOAD(msg), len);
 #endif
+
 }
