@@ -580,10 +580,10 @@ static inline void mavlink_msg_command_int_decode(const mavlink_message_t* msg, 
     command_int->frame = mavlink_msg_command_int_get_frame(msg);
     command_int->current = mavlink_msg_command_int_get_current(msg);
     command_int->autocontinue = mavlink_msg_command_int_get_autocontinue(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_COMMAND_INT_LEN? msg->len : MAVLINK_MSG_ID_COMMAND_INT_LEN;
-        memset(command_int, 0, MAVLINK_MSG_ID_COMMAND_INT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_COMMAND_INT_LEN ? msg->len : MAVLINK_MSG_ID_COMMAND_INT_LEN;
+    memset(command_int, 0, MAVLINK_MSG_ID_COMMAND_INT_LEN);
     memcpy(command_int, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

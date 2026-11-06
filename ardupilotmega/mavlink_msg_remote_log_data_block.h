@@ -318,10 +318,10 @@ static inline void mavlink_msg_remote_log_data_block_decode(const mavlink_messag
     remote_log_data_block->target_system = _MAV_RETURN_uint8_t(msg, 4);
     remote_log_data_block->target_component = mavlink_msg_remote_log_data_block_get_target_component(msg);
     mavlink_msg_remote_log_data_block_get_data(msg, remote_log_data_block->data);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN? msg->len : MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN;
-        memset(remote_log_data_block, 0, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN ? msg->len : MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN;
+    memset(remote_log_data_block, 0, MAVLINK_MSG_ID_REMOTE_LOG_DATA_BLOCK_LEN);
     memcpy(remote_log_data_block, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

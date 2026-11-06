@@ -422,10 +422,10 @@ static inline void mavlink_msg_vicon_position_estimate_decode(const mavlink_mess
     vicon_position_estimate->roll = mavlink_msg_vicon_position_estimate_get_roll(msg);
     vicon_position_estimate->pitch = mavlink_msg_vicon_position_estimate_get_pitch(msg);
     vicon_position_estimate->yaw = mavlink_msg_vicon_position_estimate_get_yaw(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE_LEN? msg->len : MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE_LEN;
-        memset(vicon_position_estimate, 0, MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE_LEN ? msg->len : MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE_LEN;
+    memset(vicon_position_estimate, 0, MAVLINK_MSG_ID_VICON_POSITION_ESTIMATE_LEN);
     memcpy(vicon_position_estimate, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

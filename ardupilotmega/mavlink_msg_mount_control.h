@@ -384,10 +384,10 @@ static inline void mavlink_msg_mount_control_decode(const mavlink_message_t* msg
     mount_control->target_system = _MAV_RETURN_uint8_t(msg, 12);
     mount_control->target_component = mavlink_msg_mount_control_get_target_component(msg);
     mount_control->save_position = mavlink_msg_mount_control_get_save_position(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MOUNT_CONTROL_LEN? msg->len : MAVLINK_MSG_ID_MOUNT_CONTROL_LEN;
-        memset(mount_control, 0, MAVLINK_MSG_ID_MOUNT_CONTROL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MOUNT_CONTROL_LEN ? msg->len : MAVLINK_MSG_ID_MOUNT_CONTROL_LEN;
+    memset(mount_control, 0, MAVLINK_MSG_ID_MOUNT_CONTROL_LEN);
     memcpy(mount_control, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

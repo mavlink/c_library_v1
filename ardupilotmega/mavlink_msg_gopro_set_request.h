@@ -318,10 +318,10 @@ static inline void mavlink_msg_gopro_set_request_decode(const mavlink_message_t*
     gopro_set_request->target_component = mavlink_msg_gopro_set_request_get_target_component(msg);
     gopro_set_request->cmd_id = mavlink_msg_gopro_set_request_get_cmd_id(msg);
     mavlink_msg_gopro_set_request_get_value(msg, gopro_set_request->value);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN? msg->len : MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN;
-        memset(gopro_set_request, 0, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN ? msg->len : MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN;
+    memset(gopro_set_request, 0, MAVLINK_MSG_ID_GOPRO_SET_REQUEST_LEN);
     memcpy(gopro_set_request, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

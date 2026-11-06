@@ -514,10 +514,10 @@ static inline void mavlink_msg_set_home_position_decode(const mavlink_message_t*
     set_home_position->approach_y = mavlink_msg_set_home_position_get_approach_y(msg);
     set_home_position->approach_z = mavlink_msg_set_home_position_get_approach_z(msg);
     set_home_position->target_system = _MAV_RETURN_uint8_t(msg, 52);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SET_HOME_POSITION_LEN? msg->len : MAVLINK_MSG_ID_SET_HOME_POSITION_LEN;
-        memset(set_home_position, 0, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SET_HOME_POSITION_LEN ? msg->len : MAVLINK_MSG_ID_SET_HOME_POSITION_LEN;
+    memset(set_home_position, 0, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN);
     memcpy(set_home_position, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

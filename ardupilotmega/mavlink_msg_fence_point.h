@@ -384,10 +384,10 @@ static inline void mavlink_msg_fence_point_decode(const mavlink_message_t* msg, 
     fence_point->target_component = mavlink_msg_fence_point_get_target_component(msg);
     fence_point->idx = mavlink_msg_fence_point_get_idx(msg);
     fence_point->count = mavlink_msg_fence_point_get_count(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_FENCE_POINT_LEN? msg->len : MAVLINK_MSG_ID_FENCE_POINT_LEN;
-        memset(fence_point, 0, MAVLINK_MSG_ID_FENCE_POINT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_FENCE_POINT_LEN ? msg->len : MAVLINK_MSG_ID_FENCE_POINT_LEN;
+    memset(fence_point, 0, MAVLINK_MSG_ID_FENCE_POINT_LEN);
     memcpy(fence_point, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

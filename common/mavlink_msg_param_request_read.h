@@ -318,10 +318,10 @@ static inline void mavlink_msg_param_request_read_decode(const mavlink_message_t
     param_request_read->target_system = _MAV_RETURN_uint8_t(msg, 2);
     param_request_read->target_component = mavlink_msg_param_request_read_get_target_component(msg);
     mavlink_msg_param_request_read_get_param_id(msg, param_request_read->param_id);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_PARAM_REQUEST_READ_LEN? msg->len : MAVLINK_MSG_ID_PARAM_REQUEST_READ_LEN;
-        memset(param_request_read, 0, MAVLINK_MSG_ID_PARAM_REQUEST_READ_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_PARAM_REQUEST_READ_LEN ? msg->len : MAVLINK_MSG_ID_PARAM_REQUEST_READ_LEN;
+    memset(param_request_read, 0, MAVLINK_MSG_ID_PARAM_REQUEST_READ_LEN);
     memcpy(param_request_read, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

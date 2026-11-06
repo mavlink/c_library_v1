@@ -590,10 +590,10 @@ static inline void mavlink_msg_hil_gps_decode(const mavlink_message_t* msg, mavl
     hil_gps->cog = mavlink_msg_hil_gps_get_cog(msg);
     hil_gps->fix_type = mavlink_msg_hil_gps_get_fix_type(msg);
     hil_gps->satellites_visible = mavlink_msg_hil_gps_get_satellites_visible(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_HIL_GPS_LEN? msg->len : MAVLINK_MSG_ID_HIL_GPS_LEN;
-        memset(hil_gps, 0, MAVLINK_MSG_ID_HIL_GPS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_HIL_GPS_LEN ? msg->len : MAVLINK_MSG_ID_HIL_GPS_LEN;
+    memset(hil_gps, 0, MAVLINK_MSG_ID_HIL_GPS_LEN);
     memcpy(hil_gps, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

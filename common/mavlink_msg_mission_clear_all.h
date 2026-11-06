@@ -272,10 +272,10 @@ static inline void mavlink_msg_mission_clear_all_decode(const mavlink_message_t*
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mission_clear_all->target_system = _MAV_RETURN_uint8_t(msg, 0);
     mission_clear_all->target_component = mavlink_msg_mission_clear_all_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN? msg->len : MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN;
-        memset(mission_clear_all, 0, MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN ? msg->len : MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN;
+    memset(mission_clear_all, 0, MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN);
     memcpy(mission_clear_all, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

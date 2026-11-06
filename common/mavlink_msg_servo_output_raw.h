@@ -506,10 +506,10 @@ static inline void mavlink_msg_servo_output_raw_decode(const mavlink_message_t* 
     servo_output_raw->servo7_raw = mavlink_msg_servo_output_raw_get_servo7_raw(msg);
     servo_output_raw->servo8_raw = mavlink_msg_servo_output_raw_get_servo8_raw(msg);
     servo_output_raw->port = mavlink_msg_servo_output_raw_get_port(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SERVO_OUTPUT_RAW_LEN? msg->len : MAVLINK_MSG_ID_SERVO_OUTPUT_RAW_LEN;
-        memset(servo_output_raw, 0, MAVLINK_MSG_ID_SERVO_OUTPUT_RAW_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SERVO_OUTPUT_RAW_LEN ? msg->len : MAVLINK_MSG_ID_SERVO_OUTPUT_RAW_LEN;
+    memset(servo_output_raw, 0, MAVLINK_MSG_ID_SERVO_OUTPUT_RAW_LEN);
     memcpy(servo_output_raw, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

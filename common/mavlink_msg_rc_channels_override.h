@@ -496,10 +496,10 @@ static inline void mavlink_msg_rc_channels_override_decode(const mavlink_message
     rc_channels_override->chan8_raw = mavlink_msg_rc_channels_override_get_chan8_raw(msg);
     rc_channels_override->target_system = _MAV_RETURN_uint8_t(msg, 16);
     rc_channels_override->target_component = mavlink_msg_rc_channels_override_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN? msg->len : MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN;
-        memset(rc_channels_override, 0, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN ? msg->len : MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN;
+    memset(rc_channels_override, 0, MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE_LEN);
     memcpy(rc_channels_override, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

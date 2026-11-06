@@ -702,10 +702,10 @@ static inline void mavlink_msg_efi_status_decode(const mavlink_message_t* msg, m
     efi_status->throttle_out = mavlink_msg_efi_status_get_throttle_out(msg);
     efi_status->pt_compensation = mavlink_msg_efi_status_get_pt_compensation(msg);
     efi_status->health = mavlink_msg_efi_status_get_health(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_EFI_STATUS_LEN? msg->len : MAVLINK_MSG_ID_EFI_STATUS_LEN;
-        memset(efi_status, 0, MAVLINK_MSG_ID_EFI_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_EFI_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_EFI_STATUS_LEN;
+    memset(efi_status, 0, MAVLINK_MSG_ID_EFI_STATUS_LEN);
     memcpy(efi_status, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

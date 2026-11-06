@@ -318,10 +318,10 @@ static inline void mavlink_msg_gps_inject_data_decode(const mavlink_message_t* m
     gps_inject_data->target_component = mavlink_msg_gps_inject_data_get_target_component(msg);
     gps_inject_data->len = mavlink_msg_gps_inject_data_get_len(msg);
     mavlink_msg_gps_inject_data_get_data(msg, gps_inject_data->data);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN? msg->len : MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN;
-        memset(gps_inject_data, 0, MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN ? msg->len : MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN;
+    memset(gps_inject_data, 0, MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN);
     memcpy(gps_inject_data, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

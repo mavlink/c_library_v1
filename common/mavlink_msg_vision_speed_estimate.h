@@ -338,10 +338,10 @@ static inline void mavlink_msg_vision_speed_estimate_decode(const mavlink_messag
     vision_speed_estimate->x = mavlink_msg_vision_speed_estimate_get_x(msg);
     vision_speed_estimate->y = mavlink_msg_vision_speed_estimate_get_y(msg);
     vision_speed_estimate->z = mavlink_msg_vision_speed_estimate_get_z(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE_LEN? msg->len : MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE_LEN;
-        memset(vision_speed_estimate, 0, MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE_LEN ? msg->len : MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE_LEN;
+    memset(vision_speed_estimate, 0, MAVLINK_MSG_ID_VISION_SPEED_ESTIMATE_LEN);
     memcpy(vision_speed_estimate, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

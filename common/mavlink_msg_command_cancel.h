@@ -310,10 +310,10 @@ static inline void mavlink_msg_command_cancel_decode(const mavlink_message_t* ms
     command_cancel->command = mavlink_msg_command_cancel_get_command(msg);
     command_cancel->target_system = _MAV_RETURN_uint8_t(msg, 2);
     command_cancel->target_component = mavlink_msg_command_cancel_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_COMMAND_CANCEL_LEN? msg->len : MAVLINK_MSG_ID_COMMAND_CANCEL_LEN;
-        memset(command_cancel, 0, MAVLINK_MSG_ID_COMMAND_CANCEL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_COMMAND_CANCEL_LEN ? msg->len : MAVLINK_MSG_ID_COMMAND_CANCEL_LEN;
+    memset(command_cancel, 0, MAVLINK_MSG_ID_COMMAND_CANCEL_LEN);
     memcpy(command_cancel, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

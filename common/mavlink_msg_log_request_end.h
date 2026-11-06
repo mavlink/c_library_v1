@@ -272,10 +272,10 @@ static inline void mavlink_msg_log_request_end_decode(const mavlink_message_t* m
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     log_request_end->target_system = _MAV_RETURN_uint8_t(msg, 0);
     log_request_end->target_component = mavlink_msg_log_request_end_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_LOG_REQUEST_END_LEN? msg->len : MAVLINK_MSG_ID_LOG_REQUEST_END_LEN;
-        memset(log_request_end, 0, MAVLINK_MSG_ID_LOG_REQUEST_END_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_LOG_REQUEST_END_LEN ? msg->len : MAVLINK_MSG_ID_LOG_REQUEST_END_LEN;
+    memset(log_request_end, 0, MAVLINK_MSG_ID_LOG_REQUEST_END_LEN);
     memcpy(log_request_end, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

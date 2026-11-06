@@ -272,10 +272,10 @@ static inline void mavlink_msg_statustext_decode(const mavlink_message_t* msg, m
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     statustext->severity = mavlink_msg_statustext_get_severity(msg);
     mavlink_msg_statustext_get_text(msg, statustext->text);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_STATUSTEXT_LEN? msg->len : MAVLINK_MSG_ID_STATUSTEXT_LEN;
-        memset(statustext, 0, MAVLINK_MSG_ID_STATUSTEXT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_STATUSTEXT_LEN ? msg->len : MAVLINK_MSG_ID_STATUSTEXT_LEN;
+    memset(statustext, 0, MAVLINK_MSG_ID_STATUSTEXT_LEN);
     memcpy(statustext, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

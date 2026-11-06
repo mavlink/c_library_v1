@@ -468,10 +468,10 @@ static inline void mavlink_msg_battery_status_decode(const mavlink_message_t* ms
     battery_status->battery_function = mavlink_msg_battery_status_get_battery_function(msg);
     battery_status->type = mavlink_msg_battery_status_get_type(msg);
     battery_status->battery_remaining = mavlink_msg_battery_status_get_battery_remaining(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_BATTERY_STATUS_LEN? msg->len : MAVLINK_MSG_ID_BATTERY_STATUS_LEN;
-        memset(battery_status, 0, MAVLINK_MSG_ID_BATTERY_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_BATTERY_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_BATTERY_STATUS_LEN;
+    memset(battery_status, 0, MAVLINK_MSG_ID_BATTERY_STATUS_LEN);
     memcpy(battery_status, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

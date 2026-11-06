@@ -272,10 +272,10 @@ static inline void mavlink_msg_autopilot_version_request_decode(const mavlink_me
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     autopilot_version_request->target_system = _MAV_RETURN_uint8_t(msg, 0);
     autopilot_version_request->target_component = mavlink_msg_autopilot_version_request_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN? msg->len : MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN;
-        memset(autopilot_version_request, 0, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN ? msg->len : MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN;
+    memset(autopilot_version_request, 0, MAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST_LEN);
     memcpy(autopilot_version_request, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

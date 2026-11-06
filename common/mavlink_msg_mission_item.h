@@ -608,10 +608,10 @@ static inline void mavlink_msg_mission_item_decode(const mavlink_message_t* msg,
     mission_item->frame = mavlink_msg_mission_item_get_frame(msg);
     mission_item->current = mavlink_msg_mission_item_get_current(msg);
     mission_item->autocontinue = mavlink_msg_mission_item_get_autocontinue(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_ITEM_LEN? msg->len : MAVLINK_MSG_ID_MISSION_ITEM_LEN;
-        memset(mission_item, 0, MAVLINK_MSG_ID_MISSION_ITEM_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_ITEM_LEN ? msg->len : MAVLINK_MSG_ID_MISSION_ITEM_LEN;
+    memset(mission_item, 0, MAVLINK_MSG_ID_MISSION_ITEM_LEN);
     memcpy(mission_item, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

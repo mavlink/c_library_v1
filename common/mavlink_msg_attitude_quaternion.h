@@ -450,10 +450,10 @@ static inline void mavlink_msg_attitude_quaternion_decode(const mavlink_message_
     attitude_quaternion->rollspeed = mavlink_msg_attitude_quaternion_get_rollspeed(msg);
     attitude_quaternion->pitchspeed = mavlink_msg_attitude_quaternion_get_pitchspeed(msg);
     attitude_quaternion->yawspeed = mavlink_msg_attitude_quaternion_get_yawspeed(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_ATTITUDE_QUATERNION_LEN? msg->len : MAVLINK_MSG_ID_ATTITUDE_QUATERNION_LEN;
-        memset(attitude_quaternion, 0, MAVLINK_MSG_ID_ATTITUDE_QUATERNION_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_ATTITUDE_QUATERNION_LEN ? msg->len : MAVLINK_MSG_ID_ATTITUDE_QUATERNION_LEN;
+    memset(attitude_quaternion, 0, MAVLINK_MSG_ID_ATTITUDE_QUATERNION_LEN);
     memcpy(attitude_quaternion, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

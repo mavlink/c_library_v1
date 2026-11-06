@@ -520,10 +520,10 @@ static inline void mavlink_msg_home_position_decode(const mavlink_message_t* msg
     home_position->approach_x = mavlink_msg_home_position_get_approach_x(msg);
     home_position->approach_y = mavlink_msg_home_position_get_approach_y(msg);
     home_position->approach_z = mavlink_msg_home_position_get_approach_z(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_HOME_POSITION_LEN? msg->len : MAVLINK_MSG_ID_HOME_POSITION_LEN;
-        memset(home_position, 0, MAVLINK_MSG_ID_HOME_POSITION_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_HOME_POSITION_LEN ? msg->len : MAVLINK_MSG_ID_HOME_POSITION_LEN;
+    memset(home_position, 0, MAVLINK_MSG_ID_HOME_POSITION_LEN);
     memcpy(home_position, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

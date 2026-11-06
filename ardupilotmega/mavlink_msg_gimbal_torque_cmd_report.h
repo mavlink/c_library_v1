@@ -356,10 +356,10 @@ static inline void mavlink_msg_gimbal_torque_cmd_report_decode(const mavlink_mes
     gimbal_torque_cmd_report->az_torque_cmd = mavlink_msg_gimbal_torque_cmd_report_get_az_torque_cmd(msg);
     gimbal_torque_cmd_report->target_system = _MAV_RETURN_uint8_t(msg, 6);
     gimbal_torque_cmd_report->target_component = mavlink_msg_gimbal_torque_cmd_report_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN? msg->len : MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN;
-        memset(gimbal_torque_cmd_report, 0, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN ? msg->len : MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN;
+    memset(gimbal_torque_cmd_report, 0, MAVLINK_MSG_ID_GIMBAL_TORQUE_CMD_REPORT_LEN);
     memcpy(gimbal_torque_cmd_report, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

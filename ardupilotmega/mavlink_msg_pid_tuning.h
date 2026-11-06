@@ -422,10 +422,10 @@ static inline void mavlink_msg_pid_tuning_decode(const mavlink_message_t* msg, m
     pid_tuning->I = mavlink_msg_pid_tuning_get_I(msg);
     pid_tuning->D = mavlink_msg_pid_tuning_get_D(msg);
     pid_tuning->axis = mavlink_msg_pid_tuning_get_axis(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_PID_TUNING_LEN? msg->len : MAVLINK_MSG_ID_PID_TUNING_LEN;
-        memset(pid_tuning, 0, MAVLINK_MSG_ID_PID_TUNING_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_PID_TUNING_LEN ? msg->len : MAVLINK_MSG_ID_PID_TUNING_LEN;
+    memset(pid_tuning, 0, MAVLINK_MSG_ID_PID_TUNING_LEN);
     memcpy(pid_tuning, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

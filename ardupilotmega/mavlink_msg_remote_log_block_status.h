@@ -328,10 +328,10 @@ static inline void mavlink_msg_remote_log_block_status_decode(const mavlink_mess
     remote_log_block_status->target_system = _MAV_RETURN_uint8_t(msg, 4);
     remote_log_block_status->target_component = mavlink_msg_remote_log_block_status_get_target_component(msg);
     remote_log_block_status->status = mavlink_msg_remote_log_block_status_get_status(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN? msg->len : MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN;
-        memset(remote_log_block_status, 0, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN;
+    memset(remote_log_block_status, 0, MAVLINK_MSG_ID_REMOTE_LOG_BLOCK_STATUS_LEN);
     memcpy(remote_log_block_status, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

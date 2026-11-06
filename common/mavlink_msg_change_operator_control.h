@@ -318,10 +318,10 @@ static inline void mavlink_msg_change_operator_control_decode(const mavlink_mess
     change_operator_control->control_request = mavlink_msg_change_operator_control_get_control_request(msg);
     change_operator_control->version = mavlink_msg_change_operator_control_get_version(msg);
     mavlink_msg_change_operator_control_get_passkey(msg, change_operator_control->passkey);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN? msg->len : MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN;
-        memset(change_operator_control, 0, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN ? msg->len : MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN;
+    memset(change_operator_control, 0, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN);
     memcpy(change_operator_control, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

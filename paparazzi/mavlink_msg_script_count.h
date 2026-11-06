@@ -300,10 +300,10 @@ static inline void mavlink_msg_script_count_decode(const mavlink_message_t* msg,
     script_count->count = mavlink_msg_script_count_get_count(msg);
     script_count->target_system = _MAV_RETURN_uint8_t(msg, 2);
     script_count->target_component = mavlink_msg_script_count_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SCRIPT_COUNT_LEN? msg->len : MAVLINK_MSG_ID_SCRIPT_COUNT_LEN;
-        memset(script_count, 0, MAVLINK_MSG_ID_SCRIPT_COUNT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SCRIPT_COUNT_LEN ? msg->len : MAVLINK_MSG_ID_SCRIPT_COUNT_LEN;
+    memset(script_count, 0, MAVLINK_MSG_ID_SCRIPT_COUNT_LEN);
     memcpy(script_count, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

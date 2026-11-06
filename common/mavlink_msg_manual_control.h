@@ -384,10 +384,10 @@ static inline void mavlink_msg_manual_control_decode(const mavlink_message_t* ms
     manual_control->r = mavlink_msg_manual_control_get_r(msg);
     manual_control->buttons = mavlink_msg_manual_control_get_buttons(msg);
     manual_control->target = _MAV_RETURN_uint8_t(msg, 10);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MANUAL_CONTROL_LEN? msg->len : MAVLINK_MSG_ID_MANUAL_CONTROL_LEN;
-        memset(manual_control, 0, MAVLINK_MSG_ID_MANUAL_CONTROL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MANUAL_CONTROL_LEN ? msg->len : MAVLINK_MSG_ID_MANUAL_CONTROL_LEN;
+    memset(manual_control, 0, MAVLINK_MSG_ID_MANUAL_CONTROL_LEN);
     memcpy(manual_control, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

@@ -356,10 +356,10 @@ static inline void mavlink_msg_mount_status_decode(const mavlink_message_t* msg,
     mount_status->pointing_c = mavlink_msg_mount_status_get_pointing_c(msg);
     mount_status->target_system = _MAV_RETURN_uint8_t(msg, 12);
     mount_status->target_component = mavlink_msg_mount_status_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MOUNT_STATUS_LEN? msg->len : MAVLINK_MSG_ID_MOUNT_STATUS_LEN;
-        memset(mount_status, 0, MAVLINK_MSG_ID_MOUNT_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MOUNT_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_MOUNT_STATUS_LEN;
+    memset(mount_status, 0, MAVLINK_MSG_ID_MOUNT_STATUS_LEN);
     memcpy(mount_status, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

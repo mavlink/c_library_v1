@@ -496,10 +496,10 @@ static inline void mavlink_msg_digicam_control_decode(const mavlink_message_t* m
     digicam_control->shot = mavlink_msg_digicam_control_get_shot(msg);
     digicam_control->command_id = mavlink_msg_digicam_control_get_command_id(msg);
     digicam_control->extra_param = mavlink_msg_digicam_control_get_extra_param(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_DIGICAM_CONTROL_LEN? msg->len : MAVLINK_MSG_ID_DIGICAM_CONTROL_LEN;
-        memset(digicam_control, 0, MAVLINK_MSG_ID_DIGICAM_CONTROL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_DIGICAM_CONTROL_LEN ? msg->len : MAVLINK_MSG_ID_DIGICAM_CONTROL_LEN;
+    memset(digicam_control, 0, MAVLINK_MSG_ID_DIGICAM_CONTROL_LEN);
     memcpy(digicam_control, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

@@ -458,10 +458,10 @@ static inline void mavlink_msg_set_attitude_target_decode(const mavlink_message_
     set_attitude_target->target_system = _MAV_RETURN_uint8_t(msg, 36);
     set_attitude_target->target_component = mavlink_msg_set_attitude_target_get_target_component(msg);
     set_attitude_target->type_mask = mavlink_msg_set_attitude_target_get_type_mask(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN? msg->len : MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN;
-        memset(set_attitude_target, 0, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN ? msg->len : MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN;
+    memset(set_attitude_target, 0, MAVLINK_MSG_ID_SET_ATTITUDE_TARGET_LEN);
     memcpy(set_attitude_target, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

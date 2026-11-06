@@ -338,10 +338,10 @@ static inline void mavlink_msg_scaled_pressure_decode(const mavlink_message_t* m
     scaled_pressure->press_abs = mavlink_msg_scaled_pressure_get_press_abs(msg);
     scaled_pressure->press_diff = mavlink_msg_scaled_pressure_get_press_diff(msg);
     scaled_pressure->temperature = mavlink_msg_scaled_pressure_get_temperature(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SCALED_PRESSURE_LEN? msg->len : MAVLINK_MSG_ID_SCALED_PRESSURE_LEN;
-        memset(scaled_pressure, 0, MAVLINK_MSG_ID_SCALED_PRESSURE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SCALED_PRESSURE_LEN ? msg->len : MAVLINK_MSG_ID_SCALED_PRESSURE_LEN;
+    memset(scaled_pressure, 0, MAVLINK_MSG_ID_SCALED_PRESSURE_LEN);
     memcpy(scaled_pressure, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

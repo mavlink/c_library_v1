@@ -346,10 +346,10 @@ static inline void mavlink_msg_v2_extension_decode(const mavlink_message_t* msg,
     v2_extension->target_system = _MAV_RETURN_uint8_t(msg, 3);
     v2_extension->target_component = mavlink_msg_v2_extension_get_target_component(msg);
     mavlink_msg_v2_extension_get_payload(msg, v2_extension->payload);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_V2_EXTENSION_LEN? msg->len : MAVLINK_MSG_ID_V2_EXTENSION_LEN;
-        memset(v2_extension, 0, MAVLINK_MSG_ID_V2_EXTENSION_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_V2_EXTENSION_LEN ? msg->len : MAVLINK_MSG_ID_V2_EXTENSION_LEN;
+    memset(v2_extension, 0, MAVLINK_MSG_ID_V2_EXTENSION_LEN);
     memcpy(v2_extension, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

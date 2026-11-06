@@ -468,10 +468,10 @@ static inline void mavlink_msg_safety_set_allowed_area_decode(const mavlink_mess
     safety_set_allowed_area->target_system = _MAV_RETURN_uint8_t(msg, 24);
     safety_set_allowed_area->target_component = mavlink_msg_safety_set_allowed_area_get_target_component(msg);
     safety_set_allowed_area->frame = mavlink_msg_safety_set_allowed_area_get_frame(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN? msg->len : MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN;
-        memset(safety_set_allowed_area, 0, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN ? msg->len : MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN;
+    memset(safety_set_allowed_area, 0, MAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA_LEN);
     memcpy(safety_set_allowed_area, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

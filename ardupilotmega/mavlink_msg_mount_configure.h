@@ -384,10 +384,10 @@ static inline void mavlink_msg_mount_configure_decode(const mavlink_message_t* m
     mount_configure->stab_roll = mavlink_msg_mount_configure_get_stab_roll(msg);
     mount_configure->stab_pitch = mavlink_msg_mount_configure_get_stab_pitch(msg);
     mount_configure->stab_yaw = mavlink_msg_mount_configure_get_stab_yaw(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN? msg->len : MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN;
-        memset(mount_configure, 0, MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN ? msg->len : MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN;
+    memset(mount_configure, 0, MAVLINK_MSG_ID_MOUNT_CONFIGURE_LEN);
     memcpy(mount_configure, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

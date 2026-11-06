@@ -328,10 +328,10 @@ static inline void mavlink_msg_log_request_list_decode(const mavlink_message_t* 
     log_request_list->end = mavlink_msg_log_request_list_get_end(msg);
     log_request_list->target_system = _MAV_RETURN_uint8_t(msg, 4);
     log_request_list->target_component = mavlink_msg_log_request_list_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_LOG_REQUEST_LIST_LEN? msg->len : MAVLINK_MSG_ID_LOG_REQUEST_LIST_LEN;
-        memset(log_request_list, 0, MAVLINK_MSG_ID_LOG_REQUEST_LIST_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_LOG_REQUEST_LIST_LEN ? msg->len : MAVLINK_MSG_ID_LOG_REQUEST_LIST_LEN;
+    memset(log_request_list, 0, MAVLINK_MSG_ID_LOG_REQUEST_LIST_LEN);
     memcpy(log_request_list, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

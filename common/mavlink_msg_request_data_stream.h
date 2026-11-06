@@ -356,10 +356,10 @@ static inline void mavlink_msg_request_data_stream_decode(const mavlink_message_
     request_data_stream->target_component = mavlink_msg_request_data_stream_get_target_component(msg);
     request_data_stream->req_stream_id = mavlink_msg_request_data_stream_get_req_stream_id(msg);
     request_data_stream->start_stop = mavlink_msg_request_data_stream_get_start_stop(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN? msg->len : MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN;
-        memset(request_data_stream, 0, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN ? msg->len : MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN;
+    memset(request_data_stream, 0, MAVLINK_MSG_ID_REQUEST_DATA_STREAM_LEN);
     memcpy(request_data_stream, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

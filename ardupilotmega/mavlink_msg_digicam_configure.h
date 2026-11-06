@@ -524,10 +524,10 @@ static inline void mavlink_msg_digicam_configure_decode(const mavlink_message_t*
     digicam_configure->command_id = mavlink_msg_digicam_configure_get_command_id(msg);
     digicam_configure->engine_cut_off = mavlink_msg_digicam_configure_get_engine_cut_off(msg);
     digicam_configure->extra_param = mavlink_msg_digicam_configure_get_extra_param(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN? msg->len : MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN;
-        memset(digicam_configure, 0, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN ? msg->len : MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN;
+    memset(digicam_configure, 0, MAVLINK_MSG_ID_DIGICAM_CONFIGURE_LEN);
     memcpy(digicam_configure, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

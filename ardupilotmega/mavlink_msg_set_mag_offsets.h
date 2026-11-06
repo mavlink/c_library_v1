@@ -356,10 +356,10 @@ static inline void mavlink_msg_set_mag_offsets_decode(const mavlink_message_t* m
     set_mag_offsets->mag_ofs_z = mavlink_msg_set_mag_offsets_get_mag_ofs_z(msg);
     set_mag_offsets->target_system = _MAV_RETURN_uint8_t(msg, 6);
     set_mag_offsets->target_component = mavlink_msg_set_mag_offsets_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SET_MAG_OFFSETS_LEN? msg->len : MAVLINK_MSG_ID_SET_MAG_OFFSETS_LEN;
-        memset(set_mag_offsets, 0, MAVLINK_MSG_ID_SET_MAG_OFFSETS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SET_MAG_OFFSETS_LEN ? msg->len : MAVLINK_MSG_ID_SET_MAG_OFFSETS_LEN;
+    memset(set_mag_offsets, 0, MAVLINK_MSG_ID_SET_MAG_OFFSETS_LEN);
     memcpy(set_mag_offsets, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

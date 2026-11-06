@@ -580,10 +580,10 @@ static inline void mavlink_msg_command_long_stamped_decode(const mavlink_message
     command_long_stamped->target_system = _MAV_RETURN_uint8_t(msg, 42);
     command_long_stamped->target_component = mavlink_msg_command_long_stamped_get_target_component(msg);
     command_long_stamped->confirmation = mavlink_msg_command_long_stamped_get_confirmation(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN? msg->len : MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN;
-        memset(command_long_stamped, 0, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN ? msg->len : MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN;
+    memset(command_long_stamped, 0, MAVLINK_MSG_ID_COMMAND_LONG_STAMPED_LEN);
     memcpy(command_long_stamped, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

@@ -814,10 +814,10 @@ static inline void mavlink_msg_sim_state_decode(const mavlink_message_t* msg, ma
     sim_state->vn = mavlink_msg_sim_state_get_vn(msg);
     sim_state->ve = mavlink_msg_sim_state_get_ve(msg);
     sim_state->vd = mavlink_msg_sim_state_get_vd(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SIM_STATE_LEN? msg->len : MAVLINK_MSG_ID_SIM_STATE_LEN;
-        memset(sim_state, 0, MAVLINK_MSG_ID_SIM_STATE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SIM_STATE_LEN ? msg->len : MAVLINK_MSG_ID_SIM_STATE_LEN;
+    memset(sim_state, 0, MAVLINK_MSG_ID_SIM_STATE_LEN);
     memcpy(sim_state, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

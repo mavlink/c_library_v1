@@ -282,10 +282,10 @@ static inline void mavlink_msg_timesync_decode(const mavlink_message_t* msg, mav
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     timesync->tc1 = mavlink_msg_timesync_get_tc1(msg);
     timesync->ts1 = mavlink_msg_timesync_get_ts1(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_TIMESYNC_LEN? msg->len : MAVLINK_MSG_ID_TIMESYNC_LEN;
-        memset(timesync, 0, MAVLINK_MSG_ID_TIMESYNC_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_TIMESYNC_LEN ? msg->len : MAVLINK_MSG_ID_TIMESYNC_LEN;
+    memset(timesync, 0, MAVLINK_MSG_ID_TIMESYNC_LEN);
     memcpy(timesync, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

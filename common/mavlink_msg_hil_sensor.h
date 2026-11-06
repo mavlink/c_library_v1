@@ -646,10 +646,10 @@ static inline void mavlink_msg_hil_sensor_decode(const mavlink_message_t* msg, m
     hil_sensor->pressure_alt = mavlink_msg_hil_sensor_get_pressure_alt(msg);
     hil_sensor->temperature = mavlink_msg_hil_sensor_get_temperature(msg);
     hil_sensor->fields_updated = mavlink_msg_hil_sensor_get_fields_updated(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_HIL_SENSOR_LEN? msg->len : MAVLINK_MSG_ID_HIL_SENSOR_LEN;
-        memset(hil_sensor, 0, MAVLINK_MSG_ID_HIL_SENSOR_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_HIL_SENSOR_LEN ? msg->len : MAVLINK_MSG_ID_HIL_SENSOR_LEN;
+    memset(hil_sensor, 0, MAVLINK_MSG_ID_HIL_SENSOR_LEN);
     memcpy(hil_sensor, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

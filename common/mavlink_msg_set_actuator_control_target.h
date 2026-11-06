@@ -346,10 +346,10 @@ static inline void mavlink_msg_set_actuator_control_target_decode(const mavlink_
     set_actuator_control_target->group_mlx = mavlink_msg_set_actuator_control_target_get_group_mlx(msg);
     set_actuator_control_target->target_system = _MAV_RETURN_uint8_t(msg, 41);
     set_actuator_control_target->target_component = mavlink_msg_set_actuator_control_target_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SET_ACTUATOR_CONTROL_TARGET_LEN? msg->len : MAVLINK_MSG_ID_SET_ACTUATOR_CONTROL_TARGET_LEN;
-        memset(set_actuator_control_target, 0, MAVLINK_MSG_ID_SET_ACTUATOR_CONTROL_TARGET_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SET_ACTUATOR_CONTROL_TARGET_LEN ? msg->len : MAVLINK_MSG_ID_SET_ACTUATOR_CONTROL_TARGET_LEN;
+    memset(set_actuator_control_target, 0, MAVLINK_MSG_ID_SET_ACTUATOR_CONTROL_TARGET_LEN);
     memcpy(set_actuator_control_target, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

@@ -356,10 +356,10 @@ static inline void mavlink_msg_gimbal_control_decode(const mavlink_message_t* ms
     gimbal_control->demanded_rate_z = mavlink_msg_gimbal_control_get_demanded_rate_z(msg);
     gimbal_control->target_system = _MAV_RETURN_uint8_t(msg, 12);
     gimbal_control->target_component = mavlink_msg_gimbal_control_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_GIMBAL_CONTROL_LEN? msg->len : MAVLINK_MSG_ID_GIMBAL_CONTROL_LEN;
-        memset(gimbal_control, 0, MAVLINK_MSG_ID_GIMBAL_CONTROL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_GIMBAL_CONTROL_LEN ? msg->len : MAVLINK_MSG_ID_GIMBAL_CONTROL_LEN;
+    memset(gimbal_control, 0, MAVLINK_MSG_ID_GIMBAL_CONTROL_LEN);
     memcpy(gimbal_control, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

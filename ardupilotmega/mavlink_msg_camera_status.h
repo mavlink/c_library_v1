@@ -468,10 +468,10 @@ static inline void mavlink_msg_camera_status_decode(const mavlink_message_t* msg
     camera_status->target_system = _MAV_RETURN_uint8_t(msg, 26);
     camera_status->cam_idx = mavlink_msg_camera_status_get_cam_idx(msg);
     camera_status->event_id = mavlink_msg_camera_status_get_event_id(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_STATUS_LEN? msg->len : MAVLINK_MSG_ID_CAMERA_STATUS_LEN;
-        memset(camera_status, 0, MAVLINK_MSG_ID_CAMERA_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_CAMERA_STATUS_LEN;
+    memset(camera_status, 0, MAVLINK_MSG_ID_CAMERA_STATUS_LEN);
     memcpy(camera_status, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

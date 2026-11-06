@@ -300,10 +300,10 @@ static inline void mavlink_msg_mission_ack_decode(const mavlink_message_t* msg, 
     mission_ack->target_system = _MAV_RETURN_uint8_t(msg, 0);
     mission_ack->target_component = mavlink_msg_mission_ack_get_target_component(msg);
     mission_ack->type = mavlink_msg_mission_ack_get_type(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_ACK_LEN? msg->len : MAVLINK_MSG_ID_MISSION_ACK_LEN;
-        memset(mission_ack, 0, MAVLINK_MSG_ID_MISSION_ACK_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_ACK_LEN ? msg->len : MAVLINK_MSG_ID_MISSION_ACK_LEN;
+    memset(mission_ack, 0, MAVLINK_MSG_ID_MISSION_ACK_LEN);
     memcpy(mission_ack, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

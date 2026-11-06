@@ -636,10 +636,10 @@ static inline void mavlink_msg_command_int_stamped_decode(const mavlink_message_
     command_int_stamped->frame = mavlink_msg_command_int_stamped_get_frame(msg);
     command_int_stamped->current = mavlink_msg_command_int_stamped_get_current(msg);
     command_int_stamped->autocontinue = mavlink_msg_command_int_stamped_get_autocontinue(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN? msg->len : MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN;
-        memset(command_int_stamped, 0, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN ? msg->len : MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN;
+    memset(command_int_stamped, 0, MAVLINK_MSG_ID_COMMAND_INT_STAMPED_LEN);
     memcpy(command_int_stamped, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

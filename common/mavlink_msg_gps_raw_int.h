@@ -506,10 +506,10 @@ static inline void mavlink_msg_gps_raw_int_decode(const mavlink_message_t* msg, 
     gps_raw_int->cog = mavlink_msg_gps_raw_int_get_cog(msg);
     gps_raw_int->fix_type = mavlink_msg_gps_raw_int_get_fix_type(msg);
     gps_raw_int->satellites_visible = mavlink_msg_gps_raw_int_get_satellites_visible(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_GPS_RAW_INT_LEN? msg->len : MAVLINK_MSG_ID_GPS_RAW_INT_LEN;
-        memset(gps_raw_int, 0, MAVLINK_MSG_ID_GPS_RAW_INT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_GPS_RAW_INT_LEN ? msg->len : MAVLINK_MSG_ID_GPS_RAW_INT_LEN;
+    memset(gps_raw_int, 0, MAVLINK_MSG_ID_GPS_RAW_INT_LEN);
     memcpy(gps_raw_int, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

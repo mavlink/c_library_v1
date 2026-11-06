@@ -552,10 +552,10 @@ static inline void mavlink_msg_gimbal_report_decode(const mavlink_message_t* msg
     gimbal_report->joint_az = mavlink_msg_gimbal_report_get_joint_az(msg);
     gimbal_report->target_system = _MAV_RETURN_uint8_t(msg, 40);
     gimbal_report->target_component = mavlink_msg_gimbal_report_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_GIMBAL_REPORT_LEN? msg->len : MAVLINK_MSG_ID_GIMBAL_REPORT_LEN;
-        memset(gimbal_report, 0, MAVLINK_MSG_ID_GIMBAL_REPORT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_GIMBAL_REPORT_LEN ? msg->len : MAVLINK_MSG_ID_GIMBAL_REPORT_LEN;
+    memset(gimbal_report, 0, MAVLINK_MSG_ID_GIMBAL_REPORT_LEN);
     memcpy(gimbal_report, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

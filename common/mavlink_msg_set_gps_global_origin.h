@@ -328,10 +328,10 @@ static inline void mavlink_msg_set_gps_global_origin_decode(const mavlink_messag
     set_gps_global_origin->longitude = mavlink_msg_set_gps_global_origin_get_longitude(msg);
     set_gps_global_origin->altitude = mavlink_msg_set_gps_global_origin_get_altitude(msg);
     set_gps_global_origin->target_system = _MAV_RETURN_uint8_t(msg, 12);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN? msg->len : MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN;
-        memset(set_gps_global_origin, 0, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN ? msg->len : MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN;
+    memset(set_gps_global_origin, 0, MAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN_LEN);
     memcpy(set_gps_global_origin, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

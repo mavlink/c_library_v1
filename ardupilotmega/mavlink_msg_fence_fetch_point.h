@@ -300,10 +300,10 @@ static inline void mavlink_msg_fence_fetch_point_decode(const mavlink_message_t*
     fence_fetch_point->target_system = _MAV_RETURN_uint8_t(msg, 0);
     fence_fetch_point->target_component = mavlink_msg_fence_fetch_point_get_target_component(msg);
     fence_fetch_point->idx = mavlink_msg_fence_fetch_point_get_idx(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_FENCE_FETCH_POINT_LEN? msg->len : MAVLINK_MSG_ID_FENCE_FETCH_POINT_LEN;
-        memset(fence_fetch_point, 0, MAVLINK_MSG_ID_FENCE_FETCH_POINT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_FENCE_FETCH_POINT_LEN ? msg->len : MAVLINK_MSG_ID_FENCE_FETCH_POINT_LEN;
+    memset(fence_fetch_point, 0, MAVLINK_MSG_ID_FENCE_FETCH_POINT_LEN);
     memcpy(fence_fetch_point, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

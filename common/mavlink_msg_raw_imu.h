@@ -506,10 +506,10 @@ static inline void mavlink_msg_raw_imu_decode(const mavlink_message_t* msg, mavl
     raw_imu->xmag = mavlink_msg_raw_imu_get_xmag(msg);
     raw_imu->ymag = mavlink_msg_raw_imu_get_ymag(msg);
     raw_imu->zmag = mavlink_msg_raw_imu_get_zmag(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_RAW_IMU_LEN? msg->len : MAVLINK_MSG_ID_RAW_IMU_LEN;
-        memset(raw_imu, 0, MAVLINK_MSG_ID_RAW_IMU_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_RAW_IMU_LEN ? msg->len : MAVLINK_MSG_ID_RAW_IMU_LEN;
+    memset(raw_imu, 0, MAVLINK_MSG_ID_RAW_IMU_LEN);
     memcpy(raw_imu, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

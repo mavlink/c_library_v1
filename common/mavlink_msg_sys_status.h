@@ -590,10 +590,10 @@ static inline void mavlink_msg_sys_status_decode(const mavlink_message_t* msg, m
     sys_status->errors_count3 = mavlink_msg_sys_status_get_errors_count3(msg);
     sys_status->errors_count4 = mavlink_msg_sys_status_get_errors_count4(msg);
     sys_status->battery_remaining = mavlink_msg_sys_status_get_battery_remaining(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SYS_STATUS_LEN? msg->len : MAVLINK_MSG_ID_SYS_STATUS_LEN;
-        memset(sys_status, 0, MAVLINK_MSG_ID_SYS_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SYS_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_SYS_STATUS_LEN;
+    memset(sys_status, 0, MAVLINK_MSG_ID_SYS_STATUS_LEN);
     memcpy(sys_status, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

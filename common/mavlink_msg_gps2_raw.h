@@ -562,10 +562,10 @@ static inline void mavlink_msg_gps2_raw_decode(const mavlink_message_t* msg, mav
     gps2_raw->fix_type = mavlink_msg_gps2_raw_get_fix_type(msg);
     gps2_raw->satellites_visible = mavlink_msg_gps2_raw_get_satellites_visible(msg);
     gps2_raw->dgps_numch = mavlink_msg_gps2_raw_get_dgps_numch(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_GPS2_RAW_LEN? msg->len : MAVLINK_MSG_ID_GPS2_RAW_LEN;
-        memset(gps2_raw, 0, MAVLINK_MSG_ID_GPS2_RAW_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_GPS2_RAW_LEN ? msg->len : MAVLINK_MSG_ID_GPS2_RAW_LEN;
+    memset(gps2_raw, 0, MAVLINK_MSG_ID_GPS2_RAW_LEN);
     memcpy(gps2_raw, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

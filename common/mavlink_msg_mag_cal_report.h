@@ -618,10 +618,10 @@ static inline void mavlink_msg_mag_cal_report_decode(const mavlink_message_t* ms
     mag_cal_report->cal_mask = mavlink_msg_mag_cal_report_get_cal_mask(msg);
     mag_cal_report->cal_status = mavlink_msg_mag_cal_report_get_cal_status(msg);
     mag_cal_report->autosaved = mavlink_msg_mag_cal_report_get_autosaved(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MAG_CAL_REPORT_LEN? msg->len : MAVLINK_MSG_ID_MAG_CAL_REPORT_LEN;
-        memset(mag_cal_report, 0, MAVLINK_MSG_ID_MAG_CAL_REPORT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MAG_CAL_REPORT_LEN ? msg->len : MAVLINK_MSG_ID_MAG_CAL_REPORT_LEN;
+    memset(mag_cal_report, 0, MAVLINK_MSG_ID_MAG_CAL_REPORT_LEN);
     memcpy(mag_cal_report, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

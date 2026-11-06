@@ -496,10 +496,10 @@ static inline void mavlink_msg_rally_point_decode(const mavlink_message_t* msg, 
     rally_point->idx = mavlink_msg_rally_point_get_idx(msg);
     rally_point->count = mavlink_msg_rally_point_get_count(msg);
     rally_point->flags = mavlink_msg_rally_point_get_flags(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_RALLY_POINT_LEN? msg->len : MAVLINK_MSG_ID_RALLY_POINT_LEN;
-        memset(rally_point, 0, MAVLINK_MSG_ID_RALLY_POINT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_RALLY_POINT_LEN ? msg->len : MAVLINK_MSG_ID_RALLY_POINT_LEN;
+    memset(rally_point, 0, MAVLINK_MSG_ID_RALLY_POINT_LEN);
     memcpy(rally_point, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

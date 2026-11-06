@@ -664,10 +664,10 @@ static inline void mavlink_msg_set_position_target_global_int_decode(const mavli
     set_position_target_global_int->target_system = _MAV_RETURN_uint8_t(msg, 50);
     set_position_target_global_int->target_component = mavlink_msg_set_position_target_global_int_get_target_component(msg);
     set_position_target_global_int->coordinate_frame = mavlink_msg_set_position_target_global_int_get_coordinate_frame(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN? msg->len : MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN;
-        memset(set_position_target_global_int, 0, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN ? msg->len : MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN;
+    memset(set_position_target_global_int, 0, MAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT_LEN);
     memcpy(set_position_target_global_int, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

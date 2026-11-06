@@ -328,10 +328,10 @@ static inline void mavlink_msg_mission_request_partial_list_decode(const mavlink
     mission_request_partial_list->end_index = mavlink_msg_mission_request_partial_list_get_end_index(msg);
     mission_request_partial_list->target_system = _MAV_RETURN_uint8_t(msg, 4);
     mission_request_partial_list->target_component = mavlink_msg_mission_request_partial_list_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN? msg->len : MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN;
-        memset(mission_request_partial_list, 0, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN ? msg->len : MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN;
+    memset(mission_request_partial_list, 0, MAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST_LEN);
     memcpy(mission_request_partial_list, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

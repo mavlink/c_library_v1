@@ -580,10 +580,10 @@ static inline void mavlink_msg_camera_feedback_decode(const mavlink_message_t* m
     camera_feedback->target_system = _MAV_RETURN_uint8_t(msg, 42);
     camera_feedback->cam_idx = mavlink_msg_camera_feedback_get_cam_idx(msg);
     camera_feedback->flags = mavlink_msg_camera_feedback_get_flags(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_FEEDBACK_LEN? msg->len : MAVLINK_MSG_ID_CAMERA_FEEDBACK_LEN;
-        memset(camera_feedback, 0, MAVLINK_MSG_ID_CAMERA_FEEDBACK_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_FEEDBACK_LEN ? msg->len : MAVLINK_MSG_ID_CAMERA_FEEDBACK_LEN;
+    memset(camera_feedback, 0, MAVLINK_MSG_ID_CAMERA_FEEDBACK_LEN);
     memcpy(camera_feedback, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

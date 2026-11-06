@@ -328,10 +328,10 @@ static inline void mavlink_msg_ping_decode(const mavlink_message_t* msg, mavlink
     ping->seq = mavlink_msg_ping_get_seq(msg);
     ping->target_system = _MAV_RETURN_uint8_t(msg, 12);
     ping->target_component = mavlink_msg_ping_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_PING_LEN? msg->len : MAVLINK_MSG_ID_PING_LEN;
-        memset(ping, 0, MAVLINK_MSG_ID_PING_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_PING_LEN ? msg->len : MAVLINK_MSG_ID_PING_LEN;
+    memset(ping, 0, MAVLINK_MSG_ID_PING_LEN);
     memcpy(ping, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

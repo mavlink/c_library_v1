@@ -272,10 +272,10 @@ static inline void mavlink_msg_param_request_list_decode(const mavlink_message_t
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     param_request_list->target_system = _MAV_RETURN_uint8_t(msg, 0);
     param_request_list->target_component = mavlink_msg_param_request_list_get_target_component(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_PARAM_REQUEST_LIST_LEN? msg->len : MAVLINK_MSG_ID_PARAM_REQUEST_LIST_LEN;
-        memset(param_request_list, 0, MAVLINK_MSG_ID_PARAM_REQUEST_LIST_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_PARAM_REQUEST_LIST_LEN ? msg->len : MAVLINK_MSG_ID_PARAM_REQUEST_LIST_LEN;
+    memset(param_request_list, 0, MAVLINK_MSG_ID_PARAM_REQUEST_LIST_LEN);
     memcpy(param_request_list, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

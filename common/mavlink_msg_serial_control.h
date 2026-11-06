@@ -384,10 +384,10 @@ static inline void mavlink_msg_serial_control_decode(const mavlink_message_t* ms
     serial_control->flags = mavlink_msg_serial_control_get_flags(msg);
     serial_control->count = mavlink_msg_serial_control_get_count(msg);
     mavlink_msg_serial_control_get_data(msg, serial_control->data);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SERIAL_CONTROL_LEN? msg->len : MAVLINK_MSG_ID_SERIAL_CONTROL_LEN;
-        memset(serial_control, 0, MAVLINK_MSG_ID_SERIAL_CONTROL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SERIAL_CONTROL_LEN ? msg->len : MAVLINK_MSG_ID_SERIAL_CONTROL_LEN;
+    memset(serial_control, 0, MAVLINK_MSG_ID_SERIAL_CONTROL_LEN);
     memcpy(serial_control, _MAV_PAYLOAD(msg), len);
 #endif
-
 }

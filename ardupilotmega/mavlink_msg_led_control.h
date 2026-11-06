@@ -374,10 +374,10 @@ static inline void mavlink_msg_led_control_decode(const mavlink_message_t* msg, 
     led_control->pattern = mavlink_msg_led_control_get_pattern(msg);
     led_control->custom_len = mavlink_msg_led_control_get_custom_len(msg);
     mavlink_msg_led_control_get_custom_bytes(msg, led_control->custom_bytes);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_LED_CONTROL_LEN? msg->len : MAVLINK_MSG_ID_LED_CONTROL_LEN;
-        memset(led_control, 0, MAVLINK_MSG_ID_LED_CONTROL_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_LED_CONTROL_LEN ? msg->len : MAVLINK_MSG_ID_LED_CONTROL_LEN;
+    memset(led_control, 0, MAVLINK_MSG_ID_LED_CONTROL_LEN);
     memcpy(led_control, _MAV_PAYLOAD(msg), len);
 #endif
-
 }
