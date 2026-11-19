@@ -98,6 +98,7 @@ typedef struct __mavlink_mission_item_t {
  * @param z  PARAM7 / local: Z coordinate, global: altitude (relative or absolute, depending on frame).
  * @return length of the message in bytes (excluding serial stream start sign)
  */
+MAVLINK_DEPRECATED
 static inline uint16_t mavlink_msg_mission_item_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t target_system, uint8_t target_component, uint16_t seq, uint8_t frame, uint16_t command, uint8_t current, uint8_t autocontinue, float param1, float param2, float param3, float param4, float x, float y, float z)
 {
@@ -166,6 +167,7 @@ static inline uint16_t mavlink_msg_mission_item_pack(uint8_t system_id, uint8_t 
  * @param z  PARAM7 / local: Z coordinate, global: altitude (relative or absolute, depending on frame).
  * @return length of the message in bytes (excluding serial stream start sign)
  */
+MAVLINK_DEPRECATED
 static inline uint16_t mavlink_msg_mission_item_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
                                uint8_t target_system, uint8_t target_component, uint16_t seq, uint8_t frame, uint16_t command, uint8_t current, uint8_t autocontinue, float param1, float param2, float param3, float param4, float x, float y, float z)
 {
@@ -237,6 +239,7 @@ static inline uint16_t mavlink_msg_mission_item_pack_status(uint8_t system_id, u
  * @param z  PARAM7 / local: Z coordinate, global: altitude (relative or absolute, depending on frame).
  * @return length of the message in bytes (excluding serial stream start sign)
  */
+MAVLINK_DEPRECATED
 static inline uint16_t mavlink_msg_mission_item_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t target_system,uint8_t target_component,uint16_t seq,uint8_t frame,uint16_t command,uint8_t current,uint8_t autocontinue,float param1,float param2,float param3,float param4,float x,float y,float z)
@@ -291,9 +294,12 @@ static inline uint16_t mavlink_msg_mission_item_pack_chan(uint8_t system_id, uin
  * @param msg The MAVLink message to compress the data into
  * @param mission_item C-struct to read the message contents from
  */
+MAVLINK_DEPRECATED
 static inline uint16_t mavlink_msg_mission_item_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_mission_item_t* mission_item)
 {
+    MAVLINK_DEPRECATED_CALL_BEGIN
     return mavlink_msg_mission_item_pack(system_id, component_id, msg, mission_item->target_system, mission_item->target_component, mission_item->seq, mission_item->frame, mission_item->command, mission_item->current, mission_item->autocontinue, mission_item->param1, mission_item->param2, mission_item->param3, mission_item->param4, mission_item->x, mission_item->y, mission_item->z);
+    MAVLINK_DEPRECATED_CALL_END
 }
 
 /**
@@ -305,9 +311,12 @@ static inline uint16_t mavlink_msg_mission_item_encode(uint8_t system_id, uint8_
  * @param msg The MAVLink message to compress the data into
  * @param mission_item C-struct to read the message contents from
  */
+MAVLINK_DEPRECATED
 static inline uint16_t mavlink_msg_mission_item_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_mission_item_t* mission_item)
 {
+    MAVLINK_DEPRECATED_CALL_BEGIN
     return mavlink_msg_mission_item_pack_chan(system_id, component_id, chan, msg, mission_item->target_system, mission_item->target_component, mission_item->seq, mission_item->frame, mission_item->command, mission_item->current, mission_item->autocontinue, mission_item->param1, mission_item->param2, mission_item->param3, mission_item->param4, mission_item->x, mission_item->y, mission_item->z);
+    MAVLINK_DEPRECATED_CALL_END
 }
 
 /**
@@ -319,9 +328,12 @@ static inline uint16_t mavlink_msg_mission_item_encode_chan(uint8_t system_id, u
  * @param msg The MAVLink message to compress the data into
  * @param mission_item C-struct to read the message contents from
  */
+MAVLINK_DEPRECATED
 static inline uint16_t mavlink_msg_mission_item_encode_status(uint8_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_mission_item_t* mission_item)
 {
+    MAVLINK_DEPRECATED_CALL_BEGIN
     return mavlink_msg_mission_item_pack_status(system_id, component_id, _status, msg,  mission_item->target_system, mission_item->target_component, mission_item->seq, mission_item->frame, mission_item->command, mission_item->current, mission_item->autocontinue, mission_item->param1, mission_item->param2, mission_item->param3, mission_item->param4, mission_item->x, mission_item->y, mission_item->z);
+    MAVLINK_DEPRECATED_CALL_END
 }
 
 /**
@@ -345,6 +357,7 @@ static inline uint16_t mavlink_msg_mission_item_encode_status(uint8_t system_id,
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
+MAVLINK_DEPRECATED
 static inline void mavlink_msg_mission_item_send(mavlink_channel_t chan, uint8_t target_system, uint8_t target_component, uint16_t seq, uint8_t frame, uint16_t command, uint8_t current, uint8_t autocontinue, float param1, float param2, float param3, float param4, float x, float y, float z)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -391,10 +404,13 @@ static inline void mavlink_msg_mission_item_send(mavlink_channel_t chan, uint8_t
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
+MAVLINK_DEPRECATED
 static inline void mavlink_msg_mission_item_send_struct(mavlink_channel_t chan, const mavlink_mission_item_t* mission_item)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    MAVLINK_DEPRECATED_CALL_BEGIN
     mavlink_msg_mission_item_send(chan, mission_item->target_system, mission_item->target_component, mission_item->seq, mission_item->frame, mission_item->command, mission_item->current, mission_item->autocontinue, mission_item->param1, mission_item->param2, mission_item->param3, mission_item->param4, mission_item->x, mission_item->y, mission_item->z);
+    MAVLINK_DEPRECATED_CALL_END
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MISSION_ITEM, (const char *)mission_item, MAVLINK_MSG_ID_MISSION_ITEM_MIN_LEN, MAVLINK_MSG_ID_MISSION_ITEM_LEN, MAVLINK_MSG_ID_MISSION_ITEM_CRC);
 #endif
@@ -408,6 +424,7 @@ static inline void mavlink_msg_mission_item_send_struct(mavlink_channel_t chan, 
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
+MAVLINK_DEPRECATED
 static inline void mavlink_msg_mission_item_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t target_system, uint8_t target_component, uint16_t seq, uint8_t frame, uint16_t command, uint8_t current, uint8_t autocontinue, float param1, float param2, float param3, float param4, float x, float y, float z)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -460,6 +477,7 @@ static inline void mavlink_msg_mission_item_send_buf(mavlink_message_t *msgbuf, 
  *
  * @return  Component ID
  */
+MAVLINK_DEPRECATED
 static inline uint8_t mavlink_msg_mission_item_get_target_component(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint8_t(msg,  33);
@@ -470,6 +488,7 @@ static inline uint8_t mavlink_msg_mission_item_get_target_component(const mavlin
  *
  * @return  Sequence
  */
+MAVLINK_DEPRECATED
 static inline uint16_t mavlink_msg_mission_item_get_seq(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint16_t(msg,  28);
@@ -480,6 +499,7 @@ static inline uint16_t mavlink_msg_mission_item_get_seq(const mavlink_message_t*
  *
  * @return  The coordinate system of the waypoint.
  */
+MAVLINK_DEPRECATED
 static inline uint8_t mavlink_msg_mission_item_get_frame(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint8_t(msg,  34);
@@ -490,6 +510,7 @@ static inline uint8_t mavlink_msg_mission_item_get_frame(const mavlink_message_t
  *
  * @return  The scheduled action for the waypoint.
  */
+MAVLINK_DEPRECATED
 static inline uint16_t mavlink_msg_mission_item_get_command(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint16_t(msg,  30);
@@ -500,6 +521,7 @@ static inline uint16_t mavlink_msg_mission_item_get_command(const mavlink_messag
  *
  * @return  false:0, true:1
  */
+MAVLINK_DEPRECATED
 static inline uint8_t mavlink_msg_mission_item_get_current(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint8_t(msg,  35);
@@ -510,6 +532,7 @@ static inline uint8_t mavlink_msg_mission_item_get_current(const mavlink_message
  *
  * @return  Autocontinue to next waypoint. 0: false, 1: true. Set false to pause mission after the item completes.
  */
+MAVLINK_DEPRECATED
 static inline uint8_t mavlink_msg_mission_item_get_autocontinue(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint8_t(msg,  36);
@@ -520,6 +543,7 @@ static inline uint8_t mavlink_msg_mission_item_get_autocontinue(const mavlink_me
  *
  * @return  PARAM1, see MAV_CMD enum
  */
+MAVLINK_DEPRECATED
 static inline float mavlink_msg_mission_item_get_param1(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  0);
@@ -530,6 +554,7 @@ static inline float mavlink_msg_mission_item_get_param1(const mavlink_message_t*
  *
  * @return  PARAM2, see MAV_CMD enum
  */
+MAVLINK_DEPRECATED
 static inline float mavlink_msg_mission_item_get_param2(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  4);
@@ -540,6 +565,7 @@ static inline float mavlink_msg_mission_item_get_param2(const mavlink_message_t*
  *
  * @return  PARAM3, see MAV_CMD enum
  */
+MAVLINK_DEPRECATED
 static inline float mavlink_msg_mission_item_get_param3(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  8);
@@ -550,6 +576,7 @@ static inline float mavlink_msg_mission_item_get_param3(const mavlink_message_t*
  *
  * @return  PARAM4, see MAV_CMD enum
  */
+MAVLINK_DEPRECATED
 static inline float mavlink_msg_mission_item_get_param4(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  12);
@@ -560,6 +587,7 @@ static inline float mavlink_msg_mission_item_get_param4(const mavlink_message_t*
  *
  * @return  PARAM5 / local: X coordinate, global: latitude
  */
+MAVLINK_DEPRECATED
 static inline float mavlink_msg_mission_item_get_x(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  16);
@@ -570,6 +598,7 @@ static inline float mavlink_msg_mission_item_get_x(const mavlink_message_t* msg)
  *
  * @return  PARAM6 / local: Y coordinate, global: longitude
  */
+MAVLINK_DEPRECATED
 static inline float mavlink_msg_mission_item_get_y(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  20);
@@ -580,6 +609,7 @@ static inline float mavlink_msg_mission_item_get_y(const mavlink_message_t* msg)
  *
  * @return  PARAM7 / local: Z coordinate, global: altitude (relative or absolute, depending on frame).
  */
+MAVLINK_DEPRECATED
 static inline float mavlink_msg_mission_item_get_z(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  24);
@@ -591,9 +621,11 @@ static inline float mavlink_msg_mission_item_get_z(const mavlink_message_t* msg)
  * @param msg The message to decode
  * @param mission_item C-struct to decode the message contents into
  */
+MAVLINK_DEPRECATED
 static inline void mavlink_msg_mission_item_decode(const mavlink_message_t* msg, mavlink_mission_item_t* mission_item)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    MAVLINK_DEPRECATED_CALL_BEGIN
     mission_item->param1 = mavlink_msg_mission_item_get_param1(msg);
     mission_item->param2 = mavlink_msg_mission_item_get_param2(msg);
     mission_item->param3 = mavlink_msg_mission_item_get_param3(msg);
@@ -608,6 +640,7 @@ static inline void mavlink_msg_mission_item_decode(const mavlink_message_t* msg,
     mission_item->frame = mavlink_msg_mission_item_get_frame(msg);
     mission_item->current = mavlink_msg_mission_item_get_current(msg);
     mission_item->autocontinue = mavlink_msg_mission_item_get_autocontinue(msg);
+    MAVLINK_DEPRECATED_CALL_END
 
 #else
     uint8_t len = msg->len < MAVLINK_MSG_ID_MISSION_ITEM_LEN ? msg->len : MAVLINK_MSG_ID_MISSION_ITEM_LEN;
