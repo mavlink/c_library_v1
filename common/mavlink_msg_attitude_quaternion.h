@@ -12,9 +12,9 @@ typedef struct __mavlink_attitude_quaternion_t {
  float q2; /*<  Quaternion component 2, x (0 in null-rotation)*/
  float q3; /*<  Quaternion component 3, y (0 in null-rotation)*/
  float q4; /*<  Quaternion component 4, z (0 in null-rotation)*/
- float rollspeed; /*< [rad/s] Roll angular speed*/
- float pitchspeed; /*< [rad/s] Pitch angular speed*/
- float yawspeed; /*< [rad/s] Yaw angular speed*/
+ float rollspeed; /*< [rad/s] Roll angular speed (about the body frame X axis)*/
+ float pitchspeed; /*< [rad/s] Pitch angular speed (about the body frame Y axis)*/
+ float yawspeed; /*< [rad/s] Yaw angular speed (about the body frame Z axis)*/
 } mavlink_attitude_quaternion_t;
 
 #define MAVLINK_MSG_ID_ATTITUDE_QUATERNION_LEN 32
@@ -69,9 +69,9 @@ typedef struct __mavlink_attitude_quaternion_t {
  * @param q2  Quaternion component 2, x (0 in null-rotation)
  * @param q3  Quaternion component 3, y (0 in null-rotation)
  * @param q4  Quaternion component 4, z (0 in null-rotation)
- * @param rollspeed [rad/s] Roll angular speed
- * @param pitchspeed [rad/s] Pitch angular speed
- * @param yawspeed [rad/s] Yaw angular speed
+ * @param rollspeed [rad/s] Roll angular speed (about the body frame X axis)
+ * @param pitchspeed [rad/s] Pitch angular speed (about the body frame Y axis)
+ * @param yawspeed [rad/s] Yaw angular speed (about the body frame Z axis)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_attitude_quaternion_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -119,9 +119,9 @@ static inline uint16_t mavlink_msg_attitude_quaternion_pack(uint8_t system_id, u
  * @param q2  Quaternion component 2, x (0 in null-rotation)
  * @param q3  Quaternion component 3, y (0 in null-rotation)
  * @param q4  Quaternion component 4, z (0 in null-rotation)
- * @param rollspeed [rad/s] Roll angular speed
- * @param pitchspeed [rad/s] Pitch angular speed
- * @param yawspeed [rad/s] Yaw angular speed
+ * @param rollspeed [rad/s] Roll angular speed (about the body frame X axis)
+ * @param pitchspeed [rad/s] Pitch angular speed (about the body frame Y axis)
+ * @param yawspeed [rad/s] Yaw angular speed (about the body frame Z axis)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_attitude_quaternion_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
@@ -172,9 +172,9 @@ static inline uint16_t mavlink_msg_attitude_quaternion_pack_status(uint8_t syste
  * @param q2  Quaternion component 2, x (0 in null-rotation)
  * @param q3  Quaternion component 3, y (0 in null-rotation)
  * @param q4  Quaternion component 4, z (0 in null-rotation)
- * @param rollspeed [rad/s] Roll angular speed
- * @param pitchspeed [rad/s] Pitch angular speed
- * @param yawspeed [rad/s] Yaw angular speed
+ * @param rollspeed [rad/s] Roll angular speed (about the body frame X axis)
+ * @param pitchspeed [rad/s] Pitch angular speed (about the body frame Y axis)
+ * @param yawspeed [rad/s] Yaw angular speed (about the body frame Z axis)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_attitude_quaternion_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -261,9 +261,9 @@ static inline uint16_t mavlink_msg_attitude_quaternion_encode_status(uint8_t sys
  * @param q2  Quaternion component 2, x (0 in null-rotation)
  * @param q3  Quaternion component 3, y (0 in null-rotation)
  * @param q4  Quaternion component 4, z (0 in null-rotation)
- * @param rollspeed [rad/s] Roll angular speed
- * @param pitchspeed [rad/s] Pitch angular speed
- * @param yawspeed [rad/s] Yaw angular speed
+ * @param rollspeed [rad/s] Roll angular speed (about the body frame X axis)
+ * @param pitchspeed [rad/s] Pitch angular speed (about the body frame Y axis)
+ * @param yawspeed [rad/s] Yaw angular speed (about the body frame Z axis)
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -406,7 +406,7 @@ static inline float mavlink_msg_attitude_quaternion_get_q4(const mavlink_message
 /**
  * @brief Get field rollspeed from attitude_quaternion message
  *
- * @return [rad/s] Roll angular speed
+ * @return [rad/s] Roll angular speed (about the body frame X axis)
  */
 static inline float mavlink_msg_attitude_quaternion_get_rollspeed(const mavlink_message_t* msg)
 {
@@ -416,7 +416,7 @@ static inline float mavlink_msg_attitude_quaternion_get_rollspeed(const mavlink_
 /**
  * @brief Get field pitchspeed from attitude_quaternion message
  *
- * @return [rad/s] Pitch angular speed
+ * @return [rad/s] Pitch angular speed (about the body frame Y axis)
  */
 static inline float mavlink_msg_attitude_quaternion_get_pitchspeed(const mavlink_message_t* msg)
 {
@@ -426,7 +426,7 @@ static inline float mavlink_msg_attitude_quaternion_get_pitchspeed(const mavlink
 /**
  * @brief Get field yawspeed from attitude_quaternion message
  *
- * @return [rad/s] Yaw angular speed
+ * @return [rad/s] Yaw angular speed (about the body frame Z axis)
  */
 static inline float mavlink_msg_attitude_quaternion_get_yawspeed(const mavlink_message_t* msg)
 {
